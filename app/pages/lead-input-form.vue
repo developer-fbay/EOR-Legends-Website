@@ -92,7 +92,7 @@ function resetForm() {
       <h1 class="lif-title">New Lead Input Form</h1>
 
       <form v-if="status !== 'sent'" class="lif-card" novalidate @submit.prevent="submit">
-        <input v-model="form.website" type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input v-model="form.website" type="text" name="xf_2" autocomplete="one-time-code" class="hp-field" tabindex="-1" aria-hidden="true" />
         <div class="lif-field">
           <label>Lead Owner / Your Name<span class="req">*</span></label>
           <select v-model="form.owner" :class="{ 'has-error': errors.owner }" @change="delete errors.owner">
