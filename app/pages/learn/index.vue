@@ -6,13 +6,13 @@ usePageSeo({
 })
 
 const sections = [
-  { title: 'Blogs', text: 'Expert guidance on South African employment and global team management.', to: '/blog' },
-  { title: 'News Articles', text: 'Company updates and industry developments that impact your workforce strategy.', to: '/news' },
-  { title: 'HR Glossary', text: 'A straightforward guide to employment, payroll, and compliance terminology.', to: '/hr-glossary' },
-  { title: 'About Us', text: 'Who we are, why we exist, and how we work on the ground in South Africa.', to: '/about' },
-  { title: 'Case Studies', text: 'Real examples of how international businesses hire and operate in South Africa.', to: '/case-studies' },
-  { title: 'Guides', text: 'Free resources and checklists to streamline your expansion to South Africa.', to: '/guides' },
-  { title: 'Staffing Insights', text: 'Analytics and trends to guide your hiring strategy and workforce planning in South Africa.', to: '/staffing-insights' },
+  { title: 'Blogs', text: 'Expert guidance on South African employment and global team management.', to: '/blog', image: '/assets/learn/blog-cover.webp' },
+  { title: 'News Articles', text: 'Company updates and industry developments that impact your workforce strategy.', to: '/news', image: '/assets/learn/news-article-cover.webp' },
+  { title: 'HR Glossary', text: 'A straightforward guide to employment, payroll, and compliance terminology.', to: '/hr-glossary', image: '/assets/learn/hr-glossary-cover.webp' },
+  { title: 'About Us', text: 'Who we are, why we exist, and how we work on the ground in South Africa.', to: '/about', image: '/assets/learn/about-us-cover.webp' },
+  { title: 'Case Studies', text: 'Real examples of how international businesses hire and operate in South Africa.', to: '/case-studies', image: '/assets/learn/case-studies-cover.webp' },
+  { title: 'Guides', text: 'Free resources and checklists to streamline your expansion to South Africa.', to: '/guides', image: '/assets/learn/guides-cover.webp' },
+  { title: 'Staffing Insights', text: 'Analytics and trends to guide your hiring strategy and workforce planning in South Africa.', to: '/staffing-insights', image: '/assets/learn/staffing-insights-cover.webp' },
 ]
 
 // Latest posts strip
@@ -30,7 +30,7 @@ const { data: latest } = useContentList('blogs', { limit: 3 })
       <div class="container">
         <div class="learn-grid">
           <article v-for="s in sections" :key="s.to" class="learn-card">
-            <img src="/assets/backgrounds/find-out-more-card.png" :alt="s.title" loading="lazy" />
+            <img :src="s.image" :alt="s.title" loading="lazy" />
             <h2>{{ s.title }}</h2>
             <p>{{ s.text }}</p>
             <NuxtLink :to="s.to" class="brand-btn brand-btn--orange">Explore</NuxtLink>

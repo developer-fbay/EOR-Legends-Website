@@ -15,7 +15,7 @@ const builtIn = [
     title: 'Salary Benchmarking Tool',
     excerpt:
       'Compare salaries across countries and see how your hiring budget can go further — real market data from an EOR operating on the ground.',
-    featured_image: '/assets/backgrounds/service-card.webp',
+    featured_image: '/assets/tools/tools-cover.webp',
     to: '/tools/salary-benchmarking',
   },
 ]

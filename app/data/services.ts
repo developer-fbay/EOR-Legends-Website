@@ -19,8 +19,6 @@ export type ServiceContent = {
   faqs: { q: string; a: string }[]
 }
 
-const PHOTO_1 = '/assets/services/service-photo-1.webp'
-const PHOTO_2 = '/assets/services/service-photo-2.webp'
 
 export const SERVICES: ServiceContent[] = [
   {
@@ -41,7 +39,7 @@ export const SERVICES: ServiceContent[] = [
           'You approve salaries and payments. We handle the rest. Each month, we calculate earnings, deductions, and statutory contributions for your South African employees and contractors. You receive a single consolidated invoice in your own currency. No local bank accounts, no payroll software, no finance staff required.',
           'We manage all South African payroll compliance as the legal employer. This includes PAYE, UIF, SDL calculations, SARS submissions, and audit documentation. If SARS has questions, we respond. If regulations change, we adapt. You carry no compliance exposure.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-payroll-1.webp',
       },
       {
         title: 'Accuracy and timing',
@@ -49,7 +47,7 @@ export const SERVICES: ServiceContent[] = [
           'Salaries are paid on time. Statutory submissions are filed before deadlines. Payslips are issued to staff. We process leave, bonuses, commissions, and termination payouts according to South African law. Late payments and penalties do not occur.',
           'Your payroll is managed by a dedicated Payroll Officer and Finance Administrator, not an automated system. They verify calculations, handle exceptions, and respond to queries from your team. You have direct contact with the people responsible for your payroll.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-payroll-2.webp',
       },
     ],
     steps: [
@@ -93,7 +91,7 @@ export const SERVICES: ServiceContent[] = [
           'Your South African team gets a real HR department in their own city. We handle employee queries, leave administration, performance frameworks, and workplace disputes under South African labour law.',
           'Because we are the legal employer, HR risk sits with us. Disciplinary processes, CCMA matters, and policy compliance are managed by people who deal with South African labour law every day.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-hr-1.webp',
       },
       {
         title: 'People, not portals',
@@ -101,7 +99,7 @@ export const SERVICES: ServiceContent[] = [
           'Your team members speak to named HR professionals, not a ticket queue. Queries are answered quickly and confidentially.',
           'You stay in control of day-to-day management while we take care of the employment framework behind it.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-hr-2.webp',
       },
     ],
     steps: [
@@ -132,7 +130,7 @@ export const SERVICES: ServiceContent[] = [
           'We advise on the benefits that matter for your roles in the South African market — medical aid, retirement annuities, group risk cover, and more — and source reliable local providers.',
           'Enrolment, monthly deductions, provider payments, and ongoing administration are all handled by us and reflected cleanly on your single monthly invoice.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-employee-benefits-1.webp',
       },
       {
         title: 'Competitive by design',
@@ -140,7 +138,7 @@ export const SERVICES: ServiceContent[] = [
           'The right benefits package helps you attract and keep the top 1% of South African talent. We benchmark against the local market so your offer stands out.',
           'Employees get local support in their own time zone for claims and queries.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-employee-benefits-2.webp',
       },
     ],
     steps: [
@@ -171,7 +169,7 @@ export const SERVICES: ServiceContent[] = [
           'Distributed teams drift when nobody is on the ground. We run local engagement — team events, recognition, and workplace support — that keeps your South African staff connected to your company.',
           'We help you translate your company culture into a South African context, from onboarding rituals to public holidays and working norms.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-company-culture-1.webp',
       },
       {
         title: 'Engagement you can measure',
@@ -179,7 +177,7 @@ export const SERVICES: ServiceContent[] = [
           'Regular check-ins and feedback loops surface issues before they become resignations.',
           'You get visibility of morale and retention risk without micromanaging from another continent.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-company-culture-2.webp',
       },
     ],
     steps: [
@@ -209,7 +207,7 @@ export const SERVICES: ServiceContent[] = [
           'South African law draws a firm line between contractors and employees. We assess each engagement, put compliant agreements in place, and flag misclassification risk before it becomes a liability.',
           'Contractors are paid accurately and on time in rand, while you settle one invoice in your own currency.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-contractor-management-1.webp',
       },
       {
         title: 'A path to employment',
@@ -217,7 +215,7 @@ export const SERVICES: ServiceContent[] = [
           'When a contractor relationship starts to look like employment, we tell you — and we make the conversion seamless through our EOR service.',
           'No disruption for the person, no compliance exposure for you.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-contractor-management-2.webp',
       },
     ],
     steps: [
@@ -247,7 +245,7 @@ export const SERVICES: ServiceContent[] = [
           'We map every employee, contract, and benefit with your current provider, then run a dated migration plan that protects payroll continuity and leave balances.',
           'Employment contracts transfer compliantly under South African law, with no break in service for your team.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-eor-migration-1.webp',
       },
       {
         title: 'Invisible to your team',
@@ -255,7 +253,7 @@ export const SERVICES: ServiceContent[] = [
           'Salaries are paid on the same dates. Benefits continue without interruption. For your employees, the only change is better local support.',
           'You get a single point of contact through the whole migration.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-eor-migration-2.webp',
       },
     ],
     steps: [
@@ -285,7 +283,7 @@ export const SERVICES: ServiceContent[] = [
           'New hires get compliant South African employment contracts, statutory registrations, and a proper local onboarding — usually within 48 hours of your go-ahead.',
           'Equipment, system access, and first-day logistics are handled locally so people are productive immediately.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-onboarding-offboarding-1.webp',
       },
       {
         title: 'Exits without exposure',
@@ -293,7 +291,7 @@ export const SERVICES: ServiceContent[] = [
           'When someone leaves, we run notice periods, documentation, final payments, and statutory requirements exactly as South African law demands.',
           'CCMA disputes are rare when exits are done properly — and if they happen, we handle them.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-onboarding-offboarding-2.webp',
       },
     ],
     steps: [
@@ -323,7 +321,7 @@ export const SERVICES: ServiceContent[] = [
           'Private offices or dedicated desks at Wembley Square in Cape Town, with backup power, fast redundant internet, meeting rooms, and secure access.',
           'Load-shedding never stops your team: generators and UPS keep everything running.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-office-space-1.webp',
       },
       {
         title: 'Support down the corridor',
@@ -331,7 +329,7 @@ export const SERVICES: ServiceContent[] = [
           'HR and IT support are in the same building — problems get solved in person, in minutes.',
           'Office costs are consolidated into your single monthly invoice.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-office-space-2.webp',
       },
     ],
     steps: [
@@ -361,7 +359,7 @@ export const SERVICES: ServiceContent[] = [
           'Devices are set up before day one. Problems are fixed by local technicians, often in person, in your team\'s time zone.',
           'Your security policies — MDM, VPN, access controls — are applied and maintained on every device.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-it-support-1.webp',
       },
       {
         title: 'Secure joiners and leavers',
@@ -369,7 +367,7 @@ export const SERVICES: ServiceContent[] = [
           'Access is provisioned on start and revoked completely on exit, with devices recovered, wiped, and redeployed.',
           'You get an asset register you can trust.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-it-support-2.webp',
       },
     ],
     steps: [
@@ -399,7 +397,7 @@ export const SERVICES: ServiceContent[] = [
           'We buy or lease equipment in South Africa to your spec, configure it, and deliver it before the start date.',
           'No customs, no import duties, no couriering laptops across borders.',
         ],
-        image: PHOTO_1,
+        image: '/assets/services/ov-it-equipment-1.webp',
       },
       {
         title: 'The full lifecycle',
@@ -407,7 +405,7 @@ export const SERVICES: ServiceContent[] = [
           'Repairs, replacements, upgrades, and end-of-life recovery are all handled locally.',
           'Equipment costs appear on your single monthly invoice.',
         ],
-        image: PHOTO_2,
+        image: '/assets/services/ov-it-equipment-2.webp',
       },
     ],
     steps: [
