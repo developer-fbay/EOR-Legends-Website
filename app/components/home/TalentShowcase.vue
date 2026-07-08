@@ -89,7 +89,8 @@ const active = ref(0)
 }
 .talent-head p { color: var(--grey-text); }
 
-/* ===== User's expanding-options CSS (scoped) ===== */
+/* ===== User's expanding-options CSS (scoped, made fluid so the desktop
+   layout works on laptop widths — previously fixed 800px active panel) ===== */
 .options {
   display: flex;
   flex-direction: row;
@@ -98,26 +99,31 @@ const active = ref(0)
   width: 100%;
   height: 450px;
   justify-content: center;
+  gap: 14px;
 }
 .options .option {
   position: relative;
   overflow: hidden;
-  min-width: 120px;
-  margin: 0 10px;
+  flex: 1 1 0;
+  min-width: 0;
   background: var(--optionBackground, #fefa46);
   background-size: cover;
   cursor: pointer;
-  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+  transition: flex 0.55s cubic-bezier(0.05, 0.61, 0.41, 0.95), filter 0.4s ease, box-shadow 0.4s ease;
   filter: grayscale(100%);
 }
 .options .option.active {
-  width: 800px;
-  margin: 0;
+  flex: 6 1 0;
   border-radius: 14px;
   background-size: cover;
   filter: grayscale(0%);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
 }
 .options .option:not(.active) { border-radius: 14px; }
+.options .option:not(.active):hover {
+  filter: grayscale(35%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
 .options .option .video-section {
   position: absolute;
   inset: 0;
@@ -137,7 +143,9 @@ const active = ref(0)
   border-radius: 14px;
 }
 
-@media screen and (max-width: 1400px) {
+/* Stacked layout only below the site's standard mobile breakpoint —
+   laptops (1280px+) get the desktop expanding panels */
+@media screen and (max-width: 992px) {
   .options {
     flex-direction: column;
     width: 100%;
@@ -149,6 +157,7 @@ const active = ref(0)
     min-height: 100px;
     width: 100%;
     margin: 0 !important;
+    flex: none;
   }
   .options .option.active {
     width: 100% !important;
@@ -165,7 +174,7 @@ const active = ref(0)
 }
 
 /* Short viewports: keep the row from dominating the screen */
-@media (min-width: 1401px) and (max-height: 650px) {
-  .options { height: 380px; }
+@media (min-width: 993px) and (max-height: 700px) {
+  .options { height: 360px; }
 }
 </style>
