@@ -30,7 +30,7 @@ const slides = [
     image: '/assets/case-studies/frame-165-1.webp',
     logo: '/assets/case-studies/Effer-Ventures_logo.png',
     alt: 'Effer Ventures case study',
-    link: '/case-studies/test-case-study',
+    link: '/case-studies/effer-ventures',
   },
 ]
 

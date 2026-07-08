@@ -1,21 +1,12 @@
 <script setup lang="ts">
 // Case study single — fully dynamic from WordPress ACF fields.
-// NOTE: the WP slug for ThinkWorkforce is still "thinklocum" (pre-rebrand);
-// the alias below serves the new URL until the slug is renamed in WP.
-const ALIASES: Record<string, string> = { thinkworkforce: 'thinklocum' }
-const TITLE_OVERRIDES: Record<string, string> = { thinklocum: 'ThinkWorkforce' }
-const LOGO_OVERRIDES: Record<string, string> = { thinklocum: '/assets/case-studies/thinkworkforce-logo.png' }
-
 const route = useRoute()
-const requestedSlug = String(route.params.slug)
-const wpSlug = ALIASES[requestedSlug] || requestedSlug
-
-const { data: row } = await useContentBySlug('case_studies', wpSlug)
+const { data: row } = await useContentBySlug('case_studies', String(route.params.slug))
 if (!row.value?.caseStudy) throw createError({ statusCode: 404, statusMessage: 'Case study not found' })
 
 const cs = computed(() => row.value!.caseStudy!)
-const title = computed(() => TITLE_OVERRIDES[wpSlug] || row.value!.title)
-const logo = computed(() => LOGO_OVERRIDES[wpSlug] || cs.value.logoUrl)
+const title = computed(() => row.value!.title)
+const logo = computed(() => cs.value.logoUrl)
 
 usePageSeo({
   title: () => row.value?.meta_title || `${title.value} — Case Study`,
