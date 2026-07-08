@@ -838,12 +838,13 @@ onBeforeUnmount(() => {
 }
 /* 14" laptops at 150% (≈587px viewport): tighter still */
 @media (min-width: 993px) and (max-height: 650px) {
-  .sbt-head { margin-bottom: 0.5rem; }
+  .sbt { padding-bottom: calc(var(--section-pad) + 6px); }
+  .sbt-head { margin-top: 54px; margin-bottom: 0.6rem; }
   .sbt-head p { display: none; }
-  .sbt-card { padding: 14px 24px; }
-  .sbt-field { margin-bottom: 6px; }
+  .sbt-card { padding: 12px 24px; }
+  .sbt-field { margin-bottom: 5px; }
   .sbt-select { padding-top: 7px; padding-bottom: 7px; }
-  .sbt-chart-wrap { height: 150px; min-height: 140px; margin-bottom: 8px; }
+  .sbt-chart-wrap { height: 128px; min-height: 120px; margin-bottom: 8px; }
 }
 
 
@@ -853,6 +854,14 @@ onBeforeUnmount(() => {
   .sbt { padding-bottom: calc(var(--section-pad) + 6px); }
   .sbt-head { margin-top: 52px; margin-bottom: 1.4rem; }
   .sbt-chart-wrap { height: 190px; min-height: 170px; }
+}
+
+
+/* All desktop sizes: the sticky navbar is ~79px — the heading must always
+   start below it when the section is scrolled to the top of the screen */
+@media (min-width: 993px) and (min-height: 821px) {
+  .sbt-head { margin-top: 40px; }
+  .sbt { padding-bottom: calc(var(--section-pad) + 12px); }
 }
 
 </style>
