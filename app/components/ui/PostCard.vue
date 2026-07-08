@@ -1,17 +1,19 @@
 <script setup lang="ts">
 // Archive card — grayscale image with brand treatment, title, excerpt, Read more.
+// plainImage skips the grayscale treatment (e.g. the case-study logo blocks).
 defineProps<{
   title: string
   excerpt?: string | null
   image?: string | null
   to: string
+  plainImage?: boolean
 }>()
 </script>
 
 <template>
   <article class="post-card">
     <NuxtLink :to="to" class="post-card__img" tabindex="-1" aria-hidden="true">
-      <img :src="image || '/assets/backgrounds/find-out-more-card.png'" :alt="title" loading="lazy" />
+      <img :src="image || '/assets/backgrounds/find-out-more-card.png'" :alt="title" :class="{ 'post-card__img--plain': plainImage }" loading="lazy" />
     </NuxtLink>
     <h3 class="post-card__title">
       <NuxtLink :to="to">{{ title }}</NuxtLink>
@@ -50,6 +52,7 @@ defineProps<{
   transform: scale(1.04);
   filter: grayscale(0%);
 }
+.post-card__img img.post-card__img--plain { filter: none; }
 .post-card__title {
   font-family: var(--serif);
   font-size: 1.3rem;

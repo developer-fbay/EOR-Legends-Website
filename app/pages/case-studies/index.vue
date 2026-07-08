@@ -7,6 +7,16 @@ usePageSeo({
 })
 
 const { data: posts } = useContentList('case_studies')
+
+// Designer's 2026 archive cards use the client logo blocks, not photos.
+// Keyed by WP slug (thinklocum/test-case-study pending rename in WP).
+const LOGO_BLOCKS: Record<string, string> = {
+  thinklocum: '/assets/case-studies/block-thinkworkforce.webp',
+  thinkworkforce: '/assets/case-studies/block-thinkworkforce.webp',
+  'funding-bay': '/assets/case-studies/block-funding-bay.webp',
+  'test-case-study': '/assets/case-studies/block-effer-ventures.webp',
+  'effer-ventures': '/assets/case-studies/block-effer-ventures.webp',
+}
 </script>
 
 <template>
@@ -24,7 +34,8 @@ const { data: posts } = useContentList('case_studies')
             :key="p.id"
             :title="p.title"
             :excerpt="p.excerpt"
-            :image="p.featured_image"
+            :image="LOGO_BLOCKS[p.slug] || p.featured_image"
+            :plain-image="!!LOGO_BLOCKS[p.slug]"
             :to="`/case-studies/${p.slug}`"
           />
         </div>
