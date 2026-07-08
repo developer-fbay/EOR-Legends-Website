@@ -60,7 +60,7 @@ const columns = [
   <section class="why-eor band-white section fill-screen">
     <div class="container">
       <header class="why-head">
-        <h2>Why An EOR?</h2>
+        <h2>Why Legends EOR?</h2>
         <p>How Legends stacks up against building your own entity or hiring through a local recruiter.</p>
       </header>
 

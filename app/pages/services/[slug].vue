@@ -81,7 +81,7 @@ const faqs = computed(() => {
             <button
               v-if="i === 0 || i === service.overview.length - 1"
               type="button"
-              class="svc-ov-card__cta"
+              class="brand-btn brand-btn--outline"
               @click="openContact"
             >
               Contact us
@@ -218,21 +218,8 @@ const faqs = computed(() => {
   object-fit: cover;
   aspect-ratio: 1.03;
 }
-.svc-ov-card__cta {
-  display: inline-flex;
-  align-items: center;
-  padding: 11px 28px;
-  border: 1.5px solid var(--accent);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--cream);
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-.svc-ov-card__cta:hover { background: var(--accent); color: #fff; }
+/* Overview CTA uses the shared brand button (uniform hover site-wide) */
+.svc-ov-card__copy .brand-btn { margin-top: 6px; }
 
 .svc-hiw__head {
   text-align: center;

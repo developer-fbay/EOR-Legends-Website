@@ -71,7 +71,7 @@ onMounted(async () => {
         end: 'bottom bottom',
         pin: section.querySelector('.cs-pin'),
         // higher scrub = softer catch-up, kills the harsh snap feel
-        scrub: 1.6,
+        scrub: 1.2,
         anticipatePin: 1,
       },
     })
@@ -80,7 +80,7 @@ onMounted(async () => {
       const cur = slideEls[i]!
       const nxt = slideEls[i + 1]!
       // short holds + long overlapping fades: continuous motion, no dead zones
-      tl.to({}, { duration: 0.35 })
+      tl.to({}, { duration: 0.5 })
         .set(cur, { pointerEvents: 'none', immediateRender: false })
         .to(cur.querySelectorAll('.cs-anim'), { opacity: 0, y: -22, duration: 0.55, stagger: 0.04 }, '>')
         .to(cur.querySelector('.cs-img-wrap'), { opacity: 0, scale: 1.04, duration: 0.7 }, '<0.05')
@@ -88,7 +88,7 @@ onMounted(async () => {
         .set(nxt, { pointerEvents: 'auto', immediateRender: false }, '<')
         .to(nxt.querySelectorAll('.cs-anim'), { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 }, '<0.2')
     }
-    tl.to({}, { duration: 0.35 })
+    tl.to({}, { duration: 0.55 })
 
     ScrollTrigger.refresh()
   })
