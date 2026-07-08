@@ -846,4 +846,13 @@ onBeforeUnmount(() => {
   .sbt-chart-wrap { height: 150px; min-height: 140px; margin-bottom: 8px; }
 }
 
+
+/* 1920@125% laptops (651-820px viewport): clear the arch and breathe.
+   Heading gets space above/below, tool 10px shorter, extra space below. */
+@media (min-width: 993px) and (max-height: 820px) and (min-height: 651px) {
+  .sbt { padding-bottom: calc(var(--section-pad) + 6px); }
+  .sbt-head { margin-top: 52px; margin-bottom: 1.4rem; }
+  .sbt-chart-wrap { height: 190px; min-height: 170px; }
+}
+
 </style>
