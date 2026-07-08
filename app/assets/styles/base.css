@@ -1,0 +1,292 @@
+/* ============================================================
+   Legends EOR — global design tokens & base styles
+   Tokens extracted from the live site + user's global styling code
+   ============================================================ */
+
+/* Twemoji country flags for Chrome on Windows (no native flag emoji) —
+   same polyfill approach as the salary-benchmarking plugin */
+@font-face {
+  font-family: "Twemoji Country Flags";
+  src: url("https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1.8/dist/TwemojiCountryFlags.woff2") format("woff2");
+  unicode-range: U+1F1E6-1F1FF;
+  font-display: swap;
+}
+
+:root {
+  /* Brand colors */
+  --accent: #eb3d00;
+  --accent-dark: #cf3600;
+  --green: #014520;
+  --navy: #112337;
+  --body: #1a1a1a;
+  --black: #000000;
+  --cream: #fffcf6;
+  --cream-alt: #fbf9f1;
+  --grey-light: #f5f5f5;
+  --grey-mid: #686e77;
+  --grey-text: #585e6a;
+  --yellow: #fefa46;
+  --green-soft: #e8f0e4;
+  --green-soft-2: #c5d9c0;
+  --white: #ffffff;
+
+  /* Typography */
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'Poppins', system-ui, sans-serif;
+
+  /* Type scale (site spec): h1 40 / h2 36 / h3 32 / h4 28 / p 16 (300) */
+  --fs-h1: 40px;
+  --fs-h2: 36px;
+  --fs-h3: 32px;
+  --fs-h4: 28px;
+  --fs-body: 16px;
+  --fs-small: 0.85rem;
+
+  --section-pad: clamp(3rem, 7vh, 6rem);
+  /* Content column: 1360px max with 60px gutters each side (matches the WP build) */
+  --container: 1360px;
+  --gutter: clamp(20px, 4vw, 60px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Safety net: nothing may cause horizontal page scroll.
+   `clip` (not `hidden`) so position:sticky keeps working. */
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--body);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+
+p {
+  margin: 0 0 1em;
+  font-weight: 300;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-pad);
+}
+
+/* Section color bands used across the design */
+.band-green {
+  background: var(--green);
+  color: var(--cream);
+}
+.band-cream {
+  background: var(--cream);
+  color: var(--body);
+}
+/* "White" sections use the cream #fffcf6 per design (cards inside stay pure white) */
+.band-white {
+  background: var(--cream);
+  color: var(--body);
+}
+
+/* Full-screen sections: each major section fills the viewport so the reader
+   focuses on one thing at a time (CTAs and reviews bands excluded by design) */
+.fill-screen {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+/* ============================================================
+   BRAND BUTTON HOVER — from user's global styling code
+   Classes: brand-btn + brand-btn--orange | --cream | --outline
+   ============================================================ */
+
+.brand-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 30px;
+  border: 3px solid transparent;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  border-radius: 100px;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.brand-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.brand-btn:hover {
+  border-radius: 12px;
+  box-shadow: 0 0 0 12px transparent;
+}
+.brand-btn:hover::before {
+  width: 500px;
+  height: 500px;
+  opacity: 1;
+}
+
+.brand-btn:active {
+  scale: 0.95;
+}
+
+/* Solid orange (light/cream backgrounds) — hover floods darker orange (premium, no green) */
+.brand-btn--orange {
+  background-color: var(--accent);
+  color: var(--cream);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.brand-btn--orange::before { background-color: var(--accent-dark); }
+
+/* Orange outline (dark green backgrounds) — hover floods orange with a green outline */
+.brand-btn--outline {
+  background-color: transparent;
+  color: var(--cream);
+  box-shadow: 0 0 0 2px var(--accent);
+  padding: 11px 30px;
+}
+.brand-btn--outline::before { background-color: var(--accent); }
+.brand-btn--outline:hover {
+  box-shadow: 0 0 0 2px var(--green);
+}
+
+/* Solid orange, floods cream on hover (text turns green) */
+.brand-btn--cream {
+  background-color: var(--accent);
+  color: var(--cream);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.brand-btn--cream::before { background-color: var(--cream); }
+.brand-btn--cream:hover { color: var(--green); }
+
+.brand-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   LETTER BOUNCE headline hover — from user's global styling code
+   Apply class .letter-bounce (activated by useLetterBounce())
+   ============================================================ */
+
+.letter-bounce {
+  --lb-color: var(--accent);
+  cursor: default;
+}
+.letter-bounce .lb-char {
+  display: inline-block;
+  white-space: pre;
+}
+.letter-bounce .lb-inner {
+  display: inline-block;
+  transition: color 1s ease;
+}
+.letter-bounce .lb-char:hover .lb-inner {
+  color: var(--lb-color);
+  transition: color 0s ease;
+}
+.letter-bounce .lb-inner.lb-pop {
+  animation: lb-bounce 0.4s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+@keyframes lb-bounce {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-0.22em); }
+  65%  { transform: translateY(0.04em); }
+  100% { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-bounce .lb-inner.lb-pop { animation: none; }
+  .brand-btn, .brand-btn::before { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   Short-viewport tuning (e.g. 1280×587 — 14" laptop @150% scale)
+   ============================================================ */
+@media (max-height: 650px) {
+  :root {
+    --section-pad: clamp(2rem, 5vh, 3.5rem);
+  }
+}
+
+/* Honeypot field — off-screen but not display:none, so naive bots still fill it */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}

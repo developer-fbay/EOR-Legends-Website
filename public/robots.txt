@@ -1,0 +1,90 @@
+# legendseor.com — all verified search engine and AI crawlers are welcome.
+# Internal tooling and API routes are off-limits for everyone.
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+# --- Search engines (same rules, stated explicitly) ---
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+# --- AI assistants & crawlers ---
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /lead-input-form
+
+Sitemap: https://legendseor.com/sitemap.xml
