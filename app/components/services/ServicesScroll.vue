@@ -154,10 +154,11 @@ onBeforeUnmount(() => {
   margin: 0 0 10px;
 }
 .sv-sub {
+  /* same treatment as the Talent Showcase subtitle */
   font-family: var(--sans);
-  color: rgba(1, 69, 32, 0.65);
-  font-weight: 400;
-  font-size: clamp(14px, 1.15vw, 17px);
+  color: var(--grey-text);
+  font-weight: 300;
+  font-size: var(--fs-body);
   line-height: 1.5;
   margin: 0 0 clamp(18px, 3vh, 26px);
 }
