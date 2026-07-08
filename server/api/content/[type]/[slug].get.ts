@@ -11,7 +11,7 @@ export default defineCachedEventHandler(
   },
   {
     maxAge: 300,
-    staleMaxAge: 60 * 60 * 24,
+    staleMaxAge: 60 * 60 * 24 * 7,
     swr: true,
     getKey: (event) => `wp-single-${getRouterParam(event, 'type')}-${getRouterParam(event, 'slug')}`,
   },

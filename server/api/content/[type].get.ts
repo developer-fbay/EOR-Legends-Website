@@ -10,7 +10,7 @@ export default defineCachedEventHandler(
   },
   {
     maxAge: 300, // fresh for 5 minutes
-    staleMaxAge: 60 * 60 * 24, // serve stale up to a day while revalidating
+    staleMaxAge: 60 * 60 * 24 * 7, // serve stale up to a week while revalidating
     swr: true,
     getKey: (event) => `wp-list-${getRouterParam(event, 'type')}-${getQuery(event).orderBy ?? 'date'}`,
   },
