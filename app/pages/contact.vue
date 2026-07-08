@@ -90,10 +90,10 @@ usePageSeo({
           <h2 class="la-heading-left">London, UK</h2>
           <div class="map-wrap">
             <iframe
-              src="https://www.google.com/maps?q=10%20Lower%20Thames%20Street%2C%20London%20EC3R%206AF&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2574.1297961737146!2d-0.08671981043242014!3d51.506571250417544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876056495b9fd65%3A0x8074dcd679997977!2sLegends%20Employer%20of%20Record!5e1!3m2!1sen!2suk!4v1783517610175!5m2!1sen!2suk"
               title="Map: Legends EOR London office"
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
             />
           </div>
