@@ -19,6 +19,19 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    routeRules: {
+      // After the domain moves to this site, media/PDF links that still point
+      // at legendseor.com/wp-content/... are proxied through to WordPress on
+      // its subdomain. Set WP_BASE_URL (e.g. https://wp.legendseor.com) at
+      // build time in production — REQUIRED once the domain flips, otherwise
+      // this would proxy to itself.
+      '/wp-content/**': {
+        proxy: `${process.env.WP_BASE_URL || process.env.GF_BASE_URL || 'https://legendseor.com'}/wp-content/**`,
+      },
+    },
+  },
+
   css: ['~/assets/styles/base.css'],
 
   app: {

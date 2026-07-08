@@ -18,7 +18,8 @@ Set these in the DO dashboard (App Platform → Settings → Environment Variabl
 
 | Variable | Purpose |
 |---|---|
-| `GF_BASE_URL` | `https://legendseor.com` — WordPress base for Gravity Forms |
+| `WP_BASE_URL` | WordPress base for content/media, e.g. `https://wp.legendseor.com` — **required once the main domain points at this app** |
+| `GF_BASE_URL` | WordPress base for Gravity Forms (same value as `WP_BASE_URL`) |
 | `GF_CONSUMER_KEY` / `GF_CONSUMER_SECRET` | Gravity Forms REST credentials |
 | `SUPABASE_URL` / `SUPABASE_KEY` | Supabase project (lead backup + admin) |
 | `SUPABASE_SERVICE_KEY` | Server-side lead inserts |

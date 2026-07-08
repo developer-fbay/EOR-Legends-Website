@@ -6,11 +6,13 @@
  * section, plus the FAQ pairs themselves.
  */
 
+const WP = process.env.WP_BASE_URL || process.env.GF_BASE_URL || 'https://legendseor.com'
+
 export const PILLAR_URLS: Record<string, string> = {
-  'true-cost-of-an-employee-in-the-uk': 'https://legendseor.com/true-cost-of-an-employee-uk/',
-  'permanent-establishment-guide': 'https://legendseor.com/permanent-establishment/',
-  'employee-on-costs': 'https://legendseor.com/cost-of-employing-someone-uk/',
-  'problem-2-cluster-1': 'https://legendseor.com/problem-2-cluster-1/',
+  'true-cost-of-an-employee-in-the-uk': `${WP}/true-cost-of-an-employee-uk/`,
+  'permanent-establishment-guide': `${WP}/permanent-establishment/`,
+  'employee-on-costs': `${WP}/cost-of-employing-someone-uk/`,
+  'problem-2-cluster-1': `${WP}/problem-2-cluster-1/`,
 }
 
 function stripText(s: string) {

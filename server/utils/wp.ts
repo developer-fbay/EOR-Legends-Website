@@ -8,7 +8,9 @@
  * - SEO: Rank Math headless endpoint (/rankmath/v1/getHead)
  */
 
-const WP_BASE = 'https://legendseor.com'
+// Configurable so WordPress can move to a subdomain (wp.legendseor.com) when
+// the main domain flips to this site. Falls back to the GF base, then live WP.
+const WP_BASE = process.env.WP_BASE_URL || process.env.GF_BASE_URL || 'https://legendseor.com'
 const WP_API = `${WP_BASE}/wp-json/wp/v2`
 
 /** Internal content-type names (unchanged from the Supabase era) → WP REST bases. */
