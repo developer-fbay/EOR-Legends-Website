@@ -48,7 +48,7 @@ const faqs = computed(() => {
       <section class="svc-intro band-cream section">
         <div class="container svc-intro__grid">
           <div class="svc-intro__copy">
-            <h1>{{ service.title }}<br /><em>In South Africa</em></h1>
+            <h1><em>{{ service.title }}</em><br />In South Africa</h1>
             <p v-for="(p, i) in service.intro" :key="i">{{ p }}</p>
           </div>
           <div class="svc-intro__form">

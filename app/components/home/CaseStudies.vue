@@ -157,13 +157,13 @@ onBeforeUnmount(() => {
   font-family: var(--serif);
   color: var(--ink);
   font-weight: 400;
-  font-size: clamp(30px, 3.4vw, 46px);
+  font-size: var(--fs-h2); /* uniform with every other homepage heading */
   line-height: 1.05;
   margin: 0 0 10px;
 }
 .cs-sub {
   font-family: var(--sans);
-  color: #5b6c63;
+  color: rgba(1, 69, 32, 0.65); /* matches the services parallax subtitle */
   font-weight: 400;
   font-size: clamp(14px, 1.15vw, 17px);
   line-height: 1.5;

@@ -171,6 +171,16 @@ const columns = [
 .eor-comp .eor-col-legends .eor-plan-name { color: #014520; }
 .eor-comp .eor-col-legends .eor-val { color: #014520; font-weight: 600; }
 
+/* Laptop screens: compress the table so the whole section fits the viewport */
+@media (min-width: 993px) and (max-height: 820px) {
+  .why-head { margin-bottom: 1rem; }
+  .eor-comp { padding: 8px 0; }
+  .eor-comp .eor-cell { height: 46px; font-size: 14px; padding: 0 18px; }
+  .eor-comp .eor-cell-head { height: 68px; padding: 16px 18px 0; }
+  .eor-comp .eor-plan-name { font-size: 17px; }
+  .eor-comp .eor-plan-sub { font-size: 12px; margin-top: 2px; }
+}
+
 @media (max-width: 992px) {
   .eor-comp { max-width: 100%; }
   .eor-comp .eor-cell { padding: 0 16px; font-size: 15px; }

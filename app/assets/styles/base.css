@@ -306,10 +306,7 @@ main h2 {
 }
 main h2:hover {
   transform: translateY(-4px);
-}
-/* on light bands the heading also warms to the brand green */
-main section:not(.band-green) h2:hover {
-  color: var(--green);
+  color: var(--accent); /* same hover colour as "Great Teams" */
 }
 
 /* Honeypot field — off-screen but not display:none, so naive bots still fill it */

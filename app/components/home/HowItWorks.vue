@@ -192,9 +192,18 @@ const steps = [
   .hiw-step { align-items: center; }
 }
 
-/* Short viewports: tighten vertical rhythm */
+/* Laptop screens: breathing room above and below the card */
+@media (min-width: 769px) and (max-height: 820px) {
+  .hiw-head { margin-bottom: 1rem; }
+  .hiw-section { padding: 34px 44px; }
+  .hiw-timeline-label { margin-top: 10px; font-size: 14px; }
+  .hiw-step-title { font-size: 20px; }
+  .hiw-step-desc { font-size: 14px; margin-top: 8px; }
+  .hiw-bottom { margin-top: 28px; padding-top: 18px; }
+}
+/* 14" laptops at 150%: tighter still */
 @media (min-width: 769px) and (max-height: 650px) {
-  .hiw-section { padding: 34px 40px; }
-  .hiw-bottom { margin-top: 34px; padding-top: 20px; }
+  .hiw-section { padding: 24px 36px; }
+  .hiw-bottom { margin-top: 20px; padding-top: 14px; }
 }
 </style>

@@ -149,7 +149,7 @@ onBeforeUnmount(() => {
   font-family: var(--serif);
   color: var(--ink);
   font-weight: 400;
-  font-size: clamp(30px, 3.4vw, 46px);
+  font-size: var(--fs-h2); /* uniform with the other section headings */
   line-height: 1.05;
   margin: 0 0 10px;
 }

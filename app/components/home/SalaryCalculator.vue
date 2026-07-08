@@ -827,12 +827,23 @@ onBeforeUnmount(() => {
 /* Laptop screens (short viewports): the tool was eating too much vertical
    space — tighten cards, chart and rhythm so it sits comfortably in view */
 @media (min-width: 993px) and (max-height: 820px) {
-  .sbt-head { margin-bottom: 1.1rem; }
-  .sbt-card { padding: 24px 28px; }
-  .sbt-card-title { font-size: 20px; }
-  .sbt-field { margin-bottom: 12px; }
-  .sbt-chart-wrap { height: 220px; min-height: 200px; margin-bottom: 16px; }
-  .sbt-columns { gap: 18px; }
+  .sbt-head { margin-bottom: 0.9rem; }
+  .sbt-card { padding: 20px 26px; }
+  .sbt-card-title { font-size: 19px; margin-bottom: 2px; }
+  .sbt-card-subtitle { font-size: 13px; }
+  .sbt-field { margin-bottom: 10px; }
+  .sbt-select { padding-top: 9px; padding-bottom: 9px; }
+  .sbt-chart-wrap { height: 200px; min-height: 180px; margin-bottom: 14px; }
+  .sbt-columns { gap: 16px; }
+}
+/* 14" laptops at 150% (≈587px viewport): tighter still */
+@media (min-width: 993px) and (max-height: 650px) {
+  .sbt-head { margin-bottom: 0.5rem; }
+  .sbt-head p { display: none; }
+  .sbt-card { padding: 12px 20px; }
+  .sbt-field { margin-bottom: 7px; }
+  .sbt-select { padding-top: 7px; padding-bottom: 7px; }
+  .sbt-chart-wrap { height: 150px; min-height: 140px; margin-bottom: 8px; }
 }
 
 </style>
