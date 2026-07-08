@@ -281,6 +281,37 @@ a {
   }
 }
 
+/* ============================================================
+   Laptop screens (1920px @125% ≈ 1536×750, 14" @150% ≈ 1280×587):
+   shrink the type scale and rhythm slightly so full sections fit
+   the shorter viewport.
+   ============================================================ */
+@media (min-width: 993px) and (max-height: 820px) {
+  :root {
+    --fs-h1: 36px;
+    --fs-h2: 32px;
+    --fs-h3: 29px;
+    --fs-h4: 26px;
+    --section-pad: clamp(2.2rem, 5.5vh, 3.4rem);
+  }
+}
+
+/* ============================================================
+   Heading hover — gentle rise + Great Teams green (replaces the
+   letter-bounce effect, kept in code but disabled; see
+   useLetterBounce.ts and app/pages/index.vue)
+   ============================================================ */
+main h2 {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+main h2:hover {
+  transform: translateY(-4px);
+}
+/* on light bands the heading also warms to the brand green */
+main section:not(.band-green) h2:hover {
+  color: var(--green);
+}
+
 /* Honeypot field — off-screen but not display:none, so naive bots still fill it */
 .hp-field {
   position: absolute !important;

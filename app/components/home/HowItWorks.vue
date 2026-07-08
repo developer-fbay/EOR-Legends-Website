@@ -109,6 +109,21 @@ const steps = [
   margin-right: 12px;
   position: relative;
 }
+/* hover fill: sweeps from the number across the line */
+.hiw-line::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.55s ease;
+}
+.hiw-circle-row:hover .hiw-line::before { width: 100%; }
+.hiw-circle-row:hover .hiw-circle {
+  background: var(--accent);
+  color: #fff;
+}
+.hiw-circle { transition: background 0.3s ease, color 0.3s ease; }
 .hiw-step:last-child .hiw-line { margin-right: 0; }
 .hiw-step:last-child .hiw-line::after {
   content: '';
@@ -121,6 +136,11 @@ const steps = [
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-left: 10px solid #c5d9c0;
+  transition: border-left-color 0.25s ease 0.45s;
+}
+/* the arrow completes last, once the fill reaches it */
+.hiw-step:last-child .hiw-circle-row:hover .hiw-line::after {
+  border-left-color: var(--accent);
 }
 .hiw-timeline-label {
   /* slightly larger than the original 12px, still below the 22px step title */

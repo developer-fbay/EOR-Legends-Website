@@ -61,6 +61,8 @@ export default defineNuxtPlugin((nuxtApp) => {
           autoAlpha: 0,
           duration: 0.7,
           ease: 'power2.out',
+          // leave no inline styles behind — CSS hover transforms must keep working
+          onComplete: () => gsap.set(el, { clearProps: 'transform,opacity,visibility' }),
           scrollTrigger: {
             trigger: el,
             start: 'top 88%',
@@ -83,4 +85,18 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // initial load
   setTimeout(initFades, 250)
+
+  // Late-loading content (WP images, fonts) changes the document height after
+  // Lenis and ScrollTrigger measured it — stale limits can stop the user
+  // reaching the bottom of the page. Re-measure once everything has loaded,
+  // and again shortly after as a safety net.
+  function remeasure() {
+    lenis.resize()
+    ScrollTrigger.refresh()
+  }
+  window.addEventListener('load', () => {
+    remeasure()
+    setTimeout(remeasure, 1500)
+    setTimeout(remeasure, 4000)
+  })
 })

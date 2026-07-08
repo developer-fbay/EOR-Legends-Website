@@ -64,12 +64,14 @@ onMounted(async () => {
     })
 
     const tl = gsap.timeline({
+      defaults: { ease: 'power1.inOut' },
       scrollTrigger: {
         trigger: section,
         start: 'top top',
         end: 'bottom bottom',
         pin: section.querySelector('.cs-pin'),
-        scrub: 1,
+        // higher scrub = softer catch-up, kills the harsh snap feel
+        scrub: 1.6,
         anticipatePin: 1,
       },
     })
@@ -77,15 +79,16 @@ onMounted(async () => {
     for (let i = 0; i < slideEls.length - 1; i++) {
       const cur = slideEls[i]!
       const nxt = slideEls[i + 1]!
-      tl.to({}, { duration: 0.7 })
+      // short holds + long overlapping fades: continuous motion, no dead zones
+      tl.to({}, { duration: 0.35 })
         .set(cur, { pointerEvents: 'none', immediateRender: false })
-        .to(cur.querySelectorAll('.cs-anim'), { opacity: 0, y: -28, duration: 0.4, stagger: 0.05 }, '>')
-        .to(cur.querySelector('.cs-img-wrap'), { opacity: 0, scale: 1.05, duration: 0.5 }, '<0.1')
-        .to(nxt.querySelector('.cs-img-wrap'), { opacity: 1, scale: 1, duration: 0.6 }, '<0.05')
+        .to(cur.querySelectorAll('.cs-anim'), { opacity: 0, y: -22, duration: 0.55, stagger: 0.04 }, '>')
+        .to(cur.querySelector('.cs-img-wrap'), { opacity: 0, scale: 1.04, duration: 0.7 }, '<0.05')
+        .to(nxt.querySelector('.cs-img-wrap'), { opacity: 1, scale: 1, duration: 0.8 }, '<0.15')
         .set(nxt, { pointerEvents: 'auto', immediateRender: false }, '<')
-        .to(nxt.querySelectorAll('.cs-anim'), { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 }, '<0.18')
+        .to(nxt.querySelectorAll('.cs-anim'), { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 }, '<0.2')
     }
-    tl.to({}, { duration: 0.7 })
+    tl.to({}, { duration: 0.35 })
 
     ScrollTrigger.refresh()
   })
@@ -130,7 +133,7 @@ onBeforeUnmount(() => {
   --ink: #1c1c1c;
   --line: #e7e3d6;
   --nav-h: 72px; /* matches AppHeader height */
-  height: 320vh;
+  height: 280vh;
   position: relative;
 }
 
@@ -177,7 +180,8 @@ onBeforeUnmount(() => {
   width: 100%;
   max-width: 1180px;
   margin: auto;
-  height: clamp(420px, 52vh, 560px);
+  /* low floor so the pinned screen still fits short laptop viewports */
+  height: clamp(280px, 52vh, 520px);
 }
 
 .cs-slide {
@@ -213,7 +217,7 @@ onBeforeUnmount(() => {
 .cs-stat {
   font-family: var(--serif);
   color: var(--green);
-  font-size: clamp(46px, 5vw, 68px);
+  font-size: clamp(38px, 4.4vw, 60px);
   line-height: 1;
   font-weight: 400;
   margin: 0 0 4px;
@@ -221,9 +225,9 @@ onBeforeUnmount(() => {
 .cs-title {
   color: var(--ink);
   font-family: var(--sans);
-  font-size: clamp(20px, 2.1vw, 28px);
+  font-size: clamp(19px, 1.9vw, 26px);
   font-weight: 600;
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 }
 .cs-title::after {
   content: "";
@@ -236,10 +240,10 @@ onBeforeUnmount(() => {
 }
 .cs-text {
   color: var(--black);
-  font-size: clamp(15px, 1.15vw, 17px);
-  line-height: 1.65;
-  margin: 0 0 24px;
-  max-width: 46ch;
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.6;
+  margin: 0 0 20px;
+  max-width: 48ch;
 }
 .cs-divider {
   height: 1px;
@@ -283,6 +287,18 @@ onBeforeUnmount(() => {
     justify-content: center;
     gap: 40px;
   }
+}
+
+/* Short laptop viewports (1280×587 etc.): tighter rhythm so nothing is cut off */
+@media (min-width: 993px) and (max-height: 700px) {
+  .cs-pin { padding-top: calc(var(--nav-h) + 10px); padding-bottom: 18px; }
+  .cs-sub { margin-bottom: 12px; }
+  .cs-stat { font-size: clamp(32px, 6.5vh, 44px); }
+  .cs-title { margin-bottom: 10px; }
+  .cs-title::after { margin-top: 8px; }
+  .cs-text { margin-bottom: 14px; font-size: 14px; }
+  .cs-divider { margin-bottom: 12px; }
+  .cs-logo { height: 26px; }
 }
 
 /* Reduced motion on desktop: stack instead of pin */

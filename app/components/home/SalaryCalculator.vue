@@ -824,4 +824,15 @@ onBeforeUnmount(() => {
 @media (min-width: 769px) and (max-height: 650px) {
   .sbt-chart-wrap { height: 240px; min-height: 220px; }
 }
+/* Laptop screens (short viewports): the tool was eating too much vertical
+   space — tighten cards, chart and rhythm so it sits comfortably in view */
+@media (min-width: 993px) and (max-height: 820px) {
+  .sbt-head { margin-bottom: 1.1rem; }
+  .sbt-card { padding: 24px 28px; }
+  .sbt-card-title { font-size: 20px; }
+  .sbt-field { margin-bottom: 12px; }
+  .sbt-chart-wrap { height: 220px; min-height: 200px; margin-bottom: 16px; }
+  .sbt-columns { gap: 18px; }
+}
+
 </style>

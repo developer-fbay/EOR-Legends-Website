@@ -63,27 +63,30 @@ onMounted(async () => {
     })
 
     const tl = gsap.timeline({
+      defaults: { ease: 'power1.inOut' },
       scrollTrigger: {
         trigger: section,
         start: 'top top',
         end: 'bottom bottom',
         pin: section.querySelector('.sv-pin'),
-        scrub: 1,
+        // higher scrub = softer catch-up, kills the harsh snap feel
+        scrub: 1.6,
         anticipatePin: 1,
       },
     })
     for (let i = 0; i < s.length - 1; i++) {
       const cur = s[i]!
       const nxt = s[i + 1]!
-      tl.to({}, { duration: 0.7 })
+      // short holds + long overlapping fades: continuous motion, no dead zones
+      tl.to({}, { duration: 0.35 })
         .set(cur, { pointerEvents: 'none', immediateRender: false })
-        .to(cur.querySelectorAll('.sv-anim'), { opacity: 0, y: -28, duration: 0.4, stagger: 0.05 }, '>')
-        .to(cur.querySelector('.sv-img-wrap'), { opacity: 0, scale: 1.05, duration: 0.5 }, '<0.1')
-        .to(nxt.querySelector('.sv-img-wrap'), { opacity: 1, scale: 1, duration: 0.6 }, '<0.05')
+        .to(cur.querySelectorAll('.sv-anim'), { opacity: 0, y: -22, duration: 0.55, stagger: 0.04 }, '>')
+        .to(cur.querySelector('.sv-img-wrap'), { opacity: 0, scale: 1.04, duration: 0.7 }, '<0.05')
+        .to(nxt.querySelector('.sv-img-wrap'), { opacity: 1, scale: 1, duration: 0.8 }, '<0.15')
         .set(nxt, { pointerEvents: 'auto', immediateRender: false }, '<')
-        .to(nxt.querySelectorAll('.sv-anim'), { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 }, '<0.18')
+        .to(nxt.querySelectorAll('.sv-anim'), { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 }, '<0.2')
     }
-    tl.to({}, { duration: 0.7 })
+    tl.to({}, { duration: 0.35 })
     ScrollTrigger.refresh()
   })
 })
@@ -164,7 +167,13 @@ onBeforeUnmount(() => {
   width: 100%;
   max-width: 1180px;
   margin: auto;
-  height: clamp(420px, 52vh, 560px);
+  /* low floor so the pinned screen still fits short laptop viewports */
+  height: clamp(280px, 52vh, 520px);
+}
+
+/* Short laptop viewports: tighter rhythm so nothing is cut off */
+@media (min-width: 993px) and (max-height: 700px) {
+  .sv-stage { height: clamp(260px, 55vh, 420px); }
 }
 .sv-slide {
   position: absolute;

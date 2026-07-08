@@ -48,7 +48,7 @@ const faqs = computed(() => {
       <section class="svc-intro band-cream section">
         <div class="container svc-intro__grid">
           <div class="svc-intro__copy">
-            <h1>{{ service.title }}</h1>
+            <h1>{{ service.title }}<br /><em>In South Africa</em></h1>
             <p v-for="(p, i) in service.intro" :key="i">{{ p }}</p>
           </div>
           <div class="svc-intro__form">
@@ -79,7 +79,7 @@ const faqs = computed(() => {
             <h3>{{ card.title }}</h3>
             <p v-for="(p, j) in card.paragraphs" :key="j">{{ p }}</p>
             <button
-              v-if="i === service.overview.length - 1"
+              v-if="i === 0 || i === service.overview.length - 1"
               type="button"
               class="svc-ov-card__cta"
               @click="openContact"
@@ -153,7 +153,21 @@ const faqs = computed(() => {
   gap: clamp(28px, 5vw, 80px);
   align-items: start;
 }
-.svc-intro__copy h1 { margin-bottom: 0.7em; }
+/* Hero-sized headline matching the homepage, with the italic green accent */
+.svc-intro__copy h1 {
+  font-size: clamp(40px, 3.55vw, 68px);
+  margin-bottom: 0.55em;
+}
+.svc-intro__copy h1 em {
+  font-style: italic;
+  color: var(--green);
+  transition: color 0.35s ease;
+  cursor: default;
+}
+.svc-intro__copy h1 em:hover { color: var(--accent); }
+@media (min-width: 993px) and (max-height: 700px) {
+  .svc-intro__copy h1 { font-size: clamp(34px, 5.5vh, 44px); }
+}
 .svc-intro__copy p {
   max-width: 62ch;
   color: var(--body);

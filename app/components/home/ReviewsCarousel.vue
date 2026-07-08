@@ -126,7 +126,9 @@ onBeforeUnmount(() => {
           </button>
         </div>
 
+        <!-- "See all Reviews" removed per marketing feedback (2026-07); restore by uncommenting:
         <a class="brand-btn brand-btn--outline" href="https://www.google.com/search?q=legends+eor+reviews" target="_blank" rel="noopener">See all Reviews</a>
+        -->
       </div>
 
       <div class="rc-reviews__right">
@@ -206,7 +208,7 @@ onBeforeUnmount(() => {
   line-height: 1.12;
   letter-spacing: 0.2px;
 }
-.rc-reviews__nav { display: flex; gap: 14px; margin-bottom: 28px; }
+.rc-reviews__nav { display: flex; gap: 14px; margin-bottom: 0; justify-content: center; }
 .rc-nav-btn {
   width: 32px;
   height: 32px;

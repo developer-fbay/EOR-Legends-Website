@@ -5,13 +5,14 @@ usePageSeo({
     'Build your team in South Africa with Legends EOR. We handle payroll, compliance, benefits, offices and equipment — save up to 60% on salaries with no local entity required.',
 })
 
-// Letter bounce on every homepage h2 (homepage only, per design direction).
-const pageEl = ref<HTMLElement | null>(null)
-useLetterBounceOnH2s(pageEl)
+// Letter bounce disabled per marketing feedback (2026-07) — headings now use
+// the CSS rise + green hover in base.css. Uncomment to bring the bounce back.
+// const pageEl = ref<HTMLElement | null>(null)
+// useLetterBounceOnH2s(pageEl)
 </script>
 
 <template>
-  <main ref="pageEl">
+  <main>
     <!-- Hero + logo carousel share the first fold exactly; the salary
          benchmarking section always starts below it -->
     <div class="hero-fold">
