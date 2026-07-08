@@ -78,10 +78,10 @@ usePageSeo({
           <h2 class="la-heading-left">Cape Town, South Africa HQ</h2>
           <div class="map-wrap">
             <iframe
-              src="https://www.google.com/maps?q=The%20Legends%20Agency%2C%20Wembley%20Square%2C%2040%20Solan%20Rd%2C%20Gardens%2C%20Cape%20Town&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.3222991676644!2d18.4216586!3d-33.9328377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc67c73075aca9%3A0xa71d4a1d36dfc5af!2sLegends%20Employer%20of%20Record!5e0!3m2!1sen!2suk!4v1783521916195!5m2!1sen!2suk"
               title="Map: Legends EOR Cape Town office"
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
             />
           </div>
