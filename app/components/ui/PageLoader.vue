@@ -50,7 +50,19 @@ function forceHide() {
 
 // initial load (and reload) never shows the overlay; enable afterwards
 nuxtApp.hook('app:suspense:resolve', () => { enabled = true; forceHide() })
-nuxtApp.hook('page:start', onStart)
+
+// Arm at the router level — the moment the user clicks — so the loader also
+// covers the chunk download + middleware phase before the page starts
+// rendering (page:start alone fires too late on slow connections).
+const router = useRouter()
+router.beforeEach((to, from) => {
+  if (to.path !== from.path) onStart()
+})
+router.afterEach((_to, _from, failure) => {
+  if (failure) forceHide() // cancelled/redirected navigation
+})
+router.onError(forceHide)
+
 nuxtApp.hook('page:finish', onEnd)
 nuxtApp.hook('vue:error', forceHide)
 </script>
