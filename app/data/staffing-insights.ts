@@ -56,14 +56,10 @@ export const PILLARS: Pillar[] = [
       "Permanent establishment is the tax threshold at which a UK business becomes liable for corporation tax in another country. It's triggered most commonly through a fixed place of business abroad or a dependent agent acting on your behalf. Once crossed, the consequences are real and expensive: local corporation tax on profits, transfer pricing documentation obligations, statutory registrations, and potential branch taxes under some treaties.",
       'For most UK SMEs hiring people abroad through standard commercial arrangements like Employers of Record, the permanent establishment risk is low and structurally well-managed. For businesses engaging international contractors directly, particularly in sales or business development roles, the risk is worth assessing before scaling.',
     ],
-    clusters: [
-      {
-        slug: 'problem-2-cluster-1',
-        // display title comes from the published page's h1 at render time
-        title: 'Permanent Establishment: Deep Dive',
-        intro: [],
-      },
-    ],
+    // Pillar 2's cluster page isn't published on WP yet (the old
+    // problem-2-cluster-1 duplicate was removed). Add it back here + in
+    // server/utils/pillars.ts PILLAR_URLS once the real page is live.
+    clusters: [],
   },
 ]
 

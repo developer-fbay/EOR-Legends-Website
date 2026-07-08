@@ -12,7 +12,7 @@ export const PILLAR_URLS: Record<string, string> = {
   'true-cost-of-an-employee-in-the-uk': `${WP}/true-cost-of-an-employee-uk/`,
   'permanent-establishment-guide': `${WP}/permanent-establishment/`,
   'employee-on-costs': `${WP}/cost-of-employing-someone-uk/`,
-  'problem-2-cluster-1': `${WP}/problem-2-cluster-1/`,
+  // pillar 2's cluster is not published on WP yet — add its URL here when live
 }
 
 function stripText(s: string) {
@@ -118,6 +118,12 @@ export async function fetchPillarBody(slug: string) {
   html = html.replace(
     /<div id="text_block-[^"]*" class="ct-text-block" ><b>(\d{1,2})<\/b><\/div>/g,
     '<span class="pi-num pi-num--card">$1</span>',
+  )
+  // Third variant: section headings prefixed with a number block — becomes the
+  // green square badge next to the h2 (matches the WP design).
+  html = html.replace(
+    /<div id="div_block-[^"]*" class="ct-div-block" ><div id="text_block-[^"]*" class="ct-text-block" >(\d{1,2})<\/div><\/div>(<div id="div_block-[^"]*" class="ct-div-block" ><h2)/g,
+    '<span class="pi-h2-badge">$1</span>$2',
   )
 
   return { title: h1, bodyHtml: balanceHtml(html), faqs }

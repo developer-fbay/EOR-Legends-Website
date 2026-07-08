@@ -13,6 +13,8 @@ const { data: body } = await useAsyncData(`pillar-body-${slug}`, () =>
   $fetch<{ title: string; bodyHtml: string; faqs: { q: string; a: string }[] }>(`/api/pillar/${slug}`).catch(() => null),
 )
 
+const articleEl = ref<HTMLElement | null>(null)
+
 usePageSeo({
   title: pillar.title,
   description: pillar.excerpt,
@@ -58,10 +60,14 @@ useHead({
       </div>
     </section>
 
-    <!-- Full article body extracted from the published WP page -->
+    <!-- Full article body extracted from the published WP page, with the
+         sticky table of contents from the WP design -->
     <section v-if="body?.bodyHtml" class="band-cream section" style="padding-top: 0">
-      <div class="container">
-        <article class="pi-body" v-html="body.bodyHtml" />
+      <div class="container pi-grid">
+        <aside class="pi-aside">
+          <UiTocSidebar :article-el="articleEl" />
+        </aside>
+        <article ref="articleEl" class="pi-body" v-html="body.bodyHtml" />
       </div>
     </section>
 
@@ -131,16 +137,28 @@ useHead({
   top: 96px;
 }
 
+/* ToC + body grid (matches the WP pillar layout) */
+.pi-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+.pi-aside {
+  position: sticky;
+  top: 110px;
+}
+
 /* Extracted article body — site prose styling over the raw Oxygen markup */
 .pi-body {
-  max-width: 1080px;
-  margin-inline: auto;
+  min-width: 0;
 }
 .pi-body :deep(h2) {
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: clamp(1.35rem, 1.8vw, 1.7rem);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
   margin: 1.8em 0 0.6em;
+  scroll-margin-top: 120px;
 }
 .pi-body :deep(h3) {
   font-family: var(--sans);
@@ -187,6 +205,95 @@ useHead({
 }
 .pi-body :deep(div:has(> .pi-num) > div) { grid-column: 2; }
 .pi-body :deep(div:has(> .pi-num--card) > div:first-of-type) { font-weight: 600; }
+
+/* ===== WP pillar design styles (per the live page) ===== */
+/* section-number badge beside the heading */
+.pi-body :deep(div:has(> .pi-h2-badge)) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 2.2em 0 0.6em;
+}
+.pi-body :deep(.pi-h2-badge) {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: var(--green);
+  color: var(--cream);
+  font-family: var(--serif);
+  font-size: 17px;
+}
+.pi-body :deep(div:has(> .pi-h2-badge) h2) { margin: 0; }
+
+/* cost-stack: two-column white cards with the orange left accent */
+.pi-body :deep(div:has(> div > .pi-num--card)) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 1.2em 0 1.6em;
+}
+.pi-body :deep(div:has(> .pi-num--card)) {
+  display: block;
+  background: var(--white);
+  border: 1px solid #ece9e2;
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 0;
+}
+.pi-body :deep(.pi-num--card) {
+  display: block;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.pi-body :deep(div:has(> .pi-num--card) > div:first-of-type) {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+}
+
+/* tables: dark green header, zebra rows, highlighted key column */
+.pi-body :deep(.lgx-table) {
+  border-radius: 12px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.pi-body :deep(.lgx-table thead th) {
+  background: var(--green);
+  color: var(--cream);
+  border-color: var(--green);
+  font-weight: 600;
+}
+.pi-body :deep(.lgx-table tbody tr:nth-child(even) td) { background: rgba(1, 69, 32, 0.045); }
+.pi-body :deep(.lgx-table td.col-key) {
+  background: #e8f0e4;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* note/callout box (deeper-guide references) */
+.pi-body :deep(div:has(> .ct-fancy-icon)) {
+  background: var(--white);
+  border: 1px solid #e6e2d6;
+  border-left: 3px solid var(--green);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 1.4em 0;
+  color: #5b6c63;
+}
+/* WP's icon sprite isn't loaded here — hide the empty svg */
+.pi-body :deep(.ct-fancy-icon) { display: none; }
+
 /* embedded WP widgets that can't run here (forms, the WP copy of the calculator) */
 .pi-body :deep(.gform_wrapper),
 .pi-body :deep(#sbt-tool),
@@ -206,5 +313,8 @@ useHead({
   .pi-hero__grid { grid-template-columns: 1fr; }
   .pi-hero__form { position: static; max-width: 480px; }
   .pi-cl-grid { grid-template-columns: 1fr; }
+  .pi-grid { grid-template-columns: 1fr; }
+  .pi-aside { position: static; }
+  .pi-body :deep(div:has(> div > .pi-num--card)) { grid-template-columns: 1fr; }
 }
 </style>
