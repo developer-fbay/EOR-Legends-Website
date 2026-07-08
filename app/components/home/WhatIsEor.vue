@@ -140,7 +140,7 @@ useHead({
   border: 1px solid #ece9e2;
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  padding: clamp(22px, 2.6vw, 36px);
+  padding: clamp(28px, 3vw, 44px);
 }
 .wie-card__title {
   font-family: var(--serif);

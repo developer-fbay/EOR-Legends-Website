@@ -212,11 +212,15 @@ const faqs = computed(() => {
   color: #d4e2d2;
   line-height: 1.7;
 }
+.svc-ov-card__img {
+  display: flex;
+  justify-content: center;
+}
 .svc-ov-card__img img {
-  width: 100%;
+  width: min(100%, 380px);
   border-radius: 14px;
   object-fit: cover;
-  aspect-ratio: 1.03;
+  aspect-ratio: 1 / 1;
 }
 /* Overview CTA uses the shared brand button (uniform hover site-wide) */
 .svc-ov-card__copy .brand-btn { margin-top: 6px; }

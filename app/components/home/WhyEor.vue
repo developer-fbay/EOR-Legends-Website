@@ -173,10 +173,10 @@ const columns = [
 
 /* Laptop screens: compress the table so the whole section fits the viewport */
 @media (min-width: 993px) and (max-height: 820px) {
-  .why-head { margin-bottom: 1rem; }
-  .eor-comp { padding: 8px 0; }
-  .eor-comp .eor-cell { height: 46px; font-size: 14px; padding: 0 18px; }
-  .eor-comp .eor-cell-head { height: 68px; padding: 16px 18px 0; }
+  .why-head { margin-bottom: 1.1rem; }
+  .eor-comp { padding: 10px 0; }
+  .eor-comp .eor-cell { height: 47px; font-size: 14px; padding: 0 22px; }
+  .eor-comp .eor-cell-head { height: 70px; padding: 16px 22px 0; }
   .eor-comp .eor-plan-name { font-size: 17px; }
   .eor-comp .eor-plan-sub { font-size: 12px; margin-top: 2px; }
 }

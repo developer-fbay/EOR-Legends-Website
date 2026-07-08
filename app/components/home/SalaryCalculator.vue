@@ -840,8 +840,8 @@ onBeforeUnmount(() => {
 @media (min-width: 993px) and (max-height: 650px) {
   .sbt-head { margin-bottom: 0.5rem; }
   .sbt-head p { display: none; }
-  .sbt-card { padding: 12px 20px; }
-  .sbt-field { margin-bottom: 7px; }
+  .sbt-card { padding: 14px 24px; }
+  .sbt-field { margin-bottom: 6px; }
   .sbt-select { padding-top: 7px; padding-bottom: 7px; }
   .sbt-chart-wrap { height: 150px; min-height: 140px; margin-bottom: 8px; }
 }
