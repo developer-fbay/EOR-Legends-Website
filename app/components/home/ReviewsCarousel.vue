@@ -2,7 +2,7 @@
 /**
  * Reviews carousel — infinite looping card slider from the user's code block
  * (clone-both-sides technique, pointer drag, keyboard arrows), on the green
- * band with the user's Reviews-bg.png background.
+ * band with the user's Reviews-bg.webp background.
  */
 const reviews = [
   { text: 'I never thought managing my personal finances could be this simple. Moveta’s real-time insights have helped me budget better and save more each month.', name: 'Michael Carter' },
@@ -108,7 +108,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="rc-reviews band-green section" aria-labelledby="rc-reviews-title" :style="{ backgroundImage: 'url(/assets/backgrounds/Reviews-bg.png)' }">
+  <section class="rc-reviews band-green section" aria-labelledby="rc-reviews-title" :style="{ backgroundImage: 'url(/assets/backgrounds/Reviews-bg.webp)' }">
     <div class="rc-reviews__inner">
       <div class="rc-reviews__left">
         <h2 id="rc-reviews-title" class="rc-reviews__heading">&ldquo;What our customers are saying&rdquo;</h2>
@@ -286,11 +286,14 @@ onBeforeUnmount(() => {
   .rc-reviews__heading {
     max-width: calc(100vw - 2 * var(--pad));
     overflow-wrap: break-word;
+    font-size: 22px;
   }
+  .rc-card__text { font-size: 14px; }
+  .rc-card__name { font-size: 17px; }
 }
 @media (max-width: 480px) {
   .rc-reviews { padding: 46px 0; --pad: 18px; }
-  .rc-reviews__heading { font-size: 26px; margin-bottom: 22px; }
+  .rc-reviews__heading { font-size: 20px; margin-bottom: 22px; }
   .rc-nav-btn { width: 44px; height: 44px; }
   .rc-card { padding: 26px 24px 24px; min-height: 240px; }
 }

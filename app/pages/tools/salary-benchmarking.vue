@@ -59,7 +59,7 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
     <section class="tool-block band-cream section">
       <div class="container tool-block__grid">
         <div class="tool-block__img">
-          <img src="/assets/services/service-photo-1.png" alt="Salary benchmarking consultation" loading="lazy" />
+          <img src="/assets/services/service-photo-1.webp" alt="Salary benchmarking consultation" loading="lazy" />
         </div>
         <div class="tool-block__copy">
           <h2>Salary Data You Can Actually Hire From</h2>
@@ -101,13 +101,13 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
           </p>
         </div>
         <div class="tool-block__img">
-          <img src="/assets/services/service-photo-2.png" alt="Comparing salaries by country" loading="lazy" />
+          <img src="/assets/services/service-photo-2.webp" alt="Comparing salaries by country" loading="lazy" />
         </div>
       </div>
     </section>
 
     <!-- How It Works (3 steps) -->
-    <section class="tool-hiw band-green section" :style="{ backgroundImage: 'url(/assets/backgrounds/Process-bg.png)' }">
+    <section class="tool-hiw band-green section" :style="{ backgroundImage: 'url(/assets/backgrounds/Process-bg.webp)' }">
       <div class="container">
         <header class="tool-hiw__head">
           <h2>How It Works</h2>

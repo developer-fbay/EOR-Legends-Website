@@ -25,7 +25,7 @@ const steps = [
 </script>
 
 <template>
-  <section class="hiw-band band-green section fill-screen" :style="{ backgroundImage: 'url(/assets/backgrounds/Process-bg.png)' }">
+  <section class="hiw-band band-green section fill-screen" :style="{ backgroundImage: 'url(/assets/backgrounds/Process-bg.webp)' }">
     <div class="container">
       <header class="hiw-head">
         <h2>How It Works</h2>

@@ -368,7 +368,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .sbt {
   padding-block: var(--section-pad);
-  background-image: url('/assets/backgrounds/BG_CALCULATOR.png');
+  background-image: url('/assets/backgrounds/BG_CALCULATOR.webp');
   /* Anchored to the top so the cream arch is always visible (cover crops bottom, never the arch) */
   background-size: cover;
   background-position: top center;

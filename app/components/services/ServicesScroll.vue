@@ -25,9 +25,9 @@ const slides = computed(() => {
 })
 
 const IMAGES = [
-  '/assets/case-studies/frame-165-2.png',
-  '/assets/case-studies/frame-165.png',
-  '/assets/case-studies/frame-165-1.png',
+  '/assets/case-studies/frame-165-2.webp',
+  '/assets/case-studies/frame-165.webp',
+  '/assets/case-studies/frame-165-1.webp',
 ]
 
 const root = ref<HTMLElement | null>(null)

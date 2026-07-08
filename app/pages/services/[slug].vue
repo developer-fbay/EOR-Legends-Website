@@ -62,7 +62,7 @@ const faqs = computed(() => {
     </div>
 
     <!-- Overview (dark green) -->
-    <section class="svc-overview band-green section" :style="{ backgroundImage: 'url(/assets/backgrounds/services-bg.png)' }">
+    <section class="svc-overview band-green section" :style="{ backgroundImage: 'url(/assets/backgrounds/services-bg.webp)' }">
       <div class="container">
         <header class="svc-overview__head">
           <h2>Overview</h2>

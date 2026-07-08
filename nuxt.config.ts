@@ -21,6 +21,9 @@ export default defineNuxtConfig({
 
   nitro: {
     routeRules: {
+      // Static design assets rarely change — let browsers cache them for a week
+      '/assets/**': { headers: { 'Cache-Control': 'public, max-age=604800' } },
+      '/data/**': { headers: { 'Cache-Control': 'public, max-age=86400' } },
       // After the domain moves to this site, media/PDF links that still point
       // at legendseor.com/wp-content/... are proxied through to WordPress on
       // its subdomain. Set WP_BASE_URL (e.g. https://wp.legendseor.com) at

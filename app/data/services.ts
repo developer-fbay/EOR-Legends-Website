@@ -19,8 +19,8 @@ export type ServiceContent = {
   faqs: { q: string; a: string }[]
 }
 
-const PHOTO_1 = '/assets/services/service-photo-1.png'
-const PHOTO_2 = '/assets/services/service-photo-2.png'
+const PHOTO_1 = '/assets/services/service-photo-1.webp'
+const PHOTO_2 = '/assets/services/service-photo-2.webp'
 
 export const SERVICES: ServiceContent[] = [
   {

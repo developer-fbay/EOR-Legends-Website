@@ -8,7 +8,7 @@ useSeoMeta({ title: is404.value ? 'Page not found' : 'Something went wrong' })
 <template>
   <div>
     <LayoutAppHeader />
-    <main class="err" :style="{ backgroundImage: 'url(/assets/backgrounds/Process-bg.png)' }">
+    <main class="err" :style="{ backgroundImage: 'url(/assets/backgrounds/Process-bg.webp)' }">
       <div class="err-inner">
         <p class="err-code">{{ is404 ? '404' : error?.statusCode || 500 }}</p>
         <h1 class="err-title">{{ is404 ? 'Page Not Found' : 'Something went wrong' }}</h1>

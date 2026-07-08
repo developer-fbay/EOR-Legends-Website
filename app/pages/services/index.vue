@@ -26,7 +26,7 @@ usePageSeo({
         <div class="svc-grid">
           <article v-for="s in SERVICES" :key="s.slug" class="svc-card">
             <NuxtLink :to="`/services/${s.slug}`" class="svc-card__img" tabindex="-1" aria-hidden="true">
-              <img src="/assets/backgrounds/service-card.png" :alt="s.title" loading="lazy" />
+              <img src="/assets/backgrounds/service-card.webp" :alt="s.title" loading="lazy" />
             </NuxtLink>
             <h2>{{ s.title }}</h2>
             <p>{{ s.excerpt }}</p>

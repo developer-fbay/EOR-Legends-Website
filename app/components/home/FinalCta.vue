@@ -1,5 +1,5 @@
 <template>
-  <section class="final-cta band-green section fill-screen" :style="{ backgroundImage: 'url(/assets/backgrounds/Form-bg-b.png)' }">
+  <section class="final-cta band-green section fill-screen" :style="{ backgroundImage: 'url(/assets/backgrounds/Form-bg-b.webp)' }">
     <div class="container final-grid">
       <div class="final-copy">
         <h2>Ready to hire smarter?</h2>

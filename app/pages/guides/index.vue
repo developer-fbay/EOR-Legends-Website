@@ -23,7 +23,7 @@ usePageSeo({
             :key="g.slug"
             :title="g.title"
             :excerpt="g.excerpt"
-            image="/assets/backgrounds/service-card.png"
+            image="/assets/backgrounds/service-card.webp"
             :to="`/guides/${g.slug}`"
           />
         </div>
