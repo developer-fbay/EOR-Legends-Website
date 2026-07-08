@@ -50,6 +50,12 @@ useSeoMeta({
 <template>
   <div>
     <NuxtRouteAnnouncer />
+    <!-- Brand progress bar during page navigation -->
+    <NuxtLoadingIndicator
+      :height="3"
+      :throttle="180"
+      color="linear-gradient(90deg, #eb3d00, #cf3600 60%, #014520)"
+    />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
