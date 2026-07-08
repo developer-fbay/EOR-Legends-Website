@@ -24,12 +24,6 @@ const slides = computed(() => {
     .filter(Boolean)
 })
 
-const IMAGES = [
-  '/assets/case-studies/frame-165-2.webp',
-  '/assets/case-studies/frame-165.webp',
-  '/assets/case-studies/frame-165-1.webp',
-]
-
 const root = ref<HTMLElement | null>(null)
 let mm: gsap.MatchMedia | null = null
 
@@ -110,7 +104,7 @@ onBeforeUnmount(() => {
 
       <div class="sv-stage">
         <article v-for="(s, i) in slides" :key="s.slug" class="sv-slide" :data-service="s.slug">
-          <div class="sv-img-wrap"><img :src="IMAGES[i % IMAGES.length]" :alt="s.title" loading="lazy" /></div>
+          <div class="sv-img-wrap"><img :src="`/assets/services/card-${s.slug}.webp`" :alt="s.title" loading="lazy" /></div>
           <div class="sv-content">
             <h3 class="sv-name sv-anim">{{ s.title }}</h3>
             <p class="sv-text sv-anim">{{ s.excerpt }}</p>
