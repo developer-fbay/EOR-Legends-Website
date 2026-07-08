@@ -1,29 +1,35 @@
 <script setup lang="ts">
 /**
- * Page-navigation overlay loader. The LEGENDS wordmark bounces letter by
- * letter (same motion identity as the site's heading hover effect) over a
- * blurred cream veil, with an orange sweep underneath.
- * Only appears when a navigation takes longer than SHOW_AFTER_MS, and stays
- * at least MIN_VISIBLE_MS once shown so it never flickers.
+ * Page-navigation overlay loader. The LEGENDS wordmark stays still while an
+ * orange colour wave rolls through the letters, with an orange sweep bar.
+ * Client-side navigations only — never on initial load/reload (the server
+ * already streams the full page there). Appears only when a navigation takes
+ * longer than SHOW_AFTER_MS, stays at least MIN_VISIBLE_MS, and a watchdog
+ * force-hides it if a finish event is ever missed.
  */
 const LETTERS = 'LEGENDS'.split('')
 const SHOW_AFTER_MS = 200
 const MIN_VISIBLE_MS = 500
+const WATCHDOG_MS = 8000
 
 const visible = ref(false)
+let enabled = false // flips true once the first page has fully loaded
 let showTimer: ReturnType<typeof setTimeout> | null = null
 let hideTimer: ReturnType<typeof setTimeout> | null = null
+let watchdog: ReturnType<typeof setTimeout> | null = null
 let shownAt = 0
 
 const nuxtApp = useNuxtApp()
 
 function onStart() {
+  if (!enabled) return
   if (hideTimer) { clearTimeout(hideTimer); hideTimer = null }
   if (visible.value || showTimer) return
   showTimer = setTimeout(() => {
     showTimer = null
     visible.value = true
     shownAt = Date.now()
+    watchdog = setTimeout(forceHide, WATCHDOG_MS)
   }, SHOW_AFTER_MS)
 }
 
@@ -31,12 +37,20 @@ function onEnd() {
   if (showTimer) { clearTimeout(showTimer); showTimer = null }
   if (!visible.value) return
   const wait = Math.max(0, MIN_VISIBLE_MS - (Date.now() - shownAt))
-  hideTimer = setTimeout(() => { visible.value = false; hideTimer = null }, wait)
+  hideTimer = setTimeout(forceHide, wait)
 }
 
+function forceHide() {
+  if (watchdog) { clearTimeout(watchdog); watchdog = null }
+  if (hideTimer) { clearTimeout(hideTimer); hideTimer = null }
+  visible.value = false
+}
+
+// initial load (and reload) never shows the overlay; enable afterwards
+nuxtApp.hook('app:suspense:resolve', () => { enabled = true; forceHide() })
 nuxtApp.hook('page:start', onStart)
 nuxtApp.hook('page:finish', onEnd)
-nuxtApp.hook('vue:error', onEnd)
+nuxtApp.hook('vue:error', forceHide)
 </script>
 
 <template>
@@ -48,7 +62,7 @@ nuxtApp.hook('vue:error', onEnd)
             v-for="(ch, i) in LETTERS"
             :key="i"
             class="pl-letter"
-            :style="{ animationDelay: `${i * 0.08}s` }"
+            :style="{ animationDelay: `${i * 0.09}s` }"
           >{{ ch }}</span>
         </div>
         <div class="pl-sweep"><span /></div>
@@ -81,12 +95,11 @@ nuxtApp.hook('vue:error', onEnd)
 }
 .pl-letter {
   display: inline-block;
-  animation: pl-bounce 1.1s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+  animation: pl-wave 1.3s ease-in-out infinite;
 }
-@keyframes pl-bounce {
-  0%, 55%, 100% { transform: translateY(0); }
-  25% { transform: translateY(-0.28em); color: var(--accent); }
-  40% { transform: translateY(0.05em); }
+@keyframes pl-wave {
+  0%, 45%, 100% { color: var(--green); }
+  20% { color: var(--accent); }
 }
 .pl-sweep {
   position: relative;
@@ -103,7 +116,7 @@ nuxtApp.hook('vue:error', onEnd)
   width: 38%;
   border-radius: 2px;
   background: var(--accent);
-  animation: pl-sweep 1.1s ease-in-out infinite;
+  animation: pl-sweep 1.3s ease-in-out infinite;
 }
 @keyframes pl-sweep {
   0% { left: -38%; }
@@ -125,7 +138,7 @@ nuxtApp.hook('vue:error', onEnd)
 .pl-fade-leave-to { opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .pl-letter { animation: none; }
-  .pl-sweep span { animation-duration: 2s; }
+  .pl-letter { animation-duration: 2.4s; }
+  .pl-sweep span { animation-duration: 2.4s; }
 }
 </style>
