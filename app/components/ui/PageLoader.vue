@@ -8,8 +8,10 @@
  * force-hides it if a finish event is ever missed.
  */
 const LETTERS = 'LEGENDS'.split('')
-const SHOW_AFTER_MS = 200
-const MIN_VISIBLE_MS = 500
+// Only appear when the user is actually stuck: navigations that complete
+// within the grace period move straight to the next page with no loader.
+const SHOW_AFTER_MS = 400
+const MIN_VISIBLE_MS = 450
 const WATCHDOG_MS = 8000
 
 const visible = ref(false)
