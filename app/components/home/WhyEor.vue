@@ -2,6 +2,7 @@
 // "Why an EOR?" comparison table — user's code block, converted to a data-driven Vue component.
 const rows = [
   'Time to first hire',
+  'Time to CVs',
   'Upfront setup cost',
   'Payroll, tax & benefits',
   'Local compliance & labour law',
@@ -17,12 +18,13 @@ const columns = [
     highlight: true,
     values: [
       { text: '2–4 weeks' },
+      { text: '7 days' },
       { text: 'None' },
       { text: '✓ Included' },
       { text: '✓ Included' },
       { text: '✓ Included' },
-      { text: 'None - we run it' },
-      { text: 'up to 60% lower' },
+      { text: 'None – we run it' },
+      { text: 'Up to 60% lower' },
     ],
   },
   {
@@ -31,6 +33,7 @@ const columns = [
     highlight: false,
     values: [
       { text: '4–6 months' },
+      { text: 'Varies (2–4+ weeks)' },
       { text: '£15k–40k' },
       { text: 'Your job', faint: true },
       { text: 'Your job', faint: true },
@@ -45,6 +48,7 @@ const columns = [
     highlight: false,
     values: [
       { text: '3–8 weeks' },
+      { text: 'Varies (1–3 weeks)' },
       { text: 'Placement fee' },
       { text: '✗ Not covered', no: true },
       { text: '✗ Not covered', no: true },

@@ -8,7 +8,7 @@ const slides = [
   {
     stat: '47%',
     title: 'Back-office cost reduction',
-    text: 'ThinkWorkforce, a UK recruitment company based in Birmingham, partnered with Legends EOR to build a 12-person support team in Cape Town. Through our recruitment, Employer of Record, and international support services, they reduced back-office costs by 47% while improving operational efficiency and creating additional capacity to support future growth.',
+    text: 'ThinkWorkforce, a Birmingham-based recruitment company, needed to scale a 12-person support team in Cape Town quickly and reliably. Partnering with Legends EOR for recruitment, employment, and in-country support cut back-office costs by 47% and sharpened operational efficiency as the team grew.',
     image: '/assets/case-studies/frame-165-2.webp',
     logo: '/assets/case-studies/thinkworkforce-logo.png',
     alt: 'ThinkWorkforce case study',
@@ -17,7 +17,7 @@ const slides = [
   {
     stat: '63%',
     title: 'Back-office cost reduction',
-    text: 'Funding Bay, a London-based finance brokerage, partnered with Legends EOR to build a specialist marketing and business development team in Cape Town. Through our recruitment, Employer of Record, and international support services, they reduced back-office costs by 63% while creating additional capacity to support future growth.',
+    text: 'FundingBay, a London-based finance brokerage, wanted a specialist marketing and business development team without opening an entity in South Africa. Legends EOR handled recruitment, employment, and ongoing local support, bringing back-office costs down by 63% and freeing up capacity to focus on growth.',
     image: '/assets/case-studies/frame-165.webp',
     logo: '/assets/case-studies/FB-logo.png',
     alt: 'Funding Bay case study',
@@ -26,7 +26,7 @@ const slides = [
   {
     stat: '58%',
     title: 'Back-office cost reduction',
-    text: 'Effer Ventures partnered with Legends EOR to build and manage international teams across South Africa, the UK, and India. Through a combination of recruitment, onboarding, HR support, and local compliance management, they reduced back-office costs by 58% while creating the operational infrastructure needed to support continued growth.',
+    text: 'Effer Ventures needed to manage international teams across South Africa and the UK without the compliance headache of setting up entities in each. Legends EOR took on recruitment, onboarding, HR support, and local compliance in South Africa, cutting back-office costs by 58% and giving Effer Ventures the infrastructure to keep scaling without slowing down.',
     image: '/assets/case-studies/frame-165-1.webp',
     logo: '/assets/case-studies/Effer-Ventures_logo.png',
     alt: 'Effer Ventures case study',

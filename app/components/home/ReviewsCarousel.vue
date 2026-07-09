@@ -5,12 +5,9 @@
  * band with the user's Reviews-bg.webp background.
  */
 const reviews = [
-  { text: 'I never thought managing my personal finances could be this simple. Moveta’s real-time insights have helped me budget better and save more each month.', name: 'Michael Carter' },
-  { text: 'Moveta has streamlined our financial operations and saved us countless hours every month. The analytics are incredibly detailed yet easy to understand.', name: 'Samantha Jones' },
-  { text: 'Moveta has streamlined our workflows and improved efficiency. The interface is intuitive and effective — highly recommended for any growing team.', name: 'Anita Ramesh' },
-  { text: 'Switching to Moveta was effortless. The dashboards give me a clear picture of cash flow at a glance, and the support team has been genuinely fantastic.', name: 'David Whitman' },
-  { text: 'The automated reports alone are worth it. I finally understand where every cent goes, and forecasting next quarter now takes minutes instead of days.', name: 'Priya Nair' },
-  { text: 'From invoicing to expense tracking, Moveta keeps everything in one place. It has quickly become the tool our whole team relies on every single day.', name: 'James Okoro' },
+  { text: 'Game changing for my business.', name: 'Christian Crowson' },
+  { text: 'Absolute pleasure working with Michelle Charlton. She worked around the clock to fill positions within our business. Highly recommended.', name: 'Anton Visser' },
+  { text: 'South African staff changed our business for the better. Love being able to meet the UK team too. Tell the CEO that the unlimited UK drinks budget is a good policy! ;-)', name: 'Ned Barker' },
 ]
 
 const CARD = 300
@@ -207,6 +204,7 @@ onBeforeUnmount(() => {
   font-size: clamp(28px, 2.2vw, 36px);
   line-height: 1.12;
   letter-spacing: 0.2px;
+  text-align: center;
 }
 .rc-reviews__nav { display: flex; gap: 14px; margin-bottom: 0; justify-content: center; }
 .rc-nav-btn {

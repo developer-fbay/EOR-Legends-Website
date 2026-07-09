@@ -2,10 +2,10 @@
   <section class="final-cta band-green section fill-screen" :style="{ backgroundImage: 'url(/assets/backgrounds/Form-bg-b.webp)' }">
     <div class="container final-grid">
       <div class="final-copy">
-        <h2>Ready to hire smarter?</h2>
+        <h2>Ready To Hire Smarter?</h2>
         <p>
           You've seen the numbers, heard from our clients, and understand how EOR works.
-          Take the next step — get a free, personalised cost estimate for your team.
+          Take the next step and get a free, personalised cost estimate for your team.
         </p>
         <div class="final-stats">
           <div><span>60%</span><small>avg. savings</small></div>

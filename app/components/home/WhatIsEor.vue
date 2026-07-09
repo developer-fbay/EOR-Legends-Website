@@ -1,12 +1,31 @@
 <script setup lang="ts">
-// "What Is An EOR?" — two white cards side by side (per the WP design):
-// left = definition + numbered "How it works" steps, right = FAQ accordion.
-// Copy transcribed from the WP screenshot.
-const howItWorks = [
-  { lead: 'Define the role and budget.', text: 'Use our Salary Benchmarking Tool to compare the SA cost against the UK-equivalent in pounds sterling.' },
-  { lead: 'Recruit your team member.', text: 'Run the process yourself or with a partner; you choose who joins.' },
-  { lead: 'We become the legal employer.', text: 'Legends signs the SA employment contract and handles payroll, tax, and statutory compliance.' },
-  { lead: 'You manage day to day.', text: 'Your team member takes direction from you; we run the back office in the background.' },
+// Left card: common employer questions + staffing-insights resource links.
+const resourceLinks = [
+  {
+    question: 'What is the true cost of an employee?',
+    linkText: 'The true cost of an employee in the UK 2026',
+    to: '/staffing-insights/true-cost-of-an-employee-in-the-uk',
+  },
+  {
+    question: 'Could hiring overseas create a tax problem?',
+    linkText: 'Permanent establishment: a guide for UK businesses hiring abroad',
+    to: '/staffing-insights/permanent-establishment-guide',
+  },
+  {
+    question: 'What is employee turnover actually costing you?',
+    linkText: 'When good people leave: the true cost of employee turnover',
+    to: null,
+  },
+  {
+    question: 'Is outsourcing the right call for my business?',
+    linkText: 'The real disadvantages of outsourcing',
+    to: null,
+  },
+  {
+    question: 'Did you know paternity leave and unpaid parental leave are now day one rights?',
+    linkText: 'The Employment Rights Act 2025: what UK employers need to know',
+    to: null,
+  },
 ]
 
 const faqs = [
@@ -16,15 +35,15 @@ const faqs = [
   },
   {
     q: 'Who does the SA team member work for, Legends EOR or my company?',
-    a: 'Legally, Legends EOR is the employer — we hold the contract, payroll, tax, and compliance obligations. Operationally, the person works for you: your projects, your management, your culture.',
+    a: 'Legally, Legends EOR is the employer, and we hold the contract, payroll, tax, and compliance obligations. Operationally, the person works for you: your projects, your management, your culture.',
   },
   {
     q: 'Can I hire just one person, or is there a minimum?',
-    a: 'You can hire a single person. There is no minimum team size — many clients start with one hire and grow from there.',
+    a: 'You can hire a single person. There is no minimum team size. Many clients start with one hire and grow from there.',
   },
   {
     q: 'How do I pay, and what are the fees?',
-    a: 'You receive one itemised monthly invoice in sterling covering salary, statutory contributions, benefits and our management fee — no hidden costs.',
+    a: 'You receive one itemised monthly invoice in sterling covering salary, statutory contributions, benefits and our management fee, with no hidden costs.',
   },
   {
     q: 'How long does it take to hire someone in South Africa through an EOR?',
@@ -36,7 +55,7 @@ const faqs = [
   },
   {
     q: "What happens if it doesn't work out with a hire?",
-    a: 'We manage the exit compliantly under South African labour law — notice periods, documentation and any statutory requirements — protecting you from CCMA disputes.',
+    a: 'We manage the exit compliantly under South African labour law, including notice periods, documentation and any statutory requirements, protecting you from CCMA disputes.',
   },
 ]
 
@@ -68,31 +87,34 @@ useHead({
   <section class="wie band-cream section fill-screen">
     <div class="container">
       <header class="wie-head">
-        <h2>What Is An EOR?</h2>
+        <h2>Got questions about hiring in South Africa?</h2>
         <p>
-          New to EOR? Here's how it works and answers to the most common<br />
-          questions we get from companies looking to hire in South Africa
+          Here's how it works and answers to the most common questions we get from companies
+          looking to hire in South Africa.
         </p>
       </header>
 
       <div class="wie-grid">
-        <!-- LEFT card: definition + steps -->
+        <!-- LEFT card: questions + resource links -->
         <div class="wie-card">
-          <h3 class="wie-card__title">What is an Employer of Record?</h3>
+          <h3 class="wie-card__title">Already asking yourself one of these questions?</h3>
           <p class="wie-card__body">
-            An Employer of Record (EOR) is a third-party organisation that legally employs
-            workers in another country on your behalf. For a UK business, that means hiring
-            full-time team members in South Africa without setting up a local entity,
-            navigating SA employment law, or running cross-border payroll.
+            These are the questions we hear most from UK employers looking to grow their teams.
+            Most UK employers run into at least one of them at some point.
           </p>
 
-          <h4 class="wie-hiw">How it works</h4>
-          <ol class="wie-steps">
-            <li v-for="(s, i) in howItWorks" :key="i" class="wie-step">
-              <span class="wie-step__num">{{ i + 1 }}</span>
-              <p><strong>{{ s.lead }}</strong> {{ s.text }}</p>
+          <ul class="wie-resources">
+            <li v-for="(item, i) in resourceLinks" :key="i">
+              <NuxtLink v-if="item.to" :to="item.to" class="wie-resource wie-resource--linked">
+                <p class="wie-resource__q">{{ item.question }}</p>
+                <p class="wie-resource__text">{{ item.linkText }}</p>
+              </NuxtLink>
+              <div v-else class="wie-resource">
+                <p class="wie-resource__q">{{ item.question }}</p>
+                <p class="wie-resource__text">{{ item.linkText }}</p>
+              </div>
             </li>
-          </ol>
+          </ul>
         </div>
 
         <!-- RIGHT card: FAQ -->
@@ -116,6 +138,10 @@ useHead({
 </template>
 
 <style scoped>
+.wie.section {
+  padding-block: clamp(4.5rem, 10vh, 8rem);
+}
+
 .wie-head {
   text-align: center;
   margin: 0 auto clamp(1.6rem, 4vh, 2.6rem);
@@ -129,13 +155,16 @@ useHead({
   display: grid;
   grid-template-columns: 1fr 1.05fr;
   gap: clamp(20px, 2.6vw, 36px);
-  align-items: start;
+  align-items: stretch;
   max-width: 1180px;
   margin-inline: auto;
 }
 
 /* Both columns are white cards */
 .wie-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background: var(--white);
   border: 1px solid #ece9e2;
   border-radius: 14px;
@@ -161,53 +190,55 @@ useHead({
   margin-bottom: 1.4em;
 }
 
-.wie-hiw {
-  font-family: var(--serif);
-  font-size: 1.35rem;
-  font-weight: 400;
-  margin: 0 0 0.7em;
-}
-
-/* Numbered steps in soft rounded boxes with orange number circles */
-.wie-steps {
+.wie-resources {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex: 1;
 }
-.wie-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
+.wie-resource {
+  display: block;
   background: #faf6ef;
   border: 1px solid #f0ece3;
   border-radius: 10px;
   padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
-.wie-step__num {
-  flex: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
+.wie-resource--linked {
+  cursor: pointer;
+}
+.wie-resource--linked:hover {
+  border-color: var(--green);
+  background: #f5f1e8;
+}
+.wie-resource__q {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-top: 2px;
+  line-height: 1.5;
 }
-.wie-step p {
+.wie-resource__text {
   margin: 0;
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.5;
+  color: var(--green);
 }
-.wie-step strong { font-weight: 600; }
+.wie-resource--linked:hover .wie-resource__text {
+  color: var(--accent);
+}
+.wie-resource:not(.wie-resource--linked) .wie-resource__text {
+  color: var(--body);
+}
 
 /* FAQ list */
+.wie-faq {
+  flex: 1;
+}
 .wie-faq__item + .wie-faq__item { border-top: 1px solid #efece5; }
 .wie-faq__q {
   width: 100%;
@@ -247,6 +278,5 @@ useHead({
 
 @media (max-width: 900px) {
   .wie-grid { grid-template-columns: 1fr; }
-  .wie-head p br { display: none; }
 }
 </style>

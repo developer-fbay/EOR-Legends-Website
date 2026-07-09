@@ -9,7 +9,7 @@ const steps = [
   {
     label: 'WEEK 1',
     title: 'Meet your shortlist',
-    desc: 'We source, vet and skills‑test candidates – only the strongest reach your inbox.',
+    desc: 'We source, vet and skills-test candidates. Only the strongest reach your inbox.',
   },
   {
     label: 'WEEK 2',
@@ -18,7 +18,7 @@ const steps = [
   },
   {
     label: 'WEEK 3+',
-    title: 'They start – we run it',
+    title: 'They start, we run it',
     desc: "Payroll, tax, benefits, equipment and compliance, managed locally for as long as they're with you.",
   },
 ]
@@ -46,7 +46,7 @@ const steps = [
             </div>
           </div>
           <div class="hiw-bottom">
-            <p><span>From brief to a working hire in under a month</span> – no subsidiary, no setup, no local admin.</p>
+            <p>From the brief to a working hire in under a month. No subsidiary, no setup, no local admin.</p>
             <NuxtLink to="/contact" class="brand-btn brand-btn--outline">Lets get started</NuxtLink>
           </div>
         </div>

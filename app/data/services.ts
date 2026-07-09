@@ -26,11 +26,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'Payroll',
     nav: 'Payroll',
     excerpt:
-      'Compliant South African payroll, completely managed. You approve salaries and we handle every calculation, SARS submission, and statutory filing, then send one invoice in your own currency.',
+      'We take responsibility for processing accurate payroll, meeting statutory obligations, and maintaining compliance.',
     intro: [
-      'When you use our Employer of Record service, payroll is included and handled completely.',
-      'You receive one invoice in your own currency while we manage all calculations, compliance, and submissions in South Africa.',
-      "You shouldn't need to understand South African tax codes, employment law, or SARS filing deadlines to employ someone in the country. When we employ staff on your behalf, we take responsibility for processing accurate payroll, meeting statutory obligations, and maintaining compliance.",
+      'We take responsibility for processing accurate payroll, meeting statutory obligations, and maintaining compliance.',
     ],
     overview: [
       {
@@ -79,10 +77,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'Human Resources',
     nav: 'HR',
     excerpt:
-      'Local HR grounded in South African labour law. We act as your on-the-ground HR team, handling employee queries, leave, performance, and disputes while protecting your business from compliance risk.',
+      'Legends EOR handles all HR administration for your South African team.',
     intro: [
-      'Local HR grounded in South African labour law, included in your Employer of Record service.',
-      'We act as your on-the-ground HR team, handling employee queries, leave, performance, and disputes while protecting your business from compliance risk.',
+      'Legends EOR handles all HR administration for your South African team.',
     ],
     overview: [
       {
@@ -103,7 +100,7 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'You manage the work', text: 'Your team reports to you and follows your processes day to day.' },
+      { title: 'We learn your business', text: 'An Account Manager will understand your team structure, culture, and expectations so we can represent you accurately.' },
       { title: 'We run the HR', text: 'Leave, queries, performance support, and disputes are handled locally and compliantly.' },
       { title: 'You stay protected', text: 'Labour-law risk, documentation, and CCMA processes sit with us as the legal employer.' },
     ],
@@ -118,10 +115,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'Employee Benefits',
     nav: 'Employee Benefits',
     excerpt:
-      'Optional benefits, fully managed. We advise on what is competitive for your roles, source reliable local providers, and handle enrolment, deductions, and ongoing administration.',
+      'If you choose to offer benefits, we can advise on what makes sense for your South African team.',
     intro: [
-      'Optional benefits, fully managed through your Employer of Record service.',
-      'We advise on what is competitive for your roles, source reliable local providers, and handle enrolment, deductions, and ongoing administration.',
+      'If you choose to offer benefits, we can advise on what makes sense for your South African team.',
     ],
     overview: [
       {
@@ -157,10 +153,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'Company Culture',
     nav: 'Company Culture',
     excerpt:
-      'Keep a remote South African team connected to your business. Local engagement, workplace guidance, and a cultural bridge between your headquarters and your people on the ground.',
+      'We strengthen your company culture through ongoing engagement, workplace guidance, and direct relationships.',
     intro: [
-      'Keep a remote South African team connected to your business.',
-      'Local engagement, workplace guidance, and a cultural bridge between your headquarters and your people on the ground.',
+      'We strengthen your company culture through ongoing engagement, workplace guidance, and direct relationships.',
     ],
     overview: [
       {
@@ -181,9 +176,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We embed', text: 'Your culture and ways of working are translated into the local context.' },
-      { title: 'We engage', text: 'Events, recognition, and on-the-ground support keep your team connected.' },
-      { title: 'You retain', text: 'Engaged employees stay longer and perform better for your business.' },
+      { title: 'We understand your culture', text: 'We learn what drives your business, how you operate, and what you expect from your team.' },
+      { title: 'We reinforce it locally', text: 'We maintain culture through engagement, workplace guidance, and employee support.' },
+      { title: 'We connect your team', text: 'We bridge the distance between your leadership and your South African employees.' },
     ],
     faqs: [
       { q: 'What does culture support actually include?', a: 'Local onboarding, team events, recognition programmes, regular check-ins, and a named contact your employees can talk to in person.' },
@@ -195,10 +190,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'Contractor Management',
     nav: 'Contractor Management',
     excerpt:
-      'Engage contractors in South Africa without misclassification risk. Classification guidance, compliant agreements, on-time payments, and clear advice on when a contractor should become an employee.',
+      'We help classify roles contractor, handle contracts and payments, and advise.',
     intro: [
-      'Engage contractors in South Africa without misclassification risk.',
-      'Classification guidance, compliant agreements, on-time payments, and clear advice on when a contractor should become an employee.',
+      'We help classify roles contractor, handle contracts and payments, and advise.',
     ],
     overview: [
       {
@@ -233,10 +227,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'EOR Migration',
     nav: 'EOR Migration',
     excerpt:
-      'Move to us from another Employer of Record without disruption. A controlled, planned transition that protects payroll continuity, keeps you compliant, and stays nearly invisible to your team.',
+      'If your current EOR is not delivering, we can migrate your South African employees to our service.',
     intro: [
-      'Move to us from another Employer of Record without disruption.',
-      'A controlled, planned transition that protects payroll continuity, keeps you compliant, and stays nearly invisible to your team.',
+      'If your current EOR is not delivering, we can migrate your South African employees to our service.',
     ],
     overview: [
       {
@@ -259,7 +252,7 @@ export const SERVICES: ServiceContent[] = [
     steps: [
       { title: 'We map', text: 'Contracts, benefits, and payroll details are captured from your current EOR.' },
       { title: 'We migrate', text: 'A dated plan moves employment compliantly with no break in service.' },
-      { title: 'You continue', text: 'Same team, same pay dates — with local support from day one.' },
+      { title: 'No disruptions', text: 'Same team, same pay dates — with local support from day one.' },
     ],
     faqs: [
       { q: 'Will my employees notice the switch?', a: 'Barely. Pay dates, salaries and benefits continue unchanged; the only difference is that support now comes from people on the ground in South Africa.' },
@@ -271,10 +264,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'Onboarding & Offboarding',
     nav: 'Onboarding/Offboarding',
     excerpt:
-      'Every hire and exit managed under South African labour law. Compliant contracts and statutory registrations on the way in, CCMA-safe notice and termination on the way out.',
+      'Legends EOR manages the complete process, ensuring compliance, reducing risk, and maintaining professionalism.',
     intro: [
-      'Every hire and exit managed under South African labour law.',
-      'Compliant contracts and statutory registrations on the way in, CCMA-safe notice and termination on the way out.',
+      'Legends EOR manages the complete process, ensuring compliance, reducing risk, and maintaining professionalism.',
     ],
     overview: [
       {
@@ -309,10 +301,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'Office Space',
     nav: 'Office Space',
     excerpt:
-      'Base your team in our managed Cape Town office. Private offices or dedicated desks with backup power, reliable internet, and on-site HR and IT, all under one consolidated invoice.',
+      'We offer private offices, dedicated desks, and meeting rooms with reliable infrastructure and on-site support.',
     intro: [
-      'Base your team in our managed Cape Town office.',
-      'Private offices or dedicated desks with backup power, reliable internet, and on-site HR and IT, all under one consolidated invoice.',
+      'We offer private offices, dedicated desks, and meeting rooms with reliable infrastructure and on-site support.',
     ],
     overview: [
       {
@@ -347,10 +338,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'IT Support',
     nav: 'IT Support',
     excerpt:
-      'On-site IT for your South African team, included in your EOR service. Device setup, day-to-day troubleshooting, and secure access removal during offboarding, all handled locally.',
+      'We handle device setup, troubleshooting, onboarding and offboarding, and coordination with your internal IT team.',
     intro: [
-      'On-site IT for your South African team, included in your EOR service.',
-      'Device setup, day-to-day troubleshooting, and secure access removal during offboarding, all handled locally.',
+      'We handle device setup, troubleshooting, onboarding and offboarding, and coordination with your internal IT team.',
     ],
     overview: [
       {
@@ -373,7 +363,7 @@ export const SERVICES: ServiceContent[] = [
     steps: [
       { title: 'We set up', text: 'Devices configured to your policies before each start date.' },
       { title: 'We support', text: 'Local troubleshooting keeps your team productive every day.' },
-      { title: 'We secure', text: 'Exits mean full access removal and device recovery, documented.' },
+      { title: 'Secure offboarding', text: 'Exits mean full access removal and device recovery, documented.' },
     ],
     faqs: [
       { q: 'Is IT support really included?', a: 'Yes — day-to-day IT support for your South African team is part of the EOR service, with no per-ticket charges.' },
@@ -385,10 +375,9 @@ export const SERVICES: ServiceContent[] = [
     title: 'IT Equipment',
     nav: 'IT Equipment',
     excerpt:
-      'Laptops, monitors, and peripherals sourced locally and delivered to your team. No international shipping delays, no customs headaches, and devices ready on day one.',
+      'You can purchase laptops, monitors, and peripherals through our local webstore.',
     intro: [
-      'Laptops, monitors, and peripherals sourced locally and delivered to your team.',
-      'No international shipping delays, no customs headaches, and devices ready on day one.',
+      'You can purchase laptops, monitors, and peripherals through our local webstore.',
     ],
     overview: [
       {
