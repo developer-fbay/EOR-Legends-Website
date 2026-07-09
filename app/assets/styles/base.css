@@ -304,9 +304,29 @@ a {
 main h2 {
   transition: transform 0.3s ease, color 0.3s ease;
 }
+/* !important so component-scoped heading colours (parallax sections, green
+   bands) can't outrank the hover state */
 main h2:hover {
-  transform: translateY(-4px);
-  color: var(--accent); /* same hover colour as "Great Teams" */
+  transform: translateY(-4px) !important;
+  color: var(--accent) !important; /* same hover colour as "Great Teams" */
+}
+/* Content and card headings are NOT section headings — no hover effect there
+   (article bodies on blogs/news/glossary, pillar/cluster content, legal pages,
+   and archive card titles) */
+main .art-content h2,
+main .pi-body h2,
+main .legal-card h2,
+main .learn-card h2,
+main .svc-card h2 {
+  transition: none;
+}
+main .art-content h2:hover,
+main .pi-body h2:hover,
+main .legal-card h2:hover,
+main .learn-card h2:hover,
+main .svc-card h2:hover {
+  transform: none !important;
+  color: var(--body) !important;
 }
 
 /* Honeypot field — off-screen but not display:none, so naive bots still fill it */
