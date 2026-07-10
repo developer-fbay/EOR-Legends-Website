@@ -14,6 +14,14 @@ const LOGO_BLOCKS: Record<string, string> = {
   'funding-bay': '/assets/case-studies/block-funding-bay.webp',
   'effer-ventures': '/assets/case-studies/block-effer-ventures.webp',
 }
+
+// The WP excerpt field is empty on these posts; the card copy comes from the
+// 2026 archive design instead.
+const EXCERPTS: Record<string, string> = {
+  thinkworkforce: 'UK-Based Recruitment Agency.',
+  'funding-bay': 'UK-Based Business Finance Brokerage.',
+  'effer-ventures': 'South African based Skills Investment Firm with a global footprint.',
+}
 </script>
 
 <template>
@@ -30,7 +38,7 @@ const LOGO_BLOCKS: Record<string, string> = {
             v-for="p in posts ?? []"
             :key="p.id"
             :title="p.title"
-            :excerpt="p.excerpt"
+            :excerpt="p.excerpt || EXCERPTS[p.slug]"
             :image="LOGO_BLOCKS[p.slug] || p.featured_image"
             :to="`/case-studies/${p.slug}`"
           />

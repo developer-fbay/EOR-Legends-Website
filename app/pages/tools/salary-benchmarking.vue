@@ -26,11 +26,24 @@ const steps = [
   },
 ]
 
-// Placeholder FAQs until the content manager supplies final copy.
-const faqs = Array.from({ length: 4 }, (_, i) => ({
-  q: `Placeholder question ${i + 1}, final copy coming soon`,
-  a: 'Placeholder answer. Your content manager will provide the final wording for this question.',
-}))
+const faqs = [
+  {
+    q: 'Where does the salary data come from?',
+    a: 'The benchmarks are built from real placements and live market data across the roles we hire for, combined with published salary surveys for each country. We review the figures regularly so the ranges reflect what candidates actually accept today, not last year.',
+  },
+  {
+    q: 'What currency are the results shown in?',
+    a: 'Results are shown in the currency of the country you select, converted using current exchange rates. That makes it easy to compare a South African salary directly against what you would pay for the same role at home.',
+  },
+  {
+    q: 'Does the salary shown include employment costs and fees?',
+    a: 'The benchmark shows the gross salary range for the role. On top of that, employing in South Africa adds modest statutory costs for the employer, far lower than UK National Insurance. Request a free cost estimate and we will show you the all-in monthly figure, including our EOR fee, with no hidden extras.',
+  },
+  {
+    q: 'How accurate is the benchmark for my specific role?',
+    a: 'The ranges are a reliable starting point for budgeting, but the right salary always depends on seniority, skills and industry. Send us the job spec and we will benchmark it precisely against the current market, free and with no obligation.',
+  },
+]
 </script>
 
 <template>
