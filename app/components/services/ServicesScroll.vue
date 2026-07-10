@@ -36,7 +36,7 @@ onMounted(async () => {
   gsap.registerPlugin(ScrollTrigger)
 
   mm = gsap.matchMedia()
-  mm.add('(min-width: 993px) and (prefers-reduced-motion: no-preference)', () => {
+  mm.add('(min-width: 993px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
     const section = root.value
     if (!section) return
     const s = gsap.utils.toArray<HTMLElement>('.sv-slide', section)
@@ -230,6 +230,20 @@ onBeforeUnmount(() => {
   .sv-scroll { height: var(--seq-h, 550vh); }
   .sv-slide { pointer-events: none; }
   .sv-slide:first-child { pointer-events: auto; }
+}
+@media (min-width: 993px) and (orientation: portrait) {
+  .sv-scroll { height: auto !important; }
+  .sv-pin { height: auto; display: block; padding: 48px 40px; }
+  .sv-header { margin-bottom: 40px; }
+  .sv-stage { height: auto; margin: 0 auto; }
+  .sv-slide {
+    position: static;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    margin-bottom: 72px;
+  }
+  .sv-img-wrap { height: clamp(300px, 32vh, 440px); }
 }
 @media (min-width: 993px) and (prefers-reduced-motion: reduce) {
   .sv-scroll { height: auto; }

@@ -5,9 +5,22 @@
  * band with the user's Reviews-bg.webp background.
  */
 const reviews = [
-  { text: 'Game changing for my business.', name: 'Christian Crowson' },
-  { text: 'Absolute pleasure working with Michelle Charlton. She worked around the clock to fill positions within our business. Highly recommended.', name: 'Anton Visser' },
-  { text: 'South African staff changed our business for the better. Love being able to meet the UK team too. Tell the CEO that the unlimited UK drinks budget is a good policy! ;-)', name: 'Ned Barker' },
+  {
+    text: 'PAYE, UIF and SDL are all calculated correctly and the payslips are easy for our finance team to reconcile. Only thing I\'d say is the reporting dashboard took a bit of getting used to at first.',
+    name: 'Rachel Pemberton',
+  },
+  {
+    text: 'We weren\'t sure what a decent benefits package looks like for South African employees, but the options they put in front of us were solid and two of our developers specifically mentioned how helpful it was to them.',
+    name: 'James Holloway',
+  },
+  {
+    text: 'Whenever we\'ve had a question about leave entitlement or a disciplinary process for our Cape Town staff, we\'ve had an answer within a day, usually with the relevant section of SA labour law referenced.',
+    name: 'Sarah Mitchell',
+  },
+  {
+    text: 'Migrated 15 employees from our old provider with no payroll gaps. Contracts, leave balances and benefits all carried over, and payroll ran on schedule the same month we switched. No employees contacted us with issues.',
+    name: 'David Okonkwo',
+  },
 ]
 
 const CARD = 300

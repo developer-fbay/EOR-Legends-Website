@@ -845,6 +845,11 @@ onBeforeUnmount(() => {
   .sbt-field { margin-bottom: 5px; }
   .sbt-select { padding-top: 7px; padding-bottom: 7px; }
   .sbt-chart-wrap { height: 128px; min-height: 120px; margin-bottom: 8px; }
+  .sbt-card-results .sbt-chart-wrap { min-height: 120px; }
+  .sbt-card-subtitle { display: none; }
+  .sbt-card-title { font-size: 16px; }
+  .sbt-card-form label { font-size: 12.5px; }
+  .sbt-toggle-btn { padding-top: 6px; padding-bottom: 6px; }
 }
 
 
@@ -852,8 +857,16 @@ onBeforeUnmount(() => {
    Heading gets space above/below, tool 10px shorter, extra space below. */
 @media (min-width: 993px) and (max-height: 820px) and (min-height: 651px) {
   .sbt { padding-bottom: calc(var(--section-pad) + 6px); }
-  .sbt-head { margin-top: 52px; margin-bottom: 1.4rem; }
-  .sbt-chart-wrap { height: 190px; min-height: 170px; }
+  .sbt-head { margin-top: 52px; margin-bottom: 1rem; }
+  .sbt-head p { display: none; }
+  .sbt-card { padding: 12px 22px; }
+  .sbt-card-title { font-size: 17px; }
+  .sbt-card-subtitle { display: none; }
+  .sbt-card-form label { font-size: 13px; }
+  .sbt-field { margin-bottom: 5px; }
+  .sbt-select { padding-top: 6px; padding-bottom: 6px; }
+  .sbt-toggle-btn { padding-top: 7px; padding-bottom: 7px; }
+  .sbt-card-results .sbt-chart-wrap { min-height: 150px; }
 }
 
 

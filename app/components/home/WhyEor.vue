@@ -185,6 +185,17 @@ const columns = [
   .eor-comp .eor-plan-sub { font-size: 12px; margin-top: 2px; }
 }
 
+/* 14" laptops at 150% (~587px viewport, now 8 comparison rows): tighter */
+@media (min-width: 993px) and (max-height: 650px) {
+  .why-head { margin-bottom: 0.6rem; }
+  .why-head p { display: none; }
+  .eor-comp { padding: 4px 0; }
+  .eor-comp .eor-cell { height: 40px; font-size: 13px; }
+  .eor-comp .eor-cell-head { height: 60px; padding-top: 12px; }
+  .eor-comp .eor-plan-name { font-size: 15px; }
+  .eor-comp .eor-plan-sub { display: none; }
+}
+
 @media (max-width: 992px) {
   .eor-comp { max-width: 100%; }
   .eor-comp .eor-cell { padding: 0 16px; font-size: 15px; }

@@ -9,7 +9,7 @@ const slides = [
     stat: '47%',
     title: 'Back-office cost reduction',
     text: 'ThinkWorkforce, a Birmingham-based recruitment company, needed to scale a 12-person support team in Cape Town quickly and reliably. Partnering with Legends EOR for recruitment, employment, and in-country support cut back-office costs by 47% and sharpened operational efficiency as the team grew.',
-    image: '/assets/case-studies/frame-165-2.webp',
+    image: '/assets/case-studies/cs-thinkworkforce.webp',
     logo: '/assets/case-studies/thinkworkforce-logo.png',
     alt: 'ThinkWorkforce case study',
     link: '/case-studies/thinkworkforce',
@@ -18,7 +18,7 @@ const slides = [
     stat: '63%',
     title: 'Back-office cost reduction',
     text: 'FundingBay, a London-based finance brokerage, wanted a specialist marketing and business development team without opening an entity in South Africa. Legends EOR handled recruitment, employment, and ongoing local support, bringing back-office costs down by 63% and freeing up capacity to focus on growth.',
-    image: '/assets/case-studies/frame-165.webp',
+    image: '/assets/case-studies/cs-funding-bay.webp',
     logo: '/assets/case-studies/FB-logo.png',
     alt: 'Funding Bay case study',
     link: '/case-studies/funding-bay',
@@ -27,7 +27,7 @@ const slides = [
     stat: '58%',
     title: 'Back-office cost reduction',
     text: 'Effer Ventures needed to manage international teams across South Africa and the UK without the compliance headache of setting up entities in each. Legends EOR took on recruitment, onboarding, HR support, and local compliance in South Africa, cutting back-office costs by 58% and giving Effer Ventures the infrastructure to keep scaling without slowing down.',
-    image: '/assets/case-studies/frame-165-1.webp',
+    image: '/assets/case-studies/cs-effer-ventures.webp',
     logo: '/assets/case-studies/Effer-Ventures_logo.png',
     alt: 'Effer Ventures case study',
     link: '/case-studies/effer-ventures',
@@ -44,7 +44,7 @@ onMounted(async () => {
   gsap.registerPlugin(ScrollTrigger)
 
   mm = gsap.matchMedia()
-  mm.add('(min-width: 993px) and (prefers-reduced-motion: no-preference)', () => {
+  mm.add('(min-width: 993px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
     const section = root.value
     if (!section) return
 
@@ -300,6 +300,22 @@ onBeforeUnmount(() => {
   .cs-text { margin-bottom: 14px; font-size: 14px; }
   .cs-divider { margin-bottom: 12px; }
   .cs-logo { height: 26px; }
+}
+
+/* Portrait tablets (e.g. iPad Pro 1024x1366): pinning is disabled — stack the slides */
+@media (min-width: 993px) and (orientation: portrait) {
+  .cs-scroll { height: auto; }
+  .cs-pin { height: auto; display: block; padding: 48px 40px; }
+  .cs-header { margin-bottom: 40px; }
+  .cs-stage { height: auto; margin: 0 auto; }
+  .cs-slide {
+    position: static;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    margin-bottom: 72px;
+  }
+  .cs-img-wrap { height: clamp(300px, 32vh, 440px); }
 }
 
 /* Reduced motion on desktop: stack instead of pin */

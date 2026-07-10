@@ -399,4 +399,12 @@ async function submit() {
   overflow: hidden;
   white-space: nowrap;
 }
+
+/* Laptop heights: compact form so hero folds fit shorter real-world viewports */
+@media (min-width: 993px) and (max-height: 820px) {
+  .lead-form { padding: 20px 26px; gap: 13px; }
+  .lead-form input { padding: 10px 14px; }
+  .lead-form__cc-display { padding: 10px 4px 10px 14px; }
+  .lead-form__submit { padding: 11px 30px; }
+}
 </style>

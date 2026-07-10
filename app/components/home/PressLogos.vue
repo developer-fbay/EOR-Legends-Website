@@ -76,4 +76,11 @@ const logos = [
   .press { padding-bottom: 2rem; }
   .press-divider { margin-bottom: 1.4rem; }
 }
+
+/* Laptop heights: tighter strip so the logos stay inside the hero fold */
+@media (min-width: 993px) and (max-height: 820px) {
+  .press { padding-bottom: 1.4rem; }
+  .press-divider { margin-bottom: 1rem; }
+  .press-viewport { margin-top: 10px; }
+}
 </style>

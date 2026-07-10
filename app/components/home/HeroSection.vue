@@ -113,4 +113,12 @@ const stats = [
   .hero-stats { margin-top: 0; }
   .hero-reviews { margin-top: 1rem; }
 }
+
+/* Laptop heights (incl. 1920@125% with taskbar+search visible): compress so
+   the hero + logo carousel always share the first screen */
+@media (min-width: 993px) and (max-height: 820px) {
+  .hero { padding-block: 1.2rem 0.9rem; }
+  .hero-sub { margin-bottom: 1.1rem; }
+  .hero-reviews { margin-top: 1.1rem; }
+}
 </style>

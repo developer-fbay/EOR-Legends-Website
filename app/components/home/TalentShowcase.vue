@@ -160,6 +160,7 @@ const active = ref(0)
     flex: none;
   }
   .options .option.active {
+    flex: none !important; /* the desktop flex-basis 0 collapsed the video in column layout */
     width: 100% !important;
     height: 450px !important;
     border-radius: 14px;
