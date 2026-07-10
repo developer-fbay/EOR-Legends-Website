@@ -1,6 +1,6 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <!-- Variation: twin peaks on the brand-green square tile -->
-  <rect width="64" height="64" fill="#014520"/>
+  <!-- Legends EOR favicon: twin line peaks, transparent background.
+       The cream leg ends short of the orange peak (no mask needed). -->
   <path d="M8 49 L26 20 L31.9 29.5" fill="none" stroke="#fffcf6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M33 49 L46.5 28 L60 49" fill="none" stroke="#eb3d00" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
