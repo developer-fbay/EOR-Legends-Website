@@ -12,7 +12,13 @@ export const PILLAR_URLS: Record<string, string> = {
   'true-cost-of-an-employee-in-the-uk': `${WP}/true-cost-of-an-employee-uk/`,
   'permanent-establishment-guide': `${WP}/permanent-establishment/`,
   'employee-on-costs': `${WP}/cost-of-employing-someone-uk/`,
-  // pillar 2's cluster is not published on WP yet — add its URL here when live
+  'what-is-an-employer-of-record': `${WP}/problem-2-cluster-1/`,
+}
+
+// problem-2-cluster-1 still carries the copied pillar-1 H1 in WP; pin the
+// real topic title here until the WP heading is corrected.
+const TITLE_OVERRIDES: Record<string, string> = {
+  'what-is-an-employer-of-record': 'What is an Employer of Record (EOR)?',
 }
 
 function stripText(s: string) {
@@ -126,5 +132,5 @@ export async function fetchPillarBody(slug: string) {
     '<span class="pi-h2-badge">$1</span>$2',
   )
 
-  return { title: h1, bodyHtml: balanceHtml(html), faqs }
+  return { title: TITLE_OVERRIDES[slug] || h1, bodyHtml: balanceHtml(html), faqs }
 }

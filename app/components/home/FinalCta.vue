@@ -1,3 +1,11 @@
+<script setup lang="ts">
+// Pages with a context-specific form CTA (e.g. service pages) pass their
+// heading down so the hero and footer forms match.
+withDefaults(defineProps<{ formTitle?: string }>(), {
+  formTitle: 'Ready to build your South African team?',
+})
+</script>
+
 <template>
   <section class="final-cta band-green section fill-screen" :style="{ backgroundImage: 'url(/assets/backgrounds/Form-bg-b.webp)' }">
     <div class="container final-grid">
@@ -14,7 +22,7 @@
         </div>
       </div>
       <div class="final-form">
-        <UiLeadForm :gf-form-id="28" source="footer" title="Ready to build your South African team?" />
+        <UiLeadForm :gf-form-id="28" source="footer" :title="formTitle" />
       </div>
     </div>
   </section>

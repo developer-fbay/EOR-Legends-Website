@@ -145,7 +145,7 @@ const faqs = computed(() => {
       </div>
     </section>
 
-    <HomeFinalCta />
+    <HomeFinalCta :form-title="formTitle" />
   </main>
 </template>
 

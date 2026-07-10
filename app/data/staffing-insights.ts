@@ -8,6 +8,7 @@ export type Cluster = {
   slug: string
   title: string
   intro: string[]
+  bullets?: string[]
 }
 
 export type Pillar = {
@@ -49,10 +50,23 @@ export const PILLARS: Pillar[] = [
       "Permanent establishment is the tax threshold at which a UK business becomes liable for corporation tax in another country. It's triggered most commonly through a fixed place of business abroad or a dependent agent acting on your behalf. Once crossed, the consequences are real and expensive: local corporation tax on profits, transfer pricing documentation obligations, statutory registrations, and potential branch taxes under some treaties.",
       'For most UK SMEs hiring people abroad through standard commercial arrangements like Employers of Record, the permanent establishment risk is low and structurally well-managed. For businesses engaging international contractors directly, particularly in sales or business development roles, the risk is worth assessing before scaling.',
     ],
-    // Pillar 2's cluster page isn't published on WP yet (the old
-    // problem-2-cluster-1 duplicate was removed). Add it back here + in
-    // server/utils/pillars.ts PILLAR_URLS once the real page is live.
-    clusters: [],
+    clusters: [
+      {
+        slug: 'what-is-an-employer-of-record',
+        title: 'What is an Employer of Record (EOR)?',
+        intro: [
+          'An Employer of Record (EOR) is a third-party organisation that legally employs workers in another country on behalf of your business.',
+          'The EOR signs the employment contract, runs the local payroll, withholds tax, provides statutory benefits, and takes responsibility for employment-law compliance, while you continue to manage the work itself: who you hire, what they do, how they perform. This guide explains exactly how an EOR works, what it handles and what stays with you when UK businesses use one, how it helps with Permanent Establishment risk, what to look for in a provider, and the risks and limitations to weigh.',
+          'You might need an EOR if any of these apply to you:',
+        ],
+        bullets: [
+          'You want to hire someone in another country, and your business has no legal entity there.',
+          'You are testing a new market and do not want to set up a foreign company yet.',
+          'You are exploring lower-cost markets to reduce the cost of your team.',
+          'You are worried about the tax exposure of employing staff abroad directly.',
+        ],
+      },
+    ],
   },
 ]
 

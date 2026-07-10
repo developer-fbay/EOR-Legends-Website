@@ -11,7 +11,7 @@ const PILLAR_SLUGS = [
   'true-cost-of-an-employee-in-the-uk',
   'permanent-establishment-guide',
   'employee-on-costs',
-  'problem-2-cluster-1',
+  'what-is-an-employer-of-record',
 ]
 const THROTTLE_MS = 150
 

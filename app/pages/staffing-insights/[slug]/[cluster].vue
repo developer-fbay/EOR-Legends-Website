@@ -50,6 +50,9 @@ useHead({
           <NuxtLink :to="`/staffing-insights/${pillar!.slug}`" class="pi-back">← Back to pillar</NuxtLink>
           <h1>{{ title }}</h1>
           <p v-for="(p, i) in cluster.intro" :key="i" :class="{ 'pi-lead': i === 0 }">{{ p }}</p>
+          <ul v-if="cluster.bullets" class="pi-bullets">
+            <li v-for="(b, i) in cluster.bullets" :key="i">{{ b }}</li>
+          </ul>
         </div>
         <div class="pi-hero__form">
           <UiLeadForm :gf-form-id="29" :source="`cluster-${cluster.slug}`" title="Ready to build your South African team?" />
@@ -100,6 +103,8 @@ useHead({
 }
 .pi-lead { font-size: 1.1rem; }
 .pi-hero__copy p { line-height: 1.75; max-width: 64ch; }
+.pi-bullets { padding-left: 1.2em; line-height: 1.75; max-width: 64ch; }
+.pi-bullets li { margin-bottom: 6px; }
 .pi-hero__form { position: sticky; top: 96px; }
 
 .pi-faq-title {
