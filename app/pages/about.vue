@@ -17,11 +17,11 @@ const stats = [
 const steps = [
   {
     title: 'Who We Are',
-    text: "We're an employer of record and hiring partner based in Cape Town and Johannesburg. We help global businesses hire and manage remote talent in South Africa without setting up a local entity. While most EOR providers run operations remotely through software platforms, we're based here. That means direct relationships with regulators, in-person support for your team, and local expertise you can't get from a dashboard. We handle everything from recruitment and legal employment to payroll, compliance, HR, IT support, and office space. One partner for the full employee lifecycle.",
+    text: "We're an employer of record and hiring partner based in Cape Town and Johannesburg. We help global businesses hire and manage remote talent in South Africa without setting up a local entity. We handle everything from recruitment and legal employment to payroll, compliance, HR, IT support, and office space.",
   },
   {
     title: 'Why We Exist',
-    text: "South Africa has exceptional talent, competitive costs, and a time zone that works for European and US companies. But hiring here isn't simple. Labour law is complex. Compliance is strict. Setting up your own entity takes months and ongoing legal work. We exist so you can access South African talent without the complexity, cost, or risk of doing it yourself. You work with the team you need. We handle everything else.",
+    text: "South Africa has exceptional talent, competitive costs, and a favourable time zone. But hiring here isn't simple and labour law is complex. We exist so you can access South African talent without the complexity, cost, or risk of doing it yourself.",
   },
   {
     title: 'How We Work',

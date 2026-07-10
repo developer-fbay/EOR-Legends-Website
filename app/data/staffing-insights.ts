@@ -29,13 +29,6 @@ export const PILLARS: Pillar[] = [
       'The true cost of an employee in the UK is roughly 35% to 45% more than their salary.',
       'For a £30,000 hire, that means a realistic all-in cost of around £41,000 to £47,000 in the first year, once employer National Insurance, pension, recruitment, statutory leave, turnover risk and overhead are counted. The gap has widened since the April 2025 NI rise and is set to keep rising as the £5,000 threshold stays frozen to 2031.',
     ],
-    bullets: [
-      'Mandatory on-costs add a tight 14–16%: employer NI (15% above £5,000) plus the 3% minimum pension.',
-      'Indirect costs add another 20–30%: recruitment, onboarding, equipment, overhead and management time.',
-      'Turnover is the hidden multiplier — an inflation-adjusted ~£42,000 per leaver, budgeted across the team.',
-      'The £30k example, fully loaded (with amortised turnover and full overhead) reaches the upper end, ~£47k.',
-      'The lever most cost-stressed SMEs are pulling: basing some roles in a lower-cost market, cutting per-role cost 40–60%.',
-    ],
     clusters: [
       {
         slug: 'employee-on-costs',

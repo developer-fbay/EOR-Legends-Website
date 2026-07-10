@@ -22,7 +22,7 @@ const steps = [
   },
   {
     title: 'Speak to us',
-    text: 'Turn benchmarking insights into an actual hire. Our team will walk you through employment options, timelines, compliance requirements, and how our Employer of Record service removes the need for entity setup or local payroll infrastructure in over 100 countries.',
+    text: 'Our team will walk you through employment options, timelines, compliance requirements, and how our Employer of Record service removes the need for an entity.',
   },
 ]
 
@@ -41,11 +41,6 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
         <h1>Calculate the True Cost of Your Next International Hire.</h1>
         <p class="tool-hero__sub">
           Compare salaries across countries and see how your hiring budget can go further.
-        </p>
-        <p class="tool-hero__body">
-          Hiring internationally starts with one question: where can we find the right person at
-          the right cost? This calculator lets you compare global salary benchmarking by country
-          so that you can make a confident, budget-informed decision before you ever make an offer.
         </p>
         <button type="button" class="brand-btn brand-btn--orange" @click="openContact">Contact us</button>
       </div>
@@ -161,10 +156,6 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
   color: var(--grey-text);
   margin: 0.6em auto 1em;
   max-width: 60ch;
-}
-.tool-hero__body {
-  max-width: 78ch;
-  margin: 0 auto 1.6em;
 }
 
 .tool-block__grid {

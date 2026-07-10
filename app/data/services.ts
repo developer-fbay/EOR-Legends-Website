@@ -26,7 +26,7 @@ export const SERVICES: ServiceContent[] = [
     title: 'Payroll',
     nav: 'Payroll',
     excerpt:
-      'We take responsibility for processing accurate payroll, meeting statutory obligations, and maintaining compliance.',
+      'We process accurate payroll, meet statutory obligations, and maintain compliance.',
     intro: [
       'We take responsibility for processing accurate payroll, meeting statutory obligations, and maintaining compliance.',
     ],
