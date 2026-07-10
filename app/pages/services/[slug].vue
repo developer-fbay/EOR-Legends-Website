@@ -325,9 +325,12 @@ const faqs = computed(() => {
   .svc-fold .svc-intro { padding-block: 0.75rem; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
   .svc-fold { min-height: 0; display: block; }
-  .svc-intro__grid { grid-template-columns: 1fr; }
+  .svc-intro__grid { grid-template-columns: 1fr; justify-items: center; }
+  .svc-intro__copy { text-align: center; }
+  .svc-intro__copy p { margin-inline: auto; }
+  .svc-intro__form { width: 100%; max-width: 480px; margin-inline: auto; }
   .svc-ov-card,
   .svc-ov-card--flip { grid-template-columns: 1fr; }
   .svc-ov-card--flip .svc-ov-card__copy { order: 1; }

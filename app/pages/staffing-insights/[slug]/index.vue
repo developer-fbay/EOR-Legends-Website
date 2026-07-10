@@ -309,9 +309,11 @@ useHead({
   gap: clamp(20px, 2.6vw, 34px);
 }
 
-@media (max-width: 900px) {
-  .pi-hero__grid { grid-template-columns: 1fr; }
-  .pi-hero__form { position: static; max-width: 480px; }
+@media (max-width: 850px) {
+  .pi-hero__grid { grid-template-columns: 1fr; justify-items: center; }
+  .pi-hero__copy { text-align: center; }
+  .pi-hero__copy p, .pi-hero__copy ul { margin-inline: auto; }
+  .pi-hero__form { position: static; width: 100%; max-width: 480px; margin-inline: auto; }
   .pi-cl-grid { grid-template-columns: 1fr; }
   .pi-grid { grid-template-columns: 1fr; }
   .pi-aside { position: static; }

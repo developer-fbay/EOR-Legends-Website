@@ -279,9 +279,11 @@ onBeforeUnmount(() => {
     transform: none !important;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch; /* image and content share the exact same width */
   }
-  .cs-img-wrap { height: auto; aspect-ratio: 4/3; }
+  .cs-img-wrap { height: auto; aspect-ratio: 4/3; width: 100%; }
+  .cs-content { width: 100%; }
+  .cs-text { max-width: none; }
 }
 
 @media (max-width: 532px) {

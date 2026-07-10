@@ -97,14 +97,17 @@ const stats = [
   margin-top: clamp(1.4rem, 4vh, 2.6rem);
 }
 
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-form { max-width: 480px; }
+@media (max-width: 850px) {
+  .hero-grid { grid-template-columns: 1fr; justify-items: center; }
+  .hero-copy { text-align: center; }
+  .hero-stats { justify-content: center; }
+  .hero-reviews { margin-inline: auto; }
+  .hero-form { width: 100%; max-width: 480px; margin-inline: auto; }
 }
 
 /* Short laptop viewports (1280×587): hero must NOT fill the screen — the
    fold shows hero + logo carousel together, like the WP design */
-@media (min-width: 901px) and (max-height: 650px) {
+@media (min-width: 851px) and (max-height: 650px) {
   .hero {
     min-height: 0;
     padding-block: 1.6rem 1.8rem;

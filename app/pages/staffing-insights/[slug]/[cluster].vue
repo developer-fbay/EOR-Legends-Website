@@ -261,9 +261,11 @@ useHead({
 .pi-body :deep(#sbt-tool),
 .pi-body :deep(.sbt-tool) { display: none; }
 
-@media (max-width: 900px) {
-  .pi-hero__grid { grid-template-columns: 1fr; }
-  .pi-hero__form { position: static; max-width: 480px; }
+@media (max-width: 850px) {
+  .pi-hero__grid { grid-template-columns: 1fr; justify-items: center; }
+  .pi-hero__copy { text-align: center; }
+  .pi-hero__copy p, .pi-hero__copy ul { margin-inline: auto; }
+  .pi-hero__form { position: static; width: 100%; max-width: 480px; margin-inline: auto; }
   .pi-grid { grid-template-columns: 1fr; }
   .pi-aside { position: static; }
   .pi-body :deep(div:has(> div > .pi-num--card)) { grid-template-columns: 1fr; }

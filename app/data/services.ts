@@ -54,22 +54,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'You receive one invoice', text: 'A consolidated monthly invoice in your currency covers salaries, taxes, and our service fee.' },
     ],
     faqs: [
-      {
-        q: 'How does payroll work under an Employer of Record?',
-        a: 'We calculate salaries, deductions, and statutory contributions for your South African employees and contractors each month. Employees are paid directly, SARS submissions are filed, and you receive one consolidated invoice in your own currency. You approve salaries and changes, and we handle all processing and compliance.',
-      },
-      {
-        q: 'Can we pay in our local currency?',
-        a: 'Yes. You receive one consolidated monthly invoice in your own currency, typically pounds sterling, euros or US dollars, covering salaries, statutory contributions and our service fee. We handle all rand conversions and local payments on your behalf.',
-      },
-      {
-        q: 'How do you ensure compliance with SARS?',
-        a: 'As the legal employer we manage PAYE, UIF and SDL calculations, file SARS submissions before every deadline, and keep full audit documentation. If SARS has questions, we respond; if regulations change, we adapt. You carry no compliance exposure.',
-      },
-      {
-        q: 'What happens if payroll errors occur?',
-        a: 'Your payroll is run by a dedicated Payroll Officer and Finance Administrator who verify every calculation. In the rare case of an error, they correct it immediately at no cost to you and communicate directly with the affected employee.',
-      },
+      { q: 'How does payroll work under an Employer of Record?', a: 'We calculate salaries, deductions, and statutory contributions for your South African employees and contractors each month. Employees are paid directly, SARS submissions are filed, and you receive one consolidated invoice in your own currency. You approve salaries and changes, and we handle all processing and compliance.' },
+      { q: 'Can we pay in our local currency?', a: 'Yes. You receive one invoice in your preferred currency covering salaries, statutory deductions, and our service fee. We handle the currency conversion and local payments in rands. You do not need a South African bank account or local payment infrastructure.' },
+      { q: 'How do you ensure compliance with SARS?', a: 'Our Payroll Officer and Finance Administrator calculate PAYE, UIF, and SDL according to current South African tax law and file all statutory submissions before deadlines. We monitor regulatory changes, maintain audit documentation, and take full responsibility for compliance. If SARS has questions or issues, we respond on your behalf.' },
+      { q: 'What happens if payroll errors occur?', a: 'We verify all calculations before processing to minimize errors. If an error does occur, we correct it immediately and communicate with the affected employee. You are not penalised for errors we make, and employees receive any owed amounts without delay.' },
     ],
   },
   {
@@ -105,9 +93,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'You stay protected', text: 'Labour-law risk, documentation, and CCMA processes sit with us as the legal employer.' },
     ],
     faqs: [
-      { q: 'Who handles day-to-day HR queries from my team?', a: 'Our on-the-ground HR team in South Africa handles leave, payroll queries, benefits questions and workplace concerns directly with your employees. You only get involved where you want to be.' },
-      { q: 'What happens if there is a dispute or disciplinary issue?', a: 'We manage the process under South African labour law, from documentation and hearings through to CCMA representation if needed, protecting you from procedural risk.' },
-      { q: 'Do my company policies still apply?', a: 'Yes. We align your internal policies with South African employment law and apply them consistently, flagging anything that needs local adaptation.' },
+      { q: 'What HR support is included under the EOR?', a: 'We manage employment contracts, onboarding and offboarding, leave administration, performance management coordination, employee relations, and compliance with South African labour law. We provide ongoing advisory support on employment matters and act as the local HR contact for your South African employees. This includes handling day-to-day employee queries and guiding you through any complex employment issues.' },
+      { q: 'Who handles employee disputes?', a: 'We manage employee disputes as the legal employer, working closely with you to resolve issues while protecting your interests. Our team handles grievances, disciplinary matters, and conflict resolution according to South African labour law. If disputes escalate, we coordinate legal support and representation on your behalf.' },
+      { q: 'How do you protect us from labour law risk?', a: 'We ensure all employment contracts, policies, and processes comply with South African labour law from the start. We advise you proactively when situations carry risk and guide you through decisions that could create legal exposure. As the legal employer, we take responsibility for compliance and shield you from direct liability.' },
+      { q: 'Do employees see you as their HR?', a: 'Yes. Employees understand we are their legal employer and HR contact in South Africa while they report to you operationally. We handle all HR administration, employee queries, contract matters, and compliance issues. You manage their work, performance, and day-to-day responsibilities.' },
     ],
   },
   {
@@ -143,9 +132,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We administer', text: 'Claims, changes, and renewals are managed locally, on one invoice.' },
     ],
     faqs: [
-      { q: 'Are benefits mandatory in South Africa?', a: 'Statutory contributions like UIF are mandatory and always included. Benefits such as medical aid and retirement funds are optional but strongly recommended for competitive roles; we advise on what fits.' },
-      { q: 'Can different employees have different packages?', a: 'Yes. Packages can be tailored per role or per employee, and we administer each one individually.' },
-      { q: 'How are benefits billed?', a: 'All benefit costs and deductions appear itemised on your single monthly invoice in your own currency.' },
+      { q: 'Are employee benefits mandatory in South Africa?', a: 'No. Statutory deductions like PAYE, UIF, and SDL are mandatory and handled through payroll, but benefits like medical aid and pension contributions are optional. You decide what to offer based on your budget, the roles you are hiring for, and what is competitive in your industry. We advise on what is expected for specific roles and seniority levels.' },
+      { q: 'What types of benefits can you support?', a: 'We support medical aid schemes, pension and provident funds, and enhanced leave policies beyond statutory requirements. We have established relationships with local benefit providers and can guide you on which options align with your budget and employee expectations. Benefits can be tailored by role or applied consistently across your team.' },
+      { q: 'How do you manage benefit administration?', a: 'We source providers, manage employee enrollment, process monthly deductions through payroll, and handle ongoing administration including queries and changes. You have one point of contact for all benefit matters. Employees receive clear communication and support throughout enrollment and while benefits are active.' },
+      { q: 'How are benefits integrated with payroll?', a: 'Benefit deductions are processed automatically through payroll each month. Contributions are submitted to providers on time, records are maintained for compliance, and changes to employee benefits are managed as part of normal HR processes. You do not need separate systems or additional staff to manage benefits administration.' },
     ],
   },
   {
@@ -181,8 +171,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We connect your team', text: 'We bridge the distance between your leadership and your South African employees.' },
     ],
     faqs: [
-      { q: 'What does culture support actually include?', a: 'Local onboarding, team events, recognition programmes, regular check-ins, and a named contact your employees can talk to in person.' },
-      { q: 'Can you run events for our team?', a: 'Yes, from quarterly team days in Cape Town to end-of-year functions, organised and hosted locally.' },
+      { q: 'How do you support company culture in South Africa?', a: 'We act as the local presence for your business, reinforcing your company culture through regular employee engagement, guidance on South African workplace norms, and coordination of team activities. We maintain ongoing relationships with your employees and help bridge the gap between your headquarters and your South African team. This includes advising on communication styles, workplace expectations, and cultural differences that could create misunderstandings.' },
+      { q: 'Do you replace our internal culture initiatives?', a: 'No. We support and reinforce your existing company culture locally, not replace it. You remain responsible for defining your culture, values, and how your business operates. We ensure those expectations are understood and maintained on the ground in South Africa while advising when local workplace norms differ from your approach.' },
+      { q: 'How do you reduce disengagement in remote teams?', a: 'We provide consistent local contact, regular check-ins, and engagement initiatives that help employees feel connected to your business rather than isolated. Employees have someone on the ground who understands both your company and the South African context. This reduces the disconnection that remote teams often experience when they are thousands of kilometres from headquarters.' },
+      { q: 'Can you assist with local office events?', a: 'Yes. We organise and support office-based events, including team meetings, social activities, onboarding sessions, and company celebrations. We coordinate logistics, ensure events align with your company culture, and facilitate participation. This is particularly useful for hybrid teams or companies without dedicated event coordination in South Africa.' },
     ],
   },
   {
@@ -218,8 +210,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We convert when needed', text: 'Contractors become employees smoothly when the relationship changes.' },
     ],
     faqs: [
-      { q: 'What is misclassification risk?', a: 'Treating someone as a contractor when the law sees them as an employee exposes you to back-pay, penalties and disputes. We assess and structure each engagement so that risk never lands on you.' },
-      { q: 'Can a contractor be converted to an employee later?', a: 'Yes. Conversion into our EOR service is seamless: same person, same work, with a compliant employment contract and full statutory protections.' },
+      { q: 'What does contractor management include?', a: 'Contractor management includes classification guidance, drafting compliant contractor agreements, onboarding and offboarding coordination, invoice processing and payment management, and ongoing tax and compliance advice. We provide local oversight throughout the contractor relationship and advise proactively when the engagement structure needs to change. Our role is to reduce misclassification risk and ensure the relationship is managed correctly under South African law.' },
+      { q: 'How do you reduce misclassification risk?', a: 'We assess whether a contractor relationship is genuinely independent or functions more like employment. This includes reviewing the nature of the work, level of control, exclusivity, and other factors that determine classification under South African law. We flag situations where misclassification risk exists and advise when a contractor should transition to employment before it becomes a compliance issue.' },
+      { q: 'Are contractor agreements compliant with South African law?', a: 'Yes. We draft contractor agreements that reflect the true nature of the relationship and comply with South African legal and tax requirements. Agreements include appropriate clauses on scope of work, payment terms, independence, termination, and dispute resolution. We update agreements when circumstances change to maintain compliance throughout the engagement.' },
+      { q: 'Can contractors be transitioned to employees?', a: 'Yes. We manage the transition from contractor to employee through our Employer of Record service when the role becomes permanent or the relationship shifts into employment territory. The individual moves to full employment without interruption to their work. Contracts are replaced, payroll begins, and compliance is maintained throughout the transition process.' },
     ],
   },
   {
@@ -255,8 +249,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'No disruptions', text: 'Same team, same pay dates, with local support from day one.' },
     ],
     faqs: [
-      { q: 'Will my employees notice the switch?', a: 'Barely. Pay dates, salaries and benefits continue unchanged; the only difference is that support now comes from people on the ground in South Africa.' },
-      { q: 'How long does a migration take?', a: 'Most migrations complete within one payroll cycle once contracts are mapped, typically four to six weeks end to end.' },
+      { q: 'How does EOR migration work?', a: 'We assess your current setup, identify risks, and build a detailed migration plan with clear timelines. This includes replacing employment contracts, transitioning payroll, transferring benefits where applicable, and securely handing over records and data. Each step is coordinated with your outgoing provider to avoid gaps in employment, payroll, or compliance.' },
+      { q: 'Will payroll be interrupted?', a: 'No. We ensure salary payments continue without interruption during the transition. Payroll is coordinated so employees are paid on time, statutory deductions are processed correctly, and benefits remain active throughout the migration. Continuity is the primary focus of the entire process.' },
+      { q: 'Is the migration legally compliant?', a: 'Yes. We manage the legal transition carefully to ensure employees move from one employer to another without creating compliance exposure. New employment contracts are issued, statutory registrations are transferred or established, and all documentation is prepared according to South African labour law. We conduct compliance checks to identify and correct any existing issues during the migration.' },
+      { q: 'How are employees informed?', a: 'Employees receive clear communication about the migration, what it means for them, and what changes to expect. We coordinate messaging with you to ensure consistency and minimize uncertainty. The goal is to make the transition feel almost invisible while keeping employees informed and reassured throughout the process.' },
     ],
   },
   {
@@ -292,8 +288,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We manage exits', text: 'Notice, documentation, and final payments handled CCMA-safe.' },
     ],
     faqs: [
-      { q: 'How fast can a new hire start?', a: 'Once you confirm the candidate and package, onboarding typically completes within 48 hours. Contract signed, registrations filed, equipment ready.' },
-      { q: 'What makes an exit "CCMA-safe"?', a: 'Following South African procedure to the letter: proper notice, documented process, correct final payments. We run that process as the legal employer so disputes don\'t reach you.' },
+      { q: 'What does onboarding include?', a: 'Onboarding includes drafting compliant employment contracts, registering employees for PAYE, UIF, and SDL, setting up payroll, issuing employment documentation, and coordinating IT and office access if applicable. We manage the full process from contract signature to first day readiness. Employees receive clear communication about their role, responsibilities, and probation period before they start.' },
+      { q: 'How do you ensure contracts are compliant?', a: 'We draft all employment contracts according to current South African labour law, including required clauses on notice periods, probation, leave, termination, and dispute resolution. Contracts are tailored to the role and seniority level while protecting your interests as the employer. We update contract templates when legislation changes to maintain compliance.' },
+      { q: 'How do you handle employee terminations?', a: 'We guide you through the termination process to ensure it complies with South African labour law and minimises legal risk. This includes following correct procedures for dismissals, resignations, retrenchments, and mutual separations. We prepare termination letters, calculate final payments, coordinate exit processes, and ensure all statutory requirements are met.' },
+      { q: 'How do you reduce CCMA risk?', a: 'We reduce CCMA risk by ensuring employment contracts, disciplinary processes, and terminations follow South African labour law correctly. We advise on procedural fairness, document all employment decisions properly, and guide you through high-risk situations before they escalate. If a dispute does reach the CCMA, we represent you as the legal employer.' },
     ],
   },
   {
@@ -329,8 +327,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'You consolidate', text: 'One invoice covers people, space, and support together.' },
     ],
     faqs: [
-      { q: 'What happens during load-shedding?', a: 'Nothing. Our office runs on backup generators and UPS systems with redundant fibre lines, so your team keeps working through any outage.' },
-      { q: 'Can my team work hybrid?', a: 'Yes. Dedicated desks, hot desks and remote arrangements can be mixed to fit how your team works.' },
+      { q: 'What type of office space do you provide?', a: 'We provide private offices, dedicated desks, and meeting rooms in our own managed office space in South Africa. This includes access, utilities, internet, and on-site support. Office space is available based on your team size and working model, with everything managed under one contract.' },
+      { q: 'Is the space suitable for hybrid teams?', a: 'Yes. Employees can use office space based on your company policy, whether that is full-time or hybrid. Dedicated desks and private offices are assigned to specific employees, while meeting rooms can be booked as needed. The setup supports flexible working arrangements without requiring separate leases or agreements.' },
+      { q: 'Is backup power and internet available?', a: 'Yes. Our office space has backup power to maintain operations during load shedding and reliable internet connectivity to manage South African infrastructure challenges. Your team can work without interruption when local services fail. You do not need to manage infrastructure or arrange backup systems yourself.' },
+      { q: 'Can employees work with HR and IT on-site?', a: 'Yes. Our HR and IT teams are based in the same office space as your employees. This means faster resolution of technical and HR issues, immediate access to support, and better overall employee experience. Onboarding new hires is simpler when support is available in person rather than remotely.' },
     ],
   },
   {
@@ -366,8 +366,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'Secure offboarding', text: 'Exits mean full access removal and device recovery, documented.' },
     ],
     faqs: [
-      { q: 'Is IT support really included?', a: 'Yes. Day-to-day IT support for your South African team is part of the EOR service, with no per-ticket charges.' },
-      { q: 'Can you enforce our security policies?', a: 'Yes. We apply your MDM, VPN and access-control requirements to every device and keep them maintained.' },
+      { q: 'What IT support is included?', a: 'IT support includes device setup, hardware and software troubleshooting, network and connectivity issues, security management, and access control. We handle day-to-day technical support for your employees and coordinate with your internal IT team when required. New hire IT setup and offboarding access removal are managed as part of onboarding and offboarding processes.' },
+      { q: 'Do you provide on-site support?', a: 'Yes. Our IT team is based on-site and available for hands-on troubleshooting and support. This is particularly important for resolving South African infrastructure challenges like power and connectivity issues that require local knowledge. Employees report problems directly to our team and issues are resolved faster than remote-only support allows.' },
+      { q: 'How does IT integrate with onboarding?', a: 'New hires receive full IT setup as part of their first day. Devices are configured, accounts are created, security protocols are applied, and access is granted before they start work. IT setup is coordinated tightly with HR to ensure employees are ready to work immediately without waiting for technical access or equipment.' },
+      { q: 'How do you handle access during offboarding?', a: 'All access is removed immediately when employees leave. This includes disabling accounts, revoking system access, wiping devices, and securing company data. IT offboarding is coordinated with HR to ensure access removal happens on the employee\'s last day. Devices are returned and handled securely according to your instructions.' },
     ],
   },
   {
@@ -403,8 +405,10 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We maintain', text: 'Repairs, swaps, and recovery through the device lifecycle.' },
     ],
     faqs: [
-      { q: 'Can we specify exact models?', a: 'Yes. You set the spec (or we recommend one) and we source it locally, usually within days.' },
-      { q: 'Who owns the equipment?', a: 'Either you or us, depending on the arrangement you prefer; purchase and lease options are both available.' },
+      { q: 'What equipment can be provided?', a: 'We provide laptops, monitors, keyboards, mice, headsets, and other peripherals through our local online webstore. Equipment is sourced from trusted South African suppliers and tailored to the employee\'s role and requirements. Replacement devices are handled locally when equipment fails or needs upgrading.' },
+      { q: 'Who owns the equipment?', a: 'You own the equipment. We facilitate the purchase and manage the logistics, but ownership remains with you. This means you control equipment specifications, decide on replacements, and determine what happens to devices when employees leave. We simply handle the sourcing, delivery, and lifecycle management on your behalf.' },
+      { q: 'Can we purchase equipment in our own currency?', a: 'Yes. You select equipment through our webstore and receive an invoice in your preferred currency. Equipment costs are included in your consolidated monthly invoice along with payroll and service fees. You avoid forced conversions to rands, separate vendor relationships, and currency exposure.' },
+      { q: 'How is equipment delivered to employees?', a: 'Equipment is delivered directly to employees or handed over in person at our office. For new hires, devices are ready and configured on their first day in coordination with our IT team. You do not need to arrange international shipping, manage local logistics, or wait weeks for equipment to clear customs.' },
     ],
   },
 ]

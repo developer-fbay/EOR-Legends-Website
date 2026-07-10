@@ -151,8 +151,10 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
   border-radius: 2px;
 }
 
-@media (max-width: 900px) {
-  .art-hero__wrap { grid-template-columns: 1fr; }
+@media (max-width: 850px) {
+  .art-hero__wrap { grid-template-columns: 1fr; justify-items: center; }
+  .art-hero__card { text-align: center; }
+  .art-hero__form { width: 100%; max-width: 480px; margin-inline: auto; }
   .art-grid { grid-template-columns: 1fr; }
   .art-aside { position: static; }
 }
