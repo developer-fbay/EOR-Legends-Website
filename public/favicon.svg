@@ -1,7 +1,7 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <!-- Legends EOR favicon: brand-green tile, cream arch (the site's signature
-       section motif) with the orange accent arch inside -->
-  <rect width="64" height="64" rx="14" fill="#014520"/>
-  <path d="M10 55 C10 32 20 19 32 19 C44 19 54 32 54 55 Z" fill="#fffcf6"/>
-  <path d="M20 55 C20 40 25 31 32 31 C39 31 44 40 44 55 Z" fill="#eb3d00"/>
+  <!-- Legends EOR favicon: line-style twin peaks (Nuxt-inspired), slightly
+       overlapping — cream + orange on the brand-green square tile -->
+  <rect width="64" height="64" fill="#014520"/>
+  <path d="M8 49 L26 20 L44 49" fill="none" stroke="#fffcf6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M33 49 L46.5 28 L60 49" fill="none" stroke="#eb3d00" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
