@@ -2,7 +2,7 @@
 usePageSeo({
   title: 'Hire in South Africa, the easy way',
   description:
-    'Build your team in South Africa with Legends EOR. We handle payroll, compliance, benefits, offices and equipment — save up to 60% on salaries with no local entity required.',
+    'Build your team in South Africa with Legends EOR. We handle payroll, compliance, benefits, offices and equipment. Save up to 60% on salaries with no local entity required.',
 })
 
 // Letter bounce disabled per marketing feedback (2026-07) — headings now use

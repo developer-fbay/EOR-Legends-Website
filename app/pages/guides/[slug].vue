@@ -22,7 +22,7 @@ const LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do e
 // Placeholder sections — final copy from the content manager replaces these.
 const bodyHtml = [
   `<p>${guide.intro}</p><p>${LOREM}</p>`,
-  `<h2>What's inside the guide</h2><p>${LOREM}</p><ul><li>Placeholder point one — final copy coming soon.</li><li>Placeholder point two — final copy coming soon.</li><li>Placeholder point three — final copy coming soon.</li></ul>`,
+  `<h2>What's inside the guide</h2><p>${LOREM}</p><ul><li>Placeholder point one, final copy coming soon.</li><li>Placeholder point two, final copy coming soon.</li><li>Placeholder point three, final copy coming soon.</li></ul>`,
   `<h2>Who this guide is for</h2><p>${LOREM}</p><p>${LOREM}</p>`,
   `<h2>Recruitment in South Africa</h2><p>${LOREM}</p>`,
   `<h2>Employer of Record services explained</h2><p>${LOREM}</p><p>${LOREM}</p>`,
@@ -30,7 +30,7 @@ const bodyHtml = [
 ].join('')
 
 const faqs = Array.from({ length: 4 }, (_, i) => ({
-  q: `Placeholder question ${i + 1} — final copy coming soon`,
+  q: `Placeholder question ${i + 1}, final copy coming soon`,
   a: 'Placeholder answer. Your content manager will provide the final wording for this question.',
 }))
 </script>

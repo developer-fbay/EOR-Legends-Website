@@ -6,5 +6,5 @@ useContentSeo(post)
 </script>
 
 <template>
-  <UiArticlePage v-if="post" :article="post" back-to="/blog" back-label="All blogs" />
+  <UiArticlePage v-if="post" :article="post" :hero-image="coverFor(post.slug)" back-to="/blog" back-label="All blogs" />
 </template>

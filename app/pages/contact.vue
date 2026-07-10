@@ -4,7 +4,7 @@
 usePageSeo({
   title: 'Contact Us',
   description:
-    'Get in touch with Legends EOR — offices in Cape Town and London. Call, email or request a free cost estimate for hiring in South Africa.',
+    'Get in touch with Legends EOR. Offices in Cape Town and London. Call, email or request a free cost estimate for hiring in South Africa.',
 })
 </script>
 

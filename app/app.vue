@@ -22,7 +22,7 @@ useHead({
             url: SITE,
             logo: `${SITE}/assets/legends-logo-black.png`,
             description:
-              'Employer of Record services in South Africa — hire elite South African talent without setting up a local entity.',
+              'Employer of Record services in South Africa. Hire elite South African talent without setting up a local entity.',
           },
           {
             '@type': 'WebSite',

@@ -9,7 +9,7 @@ const title = computed(() => row.value!.title)
 const logo = computed(() => cs.value.logoUrl)
 
 usePageSeo({
-  title: () => row.value?.meta_title || `${title.value} — Case Study`,
+  title: () => row.value?.meta_title || `${title.value} Case Study`,
   description: () => row.value?.meta_description || cs.value.problem.slice(0, 160),
 })
 

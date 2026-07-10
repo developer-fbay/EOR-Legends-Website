@@ -92,7 +92,7 @@ async function submit() {
         {{ status === 'sending' ? 'Sending…' : 'Download guide' }}
       </button>
       <p v-if="status === 'error'" class="lead-form__error">
-        Something went wrong — please try again or email
+        Something went wrong. Please try again or email
         <a href="mailto:enquiries@legendseor.com">enquiries@legendseor.com</a>.
       </p>
     </template>

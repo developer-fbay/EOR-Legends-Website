@@ -60,11 +60,11 @@ export const SERVICES: ServiceContent[] = [
       },
       {
         q: 'Can we pay in our local currency?',
-        a: 'Yes. You receive one consolidated monthly invoice in your own currency — typically pounds sterling, euros or US dollars — covering salaries, statutory contributions and our service fee. We handle all rand conversions and local payments on your behalf.',
+        a: 'Yes. You receive one consolidated monthly invoice in your own currency, typically pounds sterling, euros or US dollars, covering salaries, statutory contributions and our service fee. We handle all rand conversions and local payments on your behalf.',
       },
       {
         q: 'How do you ensure compliance with SARS?',
-        a: 'As the legal employer we manage PAYE, UIF and SDL calculations, file SARS submissions before every deadline, and keep full audit documentation. If SARS has questions, we respond; if regulations change, we adapt — you carry no compliance exposure.',
+        a: 'As the legal employer we manage PAYE, UIF and SDL calculations, file SARS submissions before every deadline, and keep full audit documentation. If SARS has questions, we respond; if regulations change, we adapt. You carry no compliance exposure.',
       },
       {
         q: 'What happens if payroll errors occur?',
@@ -105,7 +105,7 @@ export const SERVICES: ServiceContent[] = [
       { title: 'You stay protected', text: 'Labour-law risk, documentation, and CCMA processes sit with us as the legal employer.' },
     ],
     faqs: [
-      { q: 'Who handles day-to-day HR queries from my team?', a: 'Our on-the-ground HR team in South Africa handles leave, payroll queries, benefits questions and workplace concerns directly with your employees — you only get involved where you want to be.' },
+      { q: 'Who handles day-to-day HR queries from my team?', a: 'Our on-the-ground HR team in South Africa handles leave, payroll queries, benefits questions and workplace concerns directly with your employees. You only get involved where you want to be.' },
       { q: 'What happens if there is a dispute or disciplinary issue?', a: 'We manage the process under South African labour law, from documentation and hearings through to CCMA representation if needed, protecting you from procedural risk.' },
       { q: 'Do my company policies still apply?', a: 'Yes. We align your internal policies with South African employment law and apply them consistently, flagging anything that needs local adaptation.' },
     ],
@@ -123,7 +123,7 @@ export const SERVICES: ServiceContent[] = [
       {
         title: 'How benefits work through our EOR service',
         paragraphs: [
-          'We advise on the benefits that matter for your roles in the South African market — medical aid, retirement annuities, group risk cover, and more — and source reliable local providers.',
+          'We advise on the benefits that matter for your roles in the South African market, such as medical aid, retirement annuities and group risk cover, and source reliable local providers.',
           'Enrolment, monthly deductions, provider payments, and ongoing administration are all handled by us and reflected cleanly on your single monthly invoice.',
         ],
         image: '/assets/services/ov-employee-benefits-1.webp',
@@ -143,7 +143,7 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We administer', text: 'Claims, changes, and renewals are managed locally, on one invoice.' },
     ],
     faqs: [
-      { q: 'Are benefits mandatory in South Africa?', a: 'Statutory contributions like UIF are mandatory and always included. Benefits such as medical aid and retirement funds are optional but strongly recommended for competitive roles — we advise on what fits.' },
+      { q: 'Are benefits mandatory in South Africa?', a: 'Statutory contributions like UIF are mandatory and always included. Benefits such as medical aid and retirement funds are optional but strongly recommended for competitive roles; we advise on what fits.' },
       { q: 'Can different employees have different packages?', a: 'Yes. Packages can be tailored per role or per employee, and we administer each one individually.' },
       { q: 'How are benefits billed?', a: 'All benefit costs and deductions appear itemised on your single monthly invoice in your own currency.' },
     ],
@@ -161,7 +161,7 @@ export const SERVICES: ServiceContent[] = [
       {
         title: 'A cultural bridge, not just a payroll line',
         paragraphs: [
-          'Distributed teams drift when nobody is on the ground. We run local engagement — team events, recognition, and workplace support — that keeps your South African staff connected to your company.',
+          'Distributed teams drift when nobody is on the ground. We run local engagement, including team events, recognition, and workplace support, that keeps your South African staff connected to your company.',
           'We help you translate your company culture into a South African context, from onboarding rituals to public holidays and working norms.',
         ],
         image: '/assets/services/ov-company-culture-1.webp',
@@ -182,7 +182,7 @@ export const SERVICES: ServiceContent[] = [
     ],
     faqs: [
       { q: 'What does culture support actually include?', a: 'Local onboarding, team events, recognition programmes, regular check-ins, and a named contact your employees can talk to in person.' },
-      { q: 'Can you run events for our team?', a: 'Yes — from quarterly team days in Cape Town to end-of-year functions, organised and hosted locally.' },
+      { q: 'Can you run events for our team?', a: 'Yes, from quarterly team days in Cape Town to end-of-year functions, organised and hosted locally.' },
     ],
   },
   {
@@ -206,7 +206,7 @@ export const SERVICES: ServiceContent[] = [
       {
         title: 'A path to employment',
         paragraphs: [
-          'When a contractor relationship starts to look like employment, we tell you — and we make the conversion seamless through our EOR service.',
+          'When a contractor relationship starts to look like employment, we tell you, and we make the conversion seamless through our EOR service.',
           'No disruption for the person, no compliance exposure for you.',
         ],
         image: '/assets/services/ov-contractor-management-2.webp',
@@ -219,7 +219,7 @@ export const SERVICES: ServiceContent[] = [
     ],
     faqs: [
       { q: 'What is misclassification risk?', a: 'Treating someone as a contractor when the law sees them as an employee exposes you to back-pay, penalties and disputes. We assess and structure each engagement so that risk never lands on you.' },
-      { q: 'Can a contractor be converted to an employee later?', a: 'Yes — conversion into our EOR service is seamless: same person, same work, with a compliant employment contract and full statutory protections.' },
+      { q: 'Can a contractor be converted to an employee later?', a: 'Yes. Conversion into our EOR service is seamless: same person, same work, with a compliant employment contract and full statutory protections.' },
     ],
   },
   {
@@ -252,11 +252,11 @@ export const SERVICES: ServiceContent[] = [
     steps: [
       { title: 'We map', text: 'Contracts, benefits, and payroll details are captured from your current EOR.' },
       { title: 'We migrate', text: 'A dated plan moves employment compliantly with no break in service.' },
-      { title: 'No disruptions', text: 'Same team, same pay dates — with local support from day one.' },
+      { title: 'No disruptions', text: 'Same team, same pay dates, with local support from day one.' },
     ],
     faqs: [
       { q: 'Will my employees notice the switch?', a: 'Barely. Pay dates, salaries and benefits continue unchanged; the only difference is that support now comes from people on the ground in South Africa.' },
-      { q: 'How long does a migration take?', a: 'Most migrations complete within one payroll cycle once contracts are mapped — typically four to six weeks end to end.' },
+      { q: 'How long does a migration take?', a: 'Most migrations complete within one payroll cycle once contracts are mapped, typically four to six weeks end to end.' },
     ],
   },
   {
@@ -272,7 +272,7 @@ export const SERVICES: ServiceContent[] = [
       {
         title: 'Compliant from day one',
         paragraphs: [
-          'New hires get compliant South African employment contracts, statutory registrations, and a proper local onboarding — usually within 48 hours of your go-ahead.',
+          'New hires get compliant South African employment contracts, statutory registrations, and a proper local onboarding, usually within 48 hours of your go-ahead.',
           'Equipment, system access, and first-day logistics are handled locally so people are productive immediately.',
         ],
         image: '/assets/services/ov-onboarding-offboarding-1.webp',
@@ -281,7 +281,7 @@ export const SERVICES: ServiceContent[] = [
         title: 'Exits without exposure',
         paragraphs: [
           'When someone leaves, we run notice periods, documentation, final payments, and statutory requirements exactly as South African law demands.',
-          'CCMA disputes are rare when exits are done properly — and if they happen, we handle them.',
+          'CCMA disputes are rare when exits are done properly, and if they happen, we handle them.',
         ],
         image: '/assets/services/ov-onboarding-offboarding-2.webp',
       },
@@ -292,7 +292,7 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We manage exits', text: 'Notice, documentation, and final payments handled CCMA-safe.' },
     ],
     faqs: [
-      { q: 'How fast can a new hire start?', a: 'Once you confirm the candidate and package, onboarding typically completes within 48 hours — contract signed, registrations filed, equipment ready.' },
+      { q: 'How fast can a new hire start?', a: 'Once you confirm the candidate and package, onboarding typically completes within 48 hours. Contract signed, registrations filed, equipment ready.' },
       { q: 'What makes an exit "CCMA-safe"?', a: 'Following South African procedure to the letter: proper notice, documented process, correct final payments. We run that process as the legal employer so disputes don\'t reach you.' },
     ],
   },
@@ -317,7 +317,7 @@ export const SERVICES: ServiceContent[] = [
       {
         title: 'Support down the corridor',
         paragraphs: [
-          'HR and IT support are in the same building — problems get solved in person, in minutes.',
+          'HR and IT support are in the same building; problems get solved in person, in minutes.',
           'Office costs are consolidated into your single monthly invoice.',
         ],
         image: '/assets/services/ov-office-space-2.webp',
@@ -329,7 +329,7 @@ export const SERVICES: ServiceContent[] = [
       { title: 'You consolidate', text: 'One invoice covers people, space, and support together.' },
     ],
     faqs: [
-      { q: 'What happens during load-shedding?', a: 'Nothing — our office runs on backup generators and UPS systems with redundant fibre lines, so your team keeps working through any outage.' },
+      { q: 'What happens during load-shedding?', a: 'Nothing. Our office runs on backup generators and UPS systems with redundant fibre lines, so your team keeps working through any outage.' },
       { q: 'Can my team work hybrid?', a: 'Yes. Dedicated desks, hot desks and remote arrangements can be mixed to fit how your team works.' },
     ],
   },
@@ -347,7 +347,7 @@ export const SERVICES: ServiceContent[] = [
         title: 'IT that is actually there',
         paragraphs: [
           'Devices are set up before day one. Problems are fixed by local technicians, often in person, in your team\'s time zone.',
-          'Your security policies — MDM, VPN, access controls — are applied and maintained on every device.',
+          'Your security policies, including MDM, VPN and access controls, are applied and maintained on every device.',
         ],
         image: '/assets/services/ov-it-support-1.webp',
       },
@@ -366,7 +366,7 @@ export const SERVICES: ServiceContent[] = [
       { title: 'Secure offboarding', text: 'Exits mean full access removal and device recovery, documented.' },
     ],
     faqs: [
-      { q: 'Is IT support really included?', a: 'Yes — day-to-day IT support for your South African team is part of the EOR service, with no per-ticket charges.' },
+      { q: 'Is IT support really included?', a: 'Yes. Day-to-day IT support for your South African team is part of the EOR service, with no per-ticket charges.' },
       { q: 'Can you enforce our security policies?', a: 'Yes. We apply your MDM, VPN and access-control requirements to every device and keep them maintained.' },
     ],
   },
@@ -403,8 +403,8 @@ export const SERVICES: ServiceContent[] = [
       { title: 'We maintain', text: 'Repairs, swaps, and recovery through the device lifecycle.' },
     ],
     faqs: [
-      { q: 'Can we specify exact models?', a: 'Yes — you set the spec (or we recommend one) and we source it locally, usually within days.' },
-      { q: 'Who owns the equipment?', a: 'Either you or us, depending on the arrangement you prefer — purchase and lease options are both available.' },
+      { q: 'Can we specify exact models?', a: 'Yes. You set the spec (or we recommend one) and we source it locally, usually within days.' },
+      { q: 'Who owns the equipment?', a: 'Either you or us, depending on the arrangement you prefer; purchase and lease options are both available.' },
     ],
   },
 ]

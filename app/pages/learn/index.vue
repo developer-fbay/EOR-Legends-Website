@@ -48,7 +48,7 @@ const { data: latest } = useContentList('blogs', { limit: 3 })
             :key="p.id"
             :title="p.title"
             :excerpt="p.excerpt"
-            :image="p.featured_image"
+            :image="coverFor(p.slug)"
             :to="`/blog/${p.slug}`"
           />
         </div>

@@ -89,7 +89,7 @@ useHead({
             :key="c.slug"
             :title="c.title"
             :excerpt="c.intro[0]"
-            image="/assets/backgrounds/find-out-more-card.png"
+            :image="coverFor(c.slug)"
             :to="`/staffing-insights/${pillar.slug}/${c.slug}`"
           />
         </div>

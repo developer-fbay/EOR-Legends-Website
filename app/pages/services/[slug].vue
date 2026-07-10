@@ -32,8 +32,8 @@ const faqs = computed(() => {
   while (list.length < 4) {
     n++
     list.push({
-      q: `Placeholder question ${n} — final copy coming soon`,
-      a: 'Placeholder answer. Your content manager will provide the final wording for this question — it can be edited in app/data/services.ts or via the CMS once services are content-managed.',
+      q: `Placeholder question ${n}, final copy coming soon`,
+      a: 'Placeholder answer. Your content manager will provide the final wording for this question. It can be edited in app/data/services.ts or via the CMS once services are content-managed.',
     })
   }
   return list.slice(0, 4)
@@ -335,11 +335,11 @@ const faqs = computed(() => {
   .svc-hiw__steps { flex-direction: column; gap: 26px; }
   /* stacked timeline: left-aligned text, vertical connectors with down arrows */
   .svc-step { position: relative; }
-  .svc-step h3, .svc-step p { margin-left: 56px; text-align: left; }
   .svc-step__line {
     position: absolute;
-    left: 18px;
-    top: 44px;
+    left: auto;
+    right: 8px;
+    top: 6px;
     bottom: -20px;
     width: 2px;
     height: auto;

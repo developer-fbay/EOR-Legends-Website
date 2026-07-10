@@ -24,7 +24,7 @@ export const PILLARS: Pillar[] = [
     slug: 'true-cost-of-an-employee-in-the-uk',
     title: 'The True Cost of an Employee in the UK 2026',
     excerpt:
-      'The true cost of an employee in the UK is roughly 35% to 45% more than their salary. See the full cost stack — NI, pension, recruitment, statutory leave, turnover and overhead.',
+      'The true cost of an employee in the UK is roughly 35% to 45% more than their salary. See the full cost stack, including NI, pension, recruitment, statutory leave, turnover and overhead.',
     intro: [
       'The true cost of an employee in the UK is roughly 35% to 45% more than their salary.',
       'For a £30,000 hire, that means a realistic all-in cost of around £41,000 to £47,000 in the first year, once employer National Insurance, pension, recruitment, statutory leave, turnover risk and overhead are counted. The gap has widened since the April 2025 NI rise and is set to keep rising as the £5,000 threshold stays frozen to 2031.',

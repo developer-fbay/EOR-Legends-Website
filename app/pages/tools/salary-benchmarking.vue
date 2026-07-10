@@ -28,7 +28,7 @@ const steps = [
 
 // Placeholder FAQs until the content manager supplies final copy.
 const faqs = Array.from({ length: 4 }, (_, i) => ({
-  q: `Placeholder question ${i + 1} — final copy coming soon`,
+  q: `Placeholder question ${i + 1}, final copy coming soon`,
   a: 'Placeholder answer. Your content manager will provide the final wording for this question.',
 }))
 </script>
@@ -308,11 +308,11 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
   .tool-hiw__steps { flex-direction: column; gap: 26px; }
   /* stacked timeline: left-aligned text, vertical connectors with down arrows */
   .tool-step { position: relative; }
-  .tool-step h3, .tool-step p { margin-left: 56px; text-align: left; }
   .tool-step__line {
     position: absolute;
-    left: 18px;
-    top: 44px;
+    left: auto;
+    right: 8px;
+    top: 6px;
     bottom: -20px;
     width: 2px;
     height: auto;

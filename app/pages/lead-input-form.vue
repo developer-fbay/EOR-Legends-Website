@@ -192,7 +192,7 @@ function resetForm() {
         <button type="submit" class="lif-submit" :disabled="status === 'sending'">
           {{ status === 'sending' ? 'Submitting…' : 'Submit' }}
         </button>
-        <p v-if="status === 'error'" class="lif-error">Something went wrong — please try again.</p>
+        <p v-if="status === 'error'" class="lif-error">Something went wrong. Please try again.</p>
       </form>
 
       <div v-else class="lif-card lif-done">

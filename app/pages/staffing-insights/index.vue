@@ -23,7 +23,7 @@ usePageSeo({
             :key="p.slug"
             :title="p.title"
             :excerpt="p.excerpt"
-            image="/assets/backgrounds/find-out-more-card.png"
+            :image="coverFor(p.slug)"
             :to="`/staffing-insights/${p.slug}`"
           />
         </div>

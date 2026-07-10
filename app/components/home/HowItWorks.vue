@@ -189,12 +189,12 @@ const steps = [
   /* stacked timeline: left-aligned text, vertical connectors with down arrows */
   .hiw-step { align-items: flex-start; position: relative; }
   .hiw-circle-row { justify-content: flex-start; }
-  .hiw-timeline-label, .hiw-step-title, .hiw-step-desc { margin-left: 56px; }
   .hiw-step-desc { max-width: 100%; text-align: left; }
   .hiw-line {
     position: absolute;
-    left: 18px;
-    top: 44px;
+    left: auto;
+    right: 8px;
+    top: 6px;
     bottom: -22px;
     width: 2px;
     height: auto;

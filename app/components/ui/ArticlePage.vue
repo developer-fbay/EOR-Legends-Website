@@ -12,7 +12,11 @@ const props = defineProps<{
   backTo: string
   backLabel: string
   category?: string
+  /** overrides the WP featured image (e.g. designer cover pool for blogs) */
+  heroImage?: string
 }>()
+
+const displayImage = computed(() => props.heroImage || props.article.featured_image)
 
 const articleEl = ref<HTMLElement | null>(null)
 
@@ -78,7 +82,7 @@ useHead({
     <!-- Header: white card over/beside the featured image -->
     <section class="art-hero band-cream">
       <div class="container">
-        <div class="art-hero__wrap" :class="{ 'art-hero__wrap--no-img': !article.featured_image }">
+        <div class="art-hero__wrap" :class="{ 'art-hero__wrap--no-img': !displayImage }">
           <div class="art-hero__card">
             <NuxtLink :to="backTo" class="art-back">← {{ backLabel }}</NuxtLink>
             <h1>{{ article.title }}</h1>
@@ -87,8 +91,8 @@ useHead({
             </div>
             <p class="art-meta__author"><strong>Written By:</strong> Michael van Niekerk</p>
           </div>
-          <div v-if="article.featured_image" class="art-hero__img">
-            <img :src="article.featured_image" :alt="article.title" />
+          <div v-if="displayImage" class="art-hero__img">
+            <img :src="displayImage" :alt="article.title" />
           </div>
         </div>
       </div>
