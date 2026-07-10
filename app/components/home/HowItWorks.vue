@@ -184,12 +184,38 @@ const steps = [
 
 @media (max-width: 768px) {
   .hiw-section { padding: 48px 24px 40px; }
-  .hiw-steps { flex-direction: column; gap: 32px; }
-  .hiw-line { display: none; }
-  .hiw-step-desc { max-width: 100%; text-align: center; }
+  .hiw-steps { flex-direction: column; gap: 30px; }
   .hiw-bottom { flex-direction: column; gap: 24px; text-align: center; }
-  .hiw-circle-row { justify-content: center; }
-  .hiw-step { align-items: center; }
+  /* stacked timeline: left-aligned text, vertical connectors with down arrows */
+  .hiw-step { align-items: flex-start; position: relative; }
+  .hiw-circle-row { justify-content: flex-start; }
+  .hiw-timeline-label, .hiw-step-title, .hiw-step-desc { margin-left: 56px; }
+  .hiw-step-desc { max-width: 100%; text-align: left; }
+  .hiw-line {
+    position: absolute;
+    left: 18px;
+    top: 44px;
+    bottom: -22px;
+    width: 2px;
+    height: auto;
+    margin: 0;
+    flex: none;
+  }
+  .hiw-line::after,
+  .hiw-step:last-child .hiw-line::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -1px;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid #c5d9c0;
+    border-bottom: none;
+  }
+  .hiw-step:last-child .hiw-line { display: none; }
 }
 
 /* Laptop screens: breathing room above and below the card */

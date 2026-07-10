@@ -231,6 +231,18 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
   margin-left: 12px;
   position: relative;
 }
+/* hover fill: sweeps from the number across the line (same as homepage) */
+.tool-step__line::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.55s ease;
+}
+.tool-step__row:hover .tool-step__line::before { width: 100%; }
+.tool-step__circle { transition: background 0.3s ease, color 0.3s ease; }
+.tool-step__row:hover .tool-step__circle { background: var(--accent); color: #fff; }
 .tool-step:last-child .tool-step__line::after {
   content: '';
   position: absolute;
@@ -240,6 +252,10 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-left: 10px solid #c5d9c0;
+  transition: border-left-color 0.25s ease 0.45s;
+}
+.tool-step:last-child .tool-step__row:hover .tool-step__line::after {
+  border-left-color: var(--accent);
 }
 .tool-step h3 {
   font-family: var(--serif);
@@ -289,8 +305,35 @@ const faqs = Array.from({ length: 4 }, (_, i) => ({
 @media (max-width: 900px) {
   .tool-block__grid,
   .tool-block__grid--flip { grid-template-columns: 1fr; }
-  .tool-hiw__steps { flex-direction: column; gap: 28px; }
-  .tool-step__line { display: none; }
+  .tool-hiw__steps { flex-direction: column; gap: 26px; }
+  /* stacked timeline: left-aligned text, vertical connectors with down arrows */
+  .tool-step { position: relative; }
+  .tool-step h3, .tool-step p { margin-left: 56px; text-align: left; }
+  .tool-step__line {
+    position: absolute;
+    left: 18px;
+    top: 44px;
+    bottom: -20px;
+    width: 2px;
+    height: auto;
+    margin: 0;
+    flex: none;
+  }
+  .tool-step__line::after,
+  .tool-step:last-child .tool-step__line::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -1px;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid #c5d9c0;
+    border-bottom: none;
+  }
+  .tool-step:last-child .tool-step__line { display: none; }
   .tool-hiw__bottom { flex-direction: column; text-align: center; }
 }
 </style>

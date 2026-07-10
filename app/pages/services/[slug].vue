@@ -268,6 +268,18 @@ const faqs = computed(() => {
   margin-left: 12px;
   position: relative;
 }
+/* hover fill: sweeps from the number across the line (same as homepage) */
+.svc-step__line::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.55s ease;
+}
+.svc-step__row:hover .svc-step__line::before { width: 100%; }
+.svc-step__circle { transition: background 0.3s ease, color 0.3s ease; }
+.svc-step__row:hover .svc-step__circle { background: var(--accent); color: #fff; }
 .svc-step:last-child .svc-step__line::after {
   content: '';
   position: absolute;
@@ -277,6 +289,10 @@ const faqs = computed(() => {
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-left: 10px solid var(--green);
+  transition: border-left-color 0.25s ease 0.45s;
+}
+.svc-step:last-child .svc-step__row:hover .svc-step__line::after {
+  border-left-color: var(--accent);
 }
 .svc-step h3 {
   font-family: var(--serif);
@@ -316,7 +332,34 @@ const faqs = computed(() => {
   .svc-ov-card--flip { grid-template-columns: 1fr; }
   .svc-ov-card--flip .svc-ov-card__copy { order: 1; }
   .svc-ov-card--flip .svc-ov-card__img { order: 2; }
-  .svc-hiw__steps { flex-direction: column; }
-  .svc-step__line { display: none; }
+  .svc-hiw__steps { flex-direction: column; gap: 26px; }
+  /* stacked timeline: left-aligned text, vertical connectors with down arrows */
+  .svc-step { position: relative; }
+  .svc-step h3, .svc-step p { margin-left: 56px; text-align: left; }
+  .svc-step__line {
+    position: absolute;
+    left: 18px;
+    top: 44px;
+    bottom: -20px;
+    width: 2px;
+    height: auto;
+    margin: 0;
+    flex: none;
+  }
+  .svc-step__line::after,
+  .svc-step:last-child .svc-step__line::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -1px;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid var(--green);
+    border-bottom: none;
+  }
+  .svc-step:last-child .svc-step__line { display: none; }
 }
 </style>
