@@ -12,9 +12,11 @@ import { PHONE_COUNTRIES } from '~/composables/usePhoneCountries'
 const props = withDefaults(defineProps<{
   gfFormId: 28 | 29 | 31
   title?: string
+  buttonText?: string
   source?: string
 }>(), {
   title: 'Get a free cost estimate',
+  buttonText: 'Speak to our team',
 })
 
 const form = reactive({
@@ -164,7 +166,7 @@ async function submit() {
       </Transition>
 
       <button type="submit" class="lead-form__submit" :disabled="status === 'sending'">
-        {{ status === 'sending' ? 'Sending…' : 'Get my free estimate' }}
+        {{ status === 'sending' ? 'Sending…' : buttonText }}
       </button>
       <p v-if="status === 'error'" class="lead-form__error">
         Something went wrong. Please try again or email

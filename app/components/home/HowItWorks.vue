@@ -216,6 +216,10 @@ const steps = [
     border-bottom: none;
   }
   .hiw-step:last-child .hiw-line { display: none; }
+  /* stacked layout is touch-first: no hover effect on the connector or arrow */
+  .hiw-circle-row:hover .hiw-line::before { width: 0; }
+  .hiw-circle-row:hover .hiw-circle { background: #c5d9c0; color: #1a3a2a; }
+  .hiw-step:last-child .hiw-circle-row:hover .hiw-line::after { border-left-color: transparent; }
 }
 
 /* Laptop screens: breathing room above and below the card */

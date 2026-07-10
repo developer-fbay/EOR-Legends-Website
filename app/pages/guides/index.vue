@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Guides archive — same structure as the tools archive.
 import { GUIDES } from '~/data/guides'
+import { coverFor } from '~/utils/coverImage'
 
 usePageSeo({
   title: 'Download Your Essential EOR Guides',
@@ -23,7 +24,7 @@ usePageSeo({
             :key="g.slug"
             :title="g.title"
             :excerpt="g.excerpt"
-            image="/assets/backgrounds/service-card.webp"
+            :image="coverFor(g.slug)"
             :to="`/guides/${g.slug}`"
           />
         </div>

@@ -34,16 +34,19 @@ const findOutMore = [
     title: 'Blogs',
     text: 'Expert guidance on South African employment and global team management.',
     to: '/learn',
+    image: '/assets/learn/blog-cover.webp',
   },
   {
     title: 'News',
     text: 'Company updates and industry developments that impact your workforce strategy.',
     to: '/news',
+    image: '/assets/learn/news-article-cover.webp',
   },
   {
     title: 'Case Studies',
     text: 'See how international businesses successfully hire and operate in South Africa.',
     to: '/case-studies',
+    image: '/assets/learn/case-studies-cover.webp',
   },
 ]
 </script>
@@ -99,7 +102,7 @@ const findOutMore = [
         <h2 class="ab-more__title">Find out more</h2>
         <div class="ab-more-grid">
           <article v-for="card in findOutMore" :key="card.title" class="ab-more-card">
-            <img src="/assets/backgrounds/find-out-more-card.png" :alt="card.title" loading="lazy" />
+            <img :src="card.image" :alt="card.title" loading="lazy" />
             <h3>{{ card.title }}</h3>
             <p>{{ card.text }}</p>
             <NuxtLink :to="card.to" class="brand-btn brand-btn--orange">Read more</NuxtLink>

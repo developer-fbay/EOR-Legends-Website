@@ -55,7 +55,7 @@ useHead({
           </ul>
         </div>
         <div class="pi-hero__form">
-          <UiLeadForm :gf-form-id="29" :source="`pillar-${pillar.slug}`" title="Get a free cost estimate" />
+          <UiLeadForm :gf-form-id="29" :source="`pillar-${pillar.slug}`" title="Ready to build your South African team?" />
         </div>
       </div>
     </section>

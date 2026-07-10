@@ -65,7 +65,7 @@ usePageSeo({
         </div>
 
         <div class="contact-form">
-          <UiLeadForm :gf-form-id="31" source="contact-page" title="Get a free cost estimate" />
+          <UiLeadForm :gf-form-id="31" source="contact-page" title="Ready to build your South African team?" />
         </div>
       </div>
     </section>

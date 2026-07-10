@@ -24,7 +24,7 @@ watch(open, (v) => {
       <div v-if="open" class="cm-backdrop" @click.self="close">
         <div class="cm-dialog" role="dialog" aria-modal="true" aria-label="Contact us">
           <button class="cm-close" aria-label="Close" @click="close">×</button>
-          <UiLeadForm :gf-form-id="31" source="popup" title="Get a free cost estimate" />
+          <UiLeadForm :gf-form-id="31" source="popup" title="Ready to build your South African team?" />
         </div>
       </div>
     </Transition>

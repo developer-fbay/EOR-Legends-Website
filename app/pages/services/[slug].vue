@@ -19,6 +19,21 @@ usePageSeo({
   description: service.excerpt,
 })
 
+// Per-service estimate-form headings (marketing's form CTA copy)
+const FORM_TITLES: Record<string, string> = {
+  'payroll': 'Make SA payroll simple',
+  'hr': 'Get in-office HR support',
+  'onboarding-offboarding': 'Hire correctly, the first time',
+  'company-culture': 'Create a culture people stay for',
+  'employee-benefits': 'Offer excellent benefits, no admin',
+  'eor-migration': 'Migrate EORs seamlessly',
+  'office-space': 'Centralise IT, HR and Office space',
+  'it-support': 'Access In-house 360 IT support',
+  'it-equipment': 'Equip every hire before day one',
+  'contractor-management': 'Reduce your compliance risk',
+}
+const formTitle = FORM_TITLES[service.slug] || 'Ready to build your South African team?'
+
 const contactModal = useState('contact-modal', () => false)
 function openContact() {
   contactModal.value = true
@@ -52,7 +67,7 @@ const faqs = computed(() => {
             <p v-for="(p, i) in service.intro" :key="i">{{ p }}</p>
           </div>
           <div class="svc-intro__form">
-            <UiLeadForm :gf-form-id="29" :source="`service-${service.slug}`" title="Get a free cost estimate" />
+            <UiLeadForm :gf-form-id="29" :source="`service-${service.slug}`" :title="formTitle" />
           </div>
         </div>
       </section>

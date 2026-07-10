@@ -110,7 +110,8 @@ async function submit() {
   --la-border: #d9dcd8;
   --la-text: #16241c;
   --la-placeholder: #9aa09a;
-  background: #fffcf6;
+  /* the guide hero section is beige, so the card is white to stand out */
+  background: #fff;
   border-radius: 18px;
   padding: clamp(24px, 3vw, 40px);
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.1);

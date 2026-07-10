@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="final-form">
-        <UiLeadForm :gf-form-id="28" source="footer" title="Get a free cost estimate" />
+        <UiLeadForm :gf-form-id="28" source="footer" title="Ready to build your South African team?" />
       </div>
     </div>
   </section>
