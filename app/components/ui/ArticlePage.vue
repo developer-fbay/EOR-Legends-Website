@@ -277,6 +277,8 @@ useHead({
     margin-bottom: 16px;
   }
   .art-grid { grid-template-columns: 1fr; }
-  .art-aside { position: static; }
+  /* stacked ToC: centered, same width as the heading card */
+  .art-aside { position: static; width: calc(100% - 24px); margin-inline: auto; }
+  .art-aside :deep(.tla-toc-wrapper) { max-width: none; }
 }
 </style>
