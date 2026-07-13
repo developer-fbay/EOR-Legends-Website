@@ -269,10 +269,13 @@ useHead({
 @media (max-width: 850px) {
   .pi-hero__grid { grid-template-columns: 1fr; justify-items: center; }
   .pi-hero__copy { text-align: center; }
+  .pi-hero__copy h1 { margin-inline: auto; }
   .pi-hero__copy p, .pi-hero__copy ul { margin-inline: auto; }
   .pi-hero__form { position: static; width: 100%; max-width: 480px; margin-inline: auto; }
   .pi-grid { grid-template-columns: 1fr; }
-  .pi-aside { position: static; }
+  /* stacked ToC: centered, same width as the form card */
+  .pi-aside { position: static; width: 100%; max-width: 480px; margin-inline: auto; }
+  .pi-aside :deep(.tla-toc-wrapper) { max-width: none; }
   .pi-body :deep(div:has(> div > .pi-num--card)) { grid-template-columns: 1fr; }
 }
 </style>
