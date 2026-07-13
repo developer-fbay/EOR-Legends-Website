@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isValidPhoneNumber } from 'libphonenumber-js'
 import { PHONE_COUNTRIES } from '~/composables/usePhoneCountries'
 
 /**
@@ -40,6 +41,12 @@ const selectedCountry = computed(
   () => PHONE_COUNTRIES.find((c) => c.code === form.phoneCountry) ?? PHONE_COUNTRIES[0]!,
 )
 
+// Full international number: dial code + digits, national leading zero
+// stripped ("07926…" → "+447926…") — the format Gravity Forms validates.
+const fullPhone = computed(
+  () => `${selectedCountry.value.dial}${form.phone.replace(/[^\d]/g, '').replace(/^0+/, '')}`,
+)
+
 // Field-level validation (GF style): messages appear under each field on submit.
 const errors = reactive<Record<string, string>>({})
 const REQUIRED_MSG = 'This field is required.'
@@ -50,7 +57,9 @@ function validate(): boolean {
   if (!form.email.trim()) errors.email = REQUIRED_MSG
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim())) errors.email = 'The email address entered is invalid.'
   if (!form.phone.trim()) errors.phone = REQUIRED_MSG
-  else if (form.phone.replace(/\D/g, '').length < 6) errors.phone = 'Please enter a valid phone number.'
+  // Same check Gravity Forms runs server-side (Advanced Phone Field /
+  // libphonenumber): the number must be real for the selected country.
+  else if (!isValidPhoneNumber(fullPhone.value)) errors.phone = 'Please provide a valid phone number.'
   if (showAudience.value && !form.audience) errors.audience = REQUIRED_MSG
   if (showDetails.value) {
     if (!form.company.trim()) errors.company = REQUIRED_MSG
@@ -68,14 +77,12 @@ async function submit() {
   if (!validate()) return
   status.value = 'sending'
   try {
-    await $fetch('/api/lead', {
+    const res: any = await $fetch('/api/lead', {
       method: 'POST',
       body: {
         fullName: form.fullName,
         email: form.email,
-        // Strip spaces/formatting and the national leading zero ("07926…" → "+447926…")
-        // — Gravity Forms' phone validation rejects e.g. +4407… as invalid.
-        phone: `${selectedCountry.value.dial}${form.phone.replace(/[^\d]/g, '').replace(/^0+/, '')}`,
+        phone: fullPhone.value,
         audience: form.audience,
         company: form.company,
         message: form.message,
@@ -84,6 +91,13 @@ async function submit() {
         website: form.website,
       },
     })
+    // Gravity Forms rejected a field: show its messages under the fields
+    // instead of pretending success.
+    if (res && res.ok === false && res.validation) {
+      Object.assign(errors, res.validation)
+      status.value = 'idle'
+      return
+    }
     status.value = 'sent'
   } catch {
     status.value = 'error'
@@ -117,7 +131,7 @@ async function submit() {
         <div class="lead-form__phone" :class="{ 'has-error': errors.phone }">
           <label class="lead-form__cc">
             <span class="sr-only">Country code</span>
-            <select v-model="form.phoneCountry" aria-label="Phone country code">
+            <select v-model="form.phoneCountry" aria-label="Phone country code" @change="clearError('phone')">
               <option v-for="c in PHONE_COUNTRIES" :key="c.code" :value="c.code">
                 {{ c.flag }} {{ c.dial }} {{ c.name }}
               </option>

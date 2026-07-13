@@ -73,11 +73,8 @@ export default defineEventHandler(async (event) => {
     }
     const f = FIELD_MAP[gfFormId]!
     const radioValue = lead.audience === 'jobseeker' ? "I'm a job seeker" : "I'm an employer / business"
-    // GF made company/message REQUIRED (2026-07): when the radio is answered
-    // those fields count as visible, and empty values fail validation — the
-    // entry is silently never created. Explicit fallbacks keep delivery safe.
-    const companyValue = lead.company || 'Not provided'
-    const messageValue = lead.message || 'Not provided'
+    const companyValue = lead.company || ''
+    const messageValue = lead.message || ''
 
     try {
       const res: any = await $fetch(`${gfBase}/wp-json/gf/v2/forms/${gfFormId}/submissions`, {
@@ -97,7 +94,22 @@ export default defineEventHandler(async (event) => {
       })
       console.log(`[lead] Gravity Forms ${gfFormId}: forwarded OK, entry ${res?.entry_id ?? '?'} (valid: ${res?.is_valid})`)
       if (res && res.is_valid === false) {
+        // 1:1 with GF: relay its field messages to the browser so the visitor
+        // can fix the field — never pretend success when no entry was created.
         console.error('[lead] GF rejected the submission:', JSON.stringify(res.validation_messages))
+        const nameById: Record<string, string> = {
+          [f.name]: 'fullName',
+          [f.email]: 'email',
+          [f.phone]: 'phone',
+          [f.radio]: 'audience',
+          [f.company]: 'company',
+          [f.message]: 'message',
+        }
+        const validation: Record<string, string> = {}
+        for (const [id, msg] of Object.entries(res.validation_messages || {})) {
+          validation[nameById[id] || id] = String(msg)
+        }
+        return { ok: false, validation }
       }
 
       // The radio field's conditional logic ("phone contains 0") makes GF discard
@@ -125,8 +137,30 @@ export default defineEventHandler(async (event) => {
         })
       }
     } catch (err: any) {
-      // Never fail the user's submission because the WP forward failed.
+      // GF answers validation failures with HTTP 400, which lands here.
+      const data = err?.data
+      if (data?.is_valid === false) {
+        console.error('[lead] GF rejected the submission:', JSON.stringify(data.validation_messages))
+        const nameById: Record<string, string> = {
+          [f.name]: 'fullName',
+          [f.email]: 'email',
+          [f.phone]: 'phone',
+          [f.radio]: 'audience',
+          [f.company]: 'company',
+          [f.message]: 'message',
+        }
+        const validation: Record<string, string> = {}
+        for (const [id, msg] of Object.entries(data.validation_messages || {})) {
+          validation[nameById[id] || id] = String(msg)
+        }
+        return { ok: false, validation }
+      }
+      // GF unreachable — without a Supabase store the lead would be lost, so
+      // tell the visitor it failed rather than silently dropping it.
       console.error('[lead] Gravity Forms forward failed:', err?.message)
+      if (!(supabaseUrl && serviceKey)) {
+        throw createError({ statusCode: 502, statusMessage: 'Submission failed, please try again' })
+      }
     }
   } else {
     console.warn(`[lead] GF forwarding SKIPPED — missing env (GF_BASE_URL/KEY/SECRET). Lead stored in Supabase only.`)

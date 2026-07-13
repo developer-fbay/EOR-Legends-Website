@@ -3,6 +3,7 @@
  * Guide download form — Gravity Form 30 (Full Name 5, Work email 4, Phone 3).
  * On success the guide PDF opens/downloads.
  */
+import { isValidPhoneNumber } from 'libphonenumber-js'
 import { PHONE_COUNTRIES } from '~/composables/usePhoneCountries'
 
 const props = defineProps<{ pdfUrl: string; title?: string }>()
@@ -15,12 +16,18 @@ const selectedCountry = computed(
   () => PHONE_COUNTRIES.find((c) => c.code === form.phoneCountry) ?? PHONE_COUNTRIES[0]!,
 )
 
+const fullPhone = computed(
+  () => `${selectedCountry.value.dial}${form.phone.replace(/[^\d]/g, '').replace(/^0+/, '')}`,
+)
+
 function validate() {
   Object.keys(errors).forEach((k) => delete errors[k])
   if (!form.fullName.trim()) errors.fullName = 'This field is required.'
   if (!form.email.trim()) errors.email = 'This field is required.'
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim())) errors.email = 'The email address entered is invalid.'
   if (!form.phone.trim()) errors.phone = 'This field is required.'
+  // Same check Gravity Forms runs server-side on this field
+  else if (!isValidPhoneNumber(fullPhone.value)) errors.phone = 'Please provide a valid phone number.'
   return Object.keys(errors).length === 0
 }
 
@@ -36,7 +43,7 @@ async function submit() {
         values: {
           5: form.fullName,
           4: form.email,
-          3: `${selectedCountry.value.dial}${form.phone.replace(/[^\d]/g, '').replace(/^0+/, '')}`,
+          3: fullPhone.value,
         },
       },
     })
