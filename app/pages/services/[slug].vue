@@ -42,10 +42,10 @@ const HERO_LISTS: Record<string, { label: string; items: string[] }> = {
   'onboarding-offboarding': { label: 'All in one invoice:', items: ['Day-one setup', 'Fully managed offboarding', 'Compliant contracts', 'Payroll coordination'] },
   'company-culture': { label: 'All in one invoice:', items: ['Culture support', 'Stronger employee retention', 'Better alignment with headquarters', 'Higher morale and work quality'] },
   'employee-benefits': { label: 'All in one invoice:', items: ['Fully managed distribution', 'Locally relevant benefits', 'Provider sourcing', 'Market benchmarking'] },
-  'eor-migration': { label: 'Standalone cost', items: ['Fully managed EOR transition', 'Uninterrupted payroll', 'Leave balances preserved', 'Seamless transition for employees'] },
+  'eor-migration': { label: 'Switch without disruption:', items: ['Fully managed EOR transition', 'Uninterrupted payroll', 'Leave balances preserved', 'Seamless transition for employees'] },
   'office-space': { label: 'All in one invoice:', items: ['On-site HR and IT support', 'Reliable internet and backup power', 'Secure environment', 'Stronger team collaboration'] },
   'it-support': { label: 'All in one invoice:', items: ['Fast, local IT troubleshooting', 'Minimal disruption to productivity', 'Day-one device setup', 'Secure onboarding and offboarding'] },
-  'it-equipment': { label: 'Standalone cost', items: ['Direct delivery and setup', 'Repairs, replacements and returns managed', 'Trusted local technology sourcing', 'No shipping, customs or vendor risk'] },
+  'it-equipment': { label: 'Tech without the logistics:', items: ['Direct delivery and setup', 'Repairs, replacements and returns managed', 'Trusted local technology sourcing', 'No shipping, customs or vendor risk'] },
   'contractor-management': { label: 'All in one invoice:', items: ['Compliant contractor classification', 'Contracts, invoicing and payments managed', 'Reduced misclassification risk', 'Smooth transition to employment'] },
 }
 const heroList = HERO_LISTS[service.slug]
