@@ -73,6 +73,11 @@ export default defineEventHandler(async (event) => {
     }
     const f = FIELD_MAP[gfFormId]!
     const radioValue = lead.audience === 'jobseeker' ? "I'm a job seeker" : "I'm an employer / business"
+    // GF made company/message REQUIRED (2026-07): when the radio is answered
+    // those fields count as visible, and empty values fail validation — the
+    // entry is silently never created. Explicit fallbacks keep delivery safe.
+    const companyValue = lead.company || 'Not provided'
+    const messageValue = lead.message || 'Not provided'
 
     try {
       const res: any = await $fetch(`${gfBase}/wp-json/gf/v2/forms/${gfFormId}/submissions`, {
@@ -86,8 +91,8 @@ export default defineEventHandler(async (event) => {
           [`input_${f.email}`]: lead.email,
           [`input_${f.phone}`]: lead.phone,
           [`input_${f.radio}`]: radioValue,
-          [`input_${f.company}`]: lead.company,
-          [`input_${f.message}`]: lead.message,
+          [`input_${f.company}`]: companyValue,
+          [`input_${f.message}`]: messageValue,
         },
       })
       console.log(`[lead] Gravity Forms ${gfFormId}: forwarded OK, entry ${res?.entry_id ?? '?'} (valid: ${res?.is_valid})`)
@@ -112,8 +117,8 @@ export default defineEventHandler(async (event) => {
             [String(f.email)]: lead.email,
             [String(f.phone)]: lead.phone,
             [String(f.radio)]: radioValue,
-            [String(f.company)]: lead.company,
-            [String(f.message)]: lead.message,
+            [String(f.company)]: companyValue,
+            [String(f.message)]: messageValue,
           },
         }).catch((err: any) => {
           console.error('[lead] GF entry radio patch failed:', err?.message)
