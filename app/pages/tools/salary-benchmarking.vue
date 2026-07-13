@@ -333,6 +333,18 @@ const faqs = [
     flex: none;
   }
   .tool-step__line::after { content: none; }
+  /* node dot per step on the connector — marks the steps down the line */
+  .tool-step__line::before {
+    inset: auto;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5d9c0;
+    transition: none;
+  }
   .tool-step:last-child .tool-step__line { display: block; bottom: 0; }
   .tool-step:last-child .tool-step__line::after {
     content: '';
@@ -348,7 +360,7 @@ const faqs = [
     border-bottom: none;
   }
   /* touch: no hover effect on the connector, circle or arrow */
-  .tool-step__row:hover .tool-step__line::before { width: 0; }
+  .tool-step__row:hover .tool-step__line::before { width: 10px; }
   .tool-step__row:hover .tool-step__circle { background: #c5d9c0; color: #1a3a2a; }
   .tool-step:last-child .tool-step__row:hover .tool-step__line::after { border-top-color: #c5d9c0; }
   .tool-hiw__bottom { flex-direction: column; text-align: center; }

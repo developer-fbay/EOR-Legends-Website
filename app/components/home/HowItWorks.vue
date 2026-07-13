@@ -203,6 +203,18 @@ const steps = [
     flex: none;
   }
   .hiw-line::after { content: none; }
+  /* node dot per step on the connector — marks the steps down the line */
+  .hiw-line::before {
+    inset: auto;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5d9c0;
+    transition: none;
+  }
   .hiw-step:last-child .hiw-line { display: block; bottom: 0; }
   .hiw-step:last-child .hiw-line::after {
     content: '';
@@ -218,7 +230,7 @@ const steps = [
     border-bottom: none;
   }
   /* stacked layout is touch-first: no hover effect on the connector or arrow */
-  .hiw-circle-row:hover .hiw-line::before { width: 0; }
+  .hiw-circle-row:hover .hiw-line::before { width: 10px; }
   .hiw-circle-row:hover .hiw-circle { background: #c5d9c0; color: #1a3a2a; }
   .hiw-step:last-child .hiw-circle-row:hover .hiw-line::after { border-left-color: transparent; }
 }

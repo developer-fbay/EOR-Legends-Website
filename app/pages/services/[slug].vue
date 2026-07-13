@@ -428,6 +428,18 @@ const faqs = computed(() => {
     flex: none;
   }
   .svc-step__line::after { content: none; }
+  /* node dot per step on the connector — marks the steps down the line */
+  .svc-step__line::before {
+    inset: auto;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green);
+    transition: none;
+  }
   .svc-step:last-child .svc-step__line { display: block; bottom: 0; }
   .svc-step:last-child .svc-step__line::after {
     content: '';
@@ -443,7 +455,7 @@ const faqs = computed(() => {
     border-bottom: none;
   }
   /* touch: no hover effect on the connector, circle or arrow */
-  .svc-step__row:hover .svc-step__line::before { width: 0; }
+  .svc-step__row:hover .svc-step__line::before { width: 10px; }
   .svc-step__row:hover .svc-step__circle { background: var(--green); color: var(--cream); }
   .svc-step:last-child .svc-step__row:hover .svc-step__line::after { border-top-color: var(--green); }
 }
