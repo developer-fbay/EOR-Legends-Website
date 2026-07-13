@@ -375,7 +375,9 @@ onBeforeUnmount(() => {
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-  background-color: var(--green);
+  /* the arch image alone paints this section — no color behind it
+     (band-green would otherwise fill the edges on mobile/tablet) */
+  background-color: transparent;
 }
 .sbt-head {
   text-align: center;
@@ -782,17 +784,6 @@ onBeforeUnmount(() => {
 
 /* ===== Mobile (≤768px): stack; once results show, collapse the form card ===== */
 @media (max-width: 768px) {
-  /* phones: drop the green band entirely — it read as a border around the
-     white cards. Beige section, dark heading, subtle card outline instead. */
-  .sbt {
-    background-image: none;
-    background-color: var(--cream);
-    margin-top: 0;
-  }
-  .sbt-head h2 { color: var(--body); }
-  .sbt-head p { color: var(--grey-text); }
-  .sbt-card { border: 1px solid #ece9e2; }
-
   .sbt-columns { flex-direction: column; }
   /* stacked buttons align: both full width, centered labels */
   .sbt-results-actions { flex-direction: column; align-items: stretch; }
