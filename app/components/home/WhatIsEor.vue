@@ -1,28 +1,24 @@
 <script setup lang="ts">
-// Left card: common employer questions + staffing-insights resource links.
+// Left card: staffing-insights resource links (unlinked ones get URLs when
+// their pillar pages publish).
 const resourceLinks = [
   {
-    question: 'What is the true cost of an employee?',
     linkText: 'The true cost of an employee in the UK 2026',
     to: '/staffing-insights/true-cost-of-an-employee-in-the-uk',
   },
   {
-    question: 'Could hiring overseas create a tax problem?',
     linkText: 'Permanent establishment: a guide for UK businesses hiring abroad',
     to: '/staffing-insights/permanent-establishment-guide',
   },
   {
-    question: 'What is employee turnover actually costing you?',
     linkText: 'When good people leave: the true cost of employee turnover',
     to: null,
   },
   {
-    question: 'Is outsourcing the right call for my business?',
     linkText: 'The real disadvantages of outsourcing',
     to: null,
   },
   {
-    question: 'Did you know paternity leave and unpaid parental leave are now day one rights?',
     linkText: 'The Employment Rights Act 2025: what UK employers need to know',
     to: null,
   },
@@ -97,21 +93,21 @@ useHead({
       <div class="wie-grid">
         <!-- LEFT card: questions + resource links -->
         <div class="wie-card">
-          <h3 class="wie-card__title">Already asking yourself one of these questions?</h3>
-          <p class="wie-card__body">
-            These are the questions we hear most from UK employers looking to grow their teams.
-            Most UK employers run into at least one of them at some point.
-          </p>
+          <h3 class="wie-card__title">Educational Resources</h3>
 
           <ul class="wie-resources">
             <li v-for="(item, i) in resourceLinks" :key="i">
               <NuxtLink v-if="item.to" :to="item.to" class="wie-resource wie-resource--linked">
-                <p class="wie-resource__q">{{ item.question }}</p>
                 <p class="wie-resource__text">{{ item.linkText }}</p>
+                <span class="wie-resource__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
+                </span>
               </NuxtLink>
               <div v-else class="wie-resource">
-                <p class="wie-resource__q">{{ item.question }}</p>
                 <p class="wie-resource__text">{{ item.linkText }}</p>
+                <span class="wie-resource__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
+                </span>
               </div>
             </li>
           </ul>
@@ -200,7 +196,10 @@ useHead({
   flex: 1;
 }
 .wie-resource {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
   background: #faf6ef;
   border: 1px solid #f0ece3;
   border-radius: 10px;
@@ -209,18 +208,25 @@ useHead({
   color: inherit;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
+/* arrow in a circle, same treatment as the FAQ open/close icon */
+.wie-resource__icon {
+  flex: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wie-resource__icon svg { width: 14px; height: 14px; }
 .wie-resource--linked {
   cursor: pointer;
 }
 .wie-resource--linked:hover {
   border-color: var(--green);
   background: #f5f1e8;
-}
-.wie-resource__q {
-  margin: 0 0 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.5;
 }
 .wie-resource__text {
   margin: 0;
