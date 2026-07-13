@@ -6,7 +6,7 @@
  */
 usePageSeo({ title: 'New Lead Input Form', robots: 'noindex, nofollow' })
 
-const LEAD_OWNERS = ['Anthony Kettle', 'Dylan Fisher', 'Ned Barker', 'Olivia Pienaar', 'Jaron Visagie', 'Abby van Wyk', 'Joe Rutherford', 'Matthew Samaai', 'Jesse Klaff', 'Jayden Lowe', 'Gabriella Sander', 'Julia De Vos', 'Aidan Bonser']
+const LEAD_OWNERS = ['Anthony Kettle', 'Dylan Fisher', 'Ned Barker', 'Olivia Pienaar', 'Jaron Visagie', 'Abby van Wyk', 'Joe Rutherford', 'Matthew Samaai', 'Jesse Klaff', 'Jayden Lowe', 'Gabriella Sander', 'Julia De Vos', 'Aidan Bonser', 'Christopher Perumal']
 const COUNTRIES = ['Australia', 'Austria', 'Belgium', 'Brazil', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'France', 'Germany', 'Ghana', 'Hong Kong', 'Ireland', 'Italy', 'Netherlands', 'New Zealand', 'Nigeria', 'Pakistan', 'Poland', 'Serbia', 'Saudi Arabia', 'Singapore', 'South Africa', 'Spain', 'Switzerland', 'Tanzania', 'Turkey', 'UAE', 'Uganda', 'UK', 'Ukraine', 'USA', 'Vietnam']
 const LEAD_SOURCES = ['Network Platforms', 'Inbound Call/Enquiry', 'Client Referral', 'Partner Referral', 'Self-Generated - LinkedIn', 'Other Social Media', 'Recruiter Outreach', 'Self Generated']
 
