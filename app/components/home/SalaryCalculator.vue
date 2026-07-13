@@ -367,6 +367,8 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .sbt {
+  /* clear cream air between the logo carousel and the arch (marketing) */
+  margin-top: clamp(28px, 5vh, 56px);
   padding-block: var(--section-pad);
   background-image: url('/assets/backgrounds/BG_CALCULATOR.webp');
   /* Anchored to the top so the cream arch is always visible (cover crops bottom, never the arch) */
@@ -781,6 +783,9 @@ onBeforeUnmount(() => {
 /* ===== Mobile (≤768px): stack; once results show, collapse the form card ===== */
 @media (max-width: 768px) {
   .sbt-columns { flex-direction: column; }
+  /* stacked buttons align: both full width, centered labels */
+  .sbt-results-actions { flex-direction: column; align-items: stretch; }
+  .sbt-results-actions .sbt-btn { width: 100%; text-align: center; justify-content: center; }
   .sbt-column-left {
     flex: 0 0 auto;
     width: 100%;

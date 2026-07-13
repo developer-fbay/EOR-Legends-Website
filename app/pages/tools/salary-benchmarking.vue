@@ -319,20 +319,21 @@ const faqs = [
   .tool-block__grid,
   .tool-block__grid--flip { grid-template-columns: 1fr; }
   .tool-hiw__steps { flex-direction: column; gap: 26px; }
-  /* stacked timeline: left-aligned text, vertical connectors with down arrows */
-  .tool-step { position: relative; }
+  /* stacked timeline: one continuous connector, single arrow at the end */
+  .tool-step { position: relative; padding-right: 36px; }
   .tool-step__line {
     position: absolute;
     left: auto;
     right: 8px;
     top: 6px;
-    bottom: -20px;
+    bottom: -32px; /* bridges the 26px step gap so segments read as one line */
     width: 2px;
     height: auto;
     margin: 0;
     flex: none;
   }
-  .tool-step__line::after,
+  .tool-step__line::after { content: none; }
+  .tool-step:last-child .tool-step__line { display: block; bottom: 0; }
   .tool-step:last-child .tool-step__line::after {
     content: '';
     position: absolute;
@@ -346,7 +347,10 @@ const faqs = [
     border-top: 10px solid #c5d9c0;
     border-bottom: none;
   }
-  .tool-step:last-child .tool-step__line { display: none; }
+  /* touch: no hover effect on the connector, circle or arrow */
+  .tool-step__row:hover .tool-step__line::before { width: 0; }
+  .tool-step__row:hover .tool-step__circle { background: #c5d9c0; color: #1a3a2a; }
+  .tool-step:last-child .tool-step__row:hover .tool-step__line::after { border-top-color: #c5d9c0; }
   .tool-hiw__bottom { flex-direction: column; text-align: center; }
 }
 </style>

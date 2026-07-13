@@ -34,6 +34,22 @@ const FORM_TITLES: Record<string, string> = {
 }
 const formTitle = FORM_TITLES[service.slug] || 'Ready to build your South African team?'
 
+// Hero add-on list (content team, 2026-07): what each service bundles,
+// under an "All in one invoice:" label (or "Standalone cost" where priced apart).
+const HERO_LISTS: Record<string, { label: string; items: string[] }> = {
+  'payroll': { label: 'All in one invoice:', items: ['Seamless salary payments', 'Tax certificates', 'Tax compliance', 'Payslip delivery'] },
+  'hr': { label: 'All in one invoice:', items: ['Contract management', 'Disciplinary procedures', 'Day-to-day HR management', 'Dedicated HR guidance'] },
+  'onboarding-offboarding': { label: 'All in one invoice:', items: ['Day-one setup', 'Fully managed offboarding', 'Compliant contracts', 'Payroll coordination'] },
+  'company-culture': { label: 'All in one invoice:', items: ['Culture support', 'Stronger employee retention', 'Better alignment with headquarters', 'Higher morale and work quality'] },
+  'employee-benefits': { label: 'All in one invoice:', items: ['Fully managed distribution', 'Locally relevant benefits', 'Provider sourcing', 'Market benchmarking'] },
+  'eor-migration': { label: 'Standalone cost', items: ['Fully managed EOR transition', 'Uninterrupted payroll', 'Leave balances preserved', 'Seamless transition for employees'] },
+  'office-space': { label: 'All in one invoice:', items: ['On-site HR and IT support', 'Reliable internet and backup power', 'Secure environment', 'Stronger team collaboration'] },
+  'it-support': { label: 'All in one invoice:', items: ['Fast, local IT troubleshooting', 'Minimal disruption to productivity', 'Day-one device setup', 'Secure onboarding and offboarding'] },
+  'it-equipment': { label: 'Standalone cost', items: ['Direct delivery and setup', 'Repairs, replacements and returns managed', 'Trusted local technology sourcing', 'No shipping, customs or vendor risk'] },
+  'contractor-management': { label: 'All in one invoice:', items: ['Compliant contractor classification', 'Contracts, invoicing and payments managed', 'Reduced misclassification risk', 'Smooth transition to employment'] },
+}
+const heroList = HERO_LISTS[service.slug]
+
 const contactModal = useState('contact-modal', () => false)
 function openContact() {
   contactModal.value = true
@@ -65,6 +81,12 @@ const faqs = computed(() => {
           <div class="svc-intro__copy">
             <h1><em>{{ service.title }}</em><br />In South Africa</h1>
             <p v-for="(p, i) in service.intro" :key="i">{{ p }}</p>
+            <div v-if="heroList" class="svc-intro__list">
+              <p class="svc-intro__list-label">{{ heroList.label }}</p>
+              <ul>
+                <li v-for="item in heroList.items" :key="item">{{ item }}</li>
+              </ul>
+            </div>
           </div>
           <div class="svc-intro__form">
             <UiLeadForm :gf-form-id="29" :source="`service-${service.slug}`" :title="formTitle" />
@@ -186,6 +208,44 @@ const faqs = computed(() => {
 .svc-intro__copy p {
   max-width: 62ch;
   color: var(--body);
+}
+
+/* Hero add-on: bold label + target-bullet list (designer's payroll mock) */
+.svc-intro__list { margin-top: clamp(14px, 2.5vh, 26px); }
+.svc-intro__list-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+.svc-intro__list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.svc-intro__list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.svc-intro__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--green);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--green) 0 3px, transparent 3.5px);
+}
+@media (min-width: 993px) and (max-height: 700px) {
+  .svc-intro__list { margin-top: 10px; }
+  .svc-intro__list ul { gap: 6px; }
 }
 
 .svc-overview {
@@ -345,26 +405,30 @@ const faqs = computed(() => {
   .svc-intro__grid { grid-template-columns: 1fr; justify-items: center; }
   .svc-intro__copy { text-align: center; }
   .svc-intro__copy p { margin-inline: auto; }
+  /* centered block, left-aligned items */
+  .svc-intro__list { width: fit-content; margin-inline: auto; text-align: left; }
+  .svc-intro__list-label { text-align: center; }
   .svc-intro__form { width: 100%; max-width: 480px; margin-inline: auto; }
   .svc-ov-card,
   .svc-ov-card--flip { grid-template-columns: 1fr; }
   .svc-ov-card--flip .svc-ov-card__copy { order: 1; }
   .svc-ov-card--flip .svc-ov-card__img { order: 2; }
   .svc-hiw__steps { flex-direction: column; gap: 26px; }
-  /* stacked timeline: left-aligned text, vertical connectors with down arrows */
-  .svc-step { position: relative; }
+  /* stacked timeline: one continuous connector, single arrow at the end */
+  .svc-step { position: relative; padding-right: 36px; }
   .svc-step__line {
     position: absolute;
     left: auto;
     right: 8px;
     top: 6px;
-    bottom: -20px;
+    bottom: -32px; /* bridges the 26px step gap so segments read as one line */
     width: 2px;
     height: auto;
     margin: 0;
     flex: none;
   }
-  .svc-step__line::after,
+  .svc-step__line::after { content: none; }
+  .svc-step:last-child .svc-step__line { display: block; bottom: 0; }
   .svc-step:last-child .svc-step__line::after {
     content: '';
     position: absolute;
@@ -378,6 +442,9 @@ const faqs = computed(() => {
     border-top: 10px solid var(--green);
     border-bottom: none;
   }
-  .svc-step:last-child .svc-step__line { display: none; }
+  /* touch: no hover effect on the connector, circle or arrow */
+  .svc-step__row:hover .svc-step__line::before { width: 0; }
+  .svc-step__row:hover .svc-step__circle { background: var(--green); color: var(--cream); }
+  .svc-step:last-child .svc-step__row:hover .svc-step__line::after { border-top-color: var(--green); }
 }
 </style>

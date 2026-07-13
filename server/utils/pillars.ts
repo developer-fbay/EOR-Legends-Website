@@ -6,6 +6,11 @@
  * section, plus the FAQ pairs themselves.
  */
 
+import trueCost from '../data/pillars/true-cost-of-an-employee-in-the-uk.json'
+import permEst from '../data/pillars/permanent-establishment-guide.json'
+import onCosts from '../data/pillars/employee-on-costs.json'
+import whatIsEor from '../data/pillars/what-is-an-employer-of-record.json'
+
 const WP = process.env.WP_BASE_URL || process.env.GF_BASE_URL || 'https://legendseor.com'
 
 export const PILLAR_URLS: Record<string, string> = {
@@ -13,6 +18,21 @@ export const PILLAR_URLS: Record<string, string> = {
   'permanent-establishment-guide': `${WP}/permanent-establishment/`,
   'employee-on-costs': `${WP}/cost-of-employing-someone-uk/`,
   'what-is-an-employer-of-record': `${WP}/problem-2-cluster-1/`,
+}
+
+type PillarBody = { title: string; bodyHtml: string; faqs: { q: string; a: string }[] }
+
+/**
+ * The WP source pages were deleted from legendseor.com (2026-07-13), which
+ * silently emptied every pillar/cluster page once the runtime cache expired.
+ * These snapshots are the last good extraction, committed to the repo; the
+ * live fetch still runs first so WP wins again if the pages come back.
+ */
+const SNAPSHOTS: Record<string, PillarBody> = {
+  'true-cost-of-an-employee-in-the-uk': trueCost as PillarBody,
+  'permanent-establishment-guide': permEst as PillarBody,
+  'employee-on-costs': onCosts as PillarBody,
+  'what-is-an-employer-of-record': whatIsEor as PillarBody,
 }
 
 // problem-2-cluster-1 still carries the copied pillar-1 H1 in WP; pin the
@@ -78,10 +98,15 @@ function balanceHtml(html: string): string {
 
 export async function fetchPillarBody(slug: string) {
   const url = PILLAR_URLS[slug]
-  if (!url) return null
+  if (!url) return SNAPSHOTS[slug] || null
 
-  const res = await fetch(url)
-  if (!res.ok) return null
+  let res: Response
+  try {
+    res = await fetch(url)
+  } catch {
+    return SNAPSHOTS[slug] || null
+  }
+  if (!res.ok) return SNAPSHOTS[slug] || null
   let html = await res.text()
 
   // page h1 (real display title; the WP post title may be a placeholder)

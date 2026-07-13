@@ -50,6 +50,9 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   function initFades() {
     if (useRoute().path.startsWith('/admin')) return
+    // Phones skip the fade-ups entirely: content must never sit hidden waiting
+    // for a scroll trigger. Tablets/laptops/desktops (≥768px) keep them.
+    if (window.matchMedia('(max-width: 767px)').matches) return
     const els = Array.from(document.querySelectorAll<HTMLElement>(FADE_SELECTOR)).filter(
       (el) => !el.closest('.cs-scroll') && !el.closest('.sv-scroll') && !el.dataset.faded,
     )

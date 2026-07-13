@@ -264,14 +264,17 @@ useHead({
 
 @media (max-width: 900px) {
   .art-hero__wrap { display: block; }
+  /* image matches the heading card's width, with clear air before the ToC */
   .art-hero__img {
-    width: 100%;
-    margin-bottom: -60px;
+    width: calc(100% - 24px);
+    margin-inline: auto;
+    margin-bottom: 0;
   }
   .art-hero__card {
     position: relative;
     width: calc(100% - 24px);
     margin-inline: auto;
+    margin-bottom: 16px;
   }
   .art-grid { grid-template-columns: 1fr; }
   .art-aside { position: static; }

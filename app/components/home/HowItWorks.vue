@@ -186,8 +186,9 @@ const steps = [
   .hiw-section { padding: 48px 24px 40px; }
   .hiw-steps { flex-direction: column; gap: 30px; }
   .hiw-bottom { flex-direction: column; gap: 24px; text-align: center; }
-  /* stacked timeline: left-aligned text, vertical connectors with down arrows */
-  .hiw-step { align-items: flex-start; position: relative; }
+  /* stacked timeline: ONE continuous connector down the right side, a single
+     arrow at the bottom of the last step, and text kept clear of the line */
+  .hiw-step { align-items: flex-start; position: relative; padding-right: 36px; }
   .hiw-circle-row { justify-content: flex-start; }
   .hiw-step-desc { max-width: 100%; text-align: left; }
   .hiw-line {
@@ -195,13 +196,14 @@ const steps = [
     left: auto;
     right: 8px;
     top: 6px;
-    bottom: -22px;
+    bottom: -36px; /* bridges the 30px step gap so the segments read as one line */
     width: 2px;
     height: auto;
     margin: 0;
     flex: none;
   }
-  .hiw-line::after,
+  .hiw-line::after { content: none; }
+  .hiw-step:last-child .hiw-line { display: block; bottom: 0; }
   .hiw-step:last-child .hiw-line::after {
     content: '';
     position: absolute;
@@ -215,7 +217,6 @@ const steps = [
     border-top: 10px solid #c5d9c0;
     border-bottom: none;
   }
-  .hiw-step:last-child .hiw-line { display: none; }
   /* stacked layout is touch-first: no hover effect on the connector or arrow */
   .hiw-circle-row:hover .hiw-line::before { width: 0; }
   .hiw-circle-row:hover .hiw-circle { background: #c5d9c0; color: #1a3a2a; }

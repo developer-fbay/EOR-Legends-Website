@@ -240,5 +240,7 @@ function backToTop(e: Event) {
   .gl-grid { grid-template-columns: 1fr; }
   .gl-aside { position: static; }
   .gl-terms { columns: 1; }
+  /* stacked: the search/ToC card spans the full section width */
+  .tla-toc-wrapper { max-width: none; }
 }
 </style>

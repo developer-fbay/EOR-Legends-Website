@@ -68,6 +68,9 @@ watch(open, (v) => {
 }
 .cm-close:hover { background: var(--accent); color: #fff; }
 
+/* keep the form heading clear of the absolute-positioned close button */
+.cm-dialog :deep(.lead-form__title) { padding-inline: 36px; }
+
 .modal-enter-active,
 .modal-leave-active { transition: opacity 0.2s ease; }
 .modal-enter-from,
