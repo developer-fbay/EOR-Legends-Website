@@ -1,0 +1,73 @@
+# Legends EOR Website — Project Log
+
+Living context file. Claude updates this at the end of every request; team members
+should add their own entries under **Team changes** when they change anything
+outside this repo (WordPress, Zapier, Close, DNS, design assets).
+
+---
+
+## Project snapshot
+
+- **Stack:** Nuxt 3 (Vue 3), Nitro server, headless WordPress backend at legendseor.com (content APIs + Gravity Forms)
+- **Live:** https://legends-eor-2g8hb.ondigitalocean.app (DigitalOcean App Platform, web service, autodeploys from `main`)
+- **Repo:** github.com/developer-fbay/EOR-Legends-Website (push only when Codi says "push" — pushes deploy)
+- **Target viewports:** marketing manager uses 1280×587 (14" @150%) and 1536×~660-700 (1920 @125% with taskbar+browser chrome). Every full-screen section must fit these.
+- **Deploy rules:** Node pinned 24.x (never add `engines.npm`), lockfile must be regenerated with `npx -y npm@10 install --package-lock-only` after any dependency change, never add sharp/native-optional packages. Verify deploys by polling the live site for a marker string.
+- **Forms:** site forms proxy to Gravity Forms REST (header 29, footer 28, popup 31, guide 30, lead-input 24). GF creds in `.env` / DO env vars. Form 24 + 28/29/31 have Zapier "Website Inbound"/"New Lead Input" feeds → Codi's automations → Close CRM.
+- **Pillar/cluster content:** WP source pages were deleted (2026-07-13); extracted bodies are snapshotted in `server/data/pillars/*.json` and served as fallback. Any future WP-scraped content must be snapshotted the same way.
+
+## What needs to be done (open items)
+
+- [ ] **WP team:** fix problem-2-cluster-1 page title/H1 in WP (still "Problem 2 cluster 1" + copied pillar-1 H1; site pins the correct title server-side meanwhile)
+- [ ] **WP team:** decide whether to restore the deleted pillar/cluster WP pages (site works from snapshots either way)
+- [ ] **WP team (optional):** fill the case-study excerpt fields in WP (site uses hardcoded fallbacks from the 2026 design)
+- [ ] **WP team:** remaining em dashes inside WP-served article content need editing in WP
+- [ ] **Codi:** check the "Website Inbound" Zap field mapping after a test submission from the new forms (labels differ slightly from the old form); remap in Zapier if fields come through blank — or ask Claude to rename GF field labels to match
+- [ ] **Codi:** decide if the guide download form (GF 30) should also fire a Zapier feed
+- [ ] **Content:** 3 unlinked Educational Resources cards on the homepage need pillar pages/URLs (employee turnover, disadvantages of outsourcing, Employment Rights Act 2025)
+- [ ] **Content:** Pillar 2 has one cluster; more clusters when written
+- [ ] **Later:** domain flip to legendseor.com (WP moves to subdomain, set WP_BASE_URL, DNS via Cloudflare — see DEPLOYMENT.md)
+
+## Team changes (non-Claude)
+
+> Add entries here when anyone changes WordPress, Zapier, Close, design assets, or edits code outside a Claude session (e.g. Cursor).
+
+- **2026-07-13 — WP team:** enabled Gravity Wiz Advanced Phone Field + made company/message required on GF forms 28/29/31; added lead owner "Christopher Perumal" to GF 24. (Broke site form forwarding silently; fixed same day, see log.)
+- **~2026-07-12/13 — WP team:** deleted WP pages: /true-cost-of-an-employee-uk/, /permanent-establishment/, /cost-of-employing-someone-uk/, /problem-2-cluster-1/, /2026-home/ and other 2026 design pages. (Emptied the site's pillar/cluster pages as caches expired; rescued via repo snapshots.)
+- **2026-07-13 — Designer:** delivered vectorized favicon (Favicon-L-EOR.svg) and new IT-support cover image.
+- **2026-07-13 — Content team:** delivered service hero add-on copy (Services hero section add on.md) and form CTA copy (form-ctas.md).
+- **2026-07-11 — Codi (Cursor):** content edits committed alongside favicon work.
+
+## Done log (newest first)
+
+### 2026-07-13 (evening)
+- **Educational Resources card** (homepage): heading renamed, intro + question lines removed, statements get orange arrow-in-circle icons matching the FAQ style. *(live)*
+- **Case-study parallax** now uses the archive's green client logo blocks instead of team photos. *(live)*
+- **Zapier feeds created** on GF 29/28/31 ("Website Inbound - Header/Footer/Popup"), cloned from the old site's feed — same webhook, so Codi's automation now runs for new-site enquiries. *(live on WP side immediately)*
+- **Forms audit:** guide form (30) 1:1 with GF; lead-input form (24) matched except new lead owner (added).
+- **1:1 form validation** (header/footer/popup + guide): libphonenumber phone validation with visible inline errors, radio/company/message required matching GF, GF server-side rejections relayed under the exact field, no silent drops. Replaced the brief "Not provided" fallback approach. New dep: libphonenumber-js (lockfile regenerated npm@10). *(live)*
+- **Root-caused broken lead forwarding:** WP-side GF changes (see Team changes) made GF silently reject submissions while visitors saw success.
+- **Salary tool section:** background image only, no color fill (reverted the phone beige treatment). *(live)*
+- **Mobile step timelines:** node dot per step on the connector line (HIW, service pages, salary tool). *(live)*
+
+### 2026-07-13 (day) — marketing feedback batch
+- **PILLAR CONTENT RESCUE:** WP source pages deleted → last good extractions committed to `server/data/pillars/*.json`, `fetchPillarBody()` falls back to them. This was the "no content on iPhone" bug (WebKit reproduced via Playwright).
+- New vectorized **favicon** (SVG + ICO + apple-touch).
+- **Service hero lists** ("All in one invoice:" / benefit-led labels for EOR Migration + IT Equipment) on all 10 services.
+- Phones (≤767px) skip scroll fade-ins; tablets/desktop keep them.
+- Stacked timelines: one continuous connector + single end arrow, text padded clear.
+- Salary tool mobile buttons full-width aligned; blog/news mobile hero image matches card width with ToC gap; HR glossary card full width on mobile; contact popup close-button overlap fixed; more air between logo carousel and salary arch at 1536px; pillar/cluster + blog/news ToC centered at form/card width on tablet.
+- All deployed and verified live.
+
+### 2026-07-12 → 13 — content batch
+- Real WP FAQs for all 10 service pages (scraped before WP cleanup; no em dashes).
+- Form heroes stay side-by-side until 850px then stack centered.
+- Case-study stacked layout: image/content equal widths.
+- Dynamic form CTAs per marketing md (per-service headings, "Speak to our team" buttons, generic "Ready to build your South African team?").
+- Service footer forms match hero form headings.
+- Problem 2 cluster ("What is an Employer of Record?") added from WP + on pillar page.
+- New IT-support card image; about-page cards use learn covers; guides archive uses blog cover pool; white guide-download form card.
+- Real guide-page content + FAQs written from the actual PDF; salary tool FAQs; case-study archive excerpt fallbacks.
+
+### Earlier (context)
+- Full site build (home, services ×10, case studies, blog/news/glossary/pillars/tools/guides/about/contact), GSAP parallax sections, salary calculator port, Lenis smooth scroll, laptop-height compression tiers, security headers + rate limiting, prewarm cache, sitemap/SEO/robots, honeypot anti-bot (`xf_2`), DO deploy pipeline stabilized (npm10 lockfile, no engines.npm, no sharp), form pipeline verified into GF/Zapier/Close, deterministic blog cover randomization, em-dash sweep, favicon iterations, loader, mobile timelines, marketing viewport fits at 1280×587 / 1536×~700.
