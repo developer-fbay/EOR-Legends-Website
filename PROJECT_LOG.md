@@ -40,6 +40,9 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-14
+- **PROJECT_LOG.md + CLAUDE.md created**: living context file (done/pending/team changes) that Claude reads each session and updates after every request. *(pushed)*
+
 ### 2026-07-13 (evening)
 - **Educational Resources card** (homepage): heading renamed, intro + question lines removed, statements get orange arrow-in-circle icons matching the FAQ style. *(live)*
 - **Case-study parallax** now uses the archive's green client logo blocks instead of team photos. *(live)*
