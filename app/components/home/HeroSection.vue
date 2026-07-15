@@ -115,10 +115,13 @@ const contactModal = useState('contact-modal', () => false)
   .hero-form { width: 100%; max-width: 480px; margin-inline: auto; }
 }
 
-/* Phones: no inline form — a single CTA opens the popup form instead, and the
-   logo carousel follows right beneath the Google Reviews pill (CEO/Codi) */
+/* Phones: no inline form and no Google Reviews pill — a single CTA opens the
+   popup form, the logo carousel follows right after, and the hero carries
+   equal breathing room above and below */
 @media (max-width: 768px) {
+  .hero { padding-block: 1.5rem; }
   .hero-form { display: none; }
+  .hero-reviews { display: none; }
   .hero-mobile-cta {
     display: inline-block;
     margin-top: clamp(1.2rem, 3vh, 1.8rem);

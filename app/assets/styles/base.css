@@ -329,6 +329,20 @@ main .svc-card h2:hover {
   color: var(--body) !important;
 }
 
+/* Section headings (the animated set) render in Title Case sitewide */
+main h1,
+main h2 {
+  text-transform: capitalize;
+}
+/* Content/article headings keep their written casing */
+main .art-content h2,
+main .pi-body h2,
+main .legal-card h2,
+main .learn-card h2,
+main .svc-card h2 {
+  text-transform: none;
+}
+
 /* Honeypot field — off-screen but not display:none, so naive bots still fill it */
 .hp-field {
   position: absolute !important;

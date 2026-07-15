@@ -41,6 +41,8 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 ## Done log (newest first)
 
 ### 2026-07-15 (later) — homepage refinements
+- Section headings (h1/h2, the animated set) render Title Case sitewide via CSS `text-transform: capitalize`; article/content headings keep written casing.
+- Mobile hero: Google Reviews pill hidden too — headline/subtitle/stats/CTA with equal spacing top and bottom, logo carousel directly beneath.
 - "Got questions" section: FAQ card first and Educational Resources below, both full width; resources trimmed to the 2 published pillar pages.
 - Mobile hero: inline form hidden on phones; centered "Speak to our team" button opens the popup contact form; logo carousel sits right under the Google Reviews pill (fold no longer stretched on phones).
 - Hiring-speed FAQ answer aligned with the comparison table (CVs in 7 days, first hire in 2–4 weeks).
