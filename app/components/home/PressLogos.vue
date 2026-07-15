@@ -24,7 +24,9 @@ const logos = [
       <div class="press-track">
         <!-- duplicated set for the seamless loop -->
         <div v-for="set in 2" :key="set" class="press-set" :aria-hidden="set === 2">
-          <img v-for="logo in logos" :key="logo.alt + set" :src="logo.src" :alt="set === 1 ? logo.alt : ''" loading="lazy" />
+          <!-- eager: iOS Safari's lazy-loader misjudges the moving marquee track
+               and leaves logos blank mid-scroll -->
+          <img v-for="logo in logos" :key="logo.alt + set" :src="logo.src" :alt="set === 1 ? logo.alt : ''" loading="eager" />
         </div>
       </div>
     </div>

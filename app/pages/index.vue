@@ -49,5 +49,11 @@ usePageSeo({
 }
 /* Phones keep the full-screen fold too: the compact hero (no form/reviews)
    centers in the first screen, logos hug the bottom, and the salary section
-   stays hidden below the fold until the user scrolls */
+   stays hidden below the fold until the user scrolls.
+   lvh (large viewport) instead of svh: on iPhone 15-17 the zone behind
+   Safari's collapsing bottom bar sits between svh and lvh — with svh the
+   green section peeked through there (Codi's iPhone 17 screenshots). */
+@media (max-width: 768px) {
+  .hero-fold { min-height: calc(100svh - 78px); min-height: calc(100lvh - 78px); }
+}
 </style>
