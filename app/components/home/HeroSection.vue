@@ -129,7 +129,7 @@ const contactModal = useState('contact-modal', () => false)
     display: inline-block;
     /* height-responsive: keeps the button optically centered between the
        USP stats and the logo carousel across iPhone sizes */
-    margin-top: clamp(48px, 12vh, 112px);
+    margin-top: calc(clamp(48px, 12vh, 112px) - 5px);
   }
 }
 
