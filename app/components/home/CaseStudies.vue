@@ -17,7 +17,7 @@ const slides = [
   {
     stat: '63%',
     title: 'Back-office cost reduction',
-    text: 'FundingBay, a London-based finance brokerage, wanted a specialist marketing and business development team without opening an entity in South Africa. Legends EOR handled recruitment, employment, and ongoing local support, bringing back-office costs down by 63% and freeing up capacity to focus on growth.',
+    text: 'Funding Bay, a London-based finance brokerage, wanted a specialist marketing and business development team without opening an entity in South Africa. Legends EOR handled recruitment, employment, and ongoing local support, bringing back-office costs down by 63% and freeing up capacity to focus on growth.',
     image: '/assets/case-studies/block-funding-bay.webp',
     logo: '/assets/case-studies/FB-logo.png',
     alt: 'Funding Bay case study',
