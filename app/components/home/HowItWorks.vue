@@ -3,23 +3,23 @@
 const steps = [
   {
     label: 'DAY 1',
-    title: 'Tell us the role',
-    desc: "Share the job and budget. We benchmark the salary and confirm what's realistic in South Africa.",
+    title: 'Plan the hire',
+    desc: 'Tell us the role, budget and requirements. We benchmark the South African salary and agree the employment, benefits, equipment and workplace setup.',
   },
   {
     label: 'WEEK 1',
-    title: 'Meet your shortlist',
-    desc: 'We source, vet and skills-test candidates. Only the strongest reach your inbox.',
+    title: 'Conduct the final interview',
+    desc: 'We handle the sourcing, screening and initial assessment. You meet the strongest candidates at the final interview and choose who joins your team.',
   },
   {
     label: 'WEEK 2',
-    title: 'Choose & offer',
-    desc: 'You interview and pick. We make the offer and handle every line of the contract.',
+    title: 'We employ and onboard them',
+    desc: 'We formalise the offer, issue a compliant South African employment contract and set up payroll, HR, equipment and benefits.',
   },
   {
-    label: 'WEEK 3+',
-    title: 'They start, we run it',
-    desc: "Payroll, tax, benefits, equipment and compliance, managed locally for as long as they're with you.",
+    label: 'ONGOING',
+    title: 'You lead them. We handle the rest.',
+    desc: 'They work directly within your team. We remain the legal employer and manage payroll, tax, HR, compliance and local employee support.',
   },
 ]
 </script>

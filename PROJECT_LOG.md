@@ -42,7 +42,8 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ### 2026-07-15 (later) — homepage refinements
 - Mobile hero fills the first screen again (full-screen fold restored on phones): content vertically centered, logos at the fold bottom, salary section hidden until scroll (Codi's iPhone test).
-- iPhone 15-17 fix: fold sized with lvh so the green section can't peek through Safari's bottom-bar zone; logo marquee images load eagerly (iOS lazy-loading left the moving strip blank mid-scroll).
+- iPhone 15-17 fix: fold sized with lvh so the green section can't peek through Safari's bottom-bar zone; logo marquee images load eagerly (iOS lazy-loading left the moving strip blank mid-scroll). *(live)*
+- How It Works: new 4-step copy (Plan the hire / Conduct the final interview / We employ and onboard them / You lead them. We handle the rest.), step 4 label now ONGOING. *(live)*
 - Section headings (h1/h2, the animated set) render Title Case sitewide via CSS `text-transform: capitalize`; article/content headings keep written casing.
 - Mobile hero: Google Reviews pill hidden too — headline/subtitle/stats/CTA with equal spacing top and bottom, logo carousel directly beneath.
 - "Got questions" section: FAQ card first and Educational Resources below, both full width; resources trimmed to the 2 published pillar pages.
