@@ -77,7 +77,7 @@ const logos = [
    balanced around Safari's floating URL bar (38px cleared the bar overlap
    on Codi's iPhone 17; was 28px) */
 @media (max-width: 768px) {
-  .press { padding-bottom: 38px; }
+  .press { padding-bottom: 58px; }
 }
 
 /* Short laptop viewports (1280×587): keep the strip visible under the hero */
