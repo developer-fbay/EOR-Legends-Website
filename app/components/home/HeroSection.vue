@@ -122,9 +122,14 @@ const contactModal = useState('contact-modal', () => false)
   .hero { padding-block: 1.5rem; }
   .hero-form { display: none; }
   .hero-reviews { display: none; }
+  /* breathing room so the stacked hero doesn't read squashed (Codi) */
+  .hero-copy h1 { margin-bottom: 40px; }
+  .hero-sub { margin-bottom: 30px; }
   .hero-mobile-cta {
     display: inline-block;
-    margin-top: clamp(1.2rem, 3vh, 1.8rem);
+    /* height-responsive: keeps the button optically centered between the
+       USP stats and the logo carousel across iPhone sizes */
+    margin-top: clamp(48px, 12vh, 112px);
   }
 }
 

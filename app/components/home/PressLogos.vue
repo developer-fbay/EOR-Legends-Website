@@ -73,6 +73,12 @@ const logos = [
   .press-track { animation: none; flex-wrap: wrap; }
 }
 
+/* Phones: less padding below the strip so the logos sit lower in the fold,
+   balanced around Safari's floating URL bar */
+@media (max-width: 768px) {
+  .press { padding-bottom: 1.75rem; }
+}
+
 /* Short laptop viewports (1280×587): keep the strip visible under the hero */
 @media (max-height: 650px) {
   .press { padding-bottom: 2rem; }
