@@ -115,7 +115,7 @@ useHead({
 
         <!-- RIGHT card: FAQ -->
         <div class="wie-card">
-          <h3 class="wie-card__title">Frequently asked questions</h3>
+          <h3 class="wie-card__title">Frequently Asked Questions</h3>
           <div class="wie-faq">
             <div v-for="(f, i) in faqs" :key="i" class="wie-faq__item">
               <button class="wie-faq__q" :aria-expanded="open === i" @click="toggle(i)">

@@ -82,7 +82,7 @@ const faqs = [
 
     <section class="art-faq band-cream section">
       <div class="container">
-        <h2 class="art-faq__title">Frequently asked questions</h2>
+        <h2 class="art-faq__title">Frequently Asked Questions</h2>
         <UiFaqAccordion :faqs="faqs" />
       </div>
     </section>

@@ -40,6 +40,14 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-15 — CEO snag list (EOR Alex)
+- Hero subtitle: "IT, HR, Payroll, Benefits, Office, Equipment - One Stop Shop."
+- iPhone hero gap removed: the marketing-manager margin above the salary section is now desktop-only (≥993px); mobile section padding trimmed.
+- Salary tool reversed per CEO: South Africa is always the benchmark; the form asks "What country is your main business in?" which drives the comparison country and auto-sets the currency (GB→GBP, US→USD, EU→EUR...). Same-country picks dedupe silently instead of erroring.
+- iPhone: after Search the results/compare card scrolls into view (waits for the form-collapse transition), so the transition reads as functional.
+- "Frequently Asked Questions" Title Case across all 7 FAQ headings.
+- **Parked**: monthly CTA rotation + A/B tracking feature — full plan approved-in-principle, saved in the Claude plan file; revisit when Codi says go.
+
 ### 2026-07-14
 - **PROJECT_LOG.md + CLAUDE.md created**: living context file (done/pending/team changes) that Claude reads each session and updates after every request. *(pushed)*
 

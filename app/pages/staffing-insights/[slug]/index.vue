@@ -73,7 +73,7 @@ useHead({
 
     <section v-if="body?.faqs?.length" class="band-cream section" style="padding-top: 0">
       <div class="container">
-        <h2 class="pi-cl-title">Frequently asked questions</h2>
+        <h2 class="pi-cl-title">Frequently Asked Questions</h2>
         <UiFaqAccordion :faqs="body.faqs" />
       </div>
     </section>

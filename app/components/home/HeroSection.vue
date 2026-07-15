@@ -16,7 +16,7 @@ const stats = [
         <h1>
           We Build<br /><em>Great Teams</em><br />In South Africa
         </h1>
-        <p class="hero-sub">IT, HR, Payroll, Benefits, Offices, Equipment - All in one.</p>
+        <p class="hero-sub">IT, HR, Payroll, Benefits, Office, Equipment - One Stop Shop.</p>
 
         <div class="hero-stats">
           <div v-for="(s, i) in stats" :key="s.label" class="hero-stat" :class="{ 'hero-stat--divided': i > 0 }">

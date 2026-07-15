@@ -25,7 +25,10 @@ const CURRENCY_SYMBOLS: Record<string, string> = {
 const USD_PEGS: Record<string, number> = { AED: 3.6725, SAR: 3.75 }
 
 const data = ref<SalaryData | null>(null)
+// South Africa is always the benchmark (CEO: "SA salaries first") — the user
+// only tells us where THEIR business is based, which drives the comparison.
 const country = ref('ZA')
+const homeCountry = ref('GB')
 const jobTitle = ref('')
 const currency = ref('GBP')
 const period = ref<'monthly' | 'annual'>('annual') // defaults to annual; user can switch to monthly
@@ -33,9 +36,18 @@ const compare1 = ref('ZA')
 const compare2 = ref('GB') // second compare country defaults to United Kingdom
 const searched = ref(false)
 
-// Country 1 always mirrors the main location field (updated plugin behaviour)
-watch(country, (c) => {
-  compare1.value = c
+// The user's home market drives the comparison country and the default
+// currency (they can still change the currency afterwards).
+const COUNTRY_CURRENCY: Record<string, string> = {
+  GB: 'GBP', UK: 'GBP', US: 'USD', ZA: 'ZAR', AU: 'AUD', CA: 'CAD', CH: 'CHF',
+  CN: 'CNY', IL: 'ILS', SA: 'SAR', SG: 'SGD', AE: 'AED',
+  AT: 'EUR', BE: 'EUR', CY: 'EUR', DE: 'EUR', EE: 'EUR', ES: 'EUR', FI: 'EUR',
+  FR: 'EUR', GR: 'EUR', HR: 'EUR', IE: 'EUR', IT: 'EUR', LT: 'EUR', LU: 'EUR',
+  LV: 'EUR', MT: 'EUR', NL: 'EUR', PT: 'EUR', SI: 'EUR', SK: 'EUR',
+}
+watch(homeCountry, (c) => {
+  compare2.value = c
+  currency.value = COUNTRY_CURRENCY[c] || 'USD'
 })
 
 // Nicely formatted country names via Intl.DisplayNames (UK → GB handled)
@@ -101,7 +113,7 @@ async function getRate(from: string, to: string): Promise<number | null> {
 }
 
 const canSearch = computed(() =>
-  !!(data.value && country.value && jobTitle.value && currency.value),
+  !!(data.value && homeCountry.value && jobTitle.value && currency.value),
 )
 
 async function runSearch() {
@@ -109,13 +121,10 @@ async function runSearch() {
   errorMsg.value = ''
   fxNote.value = false
 
-  const countries = [compare1.value, compare2.value].filter(Boolean)
+  // Dedupe silently: a South African business comparing SA with SA just sees
+  // the single SA benchmark instead of an error.
+  const countries = [...new Set([compare1.value, compare2.value].filter(Boolean))]
   if (countries.length === 0) countries.push(country.value)
-  if (countries.length === 2 && countries[0] === countries[1]) {
-    errorMsg.value = 'Please select two different countries to compare.'
-    renderChart([])
-    return
-  }
   if (!jobTitle.value) {
     errorMsg.value = 'Please select a job title, then click Search.'
     renderChart([])
@@ -158,8 +167,18 @@ async function runSearch() {
 
   legendItems.value = legend
   renderChart(datasets)
+  const firstSearch = !searched.value
   searched.value = true
   loading.value = false
+
+  // Phones: the form card collapses on search, leaving the results below the
+  // fold — bring them into view so the transition reads as functional (CEO).
+  // Wait for the 0.4s collapse transition first, or the scroll overshoots.
+  if (firstSearch && typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches) {
+    setTimeout(() => {
+      document.querySelector('.sbt-card-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 450)
+  }
 }
 
 function renderChart(datasets: any[]) {
@@ -203,6 +222,7 @@ function renderChart(datasets: any[]) {
 
 function reset() {
   country.value = 'ZA'
+  homeCountry.value = 'GB'
   jobTitle.value = ''
   currency.value = 'GBP'
   period.value = 'annual'
@@ -234,8 +254,8 @@ onBeforeUnmount(() => {
       <header class="sbt-head">
         <h2>Salary Benchmarking</h2>
         <p>
-          Compare employer costs side by side. Select a role and country to see the real
-          difference in total employment cost.
+          See what your next hire earns in South Africa. Select a role and tell us where
+          your business is based to see the real difference in employment cost.
         </p>
       </header>
 
@@ -246,11 +266,11 @@ onBeforeUnmount(() => {
             <div class="sbt-card sbt-card-form">
               <form class="sbt-form" @submit.prevent="runSearch">
                 <h3 class="sbt-card-title">Salary Benchmarking Tool</h3>
-                <p class="sbt-card-subtitle">Select role and country to explore salary insights.</p>
+                <p class="sbt-card-subtitle">See South African salary ranges for your role and compare them with your home market.</p>
 
                 <div class="sbt-field">
-                  <label for="sbt-country">Which location are you considering?</label>
-                  <select id="sbt-country" v-model="country" class="sbt-select">
+                  <label for="sbt-home-country">What country is your main business in?</label>
+                  <select id="sbt-home-country" v-model="homeCountry" class="sbt-select">
                     <option value="">Select country</option>
                     <option v-for="c in countryOptions" :key="c.code" :value="c.code">{{ c.name }}</option>
                   </select>
@@ -367,8 +387,6 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .sbt {
-  /* clear cream air between the logo carousel and the arch (marketing) */
-  margin-top: clamp(28px, 5vh, 56px);
   padding-block: var(--section-pad);
   background-image: url('/assets/backgrounds/BG_CALCULATOR.webp');
   /* Anchored to the top so the cream arch is always visible (cover crops bottom, never the arch) */
@@ -783,7 +801,15 @@ onBeforeUnmount(() => {
 .sbt-filter-item { display: none; }
 
 /* ===== Mobile (≤768px): stack; once results show, collapse the form card ===== */
+/* Desktop/laptop only: cream air between the logo carousel and the arch
+   (marketing's 1536px view). Phones get no dead gap under the hero (CEO). */
+@media (min-width: 993px) {
+  .sbt { margin-top: clamp(28px, 5vh, 56px); }
+}
+
 @media (max-width: 768px) {
+  .sbt { padding-top: 24px; }
+  .sbt-card-results { scroll-margin-top: 90px; }
   .sbt-columns { flex-direction: column; }
   /* stacked buttons align: both full width, centered labels */
   .sbt-results-actions { flex-direction: column; align-items: stretch; }

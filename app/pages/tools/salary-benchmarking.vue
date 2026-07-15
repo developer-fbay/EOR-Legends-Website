@@ -147,7 +147,7 @@ const faqs = [
     <!-- FAQ -->
     <section class="tool-faq band-cream section">
       <div class="container">
-        <h2 class="tool-faq__title">Frequently asked questions</h2>
+        <h2 class="tool-faq__title">Frequently Asked Questions</h2>
         <UiFaqAccordion :faqs="faqs" />
       </div>
     </section>
