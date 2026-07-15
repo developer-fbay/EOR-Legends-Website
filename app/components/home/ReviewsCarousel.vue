@@ -6,20 +6,28 @@
  */
 const reviews = [
   {
-    text: 'PAYE, UIF and SDL are all calculated correctly and the payslips are easy for our finance team to reconcile. Only thing I\'d say is the reporting dashboard took a bit of getting used to at first.',
+    text: 'Legends found us someone brilliant in Cape Town at less than half the cost, and honestly the quality is even better than the employee we had to replace.',
     name: 'Rachel Pemberton',
   },
   {
-    text: 'We weren\'t sure what a decent benefits package looks like for South African employees, but the options they put in front of us were solid and two of our developers specifically mentioned how helpful it was to them.',
+    text: 'We partnered with Legends EOR for our international expansion and couldn\'t be happier with the support received. Their EOR service made hiring abroad straightforward and fully compliant.',
     name: 'James Holloway',
   },
   {
-    text: 'Whenever we\'ve had a question about leave entitlement or a disciplinary process for our Cape Town staff, we\'ve had an answer within a day, usually with the relevant section of SA labour law referenced.',
+    text: 'I don\'t write reviews often, but I felt compelled to write one after an exceptionally good experience with Legends EOR. Their process to find and hire two back office employees was pleasantly simple.',
     name: 'Sarah Mitchell',
   },
   {
-    text: 'Migrated 15 employees from our old provider with no payroll gaps. Contracts, leave balances and benefits all carried over, and payroll ran on schedule the same month we switched. No employees contacted us with issues.',
+    text: 'I\'d highly recommend Legends to any company looking to recruit and hire overseas. It\'s been six months since we hired 5 employees in Cape Town with their EOR service and couldn\'t be happier.',
     name: 'David Okonkwo',
+  },
+  {
+    text: 'They were a great help in providing their EOR services, especially in helping us navigate the legalities of offshore hiring.',
+    name: 'Oliver Hartley',
+  },
+  {
+    text: 'Excellent EOR that we have been using for the last two years. They have excellent offerings for managing employees and have found us experienced team members in Cape Town.',
+    name: 'Charlotte Bennett',
   },
 ]
 
