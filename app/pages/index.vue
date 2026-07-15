@@ -47,10 +47,7 @@ usePageSeo({
   flex-direction: column;
   justify-content: center;
 }
-/* Phones: the hero is content-sized (no inline form), so don't stretch the
-   fold — the logo carousel sits right beneath the Google Reviews pill */
-@media (max-width: 768px) {
-  .hero-fold { min-height: 0; }
-  .hero-fold > :deep(.hero) { flex: none; }
-}
+/* Phones keep the full-screen fold too: the compact hero (no form/reviews)
+   centers in the first screen, logos hug the bottom, and the salary section
+   stays hidden below the fold until the user scrolls */
 </style>
