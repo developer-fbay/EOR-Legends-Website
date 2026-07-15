@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Left card: staffing-insights resource links (unlinked ones get URLs when
-// their pillar pages publish).
+// Educational resources: only published pillar pages are listed (add more
+// here as they go live).
 const resourceLinks = [
   {
     linkText: 'The true cost of an employee in the UK 2026',
@@ -9,18 +9,6 @@ const resourceLinks = [
   {
     linkText: 'Permanent establishment: a guide for UK businesses hiring abroad',
     to: '/staffing-insights/permanent-establishment-guide',
-  },
-  {
-    linkText: 'When good people leave: the true cost of employee turnover',
-    to: null,
-  },
-  {
-    linkText: 'The real disadvantages of outsourcing',
-    to: null,
-  },
-  {
-    linkText: 'The Employment Rights Act 2025: what UK employers need to know',
-    to: null,
   },
 ]
 
@@ -43,7 +31,7 @@ const faqs = [
   },
   {
     q: 'How long does it take to hire someone in South Africa through an EOR?',
-    a: 'Onboarding an identified candidate takes 1–2 weeks. Including recruitment, expect roughly 6–7 weeks from brief to a working hire.',
+    a: 'You will see the first CVs within 7 days, and most clients go from brief to a working first hire in 2–4 weeks. With no entity setup or local admin on your side, nothing slows the process down.',
   },
   {
     q: 'Who owns the intellectual property my SA team member creates?',
@@ -91,29 +79,7 @@ useHead({
       </header>
 
       <div class="wie-grid">
-        <!-- LEFT card: questions + resource links -->
-        <div class="wie-card">
-          <h3 class="wie-card__title">Educational Resources</h3>
-
-          <ul class="wie-resources">
-            <li v-for="(item, i) in resourceLinks" :key="i">
-              <NuxtLink v-if="item.to" :to="item.to" class="wie-resource wie-resource--linked">
-                <p class="wie-resource__text">{{ item.linkText }}</p>
-                <span class="wie-resource__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
-                </span>
-              </NuxtLink>
-              <div v-else class="wie-resource">
-                <p class="wie-resource__text">{{ item.linkText }}</p>
-                <span class="wie-resource__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
-                </span>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- RIGHT card: FAQ -->
+        <!-- FAQ card first, full width -->
         <div class="wie-card">
           <h3 class="wie-card__title">Frequently Asked Questions</h3>
           <div class="wie-faq">
@@ -127,6 +93,22 @@ useHead({
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Educational resources below, full width -->
+        <div class="wie-card">
+          <h3 class="wie-card__title">Educational Resources</h3>
+
+          <ul class="wie-resources">
+            <li v-for="(item, i) in resourceLinks" :key="i">
+              <NuxtLink :to="item.to" class="wie-resource wie-resource--linked">
+                <p class="wie-resource__text">{{ item.linkText }}</p>
+                <span class="wie-resource__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
+                </span>
+              </NuxtLink>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -148,10 +130,10 @@ useHead({
 }
 
 .wie-grid {
+  /* stacked full-width cards: FAQs first, resources below */
   display: grid;
-  grid-template-columns: 1fr 1.05fr;
+  grid-template-columns: 1fr;
   gap: clamp(20px, 2.6vw, 36px);
-  align-items: stretch;
   max-width: 1180px;
   margin-inline: auto;
 }
@@ -236,9 +218,6 @@ useHead({
 }
 .wie-resource--linked:hover .wie-resource__text {
   color: var(--accent);
-}
-.wie-resource:not(.wie-resource--linked) .wie-resource__text {
-  color: var(--body);
 }
 
 /* FAQ list */

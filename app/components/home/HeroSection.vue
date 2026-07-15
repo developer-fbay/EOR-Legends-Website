@@ -7,6 +7,9 @@ const stats = [
   { value: '81%', label: 'Lower Employer Taxes' },
   { value: '1%', label: 'Elite SA Talent' },
 ]
+
+// Phones hide the inline form; this button opens the popup contact form instead
+const contactModal = useState('contact-modal', () => false)
 </script>
 
 <template>
@@ -26,6 +29,10 @@ const stats = [
         </div>
 
         <UiGoogleReviews class="hero-reviews" />
+
+        <button type="button" class="brand-btn brand-btn--orange hero-mobile-cta" @click="contactModal = true">
+          Speak to our team
+        </button>
       </div>
 
       <div class="hero-form">
@@ -97,12 +104,25 @@ const stats = [
   margin-top: clamp(1.4rem, 4vh, 2.6rem);
 }
 
+/* The popup-trigger button exists only on phones */
+.hero-mobile-cta { display: none; }
+
 @media (max-width: 850px) {
   .hero-grid { grid-template-columns: 1fr; justify-items: center; }
   .hero-copy { text-align: center; }
   .hero-stats { justify-content: center; }
   .hero-reviews { margin-inline: auto; }
   .hero-form { width: 100%; max-width: 480px; margin-inline: auto; }
+}
+
+/* Phones: no inline form — a single CTA opens the popup form instead, and the
+   logo carousel follows right beneath the Google Reviews pill (CEO/Codi) */
+@media (max-width: 768px) {
+  .hero-form { display: none; }
+  .hero-mobile-cta {
+    display: inline-block;
+    margin-top: clamp(1.2rem, 3vh, 1.8rem);
+  }
 }
 
 /* Short laptop viewports (1280×587): hero must NOT fill the screen — the
