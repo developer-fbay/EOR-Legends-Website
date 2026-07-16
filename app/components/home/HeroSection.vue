@@ -10,6 +10,7 @@ const stats = [
 
 // Phones hide the inline form; this button opens the popup contact form instead
 const contactModal = useState('contact-modal', () => false)
+const { ctaText } = useCtaVariant()
 </script>
 
 <template>
@@ -31,7 +32,7 @@ const contactModal = useState('contact-modal', () => false)
         <UiGoogleReviews class="hero-reviews" />
 
         <button type="button" class="brand-btn brand-btn--orange hero-mobile-cta" @click="contactModal = true">
-          Speak to our team
+          {{ ctaText('Speak to our team') }}
         </button>
       </div>
 

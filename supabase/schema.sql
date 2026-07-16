@@ -165,3 +165,92 @@ create policy "authenticated upload media" on storage.objects
 drop policy if exists "authenticated manage media" on storage.objects;
 create policy "authenticated manage media" on storage.objects
   for update to authenticated using (bucket_id = 'media');
+-- ============================================================
+-- CTA A/B experiments (monthly rotation, 33/33/33 -> 80/10/10)
+-- ============================================================
+
+create table if not exists cta_experiments (
+  id uuid primary key default gen_random_uuid(),
+  month text not null,
+  phase text not null default 'exploring'
+    check (phase in ('exploring','exploiting','carryover','archived')),
+  needs_attention text,
+  started_at timestamptz not null default now(),
+  promoted_at timestamptz,
+  archived_at timestamptz,
+  created_at timestamptz not null default now()
+);
+
+-- only one non-archived experiment at a time
+create unique index if not exists cta_experiments_one_active
+  on cta_experiments ((true)) where phase <> 'archived';
+
+create table if not exists cta_variants (
+  id uuid primary key default gen_random_uuid(),
+  experiment_id uuid not null references cta_experiments(id) on delete cascade,
+  text text not null,
+  weight numeric not null default 33.3333,
+  sort_order int not null default 0,
+  is_winner boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists cta_events (
+  id bigint generated always as identity primary key,
+  experiment_id uuid not null references cta_experiments(id) on delete cascade,
+  variant_id uuid not null references cta_variants(id) on delete cascade,
+  session_id uuid not null,
+  type text not null check (type in ('impression','conversion')),
+  gf_form_id int,
+  gf_entry_id bigint,
+  source text,
+  created_at timestamptz not null default now()
+);
+
+-- one impression per session per experiment; conversions unlimited
+create unique index if not exists cta_events_impression_dedup
+  on cta_events (experiment_id, session_id) where type = 'impression';
+-- idempotency for conversions: a GF entry can only be counted once
+create unique index if not exists cta_events_conversion_entry
+  on cta_events (gf_entry_id) where gf_entry_id is not null;
+
+create table if not exists cta_settings (
+  key text primary key,
+  value jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+insert into cta_settings (key, value) values
+  ('promotion_mode', '{"mode":"manual"}'),
+  ('min_sample', '{"impressions_per_variant":100}')
+on conflict (key) do nothing;
+
+create or replace view cta_variant_stats with (security_invoker = true) as
+select v.id as variant_id, v.experiment_id, v.text, v.weight, v.is_winner, v.sort_order,
+       count(e.id) filter (where e.type = 'impression')  as impressions,
+       count(e.id) filter (where e.type = 'conversion') as conversions
+from cta_variants v
+left join cta_events e on e.variant_id = v.id
+group by v.id;
+
+-- RLS: no anon access at all (public traffic goes through Nitro with the
+-- service key, which bypasses RLS). Authenticated (the /admin CMS) may read
+-- everything and manage experiments/variants/settings.
+alter table cta_experiments enable row level security;
+alter table cta_variants enable row level security;
+alter table cta_events enable row level security;
+alter table cta_settings enable row level security;
+
+drop policy if exists "authenticated full cta_experiments" on cta_experiments;
+create policy "authenticated full cta_experiments" on cta_experiments
+  for all to authenticated using (true) with check (true);
+drop policy if exists "authenticated full cta_variants" on cta_variants;
+create policy "authenticated full cta_variants" on cta_variants
+  for all to authenticated using (true) with check (true);
+drop policy if exists "authenticated read cta_events" on cta_events;
+create policy "authenticated read cta_events" on cta_events
+  for select to authenticated using (true);
+drop policy if exists "authenticated full cta_settings" on cta_settings;
+create policy "authenticated full cta_settings" on cta_settings
+  for all to authenticated using (true) with check (true);
+-- (CTA block above was applied to production on 2026-07-16 via the Supabase API)

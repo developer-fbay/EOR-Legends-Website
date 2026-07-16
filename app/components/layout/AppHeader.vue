@@ -29,6 +29,7 @@ watch(() => route.fullPath, () => { mobileOpen.value = false })
 
 // "Contact us" opens the popup form (Gravity Form 31) rather than navigating.
 const contactModal = useState('contact-modal', () => false)
+const { ctaText } = useCtaVariant()
 function openContact() {
   mobileOpen.value = false
   contactModal.value = true
@@ -74,7 +75,7 @@ function openContact() {
         </div>
       </nav>
 
-      <button type="button" class="brand-btn brand-btn--orange header-cta" @click="openContact">Contact Us</button>
+      <button type="button" class="brand-btn brand-btn--orange header-cta" @click="openContact">{{ ctaText('Contact Us') }}</button>
       </div>
 
       <!-- Mobile hamburger -->
@@ -95,7 +96,7 @@ function openContact() {
           <NuxtLink v-for="link in resourcesLinks" :key="link.to" :to="link.to">{{ link.label }}</NuxtLink>
         </details>
         <NuxtLink to="/case-studies">Case Studies</NuxtLink>
-        <button type="button" class="brand-btn brand-btn--orange" @click="openContact">Contact us</button>
+        <button type="button" class="brand-btn brand-btn--orange" @click="openContact">{{ ctaText('Contact us') }}</button>
       </nav>
     </Transition>
   </header>

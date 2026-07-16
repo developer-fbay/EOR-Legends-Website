@@ -22,6 +22,7 @@ async function signOut() {
         <NuxtLink to="/admin">Dashboard</NuxtLink>
         <NuxtLink v-for="(t, key) in CMS_TYPES" :key="key" :to="`/admin/${key}`">{{ t.label }}</NuxtLink>
         <NuxtLink to="/admin/leads">Leads</NuxtLink>
+        <NuxtLink to="/admin/cta">CTA Experiments</NuxtLink>
       </nav>
 
       <div class="admin-user">

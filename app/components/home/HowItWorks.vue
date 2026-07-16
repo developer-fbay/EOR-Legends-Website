@@ -1,5 +1,7 @@
 <script setup lang="ts">
 // "How It Works" 4-step timeline — user's code block converted to a Vue component.
+const { ctaText } = useCtaVariant()
+
 const steps = [
   {
     label: 'DAY 1',
@@ -47,7 +49,7 @@ const steps = [
           </div>
           <div class="hiw-bottom">
             <p>From the brief to a working hire in under a month. No subsidiary, no setup, no local admin.</p>
-            <NuxtLink to="/contact" class="brand-btn brand-btn--outline">Lets get started</NuxtLink>
+            <NuxtLink to="/contact" class="brand-btn brand-btn--outline">{{ ctaText('Lets get started') }}</NuxtLink>
           </div>
         </div>
       </div>

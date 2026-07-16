@@ -33,6 +33,10 @@ const form = reactive({
 
 const status = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
+// CTA A/B: the submit label rotates with the experiment; the assignment
+// travels with the submission for conversion attribution.
+const cta = useCtaVariant()
+
 // Conditional reveals
 const showAudience = computed(() => form.phone.trim().length > 0)
 const showDetails = computed(() => showAudience.value && form.audience !== '')
@@ -89,6 +93,9 @@ async function submit() {
         gfFormId: props.gfFormId,
         source: props.source || `gf-${props.gfFormId}`,
         website: form.website,
+        ctaExperimentId: cta.experimentId.value,
+        ctaVariantId: cta.variantId.value,
+        ctaSessionId: cta.sessionId(),
       },
     })
     // Gravity Forms rejected a field: show its messages under the fields
@@ -180,7 +187,7 @@ async function submit() {
       </Transition>
 
       <button type="submit" class="lead-form__submit" :disabled="status === 'sending'">
-        {{ status === 'sending' ? 'Sending…' : buttonText }}
+        {{ status === 'sending' ? 'Sending…' : cta.ctaText(buttonText) }}
       </button>
       <p v-if="status === 'error'" class="lead-form__error">
         Something went wrong. Please try again or email

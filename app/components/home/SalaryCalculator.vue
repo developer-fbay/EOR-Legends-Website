@@ -24,6 +24,8 @@ const CURRENCY_SYMBOLS: Record<string, string> = {
 }
 const USD_PEGS: Record<string, number> = { AED: 3.6725, SAR: 3.75 }
 
+const { ctaText } = useCtaVariant()
+
 const data = ref<SalaryData | null>(null)
 // South Africa is always the benchmark (CEO: "SA salaries first") — the user
 // only tells us where THEIR business is based, which drives the comparison.
@@ -376,7 +378,7 @@ onBeforeUnmount(() => {
 
             <div class="sbt-results-actions">
               <button type="button" class="sbt-btn sbt-btn-secondary" :disabled="!searched" @click="reset">Reset Calculator</button>
-              <NuxtLink to="/contact" class="sbt-btn sbt-btn-expert">Speak to an Expert</NuxtLink>
+              <NuxtLink to="/contact" class="sbt-btn sbt-btn-expert">{{ ctaText('Speak to an Expert') }}</NuxtLink>
             </div>
           </div>
         </div>

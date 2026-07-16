@@ -93,6 +93,32 @@ export default defineEventHandler(async (event) => {
         },
       })
       console.log(`[lead] Gravity Forms ${gfFormId}: forwarded OK, entry ${res?.entry_id ?? '?'} (valid: ${res?.is_valid})`)
+
+      // CTA A/B conversion — every GF-validated submission counts (Codi's
+      // decision), idempotent on the GF entry id. Best-effort: tracking can
+      // never break a lead.
+      if (res?.entry_id && res.is_valid !== false) {
+        try {
+          const { ctaExperimentId, ctaVariantId, ctaSessionId } = body || {}
+          if ([ctaExperimentId, ctaVariantId, ctaSessionId].every((v: unknown) => typeof v === 'string' && CTA_UUID_RE.test(v as string))) {
+            await ctaRest('cta_events', {
+              method: 'POST',
+              body: {
+                experiment_id: ctaExperimentId,
+                variant_id: ctaVariantId,
+                session_id: ctaSessionId,
+                type: 'conversion',
+                gf_form_id: gfFormId,
+                gf_entry_id: Number(res.entry_id),
+                source: lead.source,
+              },
+              headers: { Prefer: 'return=minimal' },
+            })
+          }
+        } catch (err: any) {
+          console.error('[lead] CTA conversion insert failed:', err?.message)
+        }
+      }
       if (res && res.is_valid === false) {
         // 1:1 with GF: relay its field messages to the browser so the visitor
         // can fix the field — never pretend success when no entry was created.

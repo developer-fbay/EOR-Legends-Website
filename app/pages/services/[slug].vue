@@ -51,6 +51,7 @@ const HERO_LISTS: Record<string, { label: string; items: string[] }> = {
 const heroList = HERO_LISTS[service.slug]
 
 const contactModal = useState('contact-modal', () => false)
+const { ctaText } = useCtaVariant()
 function openContact() {
   contactModal.value = true
 }
@@ -121,7 +122,7 @@ const faqs = computed(() => {
               class="brand-btn brand-btn--outline"
               @click="openContact"
             >
-              Contact us
+              {{ ctaText('Contact us') }}
             </button>
           </div>
           <div class="svc-ov-card__img">

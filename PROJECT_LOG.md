@@ -40,6 +40,15 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-16 — CTA A/B rotation feature (built, committed, NOT yet pushed)
+- Monthly CTA text rotation across every contact-intent button (form submits, header/footer Contact Us, consultation band, Speak to an Expert, Lets get started, mobile hero popup CTA): 3 texts at 33/33/33, winner promoted to 80/10/10 (manual button or auto on the 1st, Europe/London), winner carries at 100% if no new set.
+- Supabase tables created in production via the Management API (cta_experiments/variants/events/settings + stats view, RLS locked to service key + authenticated admin); schema documented in supabase/schema.sql.
+- Server: /api/cta/config (60s cache + lazy monthly lifecycle, never 500s), /api/cta/impression (one per session, JS-only so bots don't count), conversion hook in /api/lead (every GF-validated submission counts, idempotent on GF entry id), auth-guarded admin API (start/promote/settings/overview).
+- Client: useCtaVariant composable — cookie assignment during SSR (variant text in first HTML, no flash), shared config fetch in the default layout, impressions excluded on /admin and /lead-input-form.
+- /admin/cta dashboard: live variant table + CVR chart, promote with min-sample guard + force, manual/auto toggle, start-next-set form with 60-char previews, changelog of archived sets.
+- Verified end-to-end: 33/33/33 and 80/10/10 serving distributions, same text across all surfaces per visitor, impression dedup across nav/reload, conversion attributed with GF entry id + duplicate blocked, admin 401s, full fallback to hardcoded texts without Supabase. Test data cleaned from Supabase + GF.
+- NOTE for Codi: dashboard UI needs your eyes — log into /admin/cta locally and start the first real set when happy.
+
 ### 2026-07-15 (later) — homepage refinements
 - Mobile hero fills the first screen again (full-screen fold restored on phones): content vertically centered, logos at the fold bottom, salary section hidden until scroll (Codi's iPhone test).
 - iPhone 15-17 fix: fold sized with lvh so the green section can't peek through Safari's bottom-bar zone; logo marquee images load eagerly (iOS lazy-loading left the moving strip blank mid-scroll). *(live)*
