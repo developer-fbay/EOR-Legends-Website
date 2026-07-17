@@ -23,9 +23,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="admin-page">
     <h1 class="admin-title">Resources</h1>
-    <p class="res-intro">All editorial content in one place. Click a type to view and edit its entries.</p>
+    <p class="admin-intro">All editorial content in one place. Click a type to view and edit its entries.</p>
 
     <div class="admin-cards">
       <NuxtLink v-for="key in RESOURCE_TYPE_KEYS" :key="key" :to="`/admin/${key}`" class="admin-card">
@@ -37,35 +37,35 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.admin-title {
-  font-family: var(--serif);
-  font-size: 1.7rem;
-  margin-bottom: 8px;
-}
-.res-intro { color: var(--grey-mid); margin-bottom: 22px; }
 .admin-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
 }
 .admin-card {
-  background: var(--white);
+  background: #fff;
+  border: 1px solid #e7e2d4;
   border-radius: 14px;
-  padding: 20px;
+  padding: 22px;
   text-decoration: none;
-  color: var(--body);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  border: 1px solid transparent;
-  transition: border-color 0.15s ease;
+  gap: 8px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
 }
-.admin-card:hover { border-color: var(--green); }
+.admin-card:hover { border-color: var(--green); transform: translateY(-2px); }
 .admin-card__count {
   font-family: var(--serif);
-  font-size: 1.9rem;
+  font-size: 2.2rem;
   color: var(--green);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
-.admin-card__label { font-size: 0.88rem; color: var(--grey-mid); }
+.admin-card__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71786f;
+}
 </style>

@@ -19,8 +19,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="admin-page--wide">
     <h1 class="admin-title">Leads</h1>
+    <p class="admin-intro">Every form submission from the site, newest first.</p>
     <p v-if="!configured" class="admin-note">Connect Supabase to see leads (see Dashboard).</p>
     <p v-else-if="loading" class="admin-note">Loading…</p>
     <table v-else-if="leads.length" class="admin-table">
@@ -45,7 +46,5 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.admin-title { font-family: var(--serif); font-size: 1.7rem; margin-bottom: 24px; }
-.admin-note { color: var(--grey-mid); }
 .lead-msg { max-width: 280px; }
 </style>

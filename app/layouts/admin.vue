@@ -113,3 +113,49 @@ async function signOut() {
   .admin-side { position: static; height: auto; }
 }
 </style>
+
+<style>
+/* ============================================================
+   Admin design system (shared by every CMS tab)
+   canvas #f6f4ee · card #fff · hairline #e7e2d4 · ink #1c2520
+   muted #71786f · green #014520 · tint #eef3ea · accent #eb3d00
+   ============================================================ */
+.admin-page { max-width: 980px; margin-inline: auto; }
+.admin-page--wide { max-width: 1260px; margin-inline: auto; }
+.admin-title {
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: #1c2520;
+  margin-bottom: 8px;
+}
+.admin-intro { color: #71786f; margin-bottom: 24px; max-width: 62ch; line-height: 1.6; }
+.admin-note { color: #71786f; }
+.ds-card { background: #fff; border: 1px solid #e7e2d4; border-radius: 14px; padding: 24px; }
+
+.admin-table {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e7e2d4;
+  border-radius: 14px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: 0.88rem;
+}
+.admin-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #faf8f1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71786f;
+  border-bottom: 1px solid #eee9dc;
+}
+.admin-table td { padding: 12px 16px; border-top: 1px solid #f0ede3; color: #1c2520; }
+.admin-table tbody tr:first-child td { border-top: none; }
+.admin-table tbody tr:hover td { background: #faf9f4; }
+.admin-table a { color: #014520; }
+</style>

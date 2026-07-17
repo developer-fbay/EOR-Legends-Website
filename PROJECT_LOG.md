@@ -40,6 +40,11 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-17 (latest) — Design system across all CMS tabs + working tooltips (committed, NOT yet pushed)
+- Shared admin design system moved into the admin layout (unscoped): .admin-page 980px / --wide 1260px columns, serif titles, intro/note styles, ds-card, redesigned admin-table (hairline card, parchment uppercase headers, row hover).
+- Dashboard, Resources and Leads restyled to match the A/B page: hairline lead-box with filter pills + 3rem serif count, resource count cards with hover lift, wide leads table with intro line.
+- Broken native title-attribute tooltips replaced with CSS bubbles (.cta-tip: dark bubble + caret on hover/focus, keyboard reachable) across the page modal, leaders ledger and Active Custom CTAs. Verified in authed Chromium (temp QA user created + deleted after).
+
 ### 2026-07-17 (later) — A/B dashboard + CMS layout redesign (committed, NOT yet pushed)
 - Design system for the admin: 920px column, parchment canvas, hairline cards with 24/20/16 rhythm, serif titles, 38px controls, tabular numerals; Running Test card carries the only orange (live accent, leader bar); per-section leaders as a 2-column ledger; modals with serif headers/hairline footers. Verified via authed Chromium screenshots with seeded stats (temp QA user created + deleted).
 

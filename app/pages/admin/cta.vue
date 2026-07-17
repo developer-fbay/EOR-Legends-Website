@@ -349,8 +349,12 @@ onBeforeUnmount(() => chart?.destroy())
 
       <h3 class="cta-subhead">Current Leader Per Section</h3>
       <div class="cta-leaders">
-        <span v-for="l in overview.current.sectionLeaders" :key="l.surface" class="cta-leader" :title="`${SURFACES[l.surface]?.hint || ''} — ${l.metric === 'overall' ? 'no section data yet, overall leader shown' : `leading by ${l.metric}`}`">
-          {{ SURFACES[l.surface]?.label || l.surface }}: <strong>{{ l.winnerText }}</strong>
+        <span v-for="l in overview.current.sectionLeaders" :key="l.surface" class="cta-leader">
+          <span class="cta-leader__label">
+            {{ SURFACES[l.surface]?.label || l.surface }}
+            <span class="cta-tip" tabindex="0" :data-tip="`${SURFACES[l.surface]?.hint || ''} ${l.metric === 'overall' ? 'No section data yet: the overall leader is shown.' : `Leading by ${l.metric}.`}`">ⓘ</span>
+          </span>
+          <strong>{{ l.winnerText }}</strong>
         </span>
       </div>
 
@@ -417,8 +421,12 @@ onBeforeUnmount(() => chart?.destroy())
       <div class="cta-divider" />
       <h3 class="cta-subhead">Active Custom CTAs</h3>
       <p v-if="!activeCustom.length" class="cta-meta">None: everything follows the test / defaults.</p>
-      <div v-for="row in activeCustom" :key="row.key" class="cta-rule" :title="SURFACES[row.key.split('@')[0]!]?.hint">
-        <span><strong>{{ row.sectionLabel }}</strong> · {{ row.pageLabel }} → "{{ row.text }}"</span>
+      <div v-for="row in activeCustom" :key="row.key" class="cta-rule">
+        <span>
+          <strong>{{ row.sectionLabel }}</strong>
+          <span class="cta-tip" tabindex="0" :data-tip="SURFACES[row.key.split('@')[0]!]?.hint">ⓘ</span>
+          · {{ row.pageLabel }} → "{{ row.text }}"
+        </span>
         <button class="cta-rule__remove" title="Remove and revert" :disabled="busy" @click="deleteCustom(row.key)">×</button>
       </div>
     </section>
@@ -488,8 +496,8 @@ onBeforeUnmount(() => chart?.destroy())
         <h2>{{ selectedPage.label }}</h2>
         <p class="cta-meta">Every CTA section on this page. Fill in only what you want to change; blank fields follow the test / default.</p>
         <div v-for="s in selectedPage.sections" :key="s" class="cta-input-row">
-          <label class="cta-surface-label" :title="SURFACES[s]?.hint">
-            <span>{{ SURFACES[s]?.label || s }} <span class="cta-info" :title="SURFACES[s]?.hint">ⓘ</span></span>
+          <label class="cta-surface-label">
+            <span>{{ SURFACES[s]?.label || s }} <span class="cta-tip" tabindex="0" :data-tip="SURFACES[s]?.hint">ⓘ</span></span>
             <small>default: {{ SURFACES[s]?.fallback }}</small>
           </label>
           <input v-model="pageTexts[s]" type="text" maxlength="60" placeholder="Follows test / default" />
@@ -638,9 +646,64 @@ onBeforeUnmount(() => chart?.destroy())
   border-bottom: 1px dashed #eee9dc;
   font-size: 0.85rem;
   color: #71786f;
-  cursor: help;
 }
 .cta-leader strong { color: #1c2520; font-weight: 600; text-align: right; }
+.cta-leader__label { display: inline-flex; align-items: baseline; gap: 5px; }
+
+/* ---- tooltips: instant CSS bubbles on hover and keyboard focus ---- */
+.cta-tip {
+  position: relative;
+  display: inline-flex;
+  cursor: help;
+  color: #3B8949;
+  font-size: 0.85em;
+  font-weight: 400;
+}
+.cta-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 280px;
+  background: #1c2520;
+  color: #fdfcf7;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal;
+  padding: 10px 12px;
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease;
+  z-index: 60;
+  pointer-events: none;
+}
+.cta-tip::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #1c2520;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease;
+  z-index: 60;
+  pointer-events: none;
+}
+.cta-tip:hover::after,
+.cta-tip:hover::before,
+.cta-tip:focus-visible::after,
+.cta-tip:focus-visible::before {
+  opacity: 1;
+  visibility: visible;
+}
 
 /* ---- controls ---- */
 .cta-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -698,7 +761,6 @@ onBeforeUnmount(() => chart?.destroy())
 .cta-btn--danger:hover:not(:disabled) { background: #fdf3f2; }
 .cta-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .cta-btn:focus-visible { outline: 2px solid rgba(1, 69, 32, 0.45); outline-offset: 2px; }
-.cta-info { cursor: help; color: #3B8949; font-size: 0.85em; }
 
 /* ---- inputs in modals ---- */
 .cta-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }

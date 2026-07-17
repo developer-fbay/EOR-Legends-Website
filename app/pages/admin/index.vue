@@ -53,7 +53,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="admin-page">
     <h1 class="admin-title">Dashboard</h1>
 
     <div v-if="!configured" class="admin-setup">
@@ -112,13 +112,9 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.admin-title {
-  font-family: var(--serif);
-  font-size: 1.7rem;
-  margin-bottom: 24px;
-}
 .admin-setup {
   background: var(--white);
+  border: 1px solid #e7e2d4;
   border-radius: 14px;
   padding: 28px;
   max-width: 640px;
@@ -129,13 +125,14 @@ onMounted(async () => {
 
 .lead-box {
   background: var(--white);
+  border: 1px solid #e7e2d4;
   border-radius: 14px;
-  padding: 22px 24px;
+  padding: 24px;
   max-width: 520px;
-  margin-bottom: 32px;
+  margin: 16px 0 32px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 .lead-box__top {
   display: flex;
@@ -144,7 +141,13 @@ onMounted(async () => {
   gap: 12px;
   flex-wrap: wrap;
 }
-.lead-box__label { font-weight: 700; }
+.lead-box__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71786f;
+}
 .lead-box__filters { display: flex; gap: 6px; flex-wrap: wrap; }
 .lead-box__filter {
   border: 1px solid #e2ddd1;
@@ -163,9 +166,10 @@ onMounted(async () => {
 }
 .lead-box__count {
   font-family: var(--serif);
-  font-size: 2.6rem;
+  font-size: 3rem;
   color: var(--green);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .lead-box__link { color: var(--green); font-size: 0.85rem; text-decoration: none; }
 
@@ -175,30 +179,7 @@ onMounted(async () => {
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.admin-recent__head h2 { font-family: var(--serif); font-size: 1.2rem; margin: 0; }
+.admin-recent__head h2 { font-family: var(--serif); font-weight: 400; font-size: 1.25rem; margin: 0; color: #1c2520; }
 .admin-recent__head a { color: var(--green); font-size: 0.85rem; }
-.admin-empty { color: var(--grey-mid); font-size: 0.9rem; }
-</style>
-
-<style>
-/* shared admin table styles (unscoped, reused by list pages) */
-.admin-table {
-  width: 100%;
-  background: var(--white);
-  border-radius: 12px;
-  border-collapse: separate;
-  border-spacing: 0;
-  overflow: hidden;
-  font-size: 0.88rem;
-}
-.admin-table th {
-  text-align: left;
-  padding: 12px 16px;
-  background: rgba(1, 69, 32, 0.05);
-  font-weight: 600;
-}
-.admin-table td {
-  padding: 11px 16px;
-  border-top: 1px solid #f0ede6;
-}
+.admin-empty { color: #71786f; font-size: 0.9rem; }
 </style>
