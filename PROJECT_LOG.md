@@ -40,32 +40,32 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
-### 2026-07-17 (latest) — Admin polish + smooth logo marquees (committed, NOT yet pushed)
+### 2026-07-17 (latest) — Admin polish + smooth logo marquees *(live)*
 - Tooltips removed from the A/B page per Codi (the ⓘ bubbles are gone; labels stay plain).
 - Changelog is now a modal: slim card with a "View changelog" button; the modal lists every finished test with its final numbers.
 - Problem Pillars + Problem Clusters removed from the CMS Resources tab and the type registry (both empty; live pillar content serves from server/data/pillars snapshots, not Supabase).
 - Logo marquees (homepage press strip + service-pages services strip) smoothed: tracks promoted to their own compositor layer (will-change + translate3d) so the slow drift no longer snaps to whole pixels on the main thread; logo heights use svh so mobile URL-bar collapse stops resizing the moving track.
 
-### 2026-07-17 (earlier) — Design system across all CMS tabs + working tooltips (committed, NOT yet pushed)
+### 2026-07-17 (earlier) — Design system across all CMS tabs + working tooltips *(live)*
 - Shared admin design system moved into the admin layout (unscoped): .admin-page 980px / --wide 1260px columns, serif titles, intro/note styles, ds-card, redesigned admin-table (hairline card, parchment uppercase headers, row hover).
 - Dashboard, Resources and Leads restyled to match the A/B page: hairline lead-box with filter pills + 3rem serif count, resource count cards with hover lift, wide leads table with intro line.
 - Broken native title-attribute tooltips replaced with CSS bubbles (.cta-tip: dark bubble + caret on hover/focus, keyboard reachable) across the page modal, leaders ledger and Active Custom CTAs. Verified in authed Chromium (temp QA user created + deleted after).
 
-### 2026-07-17 (later) — A/B dashboard + CMS layout redesign (committed, NOT yet pushed)
+### 2026-07-17 (later) — A/B dashboard + CMS layout redesign *(live)*
 - Design system for the admin: 920px column, parchment canvas, hairline cards with 24/20/16 rhythm, serif titles, 38px controls, tabular numerals; Running Test card carries the only orange (live accent, leader bar); per-section leaders as a 2-column ledger; modals with serif headers/hairline footers. Verified via authed Chromium screenshots with seeded stats (temp QA user created + deleted).
 
-### 2026-07-17 (later) — CEO copy pass + polish (committed, NOT yet pushed)
+### 2026-07-17 (later) — CEO copy pass + polish *(live)*
 - Home: all 7 section subheadings replaced with CEO copy (md file).
 - HR service page: new hero subtext; section-copy fields per service (defaults unchanged elsewhere); HIW section replaced with "What makes our HR support different?" + 3 new steps; timeline arrow tips removed (desktop+mobile), lines and dots kept. NOTE: the md's HIW subtext ("From learning your culture...") was superseded by the inline full-replacement copy.
 - CMS: empty Services tab removed; A/B dashboard buttons unified green; tooltips explaining every CTA section; popup opener vs popup submit clearly split.
 
-### 2026-07-17 — A/B CTA Testing round 3 + CMS restructure (committed, NOT yet pushed)
+### 2026-07-17 — A/B CTA Testing round 3 + CMS restructure *(live)*
 - Renamed to "A/B CTA Testing". Click tracking per section added (new cta_events type + surface + breakdown view, applied to prod Supabase).
 - Tests run a configurable length (default 10 days); finish (auto/manual) locks each section to ITS winner (forms by conversions, buttons by clicks, overall fallback) written as deletable overrides; verified with distinct per-section winners on real data.
 - Dashboard rebuilt with modals (start test, navbar CTA, page CTAs via page picker incl. All pages), Active custom CTAs list with per-item delete/revert, per-section leader chips; Per-Section Texts panel + 80/10/10 promote removed.
 - CMS: Tools + Guides types removed; 6 content types consolidated under a Resources tab; Services keeps its tab; dashboard is lead-centric (all-time count with Today/Week/Month filters + recent leads).
 
-### 2026-07-17 — CTA feature round 2 (committed, NOT yet pushed)
+### 2026-07-17 — CTA feature round 2 *(live)*
 - New homepage FAQ set from the content team (7 questions, numbers removed; structured data follows).
 - "Stop & revert to default texts" button on /admin/cta (+ auth-guarded stop endpoint); Codi's test experiment cleared.
 - Per-Section Texts panel: 11 sections individually lockable to custom texts from the dashboard (blank = follow experiment/default); resolution override > variant > fallback, verified with mixed experiment + override.
