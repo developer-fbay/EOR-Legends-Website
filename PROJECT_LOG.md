@@ -44,6 +44,7 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 - New homepage FAQ set from the content team (7 questions, numbers removed; structured data follows).
 - "Stop & revert to default texts" button on /admin/cta (+ auth-guarded stop endpoint); Codi's test experiment cleared.
 - Per-Section Texts panel: 11 sections individually lockable to custom texts from the dashboard (blank = follow experiment/default); resolution override > variant > fallback, verified with mixed experiment + override.
+- Page-Specific Rules (marketing team lead): change one button on one page only via a rule builder (section + path + text); page rule > section rule > variant > default. Verified on /services/payroll vs /services/hr.
 
 ### 2026-07-16 — CTA A/B rotation feature (built, committed, NOT yet pushed)
 - Monthly CTA text rotation across every contact-intent button (form submits, header/footer Contact Us, consultation band, Speak to an Expert, Lets get started, mobile hero popup CTA): 3 texts at 33/33/33, winner promoted to 80/10/10 (manual button or auto on the 1st, Europe/London), winner carries at 100% if no new set.
