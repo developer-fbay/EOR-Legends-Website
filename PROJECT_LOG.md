@@ -40,6 +40,9 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-17 (later) — A/B dashboard + CMS layout redesign (committed, NOT yet pushed)
+- Design system for the admin: 920px column, parchment canvas, hairline cards with 24/20/16 rhythm, serif titles, 38px controls, tabular numerals; Running Test card carries the only orange (live accent, leader bar); per-section leaders as a 2-column ledger; modals with serif headers/hairline footers. Verified via authed Chromium screenshots with seeded stats (temp QA user created + deleted).
+
 ### 2026-07-17 (later) — CEO copy pass + polish (committed, NOT yet pushed)
 - Home: all 7 section subheadings replaced with CEO copy (md file).
 - HR service page: new hero subtext; section-copy fields per service (defaults unchanged elsewhere); HIW section replaced with "What makes our HR support different?" + 3 new steps; timeline arrow tips removed (desktop+mobile), lines and dots kept. NOTE: the md's HIW subtext ("From learning your culture...") was superseded by the inline full-replacement copy.
