@@ -13,19 +13,19 @@ definePageMeta({ layout: 'admin' })
 // ---------------------------------------------------------------------------
 // Sections + pages
 // ---------------------------------------------------------------------------
-const SURFACES: Record<string, { label: string; fallback: string }> = {
-  'header': { label: 'Navbar button', fallback: 'Contact Us' },
-  'footer': { label: 'Footer button', fallback: 'Contact Us' },
-  'hero-form': { label: 'Hero form submit', fallback: 'Speak to our team' },
-  'mobile-hero': { label: 'Mobile hero button', fallback: 'Speak to our team' },
-  'footer-form': { label: 'Footer form submit', fallback: 'Speak to our team' },
-  'popup-form': { label: 'Popup form submit', fallback: 'Speak to our team' },
-  'page-forms': { label: 'Page form submit', fallback: 'Speak to our team' },
-  'cta-band': { label: 'Consultation band', fallback: 'Schedule a free consultation' },
-  'salary-tool': { label: 'Salary tool button', fallback: 'Speak to an Expert' },
-  'service-buttons': { label: 'Service contact buttons', fallback: 'Contact us' },
-  'tools-page': { label: 'Tools page buttons', fallback: 'Contact us' },
-  'how-it-works': { label: 'How It Works button', fallback: 'Lets get started' },
+const SURFACES: Record<string, { label: string; fallback: string; hint: string }> = {
+  'header': { label: 'Navbar button', fallback: 'Contact Us', hint: 'The orange button in the site header, visible on every page. Clicking it OPENS the contact popup (the button inside the popup is "Contact popup submit").' },
+  'footer': { label: 'Footer button', fallback: 'Contact Us', hint: 'The contact button in the site footer, visible on every page. Clicking it opens the contact popup.' },
+  'hero-form': { label: 'Home hero form submit', fallback: 'Speak to our team', hint: 'The submit button inside the estimate form at the top of the home page (desktop/tablet only; phones show the mobile hero button instead).' },
+  'mobile-hero': { label: 'Mobile hero button (opens popup)', fallback: 'Speak to our team', hint: 'The orange button on the home hero on PHONES. It OPENS the contact popup; the button inside the popup is controlled separately by "Contact popup submit".' },
+  'footer-form': { label: 'Footer form submit', fallback: 'Speak to our team', hint: 'The submit button inside the big form at the bottom of most pages ("Ready To Hire Smarter?").' },
+  'popup-form': { label: 'Contact popup submit', fallback: 'Speak to our team', hint: 'The submit button INSIDE the popup contact form (opened by the navbar/footer/mobile-hero buttons) and on the contact page form. Separate from the buttons that open the popup.' },
+  'page-forms': { label: 'Service/insight page form submit', fallback: 'Speak to our team', hint: 'The submit button inside the estimate forms on service pages and staffing-insight pages.' },
+  'cta-band': { label: 'Consultation band', fallback: 'Schedule a free consultation', hint: 'The outlined button in the green "Ready to cut hiring costs by up to 60%?" band that appears across most pages. Links to the contact page.' },
+  'salary-tool': { label: 'Salary tool button', fallback: 'Speak to an Expert', hint: 'The orange button under the salary benchmarking results (home page and tools page). Links to the contact page.' },
+  'service-buttons': { label: 'Service page contact buttons', fallback: 'Contact us', hint: 'The outlined buttons inside the Overview cards on each service page. They open the contact popup.' },
+  'tools-page': { label: 'Tools page buttons', fallback: 'Contact us', hint: 'The contact buttons on the salary benchmarking tool page. They open the contact popup.' },
+  'how-it-works': { label: 'How It Works button', fallback: 'Lets get started', hint: 'The outlined button at the bottom of the How It Works card on the home page. Links to the contact page.' },
 }
 
 const SERVICE_SLUGS = ['payroll', 'hr', 'employee-benefits', 'company-culture', 'contractor-management', 'eor-migration', 'onboarding-offboarding', 'office-space', 'it-support', 'it-equipment']
@@ -346,7 +346,7 @@ onBeforeUnmount(() => chart?.destroy())
 
       <h3 class="cta-subhead">Current Leader Per Section</h3>
       <div class="cta-leaders">
-        <span v-for="l in overview.current.sectionLeaders" :key="l.surface" class="cta-leader" :title="l.metric === 'overall' ? 'No section data yet: overall leader shown' : `by ${l.metric}`">
+        <span v-for="l in overview.current.sectionLeaders" :key="l.surface" class="cta-leader" :title="`${SURFACES[l.surface]?.hint || ''} — ${l.metric === 'overall' ? 'no section data yet, overall leader shown' : `leading by ${l.metric}`}`">
           {{ SURFACES[l.surface]?.label || l.surface }}: <strong>{{ l.winnerText }}</strong>
         </span>
       </div>
@@ -410,7 +410,7 @@ onBeforeUnmount(() => chart?.destroy())
 
       <h3 class="cta-subhead">Active Custom CTAs</h3>
       <p v-if="!activeCustom.length" class="cta-meta">None: everything follows the test / defaults.</p>
-      <div v-for="row in activeCustom" :key="row.key" class="cta-rule">
+      <div v-for="row in activeCustom" :key="row.key" class="cta-rule" :title="SURFACES[row.key.split('@')[0]!]?.hint">
         <span><strong>{{ row.sectionLabel }}</strong> · {{ row.pageLabel }} → "{{ row.text }}"</span>
         <button class="cta-rule__remove" title="Remove and revert" :disabled="busy" @click="deleteCustom(row.key)">×</button>
       </div>
@@ -461,7 +461,7 @@ onBeforeUnmount(() => chart?.destroy())
     <div v-if="showNavbar" class="cta-modal-backdrop" @click.self="showNavbar = false">
       <div class="cta-modal">
         <h2>Navbar CTA</h2>
-        <p class="cta-meta">The button in the site header, on every page. Default: "{{ SURFACES['header']!.fallback }}". Leave blank to follow the test / default.</p>
+        <p class="cta-meta">{{ SURFACES['header']!.hint }} Default: "{{ SURFACES['header']!.fallback }}". Leave blank to follow the test / default.</p>
         <div class="cta-input-row">
           <input v-model="navbarText" type="text" maxlength="60" placeholder="Custom navbar text" />
           <span class="cta-count">{{ navbarText.trim().length }}/60</span>
@@ -481,8 +481,8 @@ onBeforeUnmount(() => chart?.destroy())
         <h2>{{ selectedPage.label }}</h2>
         <p class="cta-meta">Every CTA section on this page. Fill in only what you want to change; blank fields follow the test / default.</p>
         <div v-for="s in selectedPage.sections" :key="s" class="cta-input-row">
-          <label class="cta-surface-label">
-            {{ SURFACES[s]?.label || s }}
+          <label class="cta-surface-label" :title="SURFACES[s]?.hint">
+            <span>{{ SURFACES[s]?.label || s }} <span class="cta-info" :title="SURFACES[s]?.hint">ⓘ</span></span>
             <small>default: {{ SURFACES[s]?.fallback }}</small>
           </label>
           <input v-model="pageTexts[s]" type="text" maxlength="60" placeholder="Follows test / default" />
@@ -525,10 +525,15 @@ onBeforeUnmount(() => chart?.destroy())
 .cta-settings label { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; color: #555; }
 .cta-settings select, .cta-settings input { border: 1px solid #ddd8cc; border-radius: 8px; padding: 8px 10px; font: inherit; min-width: 120px; }
 
-.cta-btn { border: 1px solid #cfc9bb; background: #fff; border-radius: 999px; padding: 9px 20px; font: inherit; font-weight: 600; cursor: pointer; }
+/* one button family: green fill for primary, green outline otherwise */
+.cta-btn { border: 1px solid #014520; background: #fff; color: #014520; border-radius: 999px; padding: 9px 20px; font: inherit; font-weight: 600; cursor: pointer; }
+.cta-btn:hover:not(:disabled) { background: #e8f0e4; }
 .cta-btn--primary { background: #014520; border-color: #014520; color: #fffcf6; }
-.cta-btn--danger { border-color: #d9a1a1; color: #b91c1c; }
+.cta-btn--primary:hover:not(:disabled) { background: #0a5c30; }
+.cta-btn--danger { border-color: #b91c1c; color: #b91c1c; }
+.cta-btn--danger:hover:not(:disabled) { background: #fef2f2; }
 .cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cta-info { cursor: help; color: #3B8949; font-size: 0.85em; }
 
 .cta-pagepick { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .cta-pagepick select { border: 1px solid #ddd8cc; border-radius: 8px; padding: 8px 10px; font: inherit; max-width: 320px; }

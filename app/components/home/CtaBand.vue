@@ -7,7 +7,7 @@ const { ctaText, trackClick } = useCtaVariant()
     <div class="container cta-inner">
       <div>
         <h2>Ready to cut hiring costs by up to 60%?</h2>
-        <p>Talk to our team and get a custom cost comparison in 24 hours.</p>
+        <p>Get a personalised South African hiring cost comparison from our team within 24 hours.</p>
       </div>
       <NuxtLink to="/contact" class="brand-btn brand-btn--outline" @click="trackClick('cta-band')">{{ ctaText('Schedule a free consultation', 'cta-band') }}</NuxtLink>
     </div>

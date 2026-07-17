@@ -38,15 +38,6 @@ export const CMS_TYPES: Record<string, CmsType> = {
       { key: 'logo_image', label: 'Client logo', type: 'image' },
     ],
   },
-  'services': {
-    label: 'Services',
-    table: 'services',
-    publicPath: '/services',
-    extra: [
-      { key: 'icon', label: 'Icon name' },
-      { key: 'sort_order', label: 'Sort order', type: 'number' },
-    ],
-  },
   'hr-glossary': {
     label: 'HR Glossary',
     table: 'hr_glossary',

@@ -105,7 +105,7 @@ const faqs = computed(() => {
       <div class="container">
         <header class="svc-overview__head">
           <h2>Overview</h2>
-          <p>An overview of how things work in detail.</p>
+          <p>{{ service.overviewSub || 'An overview of how things work in detail.' }}</p>
         </header>
 
         <div
@@ -137,8 +137,8 @@ const faqs = computed(() => {
     <section class="svc-hiw band-cream section">
       <div class="container">
         <header class="svc-hiw__head">
-          <h2>How It Works</h2>
-        	<p>The same three-step process behind every result above.</p>
+          <h2>{{ service.hiwTitle || 'How It Works' }}</h2>
+          <p>{{ service.hiwSub || 'The same three-step process behind every result above.' }}</p>
         </header>
         <div class="svc-hiw__card">
           <div class="svc-hiw__steps">
@@ -157,7 +157,7 @@ const faqs = computed(() => {
 
     <HomeReviewsCarousel />
 
-    <ServicesScroll :exclude-slug="service.slug" />
+    <ServicesScroll :exclude-slug="service.slug" :subtitle="service.servicesSub" />
 
     <HomeCtaBand />
 
@@ -357,20 +357,7 @@ const faqs = computed(() => {
 .svc-step__row:hover .svc-step__line::before { width: 100%; }
 .svc-step__circle { transition: background 0.3s ease, color 0.3s ease; }
 .svc-step__row:hover .svc-step__circle { background: var(--accent); color: #fff; }
-.svc-step:last-child .svc-step__line::after {
-  content: '';
-  position: absolute;
-  right: -1px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-left: 10px solid var(--green);
-  transition: border-left-color 0.25s ease 0.45s;
-}
-.svc-step:last-child .svc-step__row:hover .svc-step__line::after {
-  border-left-color: var(--accent);
-}
+/* no arrow tip on the service timelines (CEO): the line simply ends */
 .svc-step h3 {
   font-family: var(--serif);
   font-size: 1.3rem;
@@ -442,23 +429,10 @@ const faqs = computed(() => {
     background: var(--green);
     transition: none;
   }
+  /* no arrow tip (CEO): the last segment runs to the step bottom and ends */
   .svc-step:last-child .svc-step__line { display: block; bottom: 0; }
-  .svc-step:last-child .svc-step__line::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    right: auto;
-    top: auto;
-    bottom: -1px;
-    transform: translateX(-50%);
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 10px solid var(--green);
-    border-bottom: none;
-  }
-  /* touch: no hover effect on the connector, circle or arrow */
+  /* touch: no hover effect on the connector or circle */
   .svc-step__row:hover .svc-step__line::before { width: 10px; }
   .svc-step__row:hover .svc-step__circle { background: var(--green); color: var(--cream); }
-  .svc-step:last-child .svc-step__row:hover .svc-step__line::after { border-top-color: var(--green); }
 }
 </style>

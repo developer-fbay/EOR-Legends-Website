@@ -73,8 +73,7 @@ useHead({
       <header class="wie-head">
         <h2>Got questions about hiring in South Africa?</h2>
         <p>
-          Here's how it works and answers to the most common questions we get from companies
-          looking to hire in South Africa.
+          Get the information you need to confidently build a high-performing team in South Africa.
         </p>
       </header>
 

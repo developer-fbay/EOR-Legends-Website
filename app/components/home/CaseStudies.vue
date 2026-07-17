@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
     <div class="cs-pin">
       <header class="cs-header">
         <h2 class="cs-heading">Case Studies</h2>
-        <p class="cs-sub">Real companies who built their teams with Legends.</p>
+        <p class="cs-sub">See how growing companies use Legends EOR to build high-performing South African teams and greatly reduce employment costs.</p>
         <div class="cs-header-divider" />
       </header>
 

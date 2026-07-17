@@ -7,7 +7,7 @@
  */
 import { SERVICES } from '~/data/services'
 
-const props = defineProps<{ excludeSlug?: string }>()
+const props = defineProps<{ excludeSlug?: string; subtitle?: string }>()
 
 // The WP build splits services into two code blocks; a service page shows the
 // block its service belongs to, with the current service auto-hidden.
@@ -101,7 +101,7 @@ onBeforeUnmount(() => {
     <div class="sv-pin">
       <header class="sv-header">
         <h2 class="sv-heading">Services</h2>
-        <p class="sv-sub">Our offering to all clients</p>
+        <p class="sv-sub">{{ subtitle || 'Our offering to all clients' }}</p>
         <div class="sv-header-divider" />
       </header>
 

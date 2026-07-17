@@ -46,7 +46,7 @@ const active = ref(0)
     <div class="container">
       <header class="talent-head">
         <h2>Talent Showcase</h2>
-        <p>The people behind the results.</p>
+        <p>Meet the skilled South African professionals we've already placed in growing global teams.</p>
       </header>
 
       <div class="options">

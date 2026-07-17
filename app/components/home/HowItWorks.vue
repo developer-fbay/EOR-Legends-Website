@@ -31,7 +31,7 @@ const steps = [
     <div class="container">
       <header class="hiw-head">
         <h2>How It Works</h2>
-        <p>The same four-step process behind every South African hire.</p>
+        <p>Build your South African team in four clear steps, from role brief and recruitment to compliant employment and ongoing support.</p>
       </header>
 
       <div class="hiw-section">

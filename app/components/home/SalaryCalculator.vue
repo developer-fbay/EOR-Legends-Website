@@ -256,8 +256,8 @@ onBeforeUnmount(() => {
       <header class="sbt-head">
         <h2>Salary Benchmarking</h2>
         <p>
-          See what your next hire earns in South Africa. Select a role and tell us where
-          your business is based to see the real difference in employment cost.
+          Compare South African salaries with your home market and see how much your next
+          hire could save you.
         </p>
       </header>
 

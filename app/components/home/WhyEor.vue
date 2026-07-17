@@ -65,7 +65,7 @@ const columns = [
     <div class="container">
       <header class="why-head">
         <h2>Why Legends EOR?</h2>
-        <p>How Legends stacks up against building your own entity or hiring through a local recruiter.</p>
+        <p>See how our South African Employer of Record service compares with setting up a local entity or using a recruitment agency.</p>
       </header>
 
       <div class="eor-comp">

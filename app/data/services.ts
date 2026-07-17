@@ -10,6 +10,11 @@ export type ServiceContent = {
   nav: string
   excerpt: string
   intro: string[]
+  /** per-page section copy overrides (CEO copy pass); defaults in [slug].vue */
+  overviewSub?: string
+  hiwTitle?: string
+  hiwSub?: string
+  servicesSub?: string
   overview: {
     title: string
     paragraphs: string[]
@@ -67,8 +72,12 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'Legends EOR handles all HR administration for your South African team.',
     intro: [
-      'Legends EOR handles all HR administration for your South African team.',
+      'Outsource South African HR administration, employee relations and labour-law compliance to a local team that acts as your legal employer.',
     ],
+    overviewSub: 'See how our South African EOR service manages day-to-day HR, employee support and labour-law risk for your team.',
+    hiwTitle: 'What makes our HR support different?',
+    hiwSub: 'Local expertise, dedicated support and hands-on HR assistance for every South African employee.',
+    servicesSub: 'Explore the payroll, onboarding, contractor and EOR migration services that support your South African team.',
     overview: [
       {
         title: 'How HR works through our EOR service',
@@ -88,9 +97,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We learn your business', text: 'An Account Manager will understand your team structure, culture, and expectations so we can represent you accurately.' },
-      { title: 'We run the HR', text: 'Leave, queries, performance support, and disputes are handled locally and compliantly.' },
-      { title: 'You stay protected', text: 'Labour-law risk, documentation, and CCMA processes sit with us as the legal employer.' },
+      { title: 'Your dedicated HR manager', text: 'One experienced point of contact who knows your team, manages day-to-day HR matters and keeps you informed.' },
+      { title: 'HR support, always in the office', text: 'Your employees have direct access to an HR professional who is based in our South African office and available throughout every working day.' },
+      { title: 'South African labour law specialists', text: 'Our in-house experts protect your business, navigate complex employee matters and ensure every decision is legally sound.' },
     ],
     faqs: [
       { q: 'What HR support is included under the EOR?', a: 'We manage employment contracts, onboarding and offboarding, leave administration, performance management coordination, employee relations, and compliance with South African labour law. We provide ongoing advisory support on employment matters and act as the local HR contact for your South African employees. This includes handling day-to-day employee queries and guiding you through any complex employment issues.' },

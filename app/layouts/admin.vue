@@ -19,7 +19,6 @@ async function signOut() {
       <nav class="admin-nav">
         <NuxtLink to="/admin">Dashboard</NuxtLink>
         <NuxtLink to="/admin/resources">Resources</NuxtLink>
-        <NuxtLink to="/admin/services">Services</NuxtLink>
         <NuxtLink to="/admin/leads">Leads</NuxtLink>
         <NuxtLink to="/admin/cta">A/B CTA Testing</NuxtLink>
       </nav>
