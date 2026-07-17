@@ -1,22 +1,48 @@
 <script setup lang="ts">
-import { CMS_TYPES } from '~/composables/useCmsTypes'
-
 definePageMeta({ layout: 'admin' })
 
 const supabase = useSupabaseClient()
 const configured = useCmsConfigured()
 
-const counts = ref<Record<string, number>>({})
+type LeadPeriod = 'all' | 'day' | 'week' | 'month'
+const period = ref<LeadPeriod>('all')
+const leadCount = ref<number | null>(null)
 const recentLeads = ref<any[]>([])
+
+const PERIODS: { key: LeadPeriod; label: string }[] = [
+  { key: 'all', label: 'All time' },
+  { key: 'day', label: 'Today' },
+  { key: 'week', label: 'This week' },
+  { key: 'month', label: 'This month' },
+]
+
+function periodStart(p: LeadPeriod): string | null {
+  const now = new Date()
+  if (p === 'day') return new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
+  if (p === 'week') {
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const dow = (d.getDay() + 6) % 7 // Monday start
+    d.setDate(d.getDate() - dow)
+    return d.toISOString()
+  }
+  if (p === 'month') return new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
+  return null
+}
+
+async function loadCount() {
+  leadCount.value = null
+  let q = supabase.from('leads').select('*', { count: 'exact', head: true })
+  const start = periodStart(period.value)
+  if (start) q = q.gte('created_at', start)
+  const { count } = await q
+  leadCount.value = count ?? 0
+}
+
+watch(period, loadCount)
 
 onMounted(async () => {
   if (!configured.value) return
-  for (const [key, type] of Object.entries(CMS_TYPES)) {
-    const { count } = await supabase
-      .from(type.table)
-      .select('*', { count: 'exact', head: true })
-    counts.value[key] = count ?? 0
-  }
+  await loadCount()
   const { data } = await supabase
     .from('leads')
     .select('*')
@@ -42,11 +68,23 @@ onMounted(async () => {
     </div>
 
     <template v-else>
-      <div class="admin-cards">
-        <NuxtLink v-for="(t, key) in CMS_TYPES" :key="key" :to="`/admin/${key}`" class="admin-card">
-          <span class="admin-card__count">{{ counts[key] ?? '…' }}</span>
-          <span class="admin-card__label">{{ t.label }}</span>
-        </NuxtLink>
+      <div class="lead-box">
+        <div class="lead-box__top">
+          <span class="lead-box__label">Leads</span>
+          <div class="lead-box__filters">
+            <button
+              v-for="p in PERIODS"
+              :key="p.key"
+              class="lead-box__filter"
+              :class="{ active: period === p.key }"
+              @click="period = p.key"
+            >
+              {{ p.label }}
+            </button>
+          </div>
+        </div>
+        <span class="lead-box__count">{{ leadCount ?? '…' }}</span>
+        <NuxtLink to="/admin/leads" class="lead-box__link">View all leads →</NuxtLink>
       </div>
 
       <section class="admin-recent">
@@ -89,32 +127,47 @@ onMounted(async () => {
 .admin-setup ol { padding-left: 1.3em; line-height: 1.9; }
 .admin-setup a { color: var(--green); }
 
-.admin-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 14px;
-  margin-bottom: 32px;
-}
-.admin-card {
+.lead-box {
   background: var(--white);
   border-radius: 14px;
-  padding: 18px;
-  text-decoration: none;
-  color: var(--body);
+  padding: 22px 24px;
+  max-width: 520px;
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  border: 1px solid transparent;
-  transition: border-color 0.15s ease;
+  gap: 8px;
 }
-.admin-card:hover { border-color: var(--green); }
-.admin-card__count {
+.lead-box__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.lead-box__label { font-weight: 700; }
+.lead-box__filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.lead-box__filter {
+  border: 1px solid #e2ddd1;
+  background: none;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: var(--grey-mid);
+}
+.lead-box__filter.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fffcf6;
+}
+.lead-box__count {
   font-family: var(--serif);
-  font-size: 1.9rem;
+  font-size: 2.6rem;
   color: var(--green);
   line-height: 1;
 }
-.admin-card__label { font-size: 0.85rem; color: var(--grey-mid); }
+.lead-box__link { color: var(--green); font-size: 0.85rem; text-decoration: none; }
 
 .admin-recent__head {
   display: flex;

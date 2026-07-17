@@ -7,8 +7,9 @@ usePageSeo({
 })
 
 const contactModal = useState('contact-modal', () => false)
-const { ctaText } = useCtaVariant()
+const { ctaText, trackClick } = useCtaVariant()
 function openContact() {
+  trackClick('tools-page')
   contactModal.value = true
 }
 

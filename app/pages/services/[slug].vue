@@ -51,8 +51,9 @@ const HERO_LISTS: Record<string, { label: string; items: string[] }> = {
 const heroList = HERO_LISTS[service.slug]
 
 const contactModal = useState('contact-modal', () => false)
-const { ctaText } = useCtaVariant()
+const { ctaText, trackClick } = useCtaVariant()
 function openContact() {
+  trackClick('service-buttons')
   contactModal.value = true
 }
 

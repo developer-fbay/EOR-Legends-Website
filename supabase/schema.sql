@@ -254,3 +254,17 @@ drop policy if exists "authenticated full cta_settings" on cta_settings;
 create policy "authenticated full cta_settings" on cta_settings
   for all to authenticated using (true) with check (true);
 -- (CTA block above was applied to production on 2026-07-16 via the Supabase API)
+
+-- ---------- CTA A/B round 3: click tracking + test duration ----------
+-- (applied to production 2026-07-17 via the Supabase API)
+alter table cta_events add column if not exists surface text;
+alter table cta_events drop constraint if exists cta_events_type_check;
+alter table cta_events add constraint cta_events_type_check check (type in ('impression','conversion','click'));
+create unique index if not exists cta_events_click_dedup
+  on cta_events (experiment_id, session_id, surface) where type = 'click';
+insert into cta_settings (key, value) values ('test_duration', '{"days":10}')
+on conflict (key) do nothing;
+create or replace view cta_event_breakdown with (security_invoker = true) as
+select variant_id, experiment_id, type, surface, source, count(*) as n
+from cta_events
+group by variant_id, experiment_id, type, surface, source;

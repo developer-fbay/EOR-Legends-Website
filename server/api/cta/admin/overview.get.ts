@@ -30,7 +30,13 @@ export default defineEventHandler(async (event) => {
   let current = null
   if (currentRows?.[0]) {
     const exp = currentRows[0]
-    current = { experiment: exp, variants: withCvr(await getVariantStats(exp.id)) }
+    const winners = await computeSectionWinners(exp.id)
+    current = {
+      experiment: exp,
+      variants: withCvr(await getVariantStats(exp.id)),
+      sectionLeaders: winners?.leaders || [],
+      endsAt: new Date(new Date(exp.started_at).getTime() + settings.durationDays * 24 * 60 * 60 * 1000).toISOString(),
+    }
   }
 
   const archivedRows =

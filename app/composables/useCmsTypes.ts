@@ -65,18 +65,17 @@ export const CMS_TYPES: Record<string, CmsType> = {
     publicPath: '/staffing-insights',
     extra: [{ key: 'pillar_id', label: 'Pillar ID (uuid)' }],
   },
-  'guides': {
-    label: 'Guides',
-    table: 'guides',
-    publicPath: '/guides',
-  },
-  'tools': {
-    label: 'Tools',
-    table: 'tools',
-    publicPath: '/tools',
-    extra: [{ key: 'tool_url', label: 'Tool URL' }],
-  },
 }
+
+/** The content types grouped under the CMS "Resources" tab. */
+export const RESOURCE_TYPE_KEYS = [
+  'blogs',
+  'news-articles',
+  'case-studies',
+  'hr-glossary',
+  'problem-pillars',
+  'problem-clusters',
+] as const
 
 export function useCmsConfigured() {
   const config = useRuntimeConfig()

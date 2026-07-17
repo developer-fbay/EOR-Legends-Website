@@ -21,7 +21,33 @@ export type CtaStats = {
   impressions: number
   conversions: number
 }
-export type CtaSettings = { mode: 'manual' | 'auto'; minImpressionsPerVariant: number }
+export type CtaSettings = { mode: 'manual' | 'auto'; minImpressionsPerVariant: number; durationDays: number }
+
+/** Every rotating section on the site. Forms are judged by conversions, the rest by clicks. */
+export const CTA_SURFACES = [
+  'header',
+  'footer',
+  'hero-form',
+  'mobile-hero',
+  'footer-form',
+  'popup-form',
+  'page-forms',
+  'cta-band',
+  'salary-tool',
+  'service-buttons',
+  'tools-page',
+  'how-it-works',
+] as const
+const FORM_SURFACES = new Set(['hero-form', 'footer-form', 'popup-form', 'page-forms'])
+
+/** Mirror of LeadForm's source -> surface mapping (conversion attribution). */
+export function sourceToFormSurface(source: string | null | undefined): string {
+  const s = source || ''
+  if (s === 'header') return 'hero-form'
+  if (s === 'footer') return 'footer-form'
+  if (s === 'popup' || s === 'contact-page') return 'popup-form'
+  return 'page-forms'
+}
 
 function sbUrl() {
   return process.env.SUPABASE_URL
@@ -71,12 +97,6 @@ export function londonMonth(d = new Date()): string {
   return `${y}-${m}`
 }
 
-function monthsBetween(a: string, b: string): number {
-  const [ay, am] = a.split('-').map(Number)
-  const [by, bm] = b.split('-').map(Number)
-  return (by! - ay!) * 12 + (bm! - am!)
-}
-
 /** Rank by CVR and assign 80/10/10. Blocks (ok:false) below the sample floor. */
 export function computePromotion(stats: CtaStats[], minImpressions: number) {
   const ranked = [...stats].sort((a, b) => {
@@ -118,7 +138,8 @@ export async function getCtaSettings(): Promise<CtaSettings> {
   const rows = await ctaRest<{ key: string; value: any }[]>('cta_settings?select=key,value')
   const mode = rows?.find((r) => r.key === 'promotion_mode')?.value?.mode === 'auto' ? 'auto' : 'manual'
   const min = Number(rows?.find((r) => r.key === 'min_sample')?.value?.impressions_per_variant) || 100
-  return { mode, minImpressionsPerVariant: min }
+  const days = Number(rows?.find((r) => r.key === 'test_duration')?.value?.days) || 10
+  return { mode, minImpressionsPerVariant: min, durationDays: Math.min(90, Math.max(1, days)) }
 }
 
 export async function getVariantStats(experimentId: string): Promise<CtaStats[]> {
@@ -129,24 +150,113 @@ export async function getVariantStats(experimentId: string): Promise<CtaStats[]>
   )
 }
 
-/** Promote: write 80/10/10 weights + winner flag, flip phase to exploiting. */
-export async function applyPromotion(
-  experimentId: string,
-  ranking: { variantId: string; weight: number }[],
-) {
-  for (const [i, r] of ranking.entries()) {
-    await ctaRest(`cta_variants?id=eq.${r.variantId}`, {
-      method: 'PATCH',
-      body: { weight: r.weight, is_winner: i === 0 },
-      headers: { Prefer: 'return=minimal' },
+export type SectionLeader = {
+  surface: string
+  metric: 'conversions' | 'clicks' | 'overall'
+  winnerVariantId: string
+  winnerText: string
+  score: number
+}
+
+/**
+ * Per-section winners: form sections by conversions-per-impression on THAT
+ * form; other sections by clicked-sessions-per-impression on THAT button;
+ * sections with no signal fall back to the overall winner.
+ */
+export async function computeSectionWinners(experimentId: string): Promise<{
+  leaders: SectionLeader[]
+  overall: { variantId: string; text: string }
+} | null> {
+  const stats = await getVariantStats(experimentId)
+  if (!stats.length) return null
+  const breakdown =
+    (await ctaRest<{ variant_id: string; type: string; surface: string | null; source: string | null; n: number }[]>(
+      `cta_event_breakdown?experiment_id=eq.${experimentId}&select=variant_id,type,surface,source,n`,
+    )) || []
+
+  const impressions: Record<string, number> = {}
+  for (const s of stats) impressions[s.variant_id] = Number(s.impressions)
+  const textById: Record<string, string> = {}
+  for (const s of stats) textById[s.variant_id] = s.text
+
+  // overall winner: total CVR, tiebreak conversions then clicks
+  const totals: Record<string, { conv: number; clicks: number }> = {}
+  for (const s of stats) totals[s.variant_id] = { conv: Number(s.conversions), clicks: 0 }
+  for (const b of breakdown) {
+    if (b.type === 'click') totals[b.variant_id] = totals[b.variant_id] || { conv: 0, clicks: 0 }
+    if (b.type === 'click') totals[b.variant_id]!.clicks += Number(b.n)
+  }
+  const overallRanked = [...stats].sort((a, b) => {
+    const ra = impressions[a.variant_id] ? totals[a.variant_id]!.conv / impressions[a.variant_id]! : 0
+    const rb = impressions[b.variant_id] ? totals[b.variant_id]!.conv / impressions[b.variant_id]! : 0
+    if (rb !== ra) return rb - ra
+    if (totals[b.variant_id]!.conv !== totals[a.variant_id]!.conv) return totals[b.variant_id]!.conv - totals[a.variant_id]!.conv
+    if (totals[b.variant_id]!.clicks !== totals[a.variant_id]!.clicks) return totals[b.variant_id]!.clicks - totals[a.variant_id]!.clicks
+    return a.sort_order - b.sort_order
+  })
+  const overall = { variantId: overallRanked[0]!.variant_id, text: overallRanked[0]!.text }
+
+  // per-surface signal: surface -> variant -> count
+  const bySurface: Record<string, Record<string, number>> = {}
+  for (const b of breakdown) {
+    let surface: string | null = null
+    if (b.type === 'click' && b.surface) surface = b.surface
+    if (b.type === 'conversion') surface = sourceToFormSurface(b.source)
+    if (!surface) continue
+    bySurface[surface] = bySurface[surface] || {}
+    bySurface[surface][b.variant_id] = (bySurface[surface][b.variant_id] || 0) + Number(b.n)
+  }
+
+  const leaders: SectionLeader[] = []
+  for (const surface of CTA_SURFACES) {
+    const counts = bySurface[surface]
+    if (!counts || !Object.values(counts).some((n) => n > 0)) {
+      leaders.push({ surface, metric: 'overall', winnerVariantId: overall.variantId, winnerText: overall.text, score: 0 })
+      continue
+    }
+    const ranked = Object.entries(counts).sort((a, b) => {
+      const ra = impressions[a[0]] ? a[1] / impressions[a[0]]! : 0
+      const rb = impressions[b[0]] ? b[1] / impressions[b[0]]! : 0
+      if (rb !== ra) return rb - ra
+      return b[1] - a[1]
+    })
+    const [variantId, n] = ranked[0]!
+    leaders.push({
+      surface,
+      metric: FORM_SURFACES.has(surface) ? 'conversions' : 'clicks',
+      winnerVariantId: variantId,
+      winnerText: textById[variantId] || overall.text,
+      score: impressions[variantId] ? n / impressions[variantId]! : 0,
     })
   }
+  return { leaders, overall }
+}
+
+/**
+ * Finish the test: lock each section to its winner (written as overrides so
+ * they show in Active custom CTAs and can be deleted/reverted one by one),
+ * then archive the experiment. Existing manual overrides are preserved.
+ */
+export async function finishCtaExperiment(experimentId: string): Promise<{ ok: boolean; leaders?: SectionLeader[] }> {
+  const winners = await computeSectionWinners(experimentId)
+  if (!winners) return { ok: false }
+  const existing = await getCtaOverrides()
+  const merged: CtaOverrides = { ...existing }
+  for (const l of winners.leaders) {
+    if (!merged[l.surface]) merged[l.surface] = l.winnerText
+  }
+  await ctaRest('cta_settings', {
+    method: 'POST',
+    body: { key: 'surface_overrides', value: merged, updated_at: new Date().toISOString() },
+    headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+  })
   await ctaRest(`cta_experiments?id=eq.${experimentId}`, {
     method: 'PATCH',
-    body: { phase: 'exploiting', promoted_at: new Date().toISOString(), needs_attention: null },
+    body: { phase: 'archived', archived_at: new Date().toISOString(), promoted_at: new Date().toISOString(), needs_attention: null },
     headers: { Prefer: 'return=minimal' },
   })
   invalidateCtaCache()
+  return { ok: true, leaders: winners.leaders }
 }
 
 // ---------------------------------------------------------------------------
@@ -196,62 +306,39 @@ export async function evaluateCtaLifecycle() {
   lifecycleRunning = true
   lifecycleAt = Date.now()
   try {
-    const exps = await ctaRest<{ id: string; month: string; phase: string }[]>(
-      'cta_experiments?phase=neq.archived&select=id,month,phase&limit=1',
+    const exps = await ctaRest<{ id: string; phase: string; started_at: string; needs_attention: string | null }[]>(
+      'cta_experiments?phase=neq.archived&select=id,phase,started_at,needs_attention&limit=1',
     )
     const exp = exps?.[0]
     if (!exp) return
-    const nowMonth = londonMonth()
-    if (nowMonth <= exp.month) return
 
     const settings = await getCtaSettings()
+    const endsAt = new Date(exp.started_at).getTime() + settings.durationDays * 24 * 60 * 60 * 1000
+    if (Date.now() < endsAt) return
 
-    if (exp.phase === 'exploring') {
-      if (settings.mode === 'auto') {
-        const stats = await getVariantStats(exp.id)
-        const p = computePromotion(stats, settings.minImpressionsPerVariant)
-        if (p.ok) {
-          await applyPromotion(exp.id, p.ranking)
-          console.log(`[cta] auto-promoted experiment ${exp.id} (${exp.month}) to 80/10/10`)
-        } else {
-          await ctaRest(`cta_experiments?id=eq.${exp.id}`, {
-            method: 'PATCH',
-            body: {
-              needs_attention: `Auto-promotion skipped: fewer than ${settings.minImpressionsPerVariant} impressions per variant`,
-            },
-            headers: { Prefer: 'return=minimal' },
-          })
-          invalidateCtaCache()
-        }
-      } else {
-        await ctaRest(`cta_experiments?id=eq.${exp.id}`, {
-          method: 'PATCH',
-          body: { needs_attention: 'New month: promote the winner or start a new CTA set' },
-          headers: { Prefer: 'return=minimal' },
-        })
-        invalidateCtaCache()
-      }
-    } else if (exp.phase === 'exploiting' && monthsBetween(exp.month, nowMonth) >= 2) {
-      // second rollover with no new set: winner carries at 100%
+    if (settings.mode === 'auto') {
       const stats = await getVariantStats(exp.id)
-      const winner = stats.find((s) => s.is_winner) || computePromotion(stats, 0).ranking[0]
-      if (winner) {
-        const winnerId = 'variant_id' in winner ? winner.variant_id : winner.variantId
-        for (const s of stats) {
-          await ctaRest(`cta_variants?id=eq.${s.variant_id}`, {
-            method: 'PATCH',
-            body: { weight: s.variant_id === winnerId ? 100 : 0 },
-            headers: { Prefer: 'return=minimal' },
-          })
-        }
+      const p = computePromotion(stats, settings.minImpressionsPerVariant)
+      if (p.ok) {
+        await finishCtaExperiment(exp.id)
+        console.log(`[cta] auto-finished experiment ${exp.id}: per-section winners locked in`)
+      } else if (!exp.needs_attention) {
         await ctaRest(`cta_experiments?id=eq.${exp.id}`, {
           method: 'PATCH',
-          body: { phase: 'carryover', needs_attention: 'Winner carrying over at 100%: enter 3 new CTAs' },
+          body: {
+            needs_attention: `Auto-finish skipped: fewer than ${settings.minImpressionsPerVariant} impressions per variant. Finish manually or wait for more traffic.`,
+          },
           headers: { Prefer: 'return=minimal' },
         })
         invalidateCtaCache()
-        console.log(`[cta] experiment ${exp.id} moved to carryover (winner at 100%)`)
       }
+    } else if (!exp.needs_attention) {
+      await ctaRest(`cta_experiments?id=eq.${exp.id}`, {
+        method: 'PATCH',
+        body: { needs_attention: `This test has run its ${settings.durationDays} days: finish it to lock in the winners, or keep it running.` },
+        headers: { Prefer: 'return=minimal' },
+      })
+      invalidateCtaCache()
     }
   } catch (err: any) {
     console.error('[cta] lifecycle evaluation failed:', err?.message)

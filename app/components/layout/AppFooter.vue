@@ -15,8 +15,9 @@ const services = [
 ]
 // "Contact Us" opens the popup form (Gravity Form 31), same as the navbar button.
 const contactModal = useState('contact-modal', () => false)
-const { ctaText } = useCtaVariant()
+const { ctaText, trackClick } = useCtaVariant()
 function openContact() {
+  trackClick('footer')
   contactModal.value = true
 }
 const resources = [

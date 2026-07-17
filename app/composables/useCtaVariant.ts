@@ -100,6 +100,25 @@ export function useCtaVariant() {
     }
   }
 
+  /** CTA click ping — once per session per section; powers per-section winners. */
+  function trackClick(surface: string) {
+    if (import.meta.server) return
+    const a = config.value
+    const sid = sessionId()
+    if (!a || !sid || !variantId.value) return
+    try {
+      const flag = `cta_clk_${a.experimentId}_${surface}`
+      if (sessionStorage.getItem(flag)) return
+      sessionStorage.setItem(flag, '1')
+      $fetch('/api/cta/click', {
+        method: 'POST',
+        body: { sessionId: sid, experimentId: a.experimentId, variantId: variantId.value, surface },
+      }).catch(() => {})
+    } catch {
+      /* tracking must never surface errors */
+    }
+  }
+
   /** Fire-and-forget, once per session per experiment. */
   function trackImpression() {
     if (import.meta.server) return
@@ -119,5 +138,5 @@ export function useCtaVariant() {
     }
   }
 
-  return { ctaText, experimentId, variantId, sessionId, trackImpression }
+  return { ctaText, experimentId, variantId, sessionId, trackImpression, trackClick }
 }

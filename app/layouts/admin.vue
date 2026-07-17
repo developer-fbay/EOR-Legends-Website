@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { CMS_TYPES } from '~/composables/useCmsTypes'
-
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
@@ -20,9 +18,10 @@ async function signOut() {
 
       <nav class="admin-nav">
         <NuxtLink to="/admin">Dashboard</NuxtLink>
-        <NuxtLink v-for="(t, key) in CMS_TYPES" :key="key" :to="`/admin/${key}`">{{ t.label }}</NuxtLink>
+        <NuxtLink to="/admin/resources">Resources</NuxtLink>
+        <NuxtLink to="/admin/services">Services</NuxtLink>
         <NuxtLink to="/admin/leads">Leads</NuxtLink>
-        <NuxtLink to="/admin/cta">CTA Experiments</NuxtLink>
+        <NuxtLink to="/admin/cta">A/B CTA Testing</NuxtLink>
       </nav>
 
       <div class="admin-user">

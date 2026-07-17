@@ -14,6 +14,10 @@ export default defineEventHandler(async (event) => {
   if (Number.isFinite(min) && min >= 0 && min <= 100000) {
     updates.push({ key: 'min_sample', value: { impressions_per_variant: Math.round(min) } })
   }
+  const days = Number(body?.durationDays)
+  if (Number.isFinite(days) && days >= 1 && days <= 90) {
+    updates.push({ key: 'test_duration', value: { days: Math.round(days) } })
+  }
   // custom texts: { surfaceKey: text } or { 'surfaceKey@/page/path': text };
   // blank/empty = follow experiment
   if (body?.surfaceOverrides && typeof body.surfaceOverrides === 'object' && !Array.isArray(body.surfaceOverrides)) {
