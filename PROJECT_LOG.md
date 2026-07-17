@@ -40,6 +40,11 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-17 — CTA feature round 2 (committed, NOT yet pushed)
+- New homepage FAQ set from the content team (7 questions, numbers removed; structured data follows).
+- "Stop & revert to default texts" button on /admin/cta (+ auth-guarded stop endpoint); Codi's test experiment cleared.
+- Per-Section Texts panel: 11 sections individually lockable to custom texts from the dashboard (blank = follow experiment/default); resolution override > variant > fallback, verified with mixed experiment + override.
+
 ### 2026-07-16 — CTA A/B rotation feature (built, committed, NOT yet pushed)
 - Monthly CTA text rotation across every contact-intent button (form submits, header/footer Contact Us, consultation band, Speak to an Expert, Lets get started, mobile hero popup CTA): 3 texts at 33/33/33, winner promoted to 80/10/10 (manual button or auto on the 1st, Europe/London), winner carries at 100% if no new set.
 - Supabase tables created in production via the Management API (cta_experiments/variants/events/settings + stats view, RLS locked to service key + authenticated admin); schema documented in supabase/schema.sql.
