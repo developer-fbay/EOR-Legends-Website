@@ -13,12 +13,12 @@ const steps = [
   },
   {
     label: 'WEEK 2',
-    title: 'We employ and onboard them',
+    title: 'We employ and onboard',
     desc: 'We formalise the offer, issue a compliant South African employment contract and set up payroll, HR, equipment and benefits.',
   },
   {
     label: 'ONGOING',
-    title: 'You lead them. We handle the rest.',
+    title: 'We handle the admin',
     desc: 'They work directly within your team. We remain the legal employer and manage payroll, tax, HR, compliance and local employee support.',
   },
 ]
