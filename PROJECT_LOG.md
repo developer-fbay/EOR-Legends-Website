@@ -40,6 +40,12 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-17 — A/B CTA Testing round 3 + CMS restructure (committed, NOT yet pushed)
+- Renamed to "A/B CTA Testing". Click tracking per section added (new cta_events type + surface + breakdown view, applied to prod Supabase).
+- Tests run a configurable length (default 10 days); finish (auto/manual) locks each section to ITS winner (forms by conversions, buttons by clicks, overall fallback) written as deletable overrides; verified with distinct per-section winners on real data.
+- Dashboard rebuilt with modals (start test, navbar CTA, page CTAs via page picker incl. All pages), Active custom CTAs list with per-item delete/revert, per-section leader chips; Per-Section Texts panel + 80/10/10 promote removed.
+- CMS: Tools + Guides types removed; 6 content types consolidated under a Resources tab; Services keeps its tab; dashboard is lead-centric (all-time count with Today/Week/Month filters + recent leads).
+
 ### 2026-07-17 — CTA feature round 2 (committed, NOT yet pushed)
 - New homepage FAQ set from the content team (7 questions, numbers removed; structured data follows).
 - "Stop & revert to default texts" button on /admin/cta (+ auth-guarded stop endpoint); Codi's test experiment cleared.
