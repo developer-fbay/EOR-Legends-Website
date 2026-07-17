@@ -14,32 +14,32 @@ const resourceLinks = [
 
 const faqs = [
   {
-    q: 'What is an Employer of Record and how is it different from a recruitment agency?',
-    a: "An EOR is the legal employer of your SA team member; we handle the contract, payroll, tax, and compliance while you direct the work. A recruiter just finds the person and steps away; an EOR employs them, no local entity needed. Unlike a PEO, we don't require you to have your own SA entity.",
+    q: 'What is an Employer of Record?',
+    a: 'An Employer of Record (EOR) employs your South African team members through its local entity and manages their contracts, payroll, statutory deductions and employment administration. You continue to direct their day-to-day work.',
   },
   {
-    q: 'Who does the SA team member work for, Legends EOR or my company?',
-    a: 'Legally, Legends EOR is the employer, and we hold the contract, payroll, tax, and compliance obligations. Operationally, the person works for you: your projects, your management, your culture.',
+    q: "Who is the employee's actual employer?",
+    a: "The EOR is named as the employer in the employment agreement and manages the formal employment relationship. Your company remains responsible for the employee's role, objectives and day-to-day supervision.",
   },
   {
-    q: 'Can I hire just one person, or is there a minimum?',
-    a: 'You can hire a single person. There is no minimum team size. Many clients start with one hire and grow from there.',
-  },
-  {
-    q: 'How do I pay, and what are the fees?',
-    a: 'You receive one itemised monthly invoice in sterling covering salary, statutory contributions, benefits and our management fee, with no hidden costs.',
-  },
-  {
-    q: 'How long does it take to hire someone in South Africa through an EOR?',
-    a: 'You will see the first CVs within 7 days, and most clients go from brief to a working first hire in 2–4 weeks. With no entity setup or local admin on your side, nothing slows the process down.',
+    q: 'What does the EOR handle, and what do we still manage?',
+    a: "The EOR manages the employment agreement, payroll, statutory deductions and agreed employment-compliance processes. You manage the employee's daily responsibilities, performance and priorities.",
   },
   {
     q: 'Who owns the intellectual property my SA team member creates?',
-    a: 'You do. Employment contracts assign all intellectual property created by the employee to your company.',
+    a: 'The employment contract assigns all intellectual property created by the employee to your company. The employee works exclusively within your business, uses your systems and processes, and reports directly to your management team, ensuring that all work product and IP belong to your organisation.',
   },
   {
-    q: "What happens if it doesn't work out with a hire?",
-    a: 'We manage the exit compliantly under South African labour law, including notice periods, documentation and any statutory requirements, protecting you from CCMA disputes.',
+    q: 'What is included in the EOR fee?',
+    a: "You receive a single, itemised monthly invoice in your currency which includes the employee's full monthly salary, statutory contributions, benefits, and any pre-approved expenses.",
+  },
+  {
+    q: 'How are taxes and statutory contributions handled?',
+    a: 'We calculate and process the applicable payroll deductions and statutory employer contributions, then make the required payments and submissions to the relevant authorities.',
+  },
+  {
+    q: 'Can we hire just one person, or is there a minimum?',
+    a: 'You can use our EOR service to hire a single employee in South Africa. There is no minimum team size, so you can expand your team as your needs grow.',
   },
 ]
 
