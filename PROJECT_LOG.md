@@ -40,6 +40,11 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-17 (later) — CEO copy pass + polish (committed, NOT yet pushed)
+- Home: all 7 section subheadings replaced with CEO copy (md file).
+- HR service page: new hero subtext; section-copy fields per service (defaults unchanged elsewhere); HIW section replaced with "What makes our HR support different?" + 3 new steps; timeline arrow tips removed (desktop+mobile), lines and dots kept. NOTE: the md's HIW subtext ("From learning your culture...") was superseded by the inline full-replacement copy.
+- CMS: empty Services tab removed; A/B dashboard buttons unified green; tooltips explaining every CTA section; popup opener vs popup submit clearly split.
+
 ### 2026-07-17 — A/B CTA Testing round 3 + CMS restructure (committed, NOT yet pushed)
 - Renamed to "A/B CTA Testing". Click tracking per section added (new cta_events type + surface + breakdown view, applied to prod Supabase).
 - Tests run a configurable length (default 10 days); finish (auto/manual) locks each section to ITS winner (forms by conversions, buttons by clicks, overall fallback) written as deletable overrides; verified with distinct per-section winners on real data.
