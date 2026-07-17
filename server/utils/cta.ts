@@ -96,6 +96,20 @@ export function computePromotion(stats: CtaStats[], minImpressions: number) {
   }
 }
 
+/** Per-section custom texts: surface key -> text. Overridden sections don't rotate. */
+export type CtaOverrides = Record<string, string>
+
+export async function getCtaOverrides(): Promise<CtaOverrides> {
+  const rows = await ctaRest<{ value: any }[]>('cta_settings?key=eq.surface_overrides&select=value')
+  const v = rows?.[0]?.value
+  if (!v || typeof v !== 'object' || Array.isArray(v)) return {}
+  const clean: CtaOverrides = {}
+  for (const [k, t] of Object.entries(v)) {
+    if (typeof t === 'string' && t.trim()) clean[String(k).slice(0, 40)] = t.trim().slice(0, 60)
+  }
+  return clean
+}
+
 export async function getCtaSettings(): Promise<CtaSettings> {
   const rows = await ctaRest<{ key: string; value: any }[]>('cta_settings?select=key,value')
   const mode = rows?.find((r) => r.key === 'promotion_mode')?.value?.mode === 'auto' ? 'auto' : 'manual'
@@ -134,34 +148,34 @@ export async function applyPromotion(
 // ---------------------------------------------------------------------------
 // Active-config cache (single DO instance, same assumption as rate-limit.ts)
 // ---------------------------------------------------------------------------
-let cache: { data: { active: CtaActive | null }; at: number } | null = null
+let cache: { data: { active: CtaActive | null; overrides: CtaOverrides }; at: number } | null = null
 
 export function invalidateCtaCache() {
   cache = null
 }
 
-export async function getActiveCtaConfig(): Promise<{ active: CtaActive | null }> {
+export async function getActiveCtaConfig(): Promise<{ active: CtaActive | null; overrides: CtaOverrides }> {
   if (cache && Date.now() - cache.at < 60_000) return cache.data
   const exps = await ctaRest<{ id: string; month: string; phase: string }[]>(
     'cta_experiments?phase=neq.archived&select=id,month,phase&limit=1',
   )
   const exp = exps?.[0]
-  let data: { active: CtaActive | null } = { active: null }
+  let active: CtaActive | null = null
   if (exp) {
     const variants = await ctaRest<{ id: string; text: string; weight: number }[]>(
       `cta_variants?experiment_id=eq.${exp.id}&select=id,text,weight&order=sort_order.asc`,
     )
     if (variants?.length) {
-      data = {
-        active: {
-          experimentId: exp.id,
-          month: exp.month,
-          phase: exp.phase,
-          variants: variants.map((v) => ({ id: v.id, text: v.text, weight: Number(v.weight) })),
-        },
+      active = {
+        experimentId: exp.id,
+        month: exp.month,
+        phase: exp.phase,
+        variants: variants.map((v) => ({ id: v.id, text: v.text, weight: Number(v.weight) })),
       }
     }
   }
+  const overrides = await getCtaOverrides()
+  const data = { active, overrides }
   cache = { data, at: Date.now() }
   return data
 }

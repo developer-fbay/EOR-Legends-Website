@@ -56,7 +56,7 @@ const faqs = [
         <p class="tool-hero__sub">
           Compare salaries across countries and see how your hiring budget can go further.
         </p>
-        <button type="button" class="brand-btn brand-btn--orange" @click="openContact">{{ ctaText('Contact us') }}</button>
+        <button type="button" class="brand-btn brand-btn--orange" @click="openContact">{{ ctaText('Contact us', 'tools-page') }}</button>
       </div>
     </section>
 
@@ -135,7 +135,7 @@ const faqs = [
           </div>
           <div class="tool-hiw__bottom">
             <p><span>From brief to a working hire in under a month</span> – no subsidiary, no setup, no local admin.</p>
-            <button type="button" class="brand-btn brand-btn--outline" @click="openContact">{{ ctaText('Lets get started') }} →</button>
+            <button type="button" class="brand-btn brand-btn--outline" @click="openContact">{{ ctaText('Lets get started', 'tools-page') }} →</button>
           </div>
         </div>
       </div>

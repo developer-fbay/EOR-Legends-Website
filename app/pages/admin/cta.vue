@@ -26,10 +26,26 @@ type ExperimentBlock = {
 }
 type Overview = {
   settings: { mode: 'manual' | 'auto'; minImpressionsPerVariant: number }
+  surfaceOverrides: Record<string, string>
   currentMonth: string
   current: ExperimentBlock | null
   changelog: ExperimentBlock[]
 }
+
+// Every rotating section on the site, with its built-in default text.
+const SURFACES = [
+  { key: 'header', label: 'Header button (all pages)', fallback: 'Contact Us' },
+  { key: 'footer', label: 'Footer button (all pages)', fallback: 'Contact Us' },
+  { key: 'hero-form', label: 'Homepage hero form submit', fallback: 'Speak to our team' },
+  { key: 'mobile-hero', label: 'Mobile hero popup button', fallback: 'Speak to our team' },
+  { key: 'footer-form', label: 'Footer form submit', fallback: 'Speak to our team' },
+  { key: 'popup-form', label: 'Popup + contact page form submit', fallback: 'Speak to our team' },
+  { key: 'page-forms', label: 'Service / insight page form submits', fallback: 'Speak to our team' },
+  { key: 'cta-band', label: 'Consultation band', fallback: 'Schedule a free consultation' },
+  { key: 'salary-tool', label: 'Salary tool expert button', fallback: 'Speak to an Expert' },
+  { key: 'service-buttons', label: 'Service page contact buttons', fallback: 'Contact us' },
+  { key: 'tools-page', label: 'Tools page buttons', fallback: 'Contact us / Lets get started' },
+]
 
 const overview = ref<Overview | null>(null)
 const loadError = ref('')
@@ -44,6 +60,9 @@ const minSample = ref(100)
 const newTexts = ref(['', '', ''])
 const startConfirm = ref(false)
 
+// per-section custom texts
+const overridesForm = ref<Record<string, string>>({})
+
 // promote flow
 const promoteBlocked = ref<{ minimum: number; underSampled: { text: string; impressions: number }[] } | null>(null)
 
@@ -57,6 +76,7 @@ async function load() {
     overview.value = data
     mode.value = data.settings.mode
     minSample.value = data.settings.minImpressionsPerVariant
+    overridesForm.value = Object.fromEntries(SURFACES.map((s) => [s.key, data.surfaceOverrides?.[s.key] || '']))
     await nextTick()
     renderChart()
   } catch (err: any) {
@@ -155,6 +175,20 @@ async function promote(force = false) {
     }
   } catch (err: any) {
     notice.value = err?.statusMessage || 'Promotion failed.'
+  } finally {
+    busy.value = false
+  }
+}
+
+async function saveOverrides() {
+  busy.value = true
+  notice.value = ''
+  try {
+    await $fetch('/api/cta/admin/settings', { method: 'PUT', body: { surfaceOverrides: overridesForm.value } })
+    notice.value = 'Section texts saved: they appear on the site within a minute.'
+    await load()
+  } catch {
+    notice.value = 'Saving section texts failed.'
   } finally {
     busy.value = false
   }
@@ -307,6 +341,24 @@ onBeforeUnmount(() => chart?.destroy())
       </div>
     </section>
 
+    <!-- Per-section texts -->
+    <section class="cta-card">
+      <h2>Per-Section Texts</h2>
+      <p class="cta-meta">
+        Leave a section blank to let it rotate with the experiment (or show its default text when no
+        experiment is running). Type a custom text and that section locks to it, so it does not rotate.
+        Max 60 characters.
+      </p>
+      <div v-for="s in SURFACES" :key="s.key" class="cta-input-row">
+        <label class="cta-surface-label">
+          {{ s.label }}
+          <small>default: {{ s.fallback }}</small>
+        </label>
+        <input v-model="overridesForm[s.key]" type="text" maxlength="60" placeholder="Follows experiment / default" />
+      </div>
+      <button class="cta-btn cta-btn--primary" :disabled="busy" @click="saveOverrides">Save section texts</button>
+    </section>
+
     <!-- Changelog -->
     <section class="cta-card">
       <h2>Changelog</h2>
@@ -418,6 +470,15 @@ onBeforeUnmount(() => chart?.destroy())
   font: inherit;
 }
 .cta-count { font-size: 0.78rem; color: #999; width: 46px; text-align: right; }
+.cta-surface-label {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  flex: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.cta-surface-label small { font-weight: 400; color: #999; }
 .cta-preview { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 14px; }
 .cta-preview-btn { pointer-events: none; }
 .cta-start { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }

@@ -9,7 +9,7 @@ const { ctaText } = useCtaVariant()
         <h2>Ready to cut hiring costs by up to 60%?</h2>
         <p>Talk to our team and get a custom cost comparison in 24 hours.</p>
       </div>
-      <NuxtLink to="/contact" class="brand-btn brand-btn--outline">{{ ctaText('Schedule a free consultation') }}</NuxtLink>
+      <NuxtLink to="/contact" class="brand-btn brand-btn--outline">{{ ctaText('Schedule a free consultation', 'cta-band') }}</NuxtLink>
     </div>
   </section>
 </template>

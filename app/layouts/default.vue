@@ -5,11 +5,16 @@ import type { CtaActiveConfig } from '~/composables/useCtaVariant'
 // surfaces read the shared 'cta-active' state), then record one impression
 // per browser session. Internal pages don't count as exposure.
 const ctaActive = useState<CtaActiveConfig | null>('cta-active', () => null)
+const ctaOverrides = useState<Record<string, string>>('cta-overrides', () => ({}))
 const { data: ctaConfig } = await useAsyncData(
   'cta-config',
-  () => $fetch<{ active: CtaActiveConfig | null }>('/api/cta/config').catch(() => ({ active: null })),
+  () =>
+    $fetch<{ active: CtaActiveConfig | null; overrides: Record<string, string> }>('/api/cta/config').catch(
+      () => ({ active: null, overrides: {} }),
+    ),
 )
 ctaActive.value = ctaConfig.value?.active || null
+ctaOverrides.value = ctaConfig.value?.overrides || {}
 
 const route = useRoute()
 onMounted(() => {

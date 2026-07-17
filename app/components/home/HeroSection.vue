@@ -32,7 +32,7 @@ const { ctaText } = useCtaVariant()
         <UiGoogleReviews class="hero-reviews" />
 
         <button type="button" class="brand-btn brand-btn--orange hero-mobile-cta" @click="contactModal = true">
-          {{ ctaText('Speak to our team') }}
+          {{ ctaText('Speak to our team', 'mobile-hero') }}
         </button>
       </div>
 

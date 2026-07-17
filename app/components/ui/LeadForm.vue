@@ -37,6 +37,15 @@ const status = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 // travels with the submission for conversion attribution.
 const cta = useCtaVariant()
 
+// Per-section override key, derived from where this form instance lives
+const formSurface = computed(() => {
+  const s = props.source || ''
+  if (s === 'header') return 'hero-form'
+  if (s === 'footer') return 'footer-form'
+  if (s === 'popup' || s === 'contact-page') return 'popup-form'
+  return 'page-forms'
+})
+
 // Conditional reveals
 const showAudience = computed(() => form.phone.trim().length > 0)
 const showDetails = computed(() => showAudience.value && form.audience !== '')
@@ -187,7 +196,7 @@ async function submit() {
       </Transition>
 
       <button type="submit" class="lead-form__submit" :disabled="status === 'sending'">
-        {{ status === 'sending' ? 'Sending…' : cta.ctaText(buttonText) }}
+        {{ status === 'sending' ? 'Sending…' : cta.ctaText(buttonText, formSurface) }}
       </button>
       <p v-if="status === 'error'" class="lead-form__error">
         Something went wrong. Please try again or email

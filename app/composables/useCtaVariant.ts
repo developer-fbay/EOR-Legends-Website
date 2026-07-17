@@ -19,6 +19,7 @@ export type CtaActiveConfig = {
 
 export function useCtaVariant() {
   const config = useState<CtaActiveConfig | null>('cta-active', () => null)
+  const overrides = useState<Record<string, string>>('cta-overrides', () => ({}))
   const cookie = useCookie<{ e: string; v: string } | null>('cta_ab', {
     maxAge: 60 * 60 * 24 * 180,
     sameSite: 'lax',
@@ -61,8 +62,13 @@ export function useCtaVariant() {
     return v ? v.id : null
   })
 
-  /** The assigned variant's text, or the surface's own hardcoded fallback. */
-  function ctaText(fallback: string): string {
+  /**
+   * Resolution order: the section's custom text from the dashboard (that
+   * section then doesn't rotate) > the visitor's experiment variant > the
+   * surface's own hardcoded fallback.
+   */
+  function ctaText(fallback: string, surface?: string): string {
+    if (surface && overrides.value[surface]) return overrides.value[surface]!
     const a = config.value
     if (!a || cookie.value?.e !== a.experimentId) return fallback
     const v = a.variants.find((x) => x.id === cookie.value!.v)

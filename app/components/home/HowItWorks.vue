@@ -49,7 +49,7 @@ const steps = [
           </div>
           <div class="hiw-bottom">
             <p>From the brief to a working hire in under a month. No subsidiary, no setup, no local admin.</p>
-            <NuxtLink to="/contact" class="brand-btn brand-btn--outline">{{ ctaText('Lets get started') }}</NuxtLink>
+            <NuxtLink to="/contact" class="brand-btn brand-btn--outline">{{ ctaText('Lets get started', 'how-it-works') }}</NuxtLink>
           </div>
         </div>
       </div>

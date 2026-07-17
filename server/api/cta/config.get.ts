@@ -9,6 +9,6 @@ export default defineEventHandler(async () => {
     evaluateCtaLifecycle().catch(() => {})
     return await getActiveCtaConfig()
   } catch {
-    return { active: null }
+    return { active: null, overrides: {} }
   }
 })

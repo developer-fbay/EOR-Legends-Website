@@ -378,7 +378,7 @@ onBeforeUnmount(() => {
 
             <div class="sbt-results-actions">
               <button type="button" class="sbt-btn sbt-btn-secondary" :disabled="!searched" @click="reset">Reset Calculator</button>
-              <NuxtLink to="/contact" class="sbt-btn sbt-btn-expert">{{ ctaText('Speak to an Expert') }}</NuxtLink>
+              <NuxtLink to="/contact" class="sbt-btn sbt-btn-expert">{{ ctaText('Speak to an Expert', 'salary-tool') }}</NuxtLink>
             </div>
           </div>
         </div>

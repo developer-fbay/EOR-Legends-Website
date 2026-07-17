@@ -67,7 +67,7 @@ const year = new Date().getFullYear()
           <h4>Get started</h4>
           <NuxtLink to="/">Home</NuxtLink>
           <NuxtLink to="/about">About us</NuxtLink>
-          <button type="button" class="footer-contact-btn" @click="openContact">{{ ctaText('Contact Us') }}</button>
+          <button type="button" class="footer-contact-btn" @click="openContact">{{ ctaText('Contact Us', 'footer') }}</button>
           <a href="https://the-legends-agency.com/careers/" target="_blank" rel="noopener">Careers</a>
           <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink>
           <NuxtLink to="/modern-slavery-act">Modern Slavery Act</NuxtLink>

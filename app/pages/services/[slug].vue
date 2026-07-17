@@ -122,7 +122,7 @@ const faqs = computed(() => {
               class="brand-btn brand-btn--outline"
               @click="openContact"
             >
-              {{ ctaText('Contact us') }}
+              {{ ctaText('Contact us', 'service-buttons') }}
             </button>
           </div>
           <div class="svc-ov-card__img">

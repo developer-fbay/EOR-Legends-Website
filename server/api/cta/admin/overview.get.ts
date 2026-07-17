@@ -42,5 +42,5 @@ export default defineEventHandler(async (event) => {
     changelog.push({ experiment: exp, variants: withCvr(await getVariantStats(exp.id)) })
   }
 
-  return { settings, currentMonth: londonMonth(), current, changelog }
+  return { settings, surfaceOverrides: await getCtaOverrides(), currentMonth: londonMonth(), current, changelog }
 })
