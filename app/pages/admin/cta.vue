@@ -136,7 +136,16 @@ function renderChart() {
     type: 'bar',
     data: {
       labels: rows.map((v) => `${v.text} (${v.impressions} views)`),
-      datasets: [{ label: 'Conversion rate', data: rows.map((v) => Math.round(v.cvr * 10000) / 100), backgroundColor: rows.map((v) => (v.isWinner ? '#eb3d00' : '#3B8949')), borderRadius: 4 }],
+      datasets: [{
+        label: 'Conversion rate',
+        data: rows.map((v) => Math.round(v.cvr * 10000) / 100),
+        // the current CVR leader carries the live accent
+        backgroundColor: (() => {
+          const top = Math.max(...rows.map((v) => v.cvr))
+          return rows.map((v) => (v.cvr === top && top > 0 ? '#eb3d00' : '#3B8949'))
+        })(),
+        borderRadius: 4,
+      }],
     },
     options: {
       indexAxis: 'y',
@@ -148,13 +157,7 @@ function renderChart() {
   })
 }
 
-const banner = computed(() => {
-  const o = overview.value
-  if (!o) return null
-  if (!o.current) return 'No A/B test is running. The site shows its default texts plus any custom CTAs below.'
-  if (o.current.experiment.needs_attention) return o.current.experiment.needs_attention
-  return null
-})
+const banner = computed(() => overview.value?.current?.experiment.needs_attention || null)
 
 function pct(v: number) {
   return `${Math.round(v * 10000) / 100}%`
@@ -320,9 +323,9 @@ onBeforeUnmount(() => chart?.destroy())
     <p v-if="notice" class="cta-notice">{{ notice }}</p>
 
     <!-- Current test analytics -->
-    <section v-if="overview?.current" class="cta-card">
+    <section v-if="overview?.current" class="cta-card cta-card--live">
       <div class="cta-card__head">
-        <h2>Running Test</h2>
+        <h2><span class="cta-live-dot" aria-hidden="true" /> Running Test</h2>
         <span class="cta-phase">33 / 33 / 33</span>
       </div>
       <p class="cta-meta">
@@ -369,22 +372,26 @@ onBeforeUnmount(() => chart?.destroy())
     <section class="cta-card">
       <div class="cta-card__head">
         <h2>Test Controls</h2>
-        <button v-if="!overview?.current" class="cta-btn cta-btn--primary" @click="showStart = true">Start new A/B test</button>
       </div>
+      <div v-if="!overview?.current" class="cta-empty">
+        <p>No A/B test is running. Start one to rotate three texts across every CTA on the site.</p>
+        <button class="cta-btn cta-btn--primary" @click="showStart = true">Start new A/B test</button>
+      </div>
+      <div class="cta-divider" />
       <div class="cta-settings">
         <label>
-          Finish mode
+          <span class="cta-label">Finish mode</span>
           <select v-model="mode">
             <option value="manual">Manual (I press Finish)</option>
             <option value="auto">Automatic (after the test length)</option>
           </select>
         </label>
         <label>
-          Test length (days)
+          <span class="cta-label">Test length (days)</span>
           <input v-model.number="durationDays" type="number" min="1" max="90" />
         </label>
         <label>
-          Min impressions per text
+          <span class="cta-label">Min impressions per text</span>
           <input v-model.number="minSample" type="number" min="0" max="100000" />
         </label>
         <button class="cta-btn" :disabled="busy" @click="saveSettings">Save settings</button>
@@ -398,16 +405,16 @@ onBeforeUnmount(() => chart?.destroy())
         Change individual CTAs without a test. Custom texts always win over the A/B test; delete one
         and that section reverts to the test / default.
       </p>
-      <div class="cta-controls">
+      <div class="cta-toolbar">
         <button class="cta-btn" @click="openNavbarModal">Change navbar CTA</button>
-        <div class="cta-pagepick">
-          <select v-model="selectedPagePath">
-            <option v-for="p in PAGES" :key="p.path" :value="p.path">{{ p.label }}</option>
-          </select>
-          <button class="cta-btn" @click="openPageModal">Change CTAs on this page</button>
-        </div>
+        <span class="cta-toolbar__or">or</span>
+        <select v-model="selectedPagePath">
+          <option v-for="p in PAGES" :key="p.path" :value="p.path">{{ p.label }}</option>
+        </select>
+        <button class="cta-btn" @click="openPageModal">Change CTAs on this page</button>
       </div>
 
+      <div class="cta-divider" />
       <h3 class="cta-subhead">Active Custom CTAs</h3>
       <p v-if="!activeCustom.length" class="cta-meta">None: everything follows the test / defaults.</p>
       <div v-for="row in activeCustom" :key="row.key" class="cta-rule" :title="SURFACES[row.key.split('@')[0]!]?.hint">
@@ -497,63 +504,281 @@ onBeforeUnmount(() => chart?.destroy())
 </template>
 
 <style scoped>
-.cta-admin h1 { margin-bottom: 6px; }
-.cta-intro { color: #666; margin-bottom: 18px; max-width: 72ch; }
+/* ============================================================
+   A/B CTA Testing — design tokens
+   canvas #f6f4ee · card #fff · hairline #e7e2d4 · ink #1c2520
+   muted #71786f · green #014520 · tint #eef3ea · live #eb3d00
+   column 920px · card pad 24 · card gap 20 · rhythm 16 · controls 38px
+   ============================================================ */
+.cta-admin {
+  max-width: 920px;
+  margin-inline: auto;
+}
+.cta-admin h1 {
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  margin-bottom: 8px;
+  color: #1c2520;
+}
+.cta-intro { color: #71786f; margin-bottom: 24px; max-width: 62ch; line-height: 1.6; }
 
-.cta-banner { background: #fff7e6; border: 1px solid #f0d9a8; border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; }
-.cta-banner--error { background: #fef2f2; border-color: #f5c2c2; }
-.cta-notice { background: #eefaf0; border: 1px solid #bfe3c6; border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; }
+.cta-banner {
+  background: #fff8ea;
+  border: 1px solid #ecdcb2;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+}
+.cta-banner--error { background: #fdf3f2; border-color: #ecccc9; }
+.cta-notice {
+  background: #eef3ea;
+  border: 1px solid #cfe0c8;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+}
 
-.cta-card { background: #fff; border: 1px solid #e8e5dd; border-radius: 12px; padding: 22px 24px; margin-bottom: 20px; }
-.cta-card__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
-.cta-card h2 { font-size: 1.2rem; margin: 0; }
-.cta-phase { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 999px; background: #e8f0e4; color: #014520; }
-.cta-meta { color: #777; font-size: 0.88rem; margin: 4px 0 12px; }
-.cta-subhead { font-size: 1rem; margin: 18px 0 8px; }
+/* ---- cards ---- */
+.cta-card {
+  background: #fff;
+  border: 1px solid #e7e2d4;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+/* the one loud thing on the page: the live test */
+.cta-card--live { border-top: 3px solid #eb3d00; }
+.cta-live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #eb3d00;
+  margin-right: 2px;
+  vertical-align: 2px;
+}
+.cta-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cta-card h2 {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0;
+  color: #1c2520;
+}
+.cta-phase {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #eef3ea;
+  color: #014520;
+}
+.cta-meta { color: #71786f; font-size: 0.88rem; margin: 6px 0 16px; line-height: 1.55; }
+.cta-subhead {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71786f;
+  margin: 0 0 10px;
+}
+.cta-divider { height: 1px; background: #eee9dc; margin: 20px 0; }
 
-.cta-table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 0.92rem; }
-.cta-table th, .cta-table td { border-bottom: 1px solid #eee9df; padding: 8px 10px; text-align: left; }
-.cta-table th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: #888; }
+/* ---- empty state ---- */
+.cta-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.cta-empty p { margin: 0; color: #71786f; font-size: 0.92rem; max-width: 48ch; line-height: 1.55; }
 
-.cta-chart { height: 170px; margin-bottom: 8px; }
+/* ---- data table ---- */
+.cta-table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+.cta-table th, .cta-table td { border-bottom: 1px solid #eee9dc; padding: 10px 12px; text-align: left; }
+.cta-table th:not(:first-child), .cta-table td:not(:first-child) { text-align: right; width: 120px; }
+.cta-table td:not(:first-child) { font-variant-numeric: tabular-nums; }
+.cta-table td:last-child { font-weight: 600; color: #014520; }
+.cta-table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9aa094;
+  font-weight: 600;
+  padding-bottom: 8px;
+}
+.cta-table tbody tr:last-child td { border-bottom: none; }
 
-.cta-leaders { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.cta-leader { background: #faf8f2; border: 1px solid #eee9df; border-radius: 999px; padding: 5px 12px; font-size: 0.82rem; color: #555; }
+.cta-chart { height: 180px; margin-bottom: 20px; }
 
-.cta-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 6px; }
-.cta-settings { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; margin-top: 10px; }
-.cta-settings label { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; color: #555; }
-.cta-settings select, .cta-settings input { border: 1px solid #ddd8cc; border-radius: 8px; padding: 8px 10px; font: inherit; min-width: 120px; }
+/* ---- per-section leaders: aligned two-column ledger, not wrapping pills ---- */
+.cta-leaders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  margin-bottom: 20px;
+}
+.cta-leader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px dashed #eee9dc;
+  font-size: 0.85rem;
+  color: #71786f;
+  cursor: help;
+}
+.cta-leader strong { color: #1c2520; font-weight: 600; text-align: right; }
+
+/* ---- controls ---- */
+.cta-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.cta-toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.cta-toolbar__or { color: #9aa094; font-size: 0.82rem; }
+.cta-settings { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+.cta-settings label { display: flex; flex-direction: column; gap: 6px; }
+.cta-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71786f;
+}
+
+/* every interactive control is exactly 38px tall */
+.cta-btn,
+.cta-settings select,
+.cta-settings input,
+.cta-toolbar select,
+.cta-input-row input {
+  height: 38px;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 0.9rem;
+}
+.cta-settings select, .cta-settings input, .cta-toolbar select {
+  border: 1px solid #ddd6c6;
+  border-radius: 10px;
+  padding: 0 12px;
+  background: #fff;
+  min-width: 130px;
+}
+.cta-toolbar select { max-width: 320px; }
+.cta-settings select:focus, .cta-settings input:focus, .cta-toolbar select:focus, .cta-input-row input:focus {
+  outline: 2px solid rgba(1, 69, 32, 0.35);
+  outline-offset: 1px;
+}
 
 /* one button family: green fill for primary, green outline otherwise */
-.cta-btn { border: 1px solid #014520; background: #fff; color: #014520; border-radius: 999px; padding: 9px 20px; font: inherit; font-weight: 600; cursor: pointer; }
-.cta-btn:hover:not(:disabled) { background: #e8f0e4; }
+.cta-btn {
+  border: 1px solid #014520;
+  background: #fff;
+  color: #014520;
+  border-radius: 999px;
+  padding: 0 20px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cta-btn:hover:not(:disabled) { background: #eef3ea; }
 .cta-btn--primary { background: #014520; border-color: #014520; color: #fffcf6; }
 .cta-btn--primary:hover:not(:disabled) { background: #0a5c30; }
-.cta-btn--danger { border-color: #b91c1c; color: #b91c1c; }
-.cta-btn--danger:hover:not(:disabled) { background: #fef2f2; }
-.cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cta-btn--danger { border-color: #c26a6a; color: #b91c1c; }
+.cta-btn--danger:hover:not(:disabled) { background: #fdf3f2; }
+.cta-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.cta-btn:focus-visible { outline: 2px solid rgba(1, 69, 32, 0.45); outline-offset: 2px; }
 .cta-info { cursor: help; color: #3B8949; font-size: 0.85em; }
 
-.cta-pagepick { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.cta-pagepick select { border: 1px solid #ddd8cc; border-radius: 8px; padding: 8px 10px; font: inherit; max-width: 320px; }
-
-.cta-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.cta-input-row input { flex: 1; border: 1px solid #ddd8cc; border-radius: 8px; padding: 10px 12px; font: inherit; }
-.cta-count { font-size: 0.78rem; color: #999; width: 46px; text-align: right; }
-.cta-surface-label { display: flex; flex-direction: column; width: 220px; flex: none; font-size: 0.86rem; font-weight: 600; }
-.cta-surface-label small { font-weight: 400; color: #999; }
-.cta-preview { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 14px; }
+/* ---- inputs in modals ---- */
+.cta-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.cta-input-row input {
+  flex: 1;
+  border: 1px solid #ddd6c6;
+  border-radius: 10px;
+  padding: 0 12px;
+}
+.cta-count { font-size: 0.75rem; color: #9aa094; width: 44px; text-align: right; font-variant-numeric: tabular-nums; }
+.cta-surface-label { display: flex; flex-direction: column; gap: 2px; width: 230px; flex: none; font-size: 0.86rem; font-weight: 600; color: #1c2520; }
+.cta-surface-label small { font-weight: 400; color: #9aa094; font-size: 0.75rem; }
+.cta-preview { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 4px 0 16px; }
 .cta-preview-btn { pointer-events: none; }
 
-.cta-rule { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #faf8f2; border: 1px solid #eee9df; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; font-size: 0.9rem; }
-.cta-rule__remove { border: none; background: none; color: #b91c1c; font-size: 1.1rem; cursor: pointer; line-height: 1; }
+/* ---- active custom CTA rows ---- */
+.cta-rule {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #faf8f1;
+  border: 1px solid #eee9dc;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+.cta-rule strong { color: #1c2520; }
+.cta-rule__remove {
+  border: none;
+  background: none;
+  color: #b91c1c;
+  font-size: 1.15rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+.cta-rule__remove:hover { background: #fdf3f2; }
 
-.cta-log { border-top: 1px solid #eee9df; padding: 10px 0; }
-.cta-log summary { cursor: pointer; font-size: 0.95rem; }
+/* ---- changelog ---- */
+.cta-log { border-top: 1px solid #eee9dc; padding: 12px 0; }
+.cta-log:first-of-type { border-top: none; }
+.cta-log summary { cursor: pointer; font-size: 0.92rem; color: #1c2520; }
+.cta-log[open] summary { margin-bottom: 12px; }
 
-.cta-modal-backdrop { position: fixed; inset: 0; z-index: 400; background: rgba(20, 30, 24, 0.45); display: flex; align-items: center; justify-content: center; padding: 20px; }
-.cta-modal { background: #fff; border-radius: 14px; padding: 24px 26px; width: min(100%, 640px); max-height: 90vh; overflow-y: auto; box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2); }
-.cta-modal h2 { margin: 0 0 4px; font-size: 1.15rem; }
-.cta-modal__actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+/* ---- modals ---- */
+.cta-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(22, 30, 25, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.cta-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  width: min(100%, 620px);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.22);
+}
+.cta-modal h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  color: #1c2520;
+}
+.cta-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #eee9dc;
+}
 </style>

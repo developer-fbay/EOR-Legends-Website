@@ -40,7 +40,8 @@ async function signOut() {
   display: grid;
   grid-template-columns: 230px 1fr;
   min-height: 100vh;
-  background: var(--grey-light);
+  /* warm parchment canvas — ties the admin to the site's cream brand */
+  background: #f6f4ee;
 }
 .admin-side {
   background: var(--white);
