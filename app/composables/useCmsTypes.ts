@@ -44,18 +44,6 @@ export const CMS_TYPES: Record<string, CmsType> = {
     publicPath: '/hr-glossary',
     extra: [{ key: 'letter', label: 'A–Z letter' }],
   },
-  'problem-pillars': {
-    label: 'Problem Pillars',
-    table: 'problem_pillars',
-    publicPath: '/staffing-insights',
-    extra: [{ key: 'sort_order', label: 'Sort order', type: 'number' }],
-  },
-  'problem-clusters': {
-    label: 'Problem Clusters',
-    table: 'problem_clusters',
-    publicPath: '/staffing-insights',
-    extra: [{ key: 'pillar_id', label: 'Pillar ID (uuid)' }],
-  },
 }
 
 /** The content types grouped under the CMS "Resources" tab. */
@@ -64,8 +52,6 @@ export const RESOURCE_TYPE_KEYS = [
   'news-articles',
   'case-studies',
   'hr-glossary',
-  'problem-pillars',
-  'problem-clusters',
 ] as const
 
 export function useCmsConfigured() {

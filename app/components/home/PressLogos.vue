@@ -53,6 +53,10 @@ const logos = [
   display: flex;
   width: max-content;
   animation: press-scroll 36s linear infinite;
+  /* compositor layer: without it the ~0.7px/frame drift is repainted on the
+     main thread and snapped to whole pixels, which reads as chop */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .press-set {
   display: flex;
@@ -62,12 +66,15 @@ const logos = [
 }
 .press-set img {
   height: clamp(20px, 2.4vh, 26px);
+  /* svh: mobile URL-bar show/hide changes vh, resizing every logo and making
+     the moving track jump; small-viewport units stay fixed while scrolling */
+  height: clamp(20px, 2.4svh, 26px);
   width: auto;
   object-fit: contain;
 }
 @keyframes press-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .press-track { animation: none; flex-wrap: wrap; }

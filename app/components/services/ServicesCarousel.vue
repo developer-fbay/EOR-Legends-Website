@@ -62,6 +62,10 @@ const items = [
   display: flex;
   width: max-content;
   animation: svcc-scroll 40s linear infinite;
+  /* compositor layer — same fix as the press marquee: unpromoted, the slow
+     drift is repainted on the main thread and snaps to whole pixels */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .svcc-track:hover {
   animation-play-state: paused;
@@ -115,8 +119,8 @@ const items = [
   color: var(--green);
 }
 @keyframes svcc-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 /* Short laptops: tighter strip so it fits inside the service-page fold */
 @media (max-height: 650px) and (min-width: 900px) {

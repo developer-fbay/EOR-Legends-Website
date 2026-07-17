@@ -81,6 +81,7 @@ const durationDays = ref(10)
 const showStart = ref(false)
 const showNavbar = ref(false)
 const showPage = ref(false)
+const showChangelog = ref(false)
 const selectedPagePath = ref('all')
 const newTexts = ref(['', '', ''])
 const navbarText = ref('')
@@ -350,10 +351,7 @@ onBeforeUnmount(() => chart?.destroy())
       <h3 class="cta-subhead">Current Leader Per Section</h3>
       <div class="cta-leaders">
         <span v-for="l in overview.current.sectionLeaders" :key="l.surface" class="cta-leader">
-          <span class="cta-leader__label">
-            {{ SURFACES[l.surface]?.label || l.surface }}
-            <span class="cta-tip" tabindex="0" :data-tip="`${SURFACES[l.surface]?.hint || ''} ${l.metric === 'overall' ? 'No section data yet: the overall leader is shown.' : `Leading by ${l.metric}.`}`">ⓘ</span>
-          </span>
+          <span>{{ SURFACES[l.surface]?.label || l.surface }}</span>
           <strong>{{ l.winnerText }}</strong>
         </span>
       </div>
@@ -424,7 +422,6 @@ onBeforeUnmount(() => chart?.destroy())
       <div v-for="row in activeCustom" :key="row.key" class="cta-rule">
         <span>
           <strong>{{ row.sectionLabel }}</strong>
-          <span class="cta-tip" tabindex="0" :data-tip="SURFACES[row.key.split('@')[0]!]?.hint">ⓘ</span>
           · {{ row.pageLabel }} → "{{ row.text }}"
         </span>
         <button class="cta-rule__remove" title="Remove and revert" :disabled="busy" @click="deleteCustom(row.key)">×</button>
@@ -433,25 +430,15 @@ onBeforeUnmount(() => chart?.destroy())
 
     <!-- Changelog -->
     <section class="cta-card">
-      <h2>Changelog</h2>
-      <p v-if="!overview?.changelog?.length" class="cta-meta">No finished tests yet.</p>
-      <details v-for="block in overview?.changelog || []" :key="block.experiment.id" class="cta-log">
-        <summary>
-          <strong>{{ block.experiment.month }}</strong>
-          · {{ day(block.experiment.started_at) }} to {{ day(block.experiment.archived_at) }}
-        </summary>
-        <table class="cta-table">
-          <thead><tr><th>CTA text</th><th>Impressions</th><th>Conversions</th><th>CVR</th></tr></thead>
-          <tbody>
-            <tr v-for="v in block.variants" :key="v.variantId">
-              <td>{{ v.text }}</td>
-              <td>{{ v.impressions }}</td>
-              <td>{{ v.conversions }}</td>
-              <td>{{ pct(v.cvr) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
+      <div class="cta-card__head">
+        <h2>Changelog</h2>
+        <button class="cta-btn" @click="showChangelog = true">View changelog</button>
+      </div>
+      <p class="cta-meta">
+        {{ overview?.changelog?.length
+          ? `${overview.changelog.length} finished test${overview.changelog.length === 1 ? '' : 's'} with final results.`
+          : 'No finished tests yet.' }}
+      </p>
     </section>
 
     <!-- ============ MODALS ============ -->
@@ -491,13 +478,41 @@ onBeforeUnmount(() => chart?.destroy())
       </div>
     </div>
 
+    <div v-if="showChangelog" class="cta-modal-backdrop" @click.self="showChangelog = false">
+      <div class="cta-modal">
+        <h2>Changelog</h2>
+        <p class="cta-meta">Every finished A/B test with its final numbers, newest first.</p>
+        <p v-if="!overview?.changelog?.length" class="cta-meta">No finished tests yet.</p>
+        <div v-for="block in overview?.changelog || []" :key="block.experiment.id" class="cta-log">
+          <p class="cta-log__head">
+            <strong>{{ block.experiment.month }}</strong>
+            · {{ day(block.experiment.started_at) }} to {{ day(block.experiment.archived_at) }}
+          </p>
+          <table class="cta-table">
+            <thead><tr><th>CTA text</th><th>Impressions</th><th>Conversions</th><th>CVR</th></tr></thead>
+            <tbody>
+              <tr v-for="v in block.variants" :key="v.variantId">
+                <td>{{ v.text }}</td>
+                <td>{{ v.impressions }}</td>
+                <td>{{ v.conversions }}</td>
+                <td>{{ pct(v.cvr) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cta-modal__actions">
+          <button class="cta-btn" @click="showChangelog = false">Close</button>
+        </div>
+      </div>
+    </div>
+
     <div v-if="showPage" class="cta-modal-backdrop" @click.self="showPage = false">
       <div class="cta-modal">
         <h2>{{ selectedPage.label }}</h2>
         <p class="cta-meta">Every CTA section on this page. Fill in only what you want to change; blank fields follow the test / default.</p>
         <div v-for="s in selectedPage.sections" :key="s" class="cta-input-row">
           <label class="cta-surface-label">
-            <span>{{ SURFACES[s]?.label || s }} <span class="cta-tip" tabindex="0" :data-tip="SURFACES[s]?.hint">ⓘ</span></span>
+            <span>{{ SURFACES[s]?.label || s }}</span>
             <small>default: {{ SURFACES[s]?.fallback }}</small>
           </label>
           <input v-model="pageTexts[s]" type="text" maxlength="60" placeholder="Follows test / default" />
@@ -648,62 +663,6 @@ onBeforeUnmount(() => chart?.destroy())
   color: #71786f;
 }
 .cta-leader strong { color: #1c2520; font-weight: 600; text-align: right; }
-.cta-leader__label { display: inline-flex; align-items: baseline; gap: 5px; }
-
-/* ---- tooltips: instant CSS bubbles on hover and keyboard focus ---- */
-.cta-tip {
-  position: relative;
-  display: inline-flex;
-  cursor: help;
-  color: #3B8949;
-  font-size: 0.85em;
-  font-weight: 400;
-}
-.cta-tip::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 9px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: 280px;
-  background: #1c2520;
-  color: #fdfcf7;
-  font-size: 0.78rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  text-transform: none;
-  white-space: normal;
-  padding: 10px 12px;
-  border-radius: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.12s ease;
-  z-index: 60;
-  pointer-events: none;
-}
-.cta-tip::before {
-  content: '';
-  position: absolute;
-  bottom: calc(100% + 3px);
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: #1c2520;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.12s ease;
-  z-index: 60;
-  pointer-events: none;
-}
-.cta-tip:hover::after,
-.cta-tip:hover::before,
-.cta-tip:focus-visible::after,
-.cta-tip:focus-visible::before {
-  opacity: 1;
-  visibility: visible;
-}
 
 /* ---- controls ---- */
 .cta-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -802,11 +761,11 @@ onBeforeUnmount(() => chart?.destroy())
 }
 .cta-rule__remove:hover { background: #fdf3f2; }
 
-/* ---- changelog ---- */
-.cta-log { border-top: 1px solid #eee9dc; padding: 12px 0; }
-.cta-log:first-of-type { border-top: none; }
-.cta-log summary { cursor: pointer; font-size: 0.92rem; color: #1c2520; }
-.cta-log[open] summary { margin-bottom: 12px; }
+/* ---- changelog (inside the modal) ---- */
+.cta-log { border-top: 1px solid #eee9dc; padding: 14px 0; }
+.cta-log:first-of-type { border-top: none; padding-top: 4px; }
+.cta-log__head { font-size: 0.92rem; color: #71786f; margin: 0 0 10px; }
+.cta-log__head strong { color: #1c2520; }
 
 /* ---- modals ---- */
 .cta-modal-backdrop {

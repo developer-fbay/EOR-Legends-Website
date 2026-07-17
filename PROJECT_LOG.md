@@ -40,7 +40,13 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
-### 2026-07-17 (latest) — Design system across all CMS tabs + working tooltips (committed, NOT yet pushed)
+### 2026-07-17 (latest) — Admin polish + smooth logo marquees (committed, NOT yet pushed)
+- Tooltips removed from the A/B page per Codi (the ⓘ bubbles are gone; labels stay plain).
+- Changelog is now a modal: slim card with a "View changelog" button; the modal lists every finished test with its final numbers.
+- Problem Pillars + Problem Clusters removed from the CMS Resources tab and the type registry (both empty; live pillar content serves from server/data/pillars snapshots, not Supabase).
+- Logo marquees (homepage press strip + service-pages services strip) smoothed: tracks promoted to their own compositor layer (will-change + translate3d) so the slow drift no longer snaps to whole pixels on the main thread; logo heights use svh so mobile URL-bar collapse stops resizing the moving track.
+
+### 2026-07-17 (earlier) — Design system across all CMS tabs + working tooltips (committed, NOT yet pushed)
 - Shared admin design system moved into the admin layout (unscoped): .admin-page 980px / --wide 1260px columns, serif titles, intro/note styles, ds-card, redesigned admin-table (hairline card, parchment uppercase headers, row hover).
 - Dashboard, Resources and Leads restyled to match the A/B page: hairline lead-box with filter pills + 3rem serif count, resource count cards with hover lift, wide leads table with intro line.
 - Broken native title-attribute tooltips replaced with CSS bubbles (.cta-tip: dark bubble + caret on hover/focus, keyboard reachable) across the page modal, leaders ledger and Active Custom CTAs. Verified in authed Chromium (temp QA user created + deleted after).
