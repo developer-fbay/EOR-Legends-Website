@@ -96,7 +96,11 @@ export function computePromotion(stats: CtaStats[], minImpressions: number) {
   }
 }
 
-/** Per-section custom texts: surface key -> text. Overridden sections don't rotate. */
+/**
+ * Custom CTA texts. Keys are either a plain surface ('header') or a
+ * page-scoped surface ('page-forms@/services/payroll'). Page-scoped rules
+ * beat section rules; overridden buttons don't rotate.
+ */
 export type CtaOverrides = Record<string, string>
 
 export async function getCtaOverrides(): Promise<CtaOverrides> {
@@ -105,7 +109,7 @@ export async function getCtaOverrides(): Promise<CtaOverrides> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) return {}
   const clean: CtaOverrides = {}
   for (const [k, t] of Object.entries(v)) {
-    if (typeof t === 'string' && t.trim()) clean[String(k).slice(0, 40)] = t.trim().slice(0, 60)
+    if (typeof t === 'string' && t.trim()) clean[String(k).slice(0, 120)] = t.trim().slice(0, 60)
   }
   return clean
 }

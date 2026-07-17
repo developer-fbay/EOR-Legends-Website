@@ -60,8 +60,11 @@ const minSample = ref(100)
 const newTexts = ref(['', '', ''])
 const startConfirm = ref(false)
 
-// per-section custom texts
+// per-section custom texts (site-wide)
 const overridesForm = ref<Record<string, string>>({})
+// page-specific rules: one button on one page
+const pageRules = ref<{ surface: string; path: string; text: string }[]>([])
+const newRule = ref({ surface: 'page-forms', path: '', text: '' })
 
 // promote flow
 const promoteBlocked = ref<{ minimum: number; underSampled: { text: string; impressions: number }[] } | null>(null)
@@ -77,6 +80,12 @@ async function load() {
     mode.value = data.settings.mode
     minSample.value = data.settings.minImpressionsPerVariant
     overridesForm.value = Object.fromEntries(SURFACES.map((s) => [s.key, data.surfaceOverrides?.[s.key] || '']))
+    pageRules.value = Object.entries(data.surfaceOverrides || {})
+      .filter(([k]) => k.includes('@'))
+      .map(([k, text]) => {
+        const at = k.indexOf('@')
+        return { surface: k.slice(0, at), path: k.slice(at + 1), text }
+      })
     await nextTick()
     renderChart()
   } catch (err: any) {
@@ -180,15 +189,39 @@ async function promote(force = false) {
   }
 }
 
+function normalizePath(p: string) {
+  let path = p.trim()
+  if (!path.startsWith('/')) path = `/${path}`
+  if (path.length > 1) path = path.replace(/\/+$/, '')
+  return path
+}
+
+function addPageRule() {
+  const path = normalizePath(newRule.value.path)
+  const text = newRule.value.text.trim()
+  if (path === '/' && !newRule.value.path.trim()) return
+  if (!text) return
+  // one rule per surface+page — replace an existing one
+  pageRules.value = pageRules.value.filter((r) => !(r.surface === newRule.value.surface && r.path === path))
+  pageRules.value.push({ surface: newRule.value.surface, path, text })
+  newRule.value = { surface: newRule.value.surface, path: '', text: '' }
+}
+
+function removePageRule(i: number) {
+  pageRules.value.splice(i, 1)
+}
+
 async function saveOverrides() {
   busy.value = true
   notice.value = ''
   try {
-    await $fetch('/api/cta/admin/settings', { method: 'PUT', body: { surfaceOverrides: overridesForm.value } })
-    notice.value = 'Section texts saved: they appear on the site within a minute.'
+    const merged: Record<string, string> = { ...overridesForm.value }
+    for (const r of pageRules.value) merged[`${r.surface}@${r.path}`] = r.text
+    await $fetch('/api/cta/admin/settings', { method: 'PUT', body: { surfaceOverrides: merged } })
+    notice.value = 'Custom texts saved: they appear on the site within a minute.'
     await load()
   } catch {
-    notice.value = 'Saving section texts failed.'
+    notice.value = 'Saving custom texts failed.'
   } finally {
     busy.value = false
   }
@@ -356,7 +389,28 @@ onBeforeUnmount(() => chart?.destroy())
         </label>
         <input v-model="overridesForm[s.key]" type="text" maxlength="60" placeholder="Follows experiment / default" />
       </div>
-      <button class="cta-btn cta-btn--primary" :disabled="busy" @click="saveOverrides">Save section texts</button>
+
+      <h3 class="cta-subhead">Page-Specific Rules</h3>
+      <p class="cta-meta">
+        Change one button on one page only, e.g. the form submit on /services/payroll. A page rule
+        beats the section text above, which beats the experiment.
+      </p>
+      <div v-if="pageRules.length" class="cta-rules">
+        <div v-for="(r, i) in pageRules" :key="r.surface + r.path" class="cta-rule">
+          <span><strong>{{ SURFACES.find((s) => s.key === r.surface)?.label || r.surface }}</strong> on <code>{{ r.path }}</code> → "{{ r.text }}"</span>
+          <button class="cta-rule__remove" title="Remove rule" @click="removePageRule(i)">×</button>
+        </div>
+      </div>
+      <div class="cta-rule-builder">
+        <select v-model="newRule.surface">
+          <option v-for="s in SURFACES" :key="s.key" :value="s.key">{{ s.label }}</option>
+        </select>
+        <input v-model="newRule.path" type="text" placeholder="/services/payroll" />
+        <input v-model="newRule.text" type="text" maxlength="60" placeholder="Custom text for that page" />
+        <button class="cta-btn" :disabled="!newRule.path.trim() || !newRule.text.trim()" @click="addPageRule">Add rule</button>
+      </div>
+
+      <button class="cta-btn cta-btn--primary" :disabled="busy" @click="saveOverrides">Save custom texts</button>
     </section>
 
     <!-- Changelog -->
@@ -479,6 +533,38 @@ onBeforeUnmount(() => chart?.destroy())
   font-weight: 600;
 }
 .cta-surface-label small { font-weight: 400; color: #999; }
+.cta-subhead { font-size: 1rem; margin: 18px 0 4px; }
+.cta-rules { margin-bottom: 12px; }
+.cta-rule {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #faf8f2;
+  border: 1px solid #eee9df;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+.cta-rule code { background: #f0ece3; border-radius: 4px; padding: 1px 6px; }
+.cta-rule__remove {
+  border: none;
+  background: none;
+  color: #b91c1c;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.cta-rule-builder { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.cta-rule-builder select,
+.cta-rule-builder input {
+  border: 1px solid #ddd8cc;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+}
+.cta-rule-builder input { flex: 1; min-width: 160px; }
 .cta-preview { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 14px; }
 .cta-preview-btn { pointer-events: none; }
 .cta-start { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }

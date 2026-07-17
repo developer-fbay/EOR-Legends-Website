@@ -62,13 +62,23 @@ export function useCtaVariant() {
     return v ? v.id : null
   })
 
+  const route = useRoute()
+
   /**
-   * Resolution order: the section's custom text from the dashboard (that
-   * section then doesn't rotate) > the visitor's experiment variant > the
-   * surface's own hardcoded fallback.
+   * Resolution order (dashboard-controlled, most specific wins):
+   *   1. page-scoped rule for this surface ('surface@/current/path')
+   *   2. site-wide section rule ('surface')
+   *   3. the visitor's experiment variant
+   *   4. the surface's own hardcoded fallback
+   * Overridden buttons don't rotate.
    */
   function ctaText(fallback: string, surface?: string): string {
-    if (surface && overrides.value[surface]) return overrides.value[surface]!
+    if (surface) {
+      const path = route.path.length > 1 ? route.path.replace(/\/+$/, '') : route.path
+      const pageRule = overrides.value[`${surface}@${path}`]
+      if (pageRule) return pageRule
+      if (overrides.value[surface]) return overrides.value[surface]!
+    }
     const a = config.value
     if (!a || cookie.value?.e !== a.experimentId) return fallback
     const v = a.variants.find((x) => x.id === cookie.value!.v)

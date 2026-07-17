@@ -14,11 +14,12 @@ export default defineEventHandler(async (event) => {
   if (Number.isFinite(min) && min >= 0 && min <= 100000) {
     updates.push({ key: 'min_sample', value: { impressions_per_variant: Math.round(min) } })
   }
-  // per-section custom texts: { surfaceKey: text }; blank/empty = follow experiment
+  // custom texts: { surfaceKey: text } or { 'surfaceKey@/page/path': text };
+  // blank/empty = follow experiment
   if (body?.surfaceOverrides && typeof body.surfaceOverrides === 'object' && !Array.isArray(body.surfaceOverrides)) {
     const clean: Record<string, string> = {}
     for (const [k, t] of Object.entries(body.surfaceOverrides)) {
-      if (typeof t === 'string' && t.trim()) clean[String(k).slice(0, 40)] = t.trim().slice(0, 60)
+      if (typeof t === 'string' && t.trim()) clean[String(k).slice(0, 120)] = t.trim().slice(0, 60)
     }
     updates.push({ key: 'surface_overrides', value: clean })
   }
