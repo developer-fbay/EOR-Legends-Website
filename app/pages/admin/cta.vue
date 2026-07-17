@@ -160,6 +160,21 @@ async function promote(force = false) {
   }
 }
 
+async function stopExperiment() {
+  if (!window.confirm('Stop this experiment? Every CTA on the site reverts to its default text, and this set moves to the changelog.')) return
+  busy.value = true
+  notice.value = ''
+  try {
+    await $fetch('/api/cta/admin/stop', { method: 'POST' })
+    notice.value = 'Experiment stopped: the site is showing its default CTA texts again.'
+    await load()
+  } catch (err: any) {
+    notice.value = err?.statusMessage || 'Stopping the experiment failed.'
+  } finally {
+    busy.value = false
+  }
+}
+
 const canStart = computed(() => newTexts.value.every((t) => t.trim().length > 0 && t.trim().length <= 60))
 
 async function startNewSet() {
@@ -231,6 +246,9 @@ onBeforeUnmount(() => chart?.destroy())
           @click="promote(false)"
         >
           Promote winner now
+        </button>
+        <button class="cta-btn cta-btn--danger" :disabled="busy" @click="stopExperiment">
+          Stop &amp; revert to default texts
         </button>
         <div class="cta-settings">
           <label>
@@ -388,6 +406,7 @@ onBeforeUnmount(() => chart?.destroy())
   cursor: pointer;
 }
 .cta-btn--primary { background: #014520; border-color: #014520; color: #fffcf6; }
+.cta-btn--danger { border-color: #d9a1a1; color: #b91c1c; }
 .cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .cta-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
