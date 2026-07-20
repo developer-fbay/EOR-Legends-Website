@@ -5,6 +5,24 @@
  * the existing WordPress Gravity Forms (IDs 28/29/31) so the current lead
  * flow is uninterrupted.
  */
+/**
+ * Zapier delivery is done HERE, not by WordPress: the WP host's background
+ * feed queue is broken (diagnosed 2026-07-20 — GF emails send inline but no
+ * Zapier feed ever fires). Each form posts straight to its Zap's hook after
+ * GF accepts the entry. Keys mirror what the GF Zapier add-on would send
+ * (field labels) so existing Zap field mappings keep working.
+ * Hooks for 28 (footer) and 31 (popup) pending — Codi is creating the Zaps.
+ */
+const ZAP_HOOKS: Record<number, { hook: string; title: string; labels: Record<string, string> }> = {
+  29: {
+    hook: 'https://hooks.zapier.com/hooks/standard/2683347/0f86e91401d24644b8e225f19ee060de/',
+    title: '2026 Header Contact Form',
+    labels: { name: 'Full name', email: 'Email', phone: 'Phone', radio: 'What brings you here?', company: 'Company name', message: 'message' },
+  },
+  // 28: { hook: '<footer Zap hook>', title: '2026 Footer Contact Form', labels: { ... } },
+  // 31: { hook: '<popup Zap hook>', title: '2026 Pop Up Contact Form', labels: { ... } },
+}
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
@@ -117,6 +135,29 @@ export default defineEventHandler(async (event) => {
           }
         } catch (err: any) {
           console.error('[lead] CTA conversion insert failed:', err?.message)
+        }
+
+        const zap = ZAP_HOOKS[gfFormId]
+        if (zap) {
+          await $fetch(zap.hook, {
+            method: 'POST',
+            body: {
+              id: String(res.entry_id),
+              form_id: String(gfFormId),
+              form_title: zap.title,
+              date_created: new Date().toISOString().slice(0, 19).replace('T', ' '),
+              [zap.labels.name!]: lead.full_name,
+              [zap.labels.email!]: lead.email,
+              [zap.labels.phone!]: lead.phone,
+              [zap.labels.radio!]: radioValue,
+              [zap.labels.company!]: companyValue,
+              [zap.labels.message!]: messageValue,
+              source_page: lead.source,
+            },
+          }).then(
+            () => console.log(`[lead] Zapier hook fired for form ${gfFormId}, entry ${res.entry_id}`),
+            (err: any) => console.error('[lead] Zapier hook failed:', err?.message),
+          )
         }
       }
       if (res && res.is_valid === false) {

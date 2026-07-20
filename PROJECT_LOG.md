@@ -40,6 +40,11 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-20 (latest) — Direct server→Zapier delivery (option 2, committed NOT pushed)
+- lead.post.ts now posts each accepted lead straight to its Zap hook (label-keyed payload matching what the GF add-on would send, + source_page). Header (29) wired to Codi's new Zap and verified locally: GF entry 6931 created + hook fired. Footer (28) and popup (31) hooks pending — Codi is creating those Zaps; fill ZAP_HOOKS and push when in.
+- Notification routing fix PREPARED but blocked by tool permissions (script writes to live WP forms): employer → Clients admin + visitor auto-reply; job seeker → Candidates admin only; also removes the radio's "phone contains 0" conditional logic which blanks the radio at submission time (would break routing). Script ready in session scratchpad (gf-fix-notifications.mjs); run on approval or via Codi.
+- Once direct delivery is live: deactivate the WP-side Zapier feeds (incl. cloned 49/50/51) to prevent double-sends if the WP queue is ever fixed.
+
 ### 2026-07-20 (later) — Header form Zapier delivery investigation
 - Codi reports the header form (GF 29) never fired the Zap; he hooked a Zap up manually today (new feed "Website Inbound", hook ...0f86e914, alongside the cloned "Website Inbound - Header" feed).
 - Found: WP runs the MODERN GF Zapier add-on (zapier/v1 REST subscription flow). Zaps only receive from forms they subscribed to via Zapier; the hand-cloned zapURL feeds on 28/29/31 (copies of form 26's hook) are likely dead weight — meaning footer + popup may ALSO not reach Zapier.
