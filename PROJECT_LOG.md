@@ -40,17 +40,22 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
-### 2026-07-20 (latest 3) — Marketing subheadings for 9 service pages (committed NOT pushed)
+### 2026-07-21 — Deploy + live verification of the whole Zapier batch
+- Pushed 7 commits; deploy verified in 3 min via the eor-migration hero marker.
+- Live form tests on production: header 6935 (employer → Clients admin + auto-reply), footer 6936 (job seeker → Candidates admin only), popup 6937 (employer → correct 2 emails), lead-input 6938. All Zapier hooks fired from the live server; Codi to confirm the 4 runs in Zapier history.
+- WP-side Zapier feeds 48–54 (forms 24/28/29/31) all deactivated and confirmed inactive — double-send risk closed. Form 26's old feed left untouched.
+
+### 2026-07-20 (latest 3) — Marketing subheadings for 9 service pages *(live)*
 - Applied orange-service-pages.md: new hero intro, Overview sub, Services sub and per-page CTA-band sub for payroll, employee-benefits, company-culture, contractor-management, eor-migration, onboarding-offboarding, office-space, it-support, it-equipment (Company Culture + IT Support heroes unchanged per md; Employee Benefits band text applied exactly, no trailing full stop, per Codi).
 - CtaBand gained a subtitle prop; service pages pass service.ctaSub; homepage band keeps CEO copy. HIW rows excluded (red) and HR page untouched per md/Codi.
 - Verified in SSR HTML + hero fit checked at 1280×587 (office-space, longest intro).
 
-### 2026-07-20 (latest 2) — All Zap hooks wired + GF email routing live (committed NOT pushed)
+### 2026-07-20 (latest 2) — All Zap hooks wired + GF email routing live *(live)*
 - Codi published footer + popup Zaps; hooks pulled from their WP subscription feeds and wired into lead.post.ts (28 fb99e67b..., 31 a20dbc02...). Lead-input form 24 wired in gf-submit.post.ts to its existing "New Lead Input" Zap hook. All tested locally: entries 6932/6933/6934 created + hooks fired.
 - GF notification routing applied to live WP forms 29/28/31 (Codi approved): employer → Clients admin (enquiries@) + visitor auto-reply; job seeker → Candidates admin (nishani@) only. Radio's "phone contains 0" conditional removed on all three (was still present despite manual attempt). VERIFIED via entry notes: 6932 employer → 2 correct emails; 6933 jobseeker → 1 correct email.
 - Still to do after push + live test: deactivate the WP-side Zapier feeds (48-54) so a future WP queue fix can't double-send into Close.
 
-### 2026-07-20 (latest) — Direct server→Zapier delivery (option 2, committed NOT pushed)
+### 2026-07-20 (latest) — Direct server→Zapier delivery (option 2) *(live)*
 - lead.post.ts now posts each accepted lead straight to its Zap hook (label-keyed payload matching what the GF add-on would send, + source_page). Header (29) wired to Codi's new Zap and verified locally: GF entry 6931 created + hook fired. Footer (28) and popup (31) hooks pending — Codi is creating those Zaps; fill ZAP_HOOKS and push when in.
 - Notification routing fix PREPARED but blocked by tool permissions (script writes to live WP forms): employer → Clients admin + visitor auto-reply; job seeker → Candidates admin only; also removes the radio's "phone contains 0" conditional logic which blanks the radio at submission time (would break routing). Script ready in session scratchpad (gf-fix-notifications.mjs); run on approval or via Codi.
 - Once direct delivery is live: deactivate the WP-side Zapier feeds (incl. cloned 49/50/51) to prevent double-sends if the WP queue is ever fixed.
