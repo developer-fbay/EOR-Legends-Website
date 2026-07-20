@@ -159,7 +159,7 @@ const faqs = computed(() => {
 
     <ServicesScroll :exclude-slug="service.slug" :subtitle="service.servicesSub" />
 
-    <HomeCtaBand />
+    <HomeCtaBand :subtitle="service.ctaSub" />
 
     <!-- FAQ -->
     <section class="svc-faq band-cream section">

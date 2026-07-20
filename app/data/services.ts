@@ -15,6 +15,7 @@ export type ServiceContent = {
   hiwTitle?: string
   hiwSub?: string
   servicesSub?: string
+  ctaSub?: string
   overview: {
     title: string
     paragraphs: string[]
@@ -33,8 +34,11 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'We process accurate payroll, meet statutory obligations, and maintain compliance.',
     intro: [
-      'We take responsibility for processing accurate payroll, meeting statutory obligations, and maintaining compliance.',
+      'Run accurate, compliant payroll in South Africa without local bank accounts, payroll software or in-country finance staff.',
     ],
+    overviewSub: 'See how our EOR payroll service handles salaries, PAYE, UIF, SDL, payslips and SARS submissions.',
+    servicesSub: 'Explore the HR, onboarding, contractor and EOR migration services available alongside South African payroll.',
+    ctaSub: 'Get a personalised cost comparison for employing and paying your South African team within 24 hours.',
     overview: [
       {
         title: 'How payroll works through our EOR service',
@@ -115,8 +119,11 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'If you choose to offer benefits, we can advise on what makes sense for your South African team.',
     intro: [
-      'If you choose to offer benefits, we can advise on what makes sense for your South African team.',
+      'Offer competitive employee benefits in South Africa without managing local providers, enrolment, deductions or claims.',
     ],
+    overviewSub: 'See how we benchmark, source and administer locally relevant benefits for your South African employees.',
+    servicesSub: 'Explore the HR, payroll, onboarding and contractor services that complete your South African employment package.',
+    ctaSub: 'Talk to our team and get a custom cost comparison in 24 hours',
     overview: [
       {
         title: 'How benefits work through our EOR service',
@@ -156,6 +163,9 @@ export const SERVICES: ServiceContent[] = [
     intro: [
       'We strengthen your company culture through ongoing engagement, workplace guidance, and direct relationships.',
     ],
+    overviewSub: 'See how we translate your culture locally, keep employees engaged and identify retention risks before they become resignations.',
+    servicesSub: 'Explore the HR, payroll, benefits and workplace services that help your South African team thrive.',
+    ctaSub: 'Get a tailored cost comparison and plan for building an engaged South African team within 24 hours.',
     overview: [
       {
         title: 'A cultural bridge, not just a payroll line',
@@ -193,8 +203,11 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'We help classify roles contractor, handle contracts and payments, and advise.',
     intro: [
-      'We help classify roles contractor, handle contracts and payments, and advise.',
+      'Manage South African contractors properly, from classification and contracts to payments and compliance.',
     ],
+    overviewSub: 'See how we classify, contract and pay South African contractors while protecting your business from compliance exposure.',
+    servicesSub: 'Explore the EOR, payroll, HR and onboarding services available when contractors become permanent employees.',
+    ctaSub: 'Get a tailored comparison of contractor and EOR employment costs in South Africa within 24 hours.',
     overview: [
       {
         title: 'Compliant contractor engagement',
@@ -232,8 +245,11 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'If your current EOR is not delivering, we can migrate your South African employees to our service.',
     intro: [
-      'If your current EOR is not delivering, we can migrate your South African employees to our service.',
+      'Switch EOR providers in South Africa without disrupting payroll, benefits, leave balances or employee service.',
     ],
+    overviewSub: 'See how we plan and manage a compliant EOR migration while protecting continuity for every South African employee.',
+    servicesSub: 'Explore the HR, payroll, onboarding and contractor services available after your EOR migration.',
+    ctaSub: 'Get a clear migration plan and tailored cost comparison for your South African team within 24 hours.',
     overview: [
       {
         title: 'A controlled, planned transition',
@@ -271,8 +287,11 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'Legends EOR manages the complete process, ensuring compliance, reducing risk, and maintaining professionalism.',
     intro: [
-      'Legends EOR manages the complete process, ensuring compliance, reducing risk, and maintaining professionalism.',
+      'Onboard and offboard employees in South Africa quickly, professionally and in full compliance with local labour law.',
     ],
+    overviewSub: 'See how we handle compliant contracts, statutory registrations, equipment setup, first days and employee exits.',
+    servicesSub: 'Explore the HR, payroll, equipment and IT services that support every stage of the South African employee lifecycle.',
+    ctaSub: 'Get a personalised cost comparison for hiring and onboarding your South African team within 24 hours.',
     overview: [
       {
         title: 'Compliant from day one',
@@ -310,8 +329,11 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'We offer private offices, dedicated desks, and meeting rooms with reliable infrastructure and on-site support.',
     intro: [
-      'We offer private offices, dedicated desks, and meeting rooms with reliable infrastructure and on-site support.',
+      'Give your South African team secure Cape Town office space with reliable power, fast internet and on-site HR and IT support.',
     ],
+    overviewSub: 'Explore managed offices and dedicated desks in Cape Town, built for productive teams and uninterrupted work.',
+    servicesSub: 'Explore the employment, IT and equipment services available alongside your managed South African office.',
+    ctaSub: 'Get a tailored cost comparison for hiring and housing your South African team within 24 hours.',
     overview: [
       {
         title: 'A managed home for your team',
@@ -351,6 +373,9 @@ export const SERVICES: ServiceContent[] = [
     intro: [
       'We handle device setup, troubleshooting, onboarding and offboarding, and coordination with your internal IT team.',
     ],
+    overviewSub: 'See how our in-office IT team configures devices, resolves issues and applies your security policies locally.',
+    servicesSub: 'Explore the equipment, office, HR and onboarding services that support your South African workforce.',
+    ctaSub: 'Get a tailored cost comparison for hiring and supporting your South African team within 24 hours.',
     overview: [
       {
         title: 'IT that is actually there',
@@ -388,8 +413,11 @@ export const SERVICES: ServiceContent[] = [
     excerpt:
       'You can purchase laptops, monitors, and peripherals through our local webstore.',
     intro: [
-      'You can purchase laptops, monitors, and peripherals through our local webstore.',
+      'Source, configure and deliver IT equipment anywhere in South Africa without international shipping, customs or vendor risk.',
     ],
+    overviewSub: 'See how we procure, configure, deliver and maintain laptops, monitors and peripherals throughout the employee lifecycle.',
+    servicesSub: 'Explore the IT support, office, HR and onboarding services available with locally sourced equipment.',
+    ctaSub: 'Get a tailored cost comparison for hiring and equipping your South African team within 24 hours.',
     overview: [
       {
         title: 'Local sourcing, day-one readiness',
