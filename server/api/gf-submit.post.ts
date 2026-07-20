@@ -6,6 +6,35 @@
  */
 const ALLOWED_FORMS = [24, 30]
 
+/**
+ * Direct Zapier delivery (WP's background feed queue is broken — see
+ * lead.post.ts). Form 24 posts to its existing "New Lead Input" Zap;
+ * payload keys are the GF field labels the Zap's mapping expects.
+ */
+const ZAP_HOOKS: Record<number, { hook: string; title: string; labels: Record<string, string> }> = {
+  24: {
+    hook: 'https://hooks.zapier.com/hooks/standard/2683347/79afd86203a64842b6565a0ba5fd6300/',
+    title: 'Employer of Record- New Lead input',
+    labels: {
+      3: 'First Name',
+      5: 'Last Name',
+      6: 'What is the job title of the main contact?',
+      7: 'What is the email address of the main contact?',
+      8: 'What is the phone number of the main contact? (MUST PUT COUNTRY CODE (eg +27 for SA, +44 for UK +1 for USA). Please enter one phone number only.',
+      10: 'City',
+      11: 'Post Code',
+      13: 'Client Sector',
+      15: 'Where did you get this lead?',
+      16: 'Notes',
+      18: 'Lead Owner / Your Name',
+      19: 'What country is the client based in?',
+      21: 'What is the client company name?',
+      22: 'If it was a referral, where from? Partner / Client Name',
+      23: 'Any additional phone number? (MUST PUT COUNTRY CODE (eg +27 for SA, +44 for UK +1 for USA). Please enter one phone number only.',
+    },
+  },
+}
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const formId = Number(body?.formId)
@@ -51,6 +80,24 @@ export default defineEventHandler(async (event) => {
       body: payload,
     })
     console.log(`[gf-submit] form ${formId}: entry ${res?.entry_id ?? '?'} (valid: ${res?.is_valid})`)
+
+    const zap = ZAP_HOOKS[formId]
+    if (zap && res?.entry_id && res.is_valid !== false) {
+      const zapPayload: Record<string, string> = {
+        id: String(res.entry_id),
+        form_id: String(formId),
+        form_title: zap.title,
+        date_created: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      }
+      for (const [fieldId, label] of Object.entries(zap.labels)) {
+        zapPayload[label] = String(values[fieldId] ?? '')
+      }
+      await $fetch(zap.hook, { method: 'POST', body: zapPayload }).then(
+        () => console.log(`[gf-submit] Zapier hook fired for form ${formId}, entry ${res.entry_id}`),
+        (err: any) => console.error('[gf-submit] Zapier hook failed:', err?.message),
+      )
+    }
+
     return { ok: true, entryId: res?.entry_id }
   } catch (err: any) {
     const data = err?.data

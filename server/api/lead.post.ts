@@ -11,7 +11,6 @@
  * Zapier feed ever fires). Each form posts straight to its Zap's hook after
  * GF accepts the entry. Keys mirror what the GF Zapier add-on would send
  * (field labels) so existing Zap field mappings keep working.
- * Hooks for 28 (footer) and 31 (popup) pending — Codi is creating the Zaps.
  */
 const ZAP_HOOKS: Record<number, { hook: string; title: string; labels: Record<string, string> }> = {
   29: {
@@ -19,8 +18,16 @@ const ZAP_HOOKS: Record<number, { hook: string; title: string; labels: Record<st
     title: '2026 Header Contact Form',
     labels: { name: 'Full name', email: 'Email', phone: 'Phone', radio: 'What brings you here?', company: 'Company name', message: 'message' },
   },
-  // 28: { hook: '<footer Zap hook>', title: '2026 Footer Contact Form', labels: { ... } },
-  // 31: { hook: '<popup Zap hook>', title: '2026 Pop Up Contact Form', labels: { ... } },
+  28: {
+    hook: 'https://hooks.zapier.com/hooks/standard/2683347/fb99e67ba84c4535be16c8c0e217062c/',
+    title: '2026 Footer Contact Form',
+    labels: { name: 'Full Name', email: 'Email Address', phone: 'Mobile Number', radio: 'What brings you here?', company: 'company name', message: 'message' },
+  },
+  31: {
+    hook: 'https://hooks.zapier.com/hooks/standard/2683347/a20dbc02eaa446f88d1bc2bd238cfd82/',
+    title: '2026 Pop Up Contact Form',
+    labels: { name: 'full name', email: 'work Email', phone: 'Phone', radio: 'What brings you here?', company: 'Company name *', message: 'message' },
+  },
 }
 
 export default defineEventHandler(async (event) => {

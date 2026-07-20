@@ -40,6 +40,11 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-20 (latest 2) — All Zap hooks wired + GF email routing live (committed NOT pushed)
+- Codi published footer + popup Zaps; hooks pulled from their WP subscription feeds and wired into lead.post.ts (28 fb99e67b..., 31 a20dbc02...). Lead-input form 24 wired in gf-submit.post.ts to its existing "New Lead Input" Zap hook. All tested locally: entries 6932/6933/6934 created + hooks fired.
+- GF notification routing applied to live WP forms 29/28/31 (Codi approved): employer → Clients admin (enquiries@) + visitor auto-reply; job seeker → Candidates admin (nishani@) only. Radio's "phone contains 0" conditional removed on all three (was still present despite manual attempt). VERIFIED via entry notes: 6932 employer → 2 correct emails; 6933 jobseeker → 1 correct email.
+- Still to do after push + live test: deactivate the WP-side Zapier feeds (48-54) so a future WP queue fix can't double-send into Close.
+
 ### 2026-07-20 (latest) — Direct server→Zapier delivery (option 2, committed NOT pushed)
 - lead.post.ts now posts each accepted lead straight to its Zap hook (label-keyed payload matching what the GF add-on would send, + source_page). Header (29) wired to Codi's new Zap and verified locally: GF entry 6931 created + hook fired. Footer (28) and popup (31) hooks pending — Codi is creating those Zaps; fill ZAP_HOOKS and push when in.
 - Notification routing fix PREPARED but blocked by tool permissions (script writes to live WP forms): employer → Clients admin + visitor auto-reply; job seeker → Candidates admin only; also removes the radio's "phone contains 0" conditional logic which blanks the radio at submission time (would break routing). Script ready in session scratchpad (gf-fix-notifications.mjs); run on approval or via Codi.
