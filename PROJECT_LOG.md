@@ -40,6 +40,11 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-20 — End-to-end form audit (all 5 GF pipelines tested live)
+- Test lead (Codi Kader / codi@effer-ventures.com / "this is a test") submitted through every live form path: hero (GF 29, entry 6924), footer (GF 28, 6925), popup (GF 31, 6926), guide download (GF 30, 6927), internal lead-input (GF 24, 6922). All entries complete in GF; header/footer/popup also stored in Supabase leads.
+- Zapier feeds verified active with real hook URLs: 29/28/31 all point at the same "Website Inbound" Zap hook as old form 26; GF 24 has its own "New Lead Input" hook. GF 30 (guide) has NO feed of any kind (open decision stands).
+- Findings: GF's Advanced Phone Field rejects Ofcom test/drama numbers (07700 900xxx) — real-range numbers pass; Supabase logs a lead BEFORE GF validation, so phone-rejected attempts still appear in the CMS Leads tab (GF entry count is the source of truth); form 24's phone field has no advanced validation. Codi to confirm the test leads arrived in Zapier history/Close.
+
 ### 2026-07-17 (latest) — Admin polish + smooth logo marquees *(live)*
 - Tooltips removed from the A/B page per Codi (the ⓘ bubbles are gone; labels stay plain).
 - Changelog is now a modal: slim card with a "View changelog" button; the modal lists every finished test with its final numbers.
