@@ -40,6 +40,12 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-21 (latest) — Lead input split: form 32 for WP, form 24 for the new site (committed, needs push)
+- CORRECTED diagnosis: WP's Zapier delivery is a STALLED QUEUE, not fully dead — SDR submissions kick it and flush OLD queued jobs, which is why Codi's test data appeared on this morning's Zap runs. Deactivating feed 48 had also cut the (sluggishly working) form-24 WP route.
+- Codi's fix (implemented by him): duplicated the form — old WP page now embeds NEW form 32 ("2026 New Lead input", Zap subscription feed 56, own hook), fully WP-managed as before; form 24 is exclusively the new site's, delivered by our server to the ORIGINAL New Lead Input Zap (still on, confirmed). Verified form 32 config read-only; NOT test-submitted per Codi.
+- Removed the now-obsolete gf24-relay watcher plugin. A few more ghost runs with test data may still drain from WP's stuck queue — safe to delete.
+- Watch: next real SDR lead on the old page should reach Close via the form-32 Zap (WP queue can deliver late — that underlying issue remains for the WP team: GF System Status → Background tasks).
+
 ### 2026-07-21 (later) — Rescue for WP-native lead-input submissions *(live)*
 - SDRs submit on the OLD WP page legendseor.com/new-lead-input-form/ (form 24 native embed) — those never reach Zapier (broken WP delivery, predates our feed cleanup). Missed leads replayed to the New Lead Input Zap by hand: 6939 Simon Drayson, 6940 Callum Murray, 6941 Aman Haji, 6942 Nick Salmon — all accepted.
 - New server watcher plugins/gf24-relay.ts: polls form 24 every 5 min, posts unseen WP-native entries to the Zap hook (API entries skipped — already delivered directly), last-seen state in Supabase cta_settings key gf24_relay (initialised at 6942), per-entry persistence so failures can't double-send. Zap config shared via server/utils/zapHooks.ts. Deployed + verified end-to-end: fake WP-page entry 6943 picked up and relayed by the live watcher within ~3 min.

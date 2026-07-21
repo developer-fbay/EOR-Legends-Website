@@ -10,7 +10,6 @@ const ALLOWED_FORMS = [24, 30]
  * Direct Zapier delivery (WP's background feed queue is broken — see
  * lead.post.ts). Form 24 posts to its existing "New Lead Input" Zap;
  * payload keys are the GF field labels the Zap's mapping expects.
- * Config shared with plugins/gf24-relay.ts via server/utils/zapHooks.ts.
  */
 const ZAP_HOOKS: Record<number, { hook: string; title: string; labels: Record<string, string> }> = {
   24: GF24_ZAP,

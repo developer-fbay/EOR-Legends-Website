@@ -1,7 +1,7 @@
 /**
- * New Lead Input Zap config — shared by the API relay (gf-submit.post.ts)
- * and the background watcher that rescues WP-native submissions
- * (plugins/gf24-relay.ts). Keys are the GF field labels the Zap maps on.
+ * New Lead Input Zap config, used by gf-submit.post.ts. Form 24 belongs to
+ * the new site only — the old WP page runs its own duplicate (form 32) with
+ * its own Zap, fully WP-managed. Keys are the GF field labels the Zap maps on.
  */
 export const GF24_ZAP = {
   hook: 'https://hooks.zapier.com/hooks/standard/2683347/79afd86203a64842b6565a0ba5fd6300/',
