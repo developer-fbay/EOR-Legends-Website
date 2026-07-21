@@ -40,6 +40,11 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-21 (cleanup) — Test data purged everywhere
+- 18 GF test entries (July 20-21 "this is a test" set, incl. Codi's own) force-deleted — WP's stuck queue jobs now have nothing to deliver, killing future ghost Zap runs at the source. Real leads untouched.
+- 30 Supabase test lead rows purged (codi@effer-ventures.com + debug-test@legendseor.com) — CMS Leads tab now shows only real leads.
+- Ghost runs already in Zapier history + any test leads in Close are Codi's to delete (no API access from here).
+
 ### 2026-07-21 (latest) — Lead input split: form 32 for WP, form 24 for the new site (committed, needs push)
 - CORRECTED diagnosis: WP's Zapier delivery is a STALLED QUEUE, not fully dead — SDR submissions kick it and flush OLD queued jobs, which is why Codi's test data appeared on this morning's Zap runs. Deactivating feed 48 had also cut the (sluggishly working) form-24 WP route.
 - Codi's fix (implemented by him): duplicated the form — old WP page now embeds NEW form 32 ("2026 New Lead input", Zap subscription feed 56, own hook), fully WP-managed as before; form 24 is exclusively the new site's, delivered by our server to the ORIGINAL New Lead Input Zap (still on, confirmed). Verified form 32 config read-only; NOT test-submitted per Codi.
