@@ -40,9 +40,9 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
-### 2026-07-21 (later) — Rescue for WP-native lead-input submissions (committed, needs push)
+### 2026-07-21 (later) — Rescue for WP-native lead-input submissions *(live)*
 - SDRs submit on the OLD WP page legendseor.com/new-lead-input-form/ (form 24 native embed) — those never reach Zapier (broken WP delivery, predates our feed cleanup). Missed leads replayed to the New Lead Input Zap by hand: 6939 Simon Drayson, 6940 Callum Murray, 6941 Aman Haji, 6942 Nick Salmon — all accepted.
-- New server watcher plugins/gf24-relay.ts: polls form 24 every 5 min, posts unseen WP-native entries to the Zap hook (API entries skipped — already delivered directly), last-seen state in Supabase cta_settings key gf24_relay (initialised at 6942), per-entry persistence so failures can't double-send. Zap config shared via server/utils/zapHooks.ts. Activates on next push.
+- New server watcher plugins/gf24-relay.ts: polls form 24 every 5 min, posts unseen WP-native entries to the Zap hook (API entries skipped — already delivered directly), last-seen state in Supabase cta_settings key gf24_relay (initialised at 6942), per-entry persistence so failures can't double-send. Zap config shared via server/utils/zapHooks.ts. Deployed + verified end-to-end: fake WP-page entry 6943 picked up and relayed by the live watcher within ~3 min.
 - Possibly also missing from Close: form 24 entries from before the fix era (e.g. 6920 Shelley Theaker, 6921 Nigel Clarke, 17 Jul) — Codi to check; any entry can be replayed by ID on request.
 
 ### 2026-07-21 — Deploy + live verification of the whole Zapier batch
