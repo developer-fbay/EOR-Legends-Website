@@ -927,4 +927,24 @@ onBeforeUnmount(() => {
   .sbt { padding-bottom: calc(var(--section-pad) + 12px); }
 }
 
+/* ===== Embed: an iframe's "viewport height" is just the iframe height, so
+   the short-laptop compact rules above misfire inside embeds (tiny padding,
+   hidden subtitle, squashed chart). Re-assert the standard rhythm with
+   higher specificity so the embed always matches the real site. ===== */
+.sbt.sbt--embed { padding-block: clamp(1.25rem, 3vw, 2rem); }
+.sbt.sbt--embed .sbt-card { padding: 40px; }
+.sbt.sbt--embed .sbt-card-title { font-size: 1.5rem; margin-bottom: 6px; }
+.sbt.sbt--embed .sbt-card-subtitle { display: block; font-size: 0.875rem; }
+.sbt.sbt--embed .sbt-field { margin-bottom: 18px; }
+.sbt.sbt--embed .sbt-select { padding-top: 0; padding-bottom: 0; }
+.sbt.sbt--embed .sbt-card-form label { font-size: 0.875rem; }
+.sbt.sbt--embed .sbt-toggle-btn { padding: 12px 18px; }
+.sbt.sbt--embed .sbt-columns { gap: 24px; }
+.sbt.sbt--embed .sbt-chart-wrap { height: 280px; min-height: 260px; margin-bottom: 24px; }
+@media (max-width: 768px) {
+  /* keep the phone-width card padding and the collapsed-form zero gap */
+  .sbt.sbt--embed .sbt-card { padding: 30px; }
+  .sbt.sbt--embed .sbt-tool[data-has-results="1"] .sbt-columns { gap: 0; }
+}
+
 </style>
