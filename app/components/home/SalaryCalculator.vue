@@ -24,6 +24,10 @@ const CURRENCY_SYMBOLS: Record<string, string> = {
 }
 const USD_PEGS: Record<string, number> = { AED: 3.6725, SAR: 3.75 }
 
+/** embed: bare white-label mode for /embed/salary-benchmarking — no section
+ *  heading, no Speak to an Expert CTA, no fill-screen (iframe auto-height). */
+const props = defineProps<{ embed?: boolean }>()
+
 const { ctaText, trackClick } = useCtaVariant()
 
 const data = ref<SalaryData | null>(null)
@@ -251,9 +255,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section id="salary-benchmarking" class="sbt band-green fill-screen">
+  <section id="salary-benchmarking" class="sbt band-green" :class="props.embed ? 'sbt--embed' : 'fill-screen'">
     <div class="container">
-      <header class="sbt-head">
+      <header v-if="!props.embed" class="sbt-head">
         <h2>Salary Benchmarking</h2>
         <p>
           Compare South African salaries with your home market and see how much your next
@@ -378,7 +382,7 @@ onBeforeUnmount(() => {
 
             <div class="sbt-results-actions">
               <button type="button" class="sbt-btn sbt-btn-secondary" :disabled="!searched" @click="reset">Reset Calculator</button>
-              <NuxtLink to="/contact" class="sbt-btn sbt-btn-expert" @click="trackClick('salary-tool')">{{ ctaText('Speak to an Expert', 'salary-tool') }}</NuxtLink>
+              <NuxtLink v-if="!props.embed" to="/contact" class="sbt-btn sbt-btn-expert" @click="trackClick('salary-tool')">{{ ctaText('Speak to an Expert', 'salary-tool') }}</NuxtLink>
             </div>
           </div>
         </div>
@@ -404,6 +408,9 @@ onBeforeUnmount(() => {
   max-width: 720px;
   margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
 }
+/* Embed mode: compact band, no viewport-height coupling (iframe reports its
+   own height to the parent — min-height:100vh would feedback-loop). */
+.sbt--embed { padding-block: clamp(1.25rem, 3vw, 2rem); min-height: 0; }
 .sbt-head h2 { color: var(--cream); }
 .sbt-head p { color: var(--green-soft-2); }
 

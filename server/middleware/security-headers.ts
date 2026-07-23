@@ -10,5 +10,10 @@ const HEADERS: Record<string, string> = {
 }
 
 export default defineEventHandler((event) => {
-  for (const [k, v] of Object.entries(HEADERS)) setResponseHeader(event, k, v)
+  for (const [k, v] of Object.entries(HEADERS)) {
+    // /embed/* is meant to be iframed by partner sites — CSP frame-ancestors
+    // (nuxt.config routeRules) governs it instead of X-Frame-Options.
+    if (k === 'X-Frame-Options' && event.path.startsWith('/embed/')) continue
+    setResponseHeader(event, k, v)
+  }
 })

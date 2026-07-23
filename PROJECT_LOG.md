@@ -40,6 +40,12 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-22 — Partner embed for the Salary Benchmarking tool (committed, needs push)
+- CEO request via Codi: white-label iframe embed for partner websites. Decisions: calculator only (no heading), unbranded (no Legends branding, Speak to an Expert hidden), embeddable by anyone with the link. Live-scraper data idea shelved.
+- New /embed/salary-benchmarking: renders the exact homepage SalaryCalculator (new `embed` prop hides heading + CTA, drops fill-screen), layout-free, noindex; posts { type: 'legends-embed-resize', height } to the parent (ResizeObserver). CSP frame-ancestors * on /embed/** (security-headers middleware skips X-Frame-Options there; rest of site keeps SAMEORIGIN).
+- Partner snippet at docs/embed-snippet.html — mirror of Codi's CompareMyFunding pattern (allowed-origins check, 3px threshold). NOTE: snippet URLs must be reissued after the domain flip; don't distribute widely until then.
+- Verified: embed renders pixel-identical (screenshots), auto-resize proven in a simulated partner page over HTTP (file:// parents can't load localhost iframes — PNA — test quirk only).
+
 ### 2026-07-21 (cleanup) — Test data purged everywhere
 - 18 GF test entries (July 20-21 "this is a test" set, incl. Codi's own) force-deleted — WP's stuck queue jobs now have nothing to deliver, killing future ghost Zap runs at the source. Real leads untouched.
 - 30 Supabase test lead rows purged (codi@effer-ventures.com + debug-test@legendseor.com) — CMS Leads tab now shows only real leads.

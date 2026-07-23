@@ -1,0 +1,42 @@
+<!--
+  Legends EOR — Salary Benchmarking embed
+  Paste both blocks into the partner page where the tool should appear.
+  The iframe sizes itself to its content (no scrollbars) via postMessage.
+
+  NOTE: after the legendseor.com domain flip, update the iframe src and the
+  ALLOWED list below (the ondigitalocean.app entries can then be removed).
+-->
+<iframe
+  id="legends-salary-benchmarking"
+  src="https://legends-eor-2g8hb.ondigitalocean.app/embed/salary-benchmarking"
+  title="Salary Benchmarking Tool"
+  width="98%"
+  style="width:98%; border:none; display:block; overflow:hidden;"
+  scrolling="no"
+  loading="lazy"
+  allowfullscreen
+></iframe>
+<script>
+(function () {
+  'use strict';
+  var MESSAGE_TYPE = 'legends-embed-resize';
+  var HEIGHT_CHANGE_THRESHOLD = 3;
+  var ALLOWED = [
+    'https://legends-eor-2g8hb.ondigitalocean.app',
+    'https://legendseor.com',
+    'https://www.legendseor.com'
+  ];
+  var iframe = document.getElementById('legends-salary-benchmarking');
+  if (!iframe) return;
+  var lastHeight = 0;
+  window.addEventListener('message', function (event) {
+    if (ALLOWED.indexOf(event.origin) === -1) return;
+    var data = event.data;
+    if (!data || data.type !== MESSAGE_TYPE || typeof data.height !== 'number' || data.height < 0) return;
+    var height = Math.round(data.height);
+    if (Math.abs(height - lastHeight) < HEIGHT_CHANGE_THRESHOLD) return;
+    lastHeight = height;
+    iframe.style.height = height + 'px';
+  });
+})();
+</script>
