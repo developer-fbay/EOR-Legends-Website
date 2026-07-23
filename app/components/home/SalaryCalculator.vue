@@ -148,7 +148,7 @@ async function runSearch() {
     const name = countryDisplayName(cc, data.value.countries.find((c) => c.code === cc)?.name)
     if (!bucket) {
       datasets.push({ label: name, data: [0, 0, 0], backgroundColor: COLORS[idx % COLORS.length], borderRadius: 4, borderSkipped: false })
-      legend.push({ color: COLORS[idx % COLORS.length], label: `${name} (no data)` })
+      legend.push({ color: COLORS[idx % COLORS.length]!, label: `${name} (no data)` })
       continue
     }
     let { low, median, high } = bucket
@@ -168,7 +168,7 @@ async function runSearch() {
       borderRadius: 4,
       borderSkipped: false,
     })
-    legend.push({ color: COLORS[idx % COLORS.length], label: name })
+    legend.push({ color: COLORS[idx % COLORS.length]!, label: name })
   }
 
   legendItems.value = legend
@@ -408,17 +408,21 @@ onBeforeUnmount(() => {
   max-width: 720px;
   margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
 }
-/* Embed mode: compact band, no viewport-height coupling (iframe reports its
-   own height to the parent — min-height:100vh would feedback-loop). No green
-   arch either: the embed sits on other people's websites, so the cards float
-   on a transparent background. */
+/* Embed mode: renders EXACTLY like the WordPress plugin — the bare tool,
+   edge to edge in whatever space the partner gives it. No site container,
+   no section padding, no arch, standard card shadow. Minimal breathing room
+   so card shadows aren't clipped by the iframe edge. No viewport-height
+   coupling (iframe reports its own height — 100vh would feedback-loop). */
 .sbt--embed {
-  padding-block: clamp(1.25rem, 3vw, 2rem);
+  padding: 8px 0 14px;
   min-height: 0;
   background-image: none;
   background-color: transparent;
 }
-.sbt--embed .sbt-card { box-shadow: 0 10px 30px rgba(20, 40, 30, 0.12); }
+.sbt--embed .container {
+  max-width: none;
+  padding-inline: 0;
+}
 .sbt-head h2 { color: var(--cream); }
 .sbt-head p { color: var(--green-soft-2); }
 
