@@ -1,17 +1,21 @@
 <!--
-  Legends EOR — Salary Benchmarking embed
-  Paste both blocks into the partner page where the tool should appear.
-  The iframe sizes itself to its content (no scrollbars) via postMessage.
+  Legends EOR — Salary Benchmarking embed (white-label)
+  Two ways to embed. Pick ONE per page.
 
   NOTE: after the legendseor.com domain flip, update the iframe src and the
   ALLOWED list below (the ondigitalocean.app entries can then be removed).
 -->
+
+<!-- ============================================================
+     OPTION A — auto-height (recommended for normal page content)
+     The iframe grows/shrinks to fit the tool exactly; no scrollbars.
+     ============================================================ -->
 <iframe
   id="legends-salary-benchmarking"
   src="https://legends-eor-2g8hb.ondigitalocean.app/embed/salary-benchmarking"
   title="Salary Benchmarking Tool"
   width="98%"
-  style="width:98%; border:none; display:block; overflow:hidden;"
+  style="width:100%; border:none; display:block; overflow:hidden;"
   scrolling="no"
   loading="lazy"
   allowfullscreen
@@ -40,3 +44,19 @@
   });
 })();
 </script>
+
+<!-- ============================================================
+     OPTION B — fill a container (no script needed)
+     The tool takes exactly the width and height of the div you
+     place it in; content scrolls inside if the div is shorter.
+     Size the wrapper div however you like.
+     ============================================================ -->
+<div style="width:100%; height:700px;">
+  <iframe
+    src="https://legends-eor-2g8hb.ondigitalocean.app/embed/salary-benchmarking?mode=fill"
+    title="Salary Benchmarking Tool"
+    style="width:100%; height:100%; border:none; display:block;"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>

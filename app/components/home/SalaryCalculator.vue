@@ -409,8 +409,16 @@ onBeforeUnmount(() => {
   margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
 }
 /* Embed mode: compact band, no viewport-height coupling (iframe reports its
-   own height to the parent — min-height:100vh would feedback-loop). */
-.sbt--embed { padding-block: clamp(1.25rem, 3vw, 2rem); min-height: 0; }
+   own height to the parent — min-height:100vh would feedback-loop). No green
+   arch either: the embed sits on other people's websites, so the cards float
+   on a transparent background. */
+.sbt--embed {
+  padding-block: clamp(1.25rem, 3vw, 2rem);
+  min-height: 0;
+  background-image: none;
+  background-color: transparent;
+}
+.sbt--embed .sbt-card { box-shadow: 0 10px 30px rgba(20, 40, 30, 0.12); }
 .sbt-head h2 { color: var(--cream); }
 .sbt-head p { color: var(--green-soft-2); }
 
