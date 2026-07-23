@@ -32,8 +32,14 @@ export default defineNuxtConfig({
       '/wp-content/**': {
         proxy: `${process.env.WP_BASE_URL || process.env.GF_BASE_URL || 'https://legendseor.com'}/wp-content/**`,
       },
-      // Partner-embeddable pages: any site may iframe these (and only these)
-      '/embed/**': { headers: { 'Content-Security-Policy': 'frame-ancestors *' } },
+      // Partner-embeddable pages: any site may iframe these (and only these).
+      // Never indexed — they exist solely inside partner iframes.
+      '/embed/**': {
+        headers: {
+          'Content-Security-Policy': 'frame-ancestors *',
+          'X-Robots-Tag': 'noindex, nofollow',
+        },
+      },
     },
   },
 
