@@ -40,6 +40,10 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-22 (later) — Embed v2 + WP plugin v2
+- Embed per Codi's test feedback: green arch/background removed (transparent — cards float on the partner's page), and a second variant ?mode=fill that fills whatever div it's placed in (no resize script needed; scrolls internally). docs/embed-snippet.html documents both. Verified via simulated partner page. Committed, needs push.
+- WordPress plugin (Downloads/salary-benchmarking-tool, lives OUTSIDE this repo) ported to the current site behavior + styling: SA-always-benchmark flow, home-country question drives Country 2 + auto currency, annual default, silent dedupe, live filter re-runs, mobile form collapse + scroll-into-view, Junior/Intermediate/Senior chart, email gate removed, full restyle. v2.0.0; REST/DB/Apify ingestion untouched. Verified in a stubbed-REST browser harness. Zip for upload: Downloads/salary-benchmarking-tool-v2.zip — Codi/WP team to install.
+
 ### 2026-07-22 — Partner embed for the Salary Benchmarking tool (committed, needs push)
 - CEO request via Codi: white-label iframe embed for partner websites. Decisions: calculator only (no heading), unbranded (no Legends branding, Speak to an Expert hidden), embeddable by anyone with the link. Live-scraper data idea shelved.
 - New /embed/salary-benchmarking: renders the exact homepage SalaryCalculator (new `embed` prop hides heading + CTA, drops fill-screen), layout-free, noindex; posts { type: 'legends-embed-resize', height } to the parent (ResizeObserver). CSP frame-ancestors * on /embed/** (security-headers middleware skips X-Frame-Options there; rest of site keeps SAMEORIGIN).
