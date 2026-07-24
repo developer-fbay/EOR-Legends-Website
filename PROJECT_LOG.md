@@ -40,6 +40,9 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-24 (later 2) — Parallax paragraphs = hero paragraphs (committed, needs push)
+- Content manager request via Codi: the service-page parallax showcase (ServicesScroll) now renders each service's hero paragraph (intro[0]) instead of the stale excerpt — bound directly in the component, so future hero edits stay in sync automatically. Verified on both blocks (contractor + it-equipment heroes rendering; old excerpt text gone).
+
 ### 2026-07-24 (later) — HIW headings: "Why We Are The Trusted X Partner" *(live)*
 - Applied EOR Service Page Benefits Headings.md: How It Works section heading on 9 services (HR incl. — replaces "What makes our HR support different?") is now "Why We Are The Trusted {Service} Partner". Subheadings UNCHANGED per Codi ("Possible Subheadings" in the md were not chosen). Payroll not in the md — keeps "How It Works".
 - Verified all 9 headings render in SSR + payroll default intact.

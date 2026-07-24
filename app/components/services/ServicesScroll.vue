@@ -110,7 +110,9 @@ onBeforeUnmount(() => {
           <div class="sv-img-wrap"><img :src="`/assets/services/card-${s.slug}.webp`" :alt="s.title" loading="lazy" /></div>
           <div class="sv-content">
             <h3 class="sv-name sv-anim">{{ s.title }}</h3>
-            <p class="sv-text sv-anim">{{ s.excerpt }}</p>
+            <!-- Parallax paragraph mirrors the service's hero paragraph (content
+                 manager: keep them identical) — excerpt is only the fallback. -->
+            <p class="sv-text sv-anim">{{ s.intro?.[0] || s.excerpt }}</p>
             <div class="sv-divider sv-anim" />
             <div class="sv-footer sv-anim">
               <NuxtLink class="brand-btn brand-btn--orange" :to="`/services/${s.slug}`">Read more</NuxtLink>
