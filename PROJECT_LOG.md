@@ -40,6 +40,9 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-24 (later 3) — HIW subheadings from content team (committed, needs push)
+- Applied eor-site-subheadings.md: hiwSub set on the 8 listed services (employee-benefits, company-culture, contractor-management, eor-migration, onboarding-offboarding, office-space, it-support, it-equipment) under the "Why We Are The Trusted X Partner" headings. HR keeps its existing sub; Payroll keeps the default. All verified in SSR.
+
 ### 2026-07-24 (later 2) — Parallax paragraphs = hero paragraphs (committed, needs push)
 - Content manager request via Codi: the service-page parallax showcase (ServicesScroll) now renders each service's hero paragraph (intro[0]) instead of the stale excerpt — bound directly in the component, so future hero edits stay in sync automatically. Verified on both blocks (contractor + it-equipment heroes rendering; old excerpt text gone).
 

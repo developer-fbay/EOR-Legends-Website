@@ -125,6 +125,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the HR, payroll, onboarding and contractor services that complete your South African employment package.',
     ctaSub: 'Talk to our team and get a custom cost comparison in 24 hours',
     hiwTitle: 'Why We Are The Trusted Employee Benefits Partner',
+    hiwSub: 'Locally relevant benefits, expert guidance and complete administration for every member of your South African team.',
     overview: [
       {
         title: 'How benefits work through our EOR service',
@@ -168,6 +169,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the HR, payroll, benefits and workplace services that help your South African team thrive.',
     ctaSub: 'Get a tailored cost comparison and plan for building an engaged South African team within 24 hours.',
     hiwTitle: 'Why We Are The Trusted Company Culture Partner',
+    hiwSub: 'Local engagement, regular feedback and hands-on support that keep your South African employees connected, motivated and aligned.',
     overview: [
       {
         title: 'A cultural bridge, not just a payroll line',
@@ -211,6 +213,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the EOR, payroll, HR and onboarding services available when contractors become permanent employees.',
     ctaSub: 'Get a tailored comparison of contractor and EOR employment costs in South Africa within 24 hours.',
     hiwTitle: 'Why We Are The Trusted Contractor Management Partner',
+    hiwSub: 'End-to-end management that keeps contractors compliant, organised and running smoothly.',
     overview: [
       {
         title: 'Compliant contractor engagement',
@@ -254,6 +257,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the HR, payroll, onboarding and contractor services available after your EOR migration.',
     ctaSub: 'Get a clear migration plan and tailored cost comparison for your South African team within 24 hours.',
     hiwTitle: 'Why We Are The Trusted EOR Migration Partner',
+    hiwSub: 'A carefully managed transition that protects payroll, benefits, service history and employee confidence from beginning to end.',
     overview: [
       {
         title: 'A controlled, planned transition',
@@ -297,6 +301,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the HR, payroll, equipment and IT services that support every stage of the South African employee lifecycle.',
     ctaSub: 'Get a personalised cost comparison for hiring and onboarding your South African team within 24 hours.',
     hiwTitle: 'Why We Are The Trusted Onboarding & Offboarding Partner',
+    hiwSub: 'Local expertise, clear communication and complete administration at both ends of employment.',
     overview: [
       {
         title: 'Compliant from day one',
@@ -340,6 +345,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the employment, IT and equipment services available alongside your managed South African office.',
     ctaSub: 'Get a tailored cost comparison for hiring and housing your South African team within 24 hours.',
     hiwTitle: 'Why We Are The Trusted Office Space Partner',
+    hiwSub: 'Managed workspace, dependable infrastructure and in-person support designed specifically for high-performing international teams.',
     overview: [
       {
         title: 'A managed home for your team',
@@ -383,6 +389,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the equipment, office, HR and onboarding services that support your South African workforce.',
     ctaSub: 'Get a tailored cost comparison for hiring and supporting your South African team within 24 hours.',
     hiwTitle: 'Why We Are The Trusted IT Support Partner',
+    hiwSub: 'Fast local troubleshooting, secure device management and hands-on technical support throughout every working day.',
     overview: [
       {
         title: 'IT that is actually there',
@@ -426,6 +433,7 @@ export const SERVICES: ServiceContent[] = [
     servicesSub: 'Explore the IT support, office, HR and onboarding services available with locally sourced equipment.',
     ctaSub: 'Get a tailored cost comparison for hiring and equipping your South African team within 24 hours.',
     hiwTitle: 'Why We Are The Trusted IT Equipment Partner',
+    hiwSub: 'Reliable local procurement, secure configuration and complete equipment management without international shipping or customs delays.',
     overview: [
       {
         title: 'Local sourcing, day-one readiness',
