@@ -40,15 +40,15 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
-### 2026-07-24 (later) — HIW headings: "Why We Are The Trusted X Partner" (committed, needs push)
+### 2026-07-24 (later) — HIW headings: "Why We Are The Trusted X Partner" *(live)*
 - Applied EOR Service Page Benefits Headings.md: How It Works section heading on 9 services (HR incl. — replaces "What makes our HR support different?") is now "Why We Are The Trusted {Service} Partner". Subheadings UNCHANGED per Codi ("Possible Subheadings" in the md were not chosen). Payroll not in the md — keeps "How It Works".
 - Verified all 9 headings render in SSR + payroll default intact.
 
-### 2026-07-24 — New How It Works benefits for 8 service pages (committed, needs push)
+### 2026-07-24 — New How It Works benefits for 8 service pages *(live)*
 - Applied service-page-benefits.md (MvN edits): the 3 HIW steps replaced with the new benefit title+text sets on employee-benefits, company-culture, contractor-management, eor-migration, onboarding-offboarding, office-space, it-support, it-equipment. Payroll + HR not in the file — unchanged.
 - Fixed two md typos on the way in ("Tranparency" -> "Transparency", stray space before a full stop); everything else verbatim. All 8 pages verified rendering the new titles in SSR HTML.
 
-### 2026-07-22 (latest) — Embed = plugin, exactly (committed, needs push)
+### 2026-07-22 (latest) — Embed = plugin, exactly *(live)*
 - Embed spacing bug found by Codi: iframe height triggered the site's short-laptop compact CSS (tiny padding, hidden subtitle). Embeds now exempt from all height-based compacting.
 - Embed then aligned 1:1 with the plugin per Codi: no site container/section padding, bare tool edge to edge, standard card shadow. Verified with same-width side-by-side screenshots.
 - Plugin: "Speak to an Expert" button removed entirely (site-only CTA, per Codi); zip rebuilt. Earlier: first plugin zip was broken for Linux hosts (PowerShell Compress-Archive backslash paths -> "Plugin file does not exist"); rebuilt with bsdtar, verified structure. Codi still installing — WP-side remnants of the bad upload may need deleting from wp-content/plugins/.
@@ -57,7 +57,7 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 - Embed per Codi's test feedback: green arch/background removed (transparent — cards float on the partner's page), and a second variant ?mode=fill that fills whatever div it's placed in (no resize script needed; scrolls internally). docs/embed-snippet.html documents both. Verified via simulated partner page. Committed, needs push.
 - WordPress plugin (Downloads/salary-benchmarking-tool, lives OUTSIDE this repo) ported to the current site behavior + styling: SA-always-benchmark flow, home-country question drives Country 2 + auto currency, annual default, silent dedupe, live filter re-runs, mobile form collapse + scroll-into-view, Junior/Intermediate/Senior chart, email gate removed, full restyle. v2.0.0; REST/DB/Apify ingestion untouched. Verified in a stubbed-REST browser harness. Zip for upload: Downloads/salary-benchmarking-tool-v2.zip — Codi/WP team to install.
 
-### 2026-07-22 — Partner embed for the Salary Benchmarking tool (committed, needs push)
+### 2026-07-22 — Partner embed for the Salary Benchmarking tool *(live)*
 - CEO request via Codi: white-label iframe embed for partner websites. Decisions: calculator only (no heading), unbranded (no Legends branding, Speak to an Expert hidden), embeddable by anyone with the link. Live-scraper data idea shelved.
 - New /embed/salary-benchmarking: renders the exact homepage SalaryCalculator (new `embed` prop hides heading + CTA, drops fill-screen), layout-free, noindex; posts { type: 'legends-embed-resize', height } to the parent (ResizeObserver). CSP frame-ancestors * on /embed/** (security-headers middleware skips X-Frame-Options there; rest of site keeps SAMEORIGIN).
 - Partner snippet at docs/embed-snippet.html — mirror of Codi's CompareMyFunding pattern (allowed-origins check, 3px threshold). NOTE: snippet URLs must be reissued after the domain flip; don't distribute widely until then.
