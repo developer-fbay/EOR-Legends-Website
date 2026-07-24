@@ -40,6 +40,10 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-24 — New How It Works benefits for 8 service pages (committed, needs push)
+- Applied service-page-benefits.md (MvN edits): the 3 HIW steps replaced with the new benefit title+text sets on employee-benefits, company-culture, contractor-management, eor-migration, onboarding-offboarding, office-space, it-support, it-equipment. Payroll + HR not in the file — unchanged.
+- Fixed two md typos on the way in ("Tranparency" -> "Transparency", stray space before a full stop); everything else verbatim. All 8 pages verified rendering the new titles in SSR HTML.
+
 ### 2026-07-22 (latest) — Embed = plugin, exactly (committed, needs push)
 - Embed spacing bug found by Codi: iframe height triggered the site's short-laptop compact CSS (tiny padding, hidden subtitle). Embeds now exempt from all height-based compacting.
 - Embed then aligned 1:1 with the plugin per Codi: no site container/section padding, bare tool edge to edge, standard card shadow. Verified with same-width side-by-side screenshots.

@@ -143,9 +143,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We advise', text: 'We recommend a competitive package for each role, benchmarked to the SA market.' },
-      { title: 'We arrange', text: 'Providers are sourced, employees enrolled, and deductions set up.' },
-      { title: 'We administer', text: 'Claims, changes, and renewals are managed locally, on one invoice.' },
+      { title: 'Competitive benefits, sourced for you', text: 'We advise on and source competitive employee benefits, giving your South African team a stronger package without adding work for you.' },
+      { title: 'One all-encompassing monthly invoice', text: 'Benefit costs are included in one consolidated monthly invoice, keeping payments clear, convenient and easier for your business to manage.' },
+      { title: 'Employee deductions, fully managed', text: 'We process employee benefit deductions through payroll, ensuring every contribution is handled accurately and paid on time each month.' },
     ],
     faqs: [
       { q: 'Are employee benefits mandatory in South Africa?', a: 'No. Statutory deductions like PAYE, UIF, and SDL are mandatory and handled through payroll, but benefits like medical aid and pension contributions are optional. You decide what to offer based on your budget, the roles you are hiring for, and what is competitive in your industry. We advise on what is expected for specific roles and seniority levels.' },
@@ -185,9 +185,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We understand your culture', text: 'We learn what drives your business, how you operate, and what you expect from your team.' },
-      { title: 'We reinforce it locally', text: 'We maintain culture through engagement, workplace guidance, and employee support.' },
-      { title: 'We connect your team', text: 'We bridge the distance between your leadership and your South African employees.' },
+      { title: 'Team building, hosted by us locally', text: 'We arrange team-building activities that strengthen relationships, improve engagement and help your South African employees work better together.' },
+      { title: 'A cohesive culture that fosters retention', text: 'Our HR Account Managers support employee engagement, address concerns early and help you build stronger loyalty across your team.' },
+      { title: 'Two countries, one team, zero silos', text: 'From onboarding to daily collaboration, everything is designed to create one connected team regardless of distance.' },
     ],
     faqs: [
       { q: 'How do you support company culture in South Africa?', a: 'We act as the local presence for your business, reinforcing your company culture through regular employee engagement, guidance on South African workplace norms, and coordination of team activities. We maintain ongoing relationships with your employees and help bridge the gap between your headquarters and your South African team. This includes advising on communication styles, workplace expectations, and cultural differences that could create misunderstandings.' },
@@ -227,9 +227,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We classify', text: 'Each engagement is assessed against South African law before it starts.' },
-      { title: 'We contract & pay', text: 'Compliant agreements and reliable monthly payments, on one invoice.' },
-      { title: 'We convert when needed', text: 'Contractors become employees smoothly when the relationship changes.' },
+      { title: 'Reduce contractor misclassification risk', text: 'We assess working arrangements and manage contracts correctly, helping protect your business from penalties linked to contractor misclassification.' },
+      { title: 'Seamless contract transition', text: 'When the time is right, we make it simple to transition valued contractors into compliant, permanent employees.' },
+      { title: 'Contractor tax made simple', text: 'We manage contractor payments and local tax administration, reducing complexity for both your business and the people you engage.' },
     ],
     faqs: [
       { q: 'What does contractor management include?', a: 'Contractor management includes classification guidance, drafting compliant contractor agreements, onboarding and offboarding coordination, invoice processing and payment management, and ongoing tax and compliance advice. We provide local oversight throughout the contractor relationship and advise proactively when the engagement structure needs to change. Our role is to reduce misclassification risk and ensure the relationship is managed correctly under South African law.' },
@@ -269,9 +269,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We map', text: 'Contracts, benefits, and payroll details are captured from your current EOR.' },
-      { title: 'We migrate', text: 'A dated plan moves employment compliantly with no break in service.' },
-      { title: 'No disruptions', text: 'Same team, same pay dates, with local support from day one.' },
+      { title: 'Seamless EOR Migration made simple', text: 'We manage the practical requirements of moving your workforce to a new EOR provider. This simplifies the process and removes the burden.' },
+      { title: 'No disruption to your team', text: 'Contracts, payroll details and essential employee information transfer cleanly, with no disruption to your team or your bottom line.' },
+      { title: 'Transparency and clarity for all', text: 'We communicate directly with every stakeholder, explain the migration process and provide guidance through every step of the change.' },
     ],
     faqs: [
       { q: 'How does EOR migration work?', a: 'We assess your current setup, identify risks, and build a detailed migration plan with clear timelines. This includes replacing employment contracts, transitioning payroll, transferring benefits where applicable, and securely handing over records and data. Each step is coordinated with your outgoing provider to avoid gaps in employment, payroll, or compliance.' },
@@ -311,9 +311,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We contract', text: 'Compliant SA employment contracts and statutory registrations, fast.' },
-      { title: 'We onboard', text: 'Equipment, access, and local first-day support are all arranged.' },
-      { title: 'We manage exits', text: 'Notice, documentation, and final payments handled CCMA-safe.' },
+      { title: 'Ready to work from day one', text: 'We coordinate contracts, payroll, equipment and access so every new employee can start confidently and without unnecessary delays.' },
+      { title: 'Company property safely returned', text: 'When an employee leaves, we coordinate the collection of equipment and other company property on your behalf.' },
+      { title: 'Employees guided throughout', text: 'We communicate directly with employees during onboarding and offboarding, explaining each step and keeping the process clear and professional.' },
     ],
     faqs: [
       { q: 'What does onboarding include?', a: 'Onboarding includes drafting compliant employment contracts, registering employees for PAYE, UIF, and SDL, setting up payroll, issuing employment documentation, and coordinating IT and office access if applicable. We manage the full process from contract signature to first day readiness. Employees receive clear communication about their role, responsibilities, and probation period before they start.' },
@@ -353,9 +353,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We host', text: 'Desks or private offices in our managed Cape Town workspace.' },
-      { title: 'We support', text: 'On-site HR and IT keep your team working, whatever happens.' },
-      { title: 'You consolidate', text: 'One invoice covers people, space, and support together.' },
+      { title: 'In-office HR support', text: 'Your team works in-office alongside our HR Account Managers, giving employees direct, in-person support whenever they need it.' },
+      { title: 'Protected against disruptions', text: 'Our managed office provides dependable power, internet and a professional environment where your employees can work without interruption.' },
+      { title: 'Better teamwork, better output', text: 'Working together in one office helps employees collaborate more closely, build stronger relationships and produce better-quality work.' },
     ],
     faqs: [
       { q: 'What type of office space do you provide?', a: 'We provide private offices, dedicated desks, and meeting rooms in our own managed office space in South Africa. This includes access, utilities, internet, and on-site support. Office space is available based on your team size and working model, with everything managed under one contract.' },
@@ -395,9 +395,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We set up', text: 'Devices configured to your policies before each start date.' },
-      { title: 'We support', text: 'Local troubleshooting keeps your team productive every day.' },
-      { title: 'Secure offboarding', text: 'Exits mean full access removal and device recovery, documented.' },
+      { title: 'In-office IT support', text: 'Employees receive immediate, hands-on support from our in-office IT team, resolving technical issues quickly, minimising downtime and keeping your operations running smoothly.' },
+      { title: 'Same Time Zone', text: 'Our in-office IT team is available on the ground, so technical problems can be resolved efficiently.' },
+      { title: 'Technology ready from day one', text: 'We set up the software and access each employee needs, ensuring they can start work without avoidable technical delays.' },
     ],
     faqs: [
       { q: 'What IT support is included?', a: 'IT support includes device setup, hardware and software troubleshooting, network and connectivity issues, security management, and access control. We handle day-to-day technical support for your employees and coordinate with your internal IT team when required. New hire IT setup and offboarding access removal are managed as part of onboarding and offboarding processes.' },
@@ -437,9 +437,9 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     steps: [
-      { title: 'We source', text: 'Equipment to your spec, procured locally at local prices.' },
-      { title: 'We deliver', text: 'Configured devices arrive before day one, anywhere in SA.' },
-      { title: 'We maintain', text: 'Repairs, swaps, and recovery through the device lifecycle.' },
+      { title: 'Equipment delivered securely', text: 'We source and deliver high-quality equipment locally, reducing lead times and minimising the risk of delays, damage or loss in transit.' },
+      { title: 'No customs complications', text: 'Local procurement avoids international shipping and South African customs, making equipment setup faster and much simpler.' },
+      { title: 'Trusted local suppliers', text: 'We purchase through verified suppliers, protecting your business from unreliable vendors and ensuring you receive legitimate, suitable equipment.' },
     ],
     faqs: [
       { q: 'What equipment can be provided?', a: 'We provide laptops, monitors, keyboards, mice, headsets, and other peripherals through our local online webstore. Equipment is sourced from trusted South African suppliers and tailored to the employee\'s role and requirements. Replacement devices are handled locally when equipment fails or needs upgrading.' },
