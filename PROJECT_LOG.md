@@ -40,6 +40,10 @@ outside this repo (WordPress, Zapier, Close, DNS, design assets).
 
 ## Done log (newest first)
 
+### 2026-07-24 (later) — HIW headings: "Why We Are The Trusted X Partner" (committed, needs push)
+- Applied EOR Service Page Benefits Headings.md: How It Works section heading on 9 services (HR incl. — replaces "What makes our HR support different?") is now "Why We Are The Trusted {Service} Partner". Subheadings UNCHANGED per Codi ("Possible Subheadings" in the md were not chosen). Payroll not in the md — keeps "How It Works".
+- Verified all 9 headings render in SSR + payroll default intact.
+
 ### 2026-07-24 — New How It Works benefits for 8 service pages (committed, needs push)
 - Applied service-page-benefits.md (MvN edits): the 3 HIW steps replaced with the new benefit title+text sets on employee-benefits, company-culture, contractor-management, eor-migration, onboarding-offboarding, office-space, it-support, it-equipment. Payroll + HR not in the file — unchanged.
 - Fixed two md typos on the way in ("Tranparency" -> "Transparency", stray space before a full stop); everything else verbatim. All 8 pages verified rendering the new titles in SSR HTML.
